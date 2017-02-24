@@ -53,6 +53,14 @@ module.exports = (env={}) => {
                 __DEV__: env.dev
             }),
         ],
+        resolve: {
+            extensions: ['.js', '.json', '.jsx'],
+            alias: {
+                '#lib': __dirname + '/web/modules/js/lib',
+                '#state': __dirname + '/web/modules/js/state',
+            }
+            
+        },
         devtool: 'eval',
     };
     

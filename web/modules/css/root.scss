@@ -1,0 +1,63 @@
+@import './variables.scss';
+@import './ui.scss';
+
+html {
+    overflow: hidden;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+body {
+    margin: 0;
+}
+
+div {
+    overflow: hidden;
+}
+
+img {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    user-drag: none;
+}
+
+.window {
+    position: relative;
+    background-color: $grey;
+    height: 100vh;
+    padding: 4px;
+    -webkit-user-select: none;  
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+.border {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    right: 0;
+    bottom: 8px;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-bottom: 1px solid $darkergrey;
+    border-right: 1px solid $darkergrey;
+    pointer-events: none;
+}
+
+.borderInner {
+    position: absolute;
+    left: 1px;
+    top: 2px;
+    right: 1px;
+    bottom: 9px;
+    border-bottom: 1px solid $darkgrey;
+    border-right: 1px solid $darkgrey;
+    pointer-events: none;
+}

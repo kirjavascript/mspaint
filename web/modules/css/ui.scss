@@ -1,0 +1,36 @@
+.titlebar {
+    display: flex;
+    background: linear-gradient(to right, $blue 0%, $lightblue 100%);
+    color: white;
+    height: 18px;
+
+    font-size: 10px;
+    font-weight: 600;
+    img {
+        margin-top: 1px;
+    }
+    span {
+        margin-top: 3px;
+    }
+}
+
+.menu {
+
+    border-bottom: 1px solid $darkgrey;
+    display: flex;
+
+    .item {
+        padding: 2px 5px;
+        &:hover {
+            background-color: $blue;
+            color: white;
+        }
+    }
+
+}
+
+.toolbox {
+    border-top: 1px solid white;
+    border-right: 1px solid $darkgrey;
+    border-bottom: 1px solid $darkgrey;
+}

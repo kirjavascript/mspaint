@@ -24,15 +24,23 @@ let server = app.set('view engine', 'ejs')
         console.log(`Listening on ${config.port}`)
     })
 
+// sockets //
+
+let io = require('socket.io');
+
+let socket = io.listen(server);
+
+require('./socket')(app, socket);
+
 // webpack-dev-middleware //
 
 if (devMode) {
-    require('./webpack-middleware')(app, server);
+    require('./webpack-middleware')(app, socket);
 }
 
 // load routes //
 
-require('./routes')(app);
+require('./routes')(app, socket);
 
 // assign static asset folders //
 

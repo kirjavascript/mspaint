@@ -1,4 +1,4 @@
-let io = require('socket.io');
+
 let webpack = require('webpack');
 let webpackConfig = require('../webpack.config.js')({dev:true});
 
@@ -6,11 +6,9 @@ webpackConfig.output.path = '/';
 
 let compiler = webpack(webpackConfig);
 
-function middlepack(app, server) {
+function middlepack(app, socket) {
 
     // init socket info
-
-    let socket = io.listen(server);
 
     function reload() {
         // send reload signal to active clients
@@ -26,7 +24,7 @@ function middlepack(app, server) {
     // check templates for changes
 
     require('chokidar').watch('web/templates/**/*', {ignored: /[\/\\]\./})
-        .on('all', reload);
+        .on('change', reload);
 
     // load middleware
 
@@ -35,25 +33,6 @@ function middlepack(app, server) {
         reporter: reporter(reload)
     }));
 
-    // inject live reload code
-
-    let inject = `
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.js"></script>
-        <script>
-            console.info('Development mode; waiting for updates...')
-            io.connect(location.origin).on('reload', () => location.reload());
-        </script>
-    `;
-
-    app.use((req, res, next) => {
-        let send = res.send;
-        res.send = function (string) {
-            let body = string instanceof Buffer ? string.toString() : string;
-            body = body.replace(/<\/head>/, a => inject + a);
-            send.call(this, body);
-        }
-        next();
-    })
 
 }
 
