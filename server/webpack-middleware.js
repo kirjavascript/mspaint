@@ -1,4 +1,3 @@
-
 let webpack = require('webpack');
 let webpackConfig = require('../webpack.config.js')({dev:true});
 
@@ -6,19 +5,13 @@ webpackConfig.output.path = '/';
 
 let compiler = webpack(webpackConfig);
 
-function middlepack(app, socket) {
+function middlepack(app, wss) {
 
     // init socket info
 
     function reload() {
         // send reload signal to active clients
-        Object
-            .keys(socket.sockets.sockets)
-            .map(d => socket.sockets.sockets[d])
-            .filter(client => client.connected)
-            .forEach(client => {
-                client.emit('reload');
-            })
+        wss.broadcast({cmd: 'reload'});
     }
 
     // check templates for changes

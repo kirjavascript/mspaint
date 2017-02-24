@@ -40,7 +40,7 @@ if (devMode) {
 
 // load routes //
 
-require('./routes')(app, socket);
+require('./routes')(app, wss);
 
 // assign static asset folders //
 

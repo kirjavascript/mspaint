@@ -23,14 +23,16 @@ function addClient(ws, wss) {
         },
     };
 
-    client.on('xy', (xy) => {
+    ws.on('message', ({cmd, data}) => {
 
-        Object.assign(room[uid].mouse, xy);
+        if (cmd == 'xy') {
+            Object.assign(room[uid].mouse, data);
 
-        ws.broadcast({
-            type: 'xy',
-            data: xy 
-        });
+            ws.broadcast({
+                cmd: 'xy', data
+            });
+        }
+        
     })
 
 }
