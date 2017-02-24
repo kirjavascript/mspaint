@@ -1,11 +1,22 @@
+let WebSocket = require('ws');
+
 let room = {};
 
-function addClient(client, socket) {
+function addClient(ws, wss) {
+
+    // broadcast to all _other_ clients
+    ws.broadcast = (data) => {
+        wss.clients.forEach((client) => {
+            if (client != ws && client.readyState === WebSocket.OPEN) {
+                client.send(data);
+            }
+        });
+    }
 
     let uid = Math.random().toString(36).slice(2);
 
     room[uid] = {
-        uid, ws: client,
+        uid, ws,
         mouse: {
             pageX: null,
             pageY: null
@@ -16,31 +27,29 @@ function addClient(client, socket) {
 
         Object.assign(room[uid].mouse, xy);
 
-        broadcast(uid, (client) => {
-            client.ws.emit('xy', xy);
+        ws.broadcast({
+            type: 'xy',
+            data: xy 
         });
     })
 
 }
 
-function broadcast(uid, callback) {
-
-    Object
-        .keys(room)
-        .map(client => room[client])
-        .filter(client => client.uid != uid)
-        .forEach(client => {
-            callback(client);
-        });
-
-}
-
-module.exports = (app, socket) => {
+module.exports = (app, wss) => {
 
     // setInterval true/false ping
 
-    socket.on('connection', (client) => {
-        addClient(client, socket);
+    wss.on('connection', (ws) => {
+        addClient(ws, wss);
     });
+
+    // broadcast to _all_ clients
+    wss.broadcast = (data) => {
+        wss.clients.forEach((client) => {
+            if (client.readyState === WebSocket.OPEN) {
+                client.send(data);
+            }
+        });
+    };
 
 };

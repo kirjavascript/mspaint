@@ -26,16 +26,16 @@ let server = app.set('view engine', 'ejs')
 
 // sockets //
 
-let io = require('socket.io');
+let WebSocket = require('ws');
 
-let socket = io.listen(server);
+let wss = new WebSocket.Server({server});
 
-require('./socket')(app, socket);
+require('./socket')(app, wss);
 
 // webpack-dev-middleware //
 
 if (devMode) {
-    require('./webpack-middleware')(app, socket);
+    require('./webpack-middleware')(app, wss);
 }
 
 // load routes //
