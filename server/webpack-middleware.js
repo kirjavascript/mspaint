@@ -11,7 +11,7 @@ function middlepack(app, wss) {
 
     function reload() {
         // send reload signal to active clients
-        wss.broadcast({cmd: 'reload'});
+        wss.broadcastObj({cmd: 'reload'});
     }
 
     // check templates for changes

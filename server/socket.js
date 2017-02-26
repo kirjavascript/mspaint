@@ -5,7 +5,8 @@ let room = {};
 function addClient(ws, wss) {
 
     // broadcast to all _other_ clients
-    ws.broadcast = (data) => {
+    ws.broadcastObj = (data) => {
+        data = JSON.stringify(data);
         wss.clients.forEach((client) => {
             if (client != ws && client.readyState === WebSocket.OPEN) {
                 client.send(data);
@@ -23,14 +24,26 @@ function addClient(ws, wss) {
         },
     };
 
-    ws.on('message', ({cmd, data}) => {
+    ws.on('message', (__data, {binary}) => {
 
-        if (cmd == 'xy') {
-            Object.assign(room[uid].mouse, data);
+        // JSON
+        if (!binary) {
+            try {
+                let { cmd, data } = JSON.parse(__data);
 
-            ws.broadcast({
-                cmd: 'xy', data
-            });
+                if (cmd == 'xy') {
+                    Object.assign(room[uid].mouse, data);
+
+                    ws.broadcastObj({
+                        cmd: 'xy', data
+                    });
+                }
+
+            } catch(e) { console.error(e); };
+        }
+        // TypedArray
+        else {
+
         }
         
     })
@@ -47,6 +60,15 @@ module.exports = (app, wss) => {
 
     // broadcast to _all_ clients
     wss.broadcast = (data) => {
+        wss.clients.forEach((client) => {
+            if (client.readyState === WebSocket.OPEN) {
+                client.send(data);
+            }
+        });
+    };
+
+    wss.broadcastObj = (data) => {
+        data = JSON.stringify(data);
         wss.clients.forEach((client) => {
             if (client.readyState === WebSocket.OPEN) {
                 client.send(data);

@@ -1,19 +1,26 @@
-import WebSocket from 'ws';1;
 import d3 from '#lib/d3';
 
-let ws = new WebSocket(`ws://${location.origin}`);
+// http://websocket.org/echo.html
+// http://msgpack.org/index.html
 
-ws.on('message', ({cmd, data}) => {
+const ws = new WebSocket(`ws://${location.host}/`);
+
+ws.sendObj = (obj) => ws.send(JSON.stringify(obj));
+
+ws.addEventListener('message', (e) => {
+
+    let { cmd, data } = JSON.parse(e.data);
 
     if (cmd == 'reload') {
         location.reload();
     }
+
     else if (cmd == 'xy') {
+        let { pageX, pageY } = data;
         cursor.style('top', pageY + 'px')
             .style('left', pageX + 'px');
     }
-
-
+    
 });
 
 
@@ -21,7 +28,7 @@ document.addEventListener('mousemove', (e) => {
 
     let { pageX, pageY } = e;
 
-    ws.send({cmd: 'xy', data: {pageX, pageY}});
+    ws.sendObj({cmd: 'xy', data: {pageX, pageY}});
 
 });
 
@@ -31,4 +38,3 @@ let cursor = d3.select(document.body)
     .style('height', '50px')
     .style('background-color', 'black')
     .style('position', 'absolute');
-
