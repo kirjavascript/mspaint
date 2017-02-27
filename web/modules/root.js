@@ -1,7 +1,5 @@
 import './css/root.scss';
 
-import './js/tools';
-import './js/menu';
 import './js/socket';
 
 // grr firefox

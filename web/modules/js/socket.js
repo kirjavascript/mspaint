@@ -3,16 +3,29 @@ import d3 from '#lib/d3';
 // http://websocket.org/echo.html
 // http://msgpack.org/index.html
 
-const ws = new WebSocket(`ws://${location.host}/`);
+export const ws = new WebSocket(`ws://${location.host}/`);
 
 ws.sendObj = (obj) => ws.send(JSON.stringify(obj));
 
+window.addEventListener('beforeunload', () => {
+    ws.close();
+});
+
+ws.addEventListener('close', () => {
+    // location.reload();
+    // alert('debug:closed');
+});
+
 ws.addEventListener('message', (e) => {
 
-    let { cmd, data } = JSON.parse(e.data);
+    let { cmd, uid, data } = JSON.parse(e.data);
 
     if (cmd == 'reload') {
         location.reload();
+    }
+
+    else if (cmd == 'rip') {
+        console.log(uid);
     }
 
     else if (cmd == 'xy') {
@@ -38,3 +51,4 @@ let cursor = d3.select(document.body)
     .style('height', '50px')
     .style('background-color', 'black')
     .style('position', 'absolute');
+
