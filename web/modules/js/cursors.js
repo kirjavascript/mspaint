@@ -11,16 +11,14 @@ ws.addEventListener('message', (e) => {
 
     if (cmd == 'LIST') {
         clients = data;
-        clients.forEach((d) => d.mouse = {});
         update();
     }
 
     else if (cmd == 'COLOR') {
-        d3.select('.window').style('cursor', 'url(\'data:image/svg+xml;utf8,'+encodeURIComponent(getCursorSVG(data))+'\'), auto');
+        d3.select(document.body).style('cursor', 'url(\'data:image/svg+xml;utf8,'+encodeURIComponent(getCursorSVG(data))+'\'), auto');
     }
 
     else if (cmd == 'JOIN') {
-        data.mouse = {};
         clients.push(data);
         update();
     }
@@ -60,17 +58,17 @@ function update() {
         .append('div')
         .style('position', 'absolute')
         .classed('cursor', true)
-        .html((d) => getCursorSVG(d.color));
-
-    let exit = selection.exit().remove();
-
-    selection
+        .html((d) => getCursorSVG(d.color))
+        .merge(selection)
         .style('left', (d) => d.mouse.pageX + 'px')
         .style('top', (d) => d.mouse.pageY + 'px');
-        
-        
+    
+    let exit = selection.exit()
+        .transition()
+        .duration(500)
+        .style('opacity', 0)
+        .remove();
 
-    console.log(JSON.stringify(clients));
 }
 
 // util

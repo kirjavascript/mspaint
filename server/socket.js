@@ -42,9 +42,8 @@ function addClient(ws, wss) {
     
     room[uid] = {
         ws,
-        // mouse: { pageX, pageY }
         config: {
-            uid, color, name: '',
+            uid, color, name: '', mouse: {/* pageX, pageY */}
         },
         pong: Date.now(),
     };
@@ -93,7 +92,7 @@ function addClient(ws, wss) {
                     room[uid].pong = Date.now();
                 }
                 else if (cmd == 'XY') {
-                    //Object.assign(room[uid].mouse, data);
+                    Object.assign(room[uid].config.mouse, data);
 
                     ws.broadcastObj({
                         cmd: 'XY', data, uid
