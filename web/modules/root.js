@@ -2,6 +2,7 @@ import './css/root.scss';
 import './js/socket';
 import './js/cursors';
 import './js/canvas';
+import './js/tools';
 
 // grr firefox
 [...document.querySelectorAll('img')]

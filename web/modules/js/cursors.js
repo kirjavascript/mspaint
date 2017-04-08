@@ -59,6 +59,7 @@ function update() {
     let enter = selection.enter()
         .append('div')
         .style('position', 'absolute')
+        .style('pointer-events', 'none')
         .classed('cursor', true)
         .html((d) => getCursorSVG(d.color))
         .merge(selection)

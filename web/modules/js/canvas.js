@@ -3,7 +3,7 @@ import { event as d3event } from 'd3-selection';
 import { ws } from './socket';
 import { drawToContext, unwrapBuffer } from '#shared/canvas-tools';
 
-let [width, height] = [500,400];
+let [width, height] = [1280,800];
 let canvas = d3.select('canvas');
 let ctx = canvas.node().getContext('2d');
 let data = [];
