@@ -3,7 +3,7 @@ import { ws } from './socket';
 
 let clients = [];
 
-// fade out after delay?
+// events
 
 ws.addEventListener('message', (e) => {
 
@@ -11,24 +11,31 @@ ws.addEventListener('message', (e) => {
 
     if (cmd == 'LIST') {
         clients = data;
+        clients.forEach((d) => d.mouse = {});
+        update();
     }
 
     else if (cmd == 'COLOR') {
-        d3.select('.window').style('cursor', 'url(\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" height="100px" width="100px"><g><path d="M28.1,36.6c4.6,1.9,12.2,1.6,20.9,1.1c8.9-0.4,19-0.9,28.9,0.9c6.3,1.2,11.9,3.1,16.8,6c-1.5-12.2-7.9-23.7-18.6-31.3 c-4.9-0.2-9.9,0.3-14.8,1.4C47.8,17.9,36.2,25.6,28.1,36.6z"/><path d="M70.3,9.8C57.5,3.4,42.8,3.6,30.5,9.5c-3,6-8.4,19.6-5.3,24.9c8.6-11.7,20.9-19.8,35.2-23.1C63.7,10.5,67,10,70.3,9.8z"/><path d="M16.5,51.3c0.6-1.7,1.2-3.4,2-5.1c-3.8-3.4-7.5-7-11-10.8c-2.1,6.1-2.8,12.5-2.3,18.7C9.6,51.1,13.4,50.2,16.5,51.3z"/><path d="M9,31.6c3.5,3.9,7.2,7.6,11.1,11.1c0.8-1.6,1.7-3.1,2.6-4.6c0.1-0.2,0.3-0.4,0.4-0.6c-2.9-3.3-3.1-9.2-0.6-17.6   c0.8-2.7,1.8-5.3,2.7-7.4c-5.2,3.4-9.8,8-13.3,13.7C10.8,27.9,9.8,29.7,9,31.6z"/><path d="M15.4,54.7c-2.6-1-6.1,0.7-9.7,3.4c1.2,6.6,3.9,13,8,18.5C13,69.3,13.5,61.8,15.4,54.7z"/><path d="M39.8,57.6C54.3,66.7,70,73,86.5,76.4c0.6-0.8,1.1-1.6,1.7-2.5c4.8-7.7,7-16.3,6.8-24.8c-13.8-9.3-31.3-8.4-45.8-7.7   c-9.5,0.5-17.8,0.9-23.2-1.7c-0.1,0.1-0.2,0.3-0.3,0.4c-1,1.7-2,3.4-2.9,5.1C28.2,49.7,33.8,53.9,39.8,57.6z"/><path d="M26.2,88.2c3.3,2,6.7,3.6,10.2,4.7c-3.5-6.2-6.3-12.6-8.8-18.5c-3.1-7.2-5.8-13.5-9-17.2c-1.9,8-2,16.4-0.3,24.7   C20.6,84.2,23.2,86.3,26.2,88.2z"/><path d="M30.9,73c2.9,6.8,6.1,14.4,10.5,21.2c15.6,3,32-2.3,42.6-14.6C67.7,76,52.2,69.6,37.9,60.7C32,57,26.5,53,21.3,48.6   c-0.6,1.5-1.2,3-1.7,4.6C24.1,57.1,27.3,64.5,30.9,73z"/></g></svg>\'), auto');
+        d3.select('.window').style('cursor', 'url(\'data:image/svg+xml;utf8,'+encodeURIComponent(getCursorSVG(data))+'\'), auto');
     }
 
     else if (cmd == 'JOIN') {
+        data.mouse = {};
         clients.push(data);
+        update();
     }
 
     else if (cmd == 'PART') {
-
+        let index = clients.findIndex((d) => d.uid == uid);
+        clients.splice(index, 1);
+        update();
     }
 
     else if (cmd == 'XY') {
-        
+        let client = clients.find((d) => d.uid == uid);
+        Object.assign(client, { mouse: data });
+        update();
     }
-
 
 });
 
@@ -39,4 +46,37 @@ document.addEventListener('mousemove', (e) => {
     ws.sendObj({cmd: 'XY', data: {pageX, pageY}});
 
 });
+
+// dom manipulation and data binding
+
+let cursorGroup = d3.select(document.body).append('div');
+
+function update() {
+    let selection = cursorGroup
+        .selectAll('.cursor')
+        .data(clients, (d) => d.uid);
+
+    let enter = selection.enter()
+        .append('div')
+        .style('position', 'absolute')
+        .classed('cursor', true)
+        .html((d) => getCursorSVG(d.color));
+
+    let exit = selection.exit().remove();
+
+    selection
+        .style('left', (d) => d.mouse.pageX + 'px')
+        .style('top', (d) => d.mouse.pageY + 'px');
+        
+        
+
+    console.log(JSON.stringify(clients));
+}
+
+// util
+
+function getCursorSVG(color = '#FFF') {
+    return '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="25" viewBox="0 0 190 300"><path fill="'+color+'" d="M7.8 1H.4C0 59 0 116.6 0 174c0 30.7-.2 61 .3 91.8h31c.3-4.5.4-9 .4-13.4v-2H47c0-4.6.4-9.2 0-13.7l-.3-2.5 3 1c5 1 9 0 14 0v-15h15v3c0 10 1 19 1 29l14 1h2v2c0 10 0 19 1 29 5 1 9 1 14 1h2v15h31c1-4 1-9 0-13v-3h15c1-10 0-20 0-31h-16v-31h-15l1-2v-14h62v-31h-16v-16h-16v-15h-16v-15h-16v-15h-16v-16h-16v-15h-15v-15h-16v-15H48.3v-16H31.6v-16h-16v-2l-.3-14H7.6z"/><path d="M.3 1.3h15.3l.2 15.4H31V32H15.8c0 73 .2 145.5 0 218h15.7v-15.3c5 0 10.2-.6 15.3.3 1 5 .5 10 .4 15H31.7c0 5 0 10-.4 15H.3c-.5-31-.2-61-.3-92C0 115 0 58 .4 0zM31.4 32c5 .3 10.3.3 15.4.3.2 5 .2 10.3.2 15.4h15.4c0 5.3 0 10.4.3 15.6h16v15.5c6 0 11 0 16 .2 0 5 0 10 1 15h15v15h15l1 15h15v16h-16v-16h-16v-15h-16V94h-15V78h-16V62h-15V46h-16c-.4-6-.3-11-.3-16zm109 109c5 0 10.2 0 15.3.3 0 5 0 10.2.3 15.3 5 0 10.2 0 15.3.2V172c5.2.3 10.3.3 15.5.3.2 10.4 0 20.7 0 31-20.6.3-41.2.3-62 .4.2 5 .2 10 0 15.2H109v-31h62.3v-16h-15.6v-15.5h-15.3c-.3-5.3-.3-10.5 0-15.8zm-78 62.3H78c.2 5.4.5 10.7-.3 16-4.8.4-9.7.3-14.5.3 0 5 0 10-.2 15-5.2 0-10.4.7-15.5-.3-1-5-.6-10.2-.5-15.4h15.5v-16zm15 16c5.4-.6 10.8-.4 16-.3v31H109v31c10.7 0 21-1 31.5 0 0 5 0 10-1 15h-31v-15h-15l-1-31c-5 0-10 0-16-1 0-11-2-21-1-31zM124.8 219c5.2-.4 10.4 0 15.5 0v31h15v31.3c-5 0-10 .3-16 0-1-10.3 0-20.7-1-31-5-.2-11-.2-16-.2v-31z" fill="#1c1c1c"/></svg>'; 
+}
+
 

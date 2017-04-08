@@ -1,7 +1,12 @@
 let WebSocket = require('ws');
 let { scaleOrdinal, schemeCategory10 } = require('d3-scale');
 
-let colorScale = scaleOrdinal(schemeCategory10);
+let colorGenerator = (() => {
+    let i = 0;
+    let colorScale = scaleOrdinal(schemeCategory10);
+    return () => colorScale(i++);
+})();
+
 let room = {};
 
 function addClient(ws, wss) {
@@ -19,7 +24,7 @@ function addClient(ws, wss) {
     ws.sendObj = (obj) =>
         (ws.readyState == WebSocket.OPEN) && ws.send(JSON.stringify(obj));
 
-    let uid, color = colorScale(Object.keys(room).length);
+    let uid, color = colorGenerator();
     do { uid = Math.random().toString(36).slice(2); }
     while (room[uid]);
 

@@ -26,7 +26,7 @@ export default {
     // ...require('d3-time'),
     // ...require('d3-time-format'),
     // ...require('d3-timer'),
-    // ...require('d3-transition'),
+    ...require('d3-transition'),
     // ...require('d3-voronoi'),
     // ...require('d3-zoom')
 };

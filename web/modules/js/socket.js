@@ -32,19 +32,5 @@ ws.addEventListener('message', (e) => {
         ws.sendObj({cmd: 'PONG'});
         console.log('ping: '+data);
     }
-
-    else if (cmd == 'XY') {
-        let { pageX, pageY } = data;
-        cursor.style('top', pageY + 'px')
-            .style('left', pageX + 'px');
-    }
-    
 });
-
-let cursor = d3.select(document.body)
-    .append('div')
-    .style('width', '50px')
-    .style('height', '50px')
-    .style('background-color', 'black')
-    .style('position', 'absolute');
 
