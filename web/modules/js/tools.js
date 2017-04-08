@@ -1,25 +1,32 @@
 import d3 from '#lib/d3';
 
+export let selected = 6;
+
 let tools = [
-    {
-
-    },
+    'LINE',
 ];
-
-tools = new Array(16).fill({d:1});
 
 let toolbox = d3.select('.toolbox');
 
 let selection = toolbox.selectAll('.tool')
-    .data(tools);
+    .data(new Array(16).fill({}));
 
 let enter = selection.enter()
     .append('div')
     .classed('tool', 1)
-    .append('div');
+    .append('div')
+    .on('mousedown', function(d, i) {
+        toolbox.select(`.tool:nth-child(${selected+1})`)
+            .select('img')
+            .attr('src', 'tools/up.png');
+        d3.select(this)
+            .select('img')
+            .attr('src', 'tools/down.png');
+        selected = i;
+    });
 
 enter.append('img')
-    .attr('src', 'tools/up.png');
+    .attr('src', (d,i) => `tools/${i==selected?'down':'up'}.png`);
 
 enter.append('img')
     .attr('src', (d,i) => `tools/${i}.png`);

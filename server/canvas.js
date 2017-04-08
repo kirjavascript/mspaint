@@ -13,7 +13,7 @@ function initCanvas(wssInstance, roomInstance) {
 }
 
 function updateCanvas({ cmd, data, uid, ws }) {
-    wss.broadcastObj({ cmd, data });
+    ws.broadcastObj({ cmd, data });
     drawToContext({ cmd, data, ctx });
 }
 

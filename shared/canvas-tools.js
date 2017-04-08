@@ -16,6 +16,11 @@ function drawToContext({ ctx, data, cmd }) {
 
     }
 
+    //     let radius = 5;
+    //     ctx.beginPath();
+    //     ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
+    //     ctx.fillStyle = 'green';
+    //     ctx.fill();
 }
 
 // message passing via ArrayBuffers
