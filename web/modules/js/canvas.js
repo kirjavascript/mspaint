@@ -4,7 +4,7 @@ import { ws } from './socket';
 import { drawToContext, unwrapBuffer } from '#shared/canvas-tools';
 
 let [width, height] = [1280,800];
-let canvas = d3.select('canvas');
+let canvas = d3.select('canvas').style('opacity', 0);
 let ctx = canvas.node().getContext('2d');
 let data = [];
 
@@ -15,9 +15,14 @@ ws.addEventListener('message', (e) => {
     if (e.data instanceof ArrayBuffer) {
         let { cmd, typedArray } = unwrapBuffer(e.data);
 
-        let imageData = ctx.createImageData(width, height);
-        imageData.data.set(typedArray);
-        ctx.putImageData(imageData, 0, 0);
+        if (cmd == 'INIT') {
+            let imageData = ctx.createImageData(width, height);
+            imageData.data.set(typedArray);
+            ctx.putImageData(imageData, 0, 0);
+            canvas.transition()
+                .duration(500)
+                .style('opacity', 1);
+        }
 
         return;
     }

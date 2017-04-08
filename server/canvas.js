@@ -19,7 +19,7 @@ function updateCanvas({ cmd, data, uid, ws }) {
 
 function readCanvas() {
     let typedArray = ctx.getImageData(0, 0, width, height).data;
-    return wrapBuffer('FULL', typedArray);
+    return wrapBuffer('INIT', typedArray);
 }
 
 

@@ -33,4 +33,23 @@
     border-top: 1px solid white;
     border-right: 1px solid $darkgrey;
     border-bottom: 1px solid $darkgrey;
+    width: 50px;
+    line-height: 0;
+    .tool {
+        display: inline-block; 
+
+        > div {
+
+            position: relative;
+            width: 25px;
+            height: 25px;
+
+            img {
+                position: absolute;
+                z-index: 0;
+                top: 0;
+                left: 0;
+            }
+        }
+    }
 }

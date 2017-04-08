@@ -21,7 +21,7 @@ function drawToContext({ ctx, data, cmd }) {
 // message passing via ArrayBuffers
 
 let bufferCmds = [
-    'FULL'
+    'INIT'
 ];
 
 function wrapBuffer(cmd, buffer) {
