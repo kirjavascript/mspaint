@@ -58,6 +58,7 @@ module.exports = (env={}) => {
             alias: {
                 '#lib': __dirname + '/web/modules/js/lib',
                 '#state': __dirname + '/web/modules/js/state',
+                '#js': __dirname + '/web/modules/js/js',
             }
             
         },

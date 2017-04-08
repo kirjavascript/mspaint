@@ -12,37 +12,33 @@ window.addEventListener('beforeunload', () => {
 });
 
 ws.addEventListener('close', () => {
-    // location.reload();
-    // alert('debug:closed');
+    if (__DEV__) {
+        console.error('error: closed connection');
+    }
+    else {
+        location.reload();
+    }
 });
 
 ws.addEventListener('message', (e) => {
 
     let { cmd, uid, data } = JSON.parse(e.data);
 
-    if (cmd == 'reload') {
+    if (cmd == 'RELOAD') {
         location.reload();
     }
 
-    else if (cmd == 'rip') {
-        console.log(uid);
+    else if (cmd == 'PING') {
+        ws.sendObj({cmd: 'PONG'});
+        console.log('ping: '+data);
     }
 
-    else if (cmd == 'xy') {
+    else if (cmd == 'XY') {
         let { pageX, pageY } = data;
         cursor.style('top', pageY + 'px')
             .style('left', pageX + 'px');
     }
     
-});
-
-
-document.addEventListener('mousemove', (e) => {
-
-    let { pageX, pageY } = e;
-
-    ws.sendObj({cmd: 'xy', data: {pageX, pageY}});
-
 });
 
 let cursor = d3.select(document.body)

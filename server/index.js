@@ -10,7 +10,7 @@ catch (e) {
     process.exit();
 }
 
-let devMode = ~process.argv.indexOf('--dev');
+let devMode = ~process.argv.indexOf('--env.dev');
 
 // start server //
 

@@ -1,5 +1,7 @@
 let WebSocket = require('ws');
+let { scaleOrdinal, schemeCategory10 } = require('d3-scale');
 
+let colorScale = scaleOrdinal(schemeCategory10);
 let room = {};
 
 function addClient(ws, wss) {
@@ -14,34 +16,66 @@ function addClient(ws, wss) {
         });
     }
 
-    let uid;
-    do {
-        uid = Math.random().toString(36).slice(2);
-    } while (!room[uid]);
+    ws.sendObj = (obj) =>
+        (ws.readyState == WebSocket.OPEN) && ws.send(JSON.stringify(obj));
+
+    let uid, color = colorScale(Object.keys(room).length);
+    do { uid = Math.random().toString(36).slice(2); }
+    while (room[uid]);
+
+    // send list of existing to ws
+    
+    ws.sendObj({cmd: 'LIST', data: Object.keys(room).map(key => {
+        return room[key].config;
+    })})
+
+    // send mouse colour to client
+    
+    ws.sendObj({cmd: 'COLOR', data: color}); 
+    
+    // client object
+    
+    room[uid] = {
+        ws,
+        // mouse: { pageX, pageY }
+        config: {
+            uid, color, name: '',
+        },
+        pong: Date.now(),
+    };
 
     // broadcast join to others
 
-    // send list of existing to ws
+    ws.broadcastObj({cmd: 'JOIN', data: room[uid].config, uid});
 
-    room[uid] = {
-        ws,
-        // mouse: {
-        //     pageX: null,
-        //     pageY: null,
-        // },
-        config: {
-            uid, name: '',
-            color: '#FF0000',
-        },
-        remove() {
-            ws.broadcastObj({cmd: 'part', uid});
-            delete room[uid];
+    // keep alive / ping
+
+    let interval = 5000;
+
+    let pingFunc = setInterval(() => {
+        let ping = Math.abs(- room[uid].pong + Date.now() - interval);
+        if (ping <= interval) {
+            ws.sendObj({cmd: 'PING', data: ping});   
         }
+        else if (ping > interval*2) {
+            room[uid].remove();
+        }
+    }, interval);
+
+    // remove
+
+    room[uid].remove = () => {
+        ws.broadcastObj({cmd: 'PART', uid});
+        clearInterval(pingFunc);
+        ws.close();
+        delete room[uid];
     };
 
     ws.on('close', () => {
         room[uid].remove();
     });
+
+    // messages
 
     ws.on('message', (__data, {binary}) => {
 
@@ -49,12 +83,15 @@ function addClient(ws, wss) {
         if (!binary) {
             try {
                 let { cmd, data } = JSON.parse(__data);
-
-                if (cmd == 'xy') {
+                
+                if (cmd == 'PONG') {
+                    room[uid].pong = Date.now();
+                }
+                else if (cmd == 'XY') {
                     //Object.assign(room[uid].mouse, data);
 
                     ws.broadcastObj({
-                        cmd: 'xy', data
+                        cmd: 'XY', data, uid
                     });
                 }
 
@@ -70,8 +107,6 @@ function addClient(ws, wss) {
 }
 
 module.exports = (app, wss) => {
-
-    // setInterval true/false ping
 
     // broadcast to _all_ clients
     wss.broadcast = (data) => {
