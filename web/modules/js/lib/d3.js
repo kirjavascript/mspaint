@@ -1,3 +1,5 @@
+// d3-drag was forked to remove preventDefault()
+
 export default {
     // ...require('d3-array'),
     // ...require('d3-axis'),
@@ -6,7 +8,7 @@ export default {
     // ...require('d3-collection'),
     // ...require('d3-color'),
     // ...require('d3-dispatch'),
-    // ...require('d3-drag'),
+    ...require('./d3-drag'),
     // ...require('d3-dsv'),
     // ...require('d3-ease'),
     // ...require('d3-force'),

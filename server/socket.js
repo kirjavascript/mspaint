@@ -1,5 +1,6 @@
 let WebSocket = require('ws');
 let { scaleOrdinal, schemeCategory10 } = require('d3-scale');
+let { initCanvas, updateCanvas, readCanvas } = require('./canvas');
 
 let colorGenerator = (() => {
     let i = 0;
@@ -37,6 +38,10 @@ function addClient(ws, wss) {
     // send mouse colour to client
     
     ws.sendObj({cmd: 'COLOR', data: color}); 
+
+    // send current canvas image data
+    
+    ws.send(readCanvas());
     
     // client object
     
@@ -98,6 +103,9 @@ function addClient(ws, wss) {
                         cmd: 'XY', data, uid
                     });
                 }
+                else if (cmd.indexOf('CANVAS_') == 0) {
+                    updateCanvas({ cmd, data, uid, ws });
+                }
 
             } catch(e) { console.error(e); };
         }
@@ -133,5 +141,7 @@ module.exports = (app, wss) => {
     wss.on('connection', (ws) => {
         addClient(ws, wss);
     });
+
+    initCanvas(wss, room);
 
 };

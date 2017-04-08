@@ -7,6 +7,8 @@ let clients = [];
 
 ws.addEventListener('message', (e) => {
 
+    if (e.data instanceof ArrayBuffer) return;
+
     let { cmd, uid, data } = JSON.parse(e.data);
 
     if (cmd == 'LIST') {

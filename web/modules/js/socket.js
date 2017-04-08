@@ -6,6 +6,7 @@ import d3 from '#lib/d3';
 export const ws = new WebSocket(`ws://${location.host}/`);
 
 ws.sendObj = (obj) => ws.send(JSON.stringify(obj));
+ws.binaryType = 'arraybuffer';
 
 window.addEventListener('beforeunload', () => {
     ws.close();
@@ -21,6 +22,8 @@ ws.addEventListener('close', () => {
 });
 
 ws.addEventListener('message', (e) => {
+
+    if (e.data instanceof ArrayBuffer) return; 
 
     let { cmd, uid, data } = JSON.parse(e.data);
 
