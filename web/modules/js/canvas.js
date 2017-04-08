@@ -58,7 +58,7 @@ function dragging(d) {
     let obj = {cmd: 'CANVAS_LINE', data: d3event};
 
     ws.sendObj(obj);
-    drawToContext({ctx, ...obj });
+    // drawToContext({ctx, ...obj });
 
     //     let radius = 5;
     //     ctx.beginPath();
