@@ -32,3 +32,5 @@ function selectTool(d, i) {
         .attr('src', 'tools/down.png');
     selected = i;
 }
+
+let subTool = toolbox.append('div').classed('subtool', 1);

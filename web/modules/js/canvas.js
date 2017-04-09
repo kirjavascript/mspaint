@@ -2,6 +2,7 @@ import d3 from '#lib/d3';
 import { event as d3event } from 'd3-selection';
 import { ws } from './socket';
 import { drawToContext, unwrapBuffer } from '#shared/canvas-tools';
+import { setStatus } from './statusbar';
 
 let [width, height] = [1280,800];
 let canvas = d3.select('canvas').style('opacity', 0);
@@ -59,13 +60,18 @@ function dragging(d) {
     ws.sendObj(obj);
     drawToContext({ctx, ...obj });
 
-    //     let radius = 5;
-    //     ctx.beginPath();
-    //     ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
-    //     ctx.fillStyle = 'green';
-    //     ctx.fill();
 }
 
 function dragended(d) {
 }
 
+// get X/Y
+
+canvas
+    .on('mousemove', () => {
+        let { layerX: x, layerY: y } = d3event;
+        setStatus('xy', {x, y});
+    })
+    .on('mouseleave', () => {
+        setStatus('xy');
+    });

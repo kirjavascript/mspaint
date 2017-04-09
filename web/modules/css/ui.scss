@@ -67,6 +67,13 @@
             }
         }
     }
+
+    .subtool {
+        @extend .basicShading;
+        width: 39px;
+        height: 64px;
+        margin: 3px 4px;
+    }
 }
 
 .workspace {
@@ -100,12 +107,8 @@
     display: flex;
 
     .cell {
-        flex-grow: 1;
-        flex-shrink: 0;
-        border-top: 1px solid $darkgrey;
-        border-left: 1px solid $darkgrey;
-        border-bottom: 1px solid whitesmoke;
-        border-right: 1px solid whitesmoke;
+        @extend .basicShading;
+        flex: 1 0 0;
         margin-right: 2px;
         padding: 5px 2px;
         &:last-of-type {
@@ -117,4 +120,11 @@
             margin-right: 2px;
         }
     }
+}
+
+.basicShading {
+    border-top: 1px solid $darkgrey;
+    border-left: 1px solid $darkgrey;
+    border-bottom: 1px solid whitesmoke;
+    border-right: 1px solid whitesmoke;
 }
