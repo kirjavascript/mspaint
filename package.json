@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server/index.js --ignore 'web/modules/**/*' --ignore 'shared/**/*' --env.dev",
-    "deploy": "git pull origin master && npm install && webpack -p"
+    "deploy": "git pull origin master && yarn && webpack -p"
   },
   "author": "",
   "license": "ISC",
