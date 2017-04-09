@@ -4,6 +4,7 @@ import './js/cursors';
 import './js/canvas';
 import './js/tools';
 import './js/statusbar';
+import './js/palette';
 
 // grr firefox
 [...document.querySelectorAll('img')]

@@ -4,8 +4,6 @@ Multiplayer mspaint
 mspaint websockets
 ```
     TODO;
-    UI state is local
-    multiplayer dropdown -> contributors
     open/new/save = list/newroom/png
     multiple pages /thing = different thing
     save history (diff/save anyway)
@@ -13,14 +11,10 @@ mspaint websockets
     infinite canvas?!? panning
     cursor tracking, nick, colour (!) mouse cursor of you/them
     drag an image on
-    ping in statusbar
     max width/height
-    disable text highlighting
-    enter a username/password to edit
-    mobX
+    native colour picker
     db (!)
-    history
     directory
     contributors list
-    link github
+    link github - about
 ```

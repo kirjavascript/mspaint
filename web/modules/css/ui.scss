@@ -46,7 +46,8 @@
     border-top: 1px solid white;
     border-right: 1px solid $darkgrey;
     border-bottom: 1px solid $darkgrey;
-    width: 53px;
+    width: 50px;
+    padding: 0 3px;
     line-height: 0;
     flex-shrink: 0;
 
@@ -111,6 +112,7 @@
         flex: 1 0 0;
         margin-right: 2px;
         padding: 5px 2px;
+        white-space: nowrap;
         &:last-of-type {
             margin-right: 0;
         }
