@@ -7,7 +7,7 @@ module.exports = (env={}) => {
             root: './web/modules/root.js',
         },
         output: {
-            path: './web/bundles',
+            path: __dirname  + '/web/bundles',
             filename: '[name].js',
         },
         module: {
