@@ -1,28 +1,28 @@
-let colors = ['rgb(0, 0, 0)',
-    'rgb(120, 120, 120)',
-    'rgb(121, 3, 0)',
-    'rgb(117, 122, 1)',
-    'rgb(0, 121, 2)',
-    'rgb(0, 119, 120)',
-    'rgb(10, 0, 120)',
-    'rgb(123, 0, 119)',
-    'rgb(118, 122, 56)',
-    'rgb(0, 54, 55)',
-    'rgb(40, 111, 254)',
-    'rgb(8, 49, 120)',
-    'rgb(76, 0, 254)',
-    'rgb(120, 59, 0)',
-    'rgb(255, 255, 255)',
-    'rgb(187, 187, 187)',
-    'rgb(255, 14, 0)',
-    'rgb(250, 255, 8)',
-    'rgb(0, 255, 11)',
-    'rgb(0, 254, 255)',
-    'rgb(52, 0, 254)',
-    'rgb(255, 0, 254)',
-    'rgb(251, 255, 122)',
-    'rgb(0, 255, 123)',
-    'rgb(118, 254, 255)',
-    'rgb(130, 112, 254)',
-    'rgb(255, 6, 119)',
-    'rgb(255, 125, 54)'];
+import d3 from '#lib/d3';
+
+let colors = '00077770077007007700770777303326f03740f730fffbbbf00ff00f00ff30ff0fff70f77ff87ff07f73'.match(/.../g).map((d) => '#' + d);
+
+let mice = [0, 14];
+
+let current = d3.select('.palette')
+    .append('div')
+    .classed('current', 1)
+    .selectAll('.mice')
+    .data(mice);
+
+current
+    .enter()
+    .append('div')
+    .style('background-color', (d) => colors[d]);
+
+let colorList = d3.select('.palette')
+    .append('div')
+    .classed('colors', 1)
+    .selectAll('.color')
+    .data(colors);
+
+colorList
+    .enter()
+    .append('div')
+    .classed('color',1)
+    .style('background-color', (d) => d);

@@ -1,7 +1,6 @@
 Multiplayer mspaint
 ===
 
-mspaint websockets
 ```
     TODO;
     open/new/save = list/newroom/png
