@@ -3,6 +3,7 @@ import './js/socket';
 import './js/cursors';
 import './js/canvas';
 import './js/tools';
+import './js/statusbar';
 
 // grr firefox
 [...document.querySelectorAll('img')]

@@ -1,0 +1,15 @@
+@mixin innerBorder {
+    position: relative;
+    &:before {
+        position: absolute;
+        display: block;
+        content: '';
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: visible;
+        pointer-events: none;
+        @content;
+    }
+}

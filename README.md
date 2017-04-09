@@ -1,8 +1,9 @@
-Multiplayer mspaint.exe
+Multiplayer mspaint
 ===
 
 mspaint websockets
-``` TODO
+```
+    TODO;
     UI state is local
     multiplayer dropdown -> contributors
     open/new/save = list/newroom/png
@@ -21,4 +22,5 @@ mspaint websockets
     history
     directory
     contributors list
-    link github```
+    link github
+```

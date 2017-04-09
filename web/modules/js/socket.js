@@ -1,4 +1,5 @@
 import d3 from '#lib/d3';
+import { setStatus } from './statusbar';
 
 // http://websocket.org/echo.html
 // http://msgpack.org/index.html
@@ -33,7 +34,7 @@ ws.addEventListener('message', (e) => {
 
     else if (cmd == 'PING') {
         ws.sendObj({cmd: 'PONG'});
-        console.log('ping: '+data);
+        setStatus('ping', data);
     }
 });
 

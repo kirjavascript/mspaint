@@ -1,5 +1,6 @@
 import d3 from '#lib/d3';
 import { ws } from './socket';
+import { setStatus } from './statusbar';
 
 let clients = [];
 
@@ -72,6 +73,7 @@ function update() {
         .style('opacity', 0)
         .remove();
 
+    setStatus('connectedUsers', clients.length + 1);
 }
 
 // util

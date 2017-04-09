@@ -1,5 +1,6 @@
 @import './variables.scss';
 @import './ui.scss';
+@import './mixins.scss';
 
 html {
     overflow: hidden;
@@ -78,10 +79,6 @@ canvas {
 
         display: flex; 
         flex: 1;
-
-        .leftbar {
-            flex-shrink: 0;
-        }
 
         .workspace {
             flex-grow: 1;
