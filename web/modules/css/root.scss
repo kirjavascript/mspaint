@@ -39,6 +39,8 @@ canvas {
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
+    display: flex;
+    flex-direction: column;
 }
 
 .border {
@@ -63,4 +65,26 @@ canvas {
     border-bottom: 1px solid $darkgrey;
     border-right: 1px solid $darkgrey;
     pointer-events: none;
+}
+
+.layout {
+
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;  
+    padding-bottom: 8px;
+
+    .layoutInner {
+
+        display: flex; 
+        flex: 1;
+
+        .leftbar {
+            flex-shrink: 0;
+        }
+
+        .workspace {
+            flex-grow: 1;
+        }
+    }
 }

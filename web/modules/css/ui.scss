@@ -21,6 +21,7 @@
 
     .item {
         padding: 2px 5px;
+        flex-shrink: 0;
         &:hover {
             background-color: $blue;
             color: white;
@@ -33,7 +34,7 @@
     border-top: 1px solid white;
     border-right: 1px solid $darkgrey;
     border-bottom: 1px solid $darkgrey;
-    width: 50px;
+    width: 53px;
     line-height: 0;
     .tool {
         display: inline-block; 
@@ -52,4 +53,24 @@
             }
         }
     }
+}
+
+.workspace {
+    background-color: $darkergrey;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid white;
+    position: relative;
+    &:before {
+        position: absolute;
+        display: block;
+        content: '';
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-right: 1px solid $grey;
+    }
+    padding: 3px 5px 3px 3px;
+
 }

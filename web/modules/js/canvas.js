@@ -29,7 +29,6 @@ ws.addEventListener('message', (e) => {
 
     let { cmd, uid, data } = JSON.parse(e.data);
 
-
     if (cmd.indexOf('CANVAS_') != 0) return;
 
     drawToContext({ cmd, data, ctx });

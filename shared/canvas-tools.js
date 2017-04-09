@@ -17,10 +17,14 @@ function drawToContext({ ctx, data, cmd }) {
     }
 
     //     let radius = 5;
-    //     ctx.beginPath();
+    //     cbel stagetx.beginPath();
     //     ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
     //     ctx.fillStyle = 'green';
     //     ctx.fill();
+    //
+    //     selection/drag;
+    //     should save imageData buffers and repaint them when requested
+    //     d3-brush
 }
 
 // message passing via ArrayBuffers
