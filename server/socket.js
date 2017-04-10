@@ -1,6 +1,7 @@
 let WebSocket = require('ws');
 let { scaleOrdinal, schemeCategory10 } = require('d3-scale');
 let { initCanvas, updateCanvas, readCanvas } = require('./canvas');
+let { PING_INTERVAL } = require('../shared/constants');
 
 let colorGenerator = (() => {
     let i = 0;
@@ -59,17 +60,15 @@ function addClient(ws, wss) {
 
     // keep alive / ping
 
-    let interval = 5000;
-
     let pingFunc = setInterval(() => {
-        let ping = Math.abs(- room[uid].pong + Date.now() - interval);
-        if (ping <= interval) {
+        let ping = Math.abs(- room[uid].pong + Date.now() - PING_INTERVAL);
+        if (ping <= PING_INTERVAL) {
             ws.sendObj({cmd: 'PING', data: ping});   
         }
-        else if (ping > interval*2) {
+        else if (ping > PING_INTERVAL*2) {
             room[uid].remove();
         }
-    }, interval);
+    }, PING_INTERVAL);
 
     // remove
 
@@ -81,7 +80,7 @@ function addClient(ws, wss) {
     };
 
     ws.on('close', () => {
-        room[uid].remove();
+        room[uid] && room[uid].remove();
     });
 
     // messages

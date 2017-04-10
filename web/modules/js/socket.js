@@ -1,5 +1,7 @@
 import d3 from '#lib/d3';
 import { setStatus } from './statusbar';
+import debounce from 'lodash.debounce';
+import { PING_INTERVAL } from '#shared/constants';
 
 // http://websocket.org/echo.html
 // http://msgpack.org/index.html
@@ -35,6 +37,11 @@ ws.addEventListener('message', (e) => {
     else if (cmd == 'PING') {
         ws.sendObj({cmd: 'PONG'});
         setStatus('ping', data);
+        hasPinged();
     }
 });
 
+// check if the server is dead
+const hasPinged = debounce(() => {
+    setStatus('ping', `${PING_INTERVAL}+`);
+}, PING_INTERVAL);

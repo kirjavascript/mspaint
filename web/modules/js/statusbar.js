@@ -10,6 +10,6 @@ export function setStatus(type, data) {
     ({
         ping: (data) => ping.html(`Ping: ${data}`),
         connectedUsers: (data) => connectedUsers.html(`Connected Users: ${data}`),
-        xy: (pos) => xy.html(pos ? `${pos.x}, ${pos.y}` : ''),
+        xy: (pos) => xy.html(pos ? `${pos.x|0}, ${pos.y|0}` : ''),
     }) [type](data);
 }

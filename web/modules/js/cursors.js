@@ -1,4 +1,5 @@
 import d3 from '#lib/d3';
+import { event as d3event } from 'd3-selection';
 import { ws } from './socket';
 import { setStatus } from './statusbar';
 
@@ -75,6 +76,17 @@ function update() {
 
     setStatus('connectedUsers', clients.length + 1);
 }
+
+// get local X/Y
+
+d3.select('canvas')
+    .on('mousemove', () => {
+        let { layerX: x, layerY: y } = d3event;
+        setStatus('xy', {x, y});
+    })
+    .on('mouseleave', () => {
+        setStatus('xy');
+    });
 
 // util
 

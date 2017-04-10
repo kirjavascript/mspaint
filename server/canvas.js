@@ -1,8 +1,9 @@
 let Canvas = require('canvas');
 let Image = Canvas.Image;
 let { drawToContext, wrapBuffer } = require('../shared/canvas-tools');
+let { CANVAS } = require('../shared/constants');
 
-let [width, height] = [1280,800];
+let {width, height} = CANVAS;
 let canvas, wss, room, ctx;
 
 function initCanvas(wssInstance, roomInstance) {

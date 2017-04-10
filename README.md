@@ -15,5 +15,7 @@ Multiplayer mspaint
     db (!)
     directory
     contributors list
+    legit scrollbars scrollTo(); ::-webkit-scrollbar width 0, adjust XY cursor location
+    clipboard
     link github - about
 ```

@@ -2,7 +2,6 @@ import d3 from '#lib/d3';
 import { event as d3event } from 'd3-selection';
 import { ws } from './socket';
 import { drawToContext, unwrapBuffer } from '#shared/canvas-tools';
-import { setStatus } from './statusbar';
 
 let [width, height] = [1280,800];
 let canvas = d3.select('canvas').style('opacity', 0);
@@ -65,13 +64,3 @@ function dragging(d) {
 function dragended(d) {
 }
 
-// get X/Y
-
-canvas
-    .on('mousemove', () => {
-        let { layerX: x, layerY: y } = d3event;
-        setStatus('xy', {x, y});
-    })
-    .on('mouseleave', () => {
-        setStatus('xy');
-    });
