@@ -2,11 +2,11 @@ import d3 from '#lib/d3';
 import { event as d3event } from 'd3-selection';
 import { ws } from './socket';
 import { drawToContext, unwrapBuffer } from '#shared/canvas-tools';
+import { CANVAS } from '#shared/constants';
 
-let [width, height] = [1280,800];
+let {width, height} = CANVAS;
 let canvas = d3.select('canvas').style('opacity', 0);
 let ctx = canvas.node().getContext('2d');
-let data = [];
 
 // events
 
@@ -38,7 +38,6 @@ ws.addEventListener('message', (e) => {
 // init canvas
 
 canvas
-    .datum(data)
     .attr('width', width)
     .attr('height', height);
 

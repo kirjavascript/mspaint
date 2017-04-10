@@ -5,6 +5,7 @@ import './js/canvas';
 import './js/tools';
 import './js/statusbar';
 import './js/palette';
+import './js/scrollbars';
 
 // grr firefox
 [...document.querySelectorAll('img')]

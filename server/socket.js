@@ -86,6 +86,7 @@ function addClient(ws, wss) {
     // messages
 
     ws.on('message', (__data, {binary}) => {
+        if (!room[uid]) return;
 
         // JSON
         if (!binary) {

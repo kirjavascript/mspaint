@@ -80,6 +80,7 @@
 }
 
 .workspace {
+    position: relative;
     background-color: $darkergrey;
     border-bottom: 1px solid $grey;
     border-left: 1px solid black;
@@ -89,6 +90,13 @@
         border-top: 1px solid black;
     }
     padding: 3px 4px 3px 3px;
+    > div {
+        overflow: visible;
+    }
+
+    canvas {
+        background-color: white;
+    }
 }
 
 .palette {
@@ -110,7 +118,8 @@
         position: relative;
         width: 32px;
         height: 32px;
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4QQJFgQM7DXdIAAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAHUlEQVQI1wESAO3/ANPQyP/+////Af7////V0ckAg8QN0UJCbhUAAAAASUVORK5CYII=);
+        flex-shrink: 0;
+        @extend .fuzzy;
 
         > div {
             width: 14px;
@@ -141,6 +150,7 @@
         display: flex;
         flex-wrap: wrap;
         width: 226px;
+        flex-shrink: 0;
     }
 
     .color {
@@ -186,9 +196,79 @@
     }
 }
 
+.scrollbar {
+    @extend .fuzzy;
+    $base: 14px;
+    z-index: 1;
+    position: absolute;
+    > div {
+        // position: relative;
+    }
+
+    &.bottom {
+        top: calc(100% - 16px);
+        bottom: 0;
+        left: 0;
+        right: 1px;
+    }
+    &.right {
+        width: $base;
+    }
+
+    .bar {
+        @extend .scrollShading;
+        &.right {
+           width: $base; 
+        }
+        &.bottom {
+            height: $base;
+            position: absolute;
+            left: $base + 2px;
+            top: 0;
+        }
+    }
+
+    .arrowBlock {
+        @extend .scrollShading;
+        width: $base;
+        height: $base;
+        &.left {
+            top: 0;
+            left: 0; 
+            position: absolute;
+        }
+        &.right {
+            top: 0;
+            right: 0;
+            position: absolute;
+        }
+        .arrow {
+
+        }
+    }
+
+    .scrollShading {
+        background-color: $grey;
+        border-top: 1px solid $grey;
+        border-left: 1px solid $grey;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        @include innerBorder {
+            border-top: 1px solid white;
+            border-left: 1px solid white;
+            border-right: 1px solid $darkgrey;
+            border-bottom: 1px solid $darkgrey;
+        }
+    }
+}
+
 .basicShading {
     border-top: 1px solid $darkgrey;
     border-left: 1px solid $darkgrey;
     border-bottom: 1px solid whitesmoke;
     border-right: 1px solid whitesmoke;
+}
+
+.fuzzy {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4QQJFgQM7DXdIAAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAHUlEQVQI1wESAO3/ANPQyP/+////Af7////V0ckAg8QN0UJCbhUAAAAASUVORK5CYII=);
 }
