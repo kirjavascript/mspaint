@@ -201,24 +201,29 @@
     $base: 14px;
     z-index: 1;
     position: absolute;
-    > div {
-        // position: relative;
-    }
 
     &.bottom {
         top: calc(100% - 16px);
         bottom: 0;
         left: 0;
         right: 1px;
+        border-right: 16px solid $grey;
+        margin-right: -16px;
     }
     &.right {
-        width: $base;
+        right: 1px;
+        top: 1px;
+        bottom: 0;
+        left: calc(100% - 17px);
     }
 
     .bar {
         @extend .scrollShading;
         &.right {
+            position: absolute;
            width: $base; 
+           top: $base + 2px;
+           right: 0;
         }
         &.bottom {
             height: $base;
@@ -239,6 +244,16 @@
         }
         &.right {
             top: 0;
+            right: 0;
+            position: absolute;
+        }
+        &.top {
+            top: 0;
+            right: 0;
+            position: absolute;
+        }
+        &.bottom {
+            bottom: 0;
             right: 0;
             position: absolute;
         }

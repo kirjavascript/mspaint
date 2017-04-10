@@ -19,3 +19,5 @@ Multiplayer mspaint
     clipboard
     link github - about
 ```
+
+Thanks to whoever made this; http://copy.sh/v86/?profile=windows98
