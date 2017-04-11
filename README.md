@@ -18,6 +18,7 @@ Multiplayer mspaint
     legit scrollbars scrollTo(); ::-webkit-scrollbar width 0, adjust XY cursor location
     clipboard
     link github - about
+    remove d3-transition ?
 ```
 
 Thanks to whoever made this; http://copy.sh/v86/?profile=windows98

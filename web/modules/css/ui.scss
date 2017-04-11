@@ -106,6 +106,7 @@
     overflow: visible;
     display: flex;
     flex-direction: row;
+    flex-shrink: 0;
     @include innerBorder {
         border-top: 1px solid whitesmoke;
         left: calc(100% - 1px);
@@ -178,6 +179,7 @@
     border-top: 1px solid whitesmoke;
     padding-top: 2px;
     display: flex;
+    flex-shrink: 0;
 
     .cell {
         @extend .basicShading;
