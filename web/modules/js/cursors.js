@@ -81,8 +81,8 @@ function update() {
 // get local X/Y
 
 d3.select('canvas')
-    .on('mousemove', () => {
-        let { layerX: x, layerY: y } = d3event;
+    .on('mousemove', function() {
+        let [x, y] = d3.mouse(this);
         setStatus('xy', {x, y});
     })
     .on('mouseleave', () => {

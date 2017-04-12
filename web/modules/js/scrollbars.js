@@ -5,23 +5,40 @@ import { CANVAS } from '#shared/constants';
 export let scrollPos = {x: 0, y: 0};
 
 let workspace = d3.select('.workspace');
-let canvasWrap = d3.select(document.querySelector('canvas').parentNode);
+let canvasWrap = d3.select('.canvasWrap');
 
 // draw bars
 
 let bottomScroll = workspace.append('div').classed('scrollbar bottom', 1);
 let bottomWrap = bottomScroll.append('div');
 
-bottomWrap.append('div').classed('arrowBlock left', 1);
-let bottomBar = bottomWrap.append('div').classed('bar bottom', 1);
-bottomWrap.append('div').classed('arrowBlock right', 1);
+let [arrowBL, bottomBar, arrowBR] = [
+    bottomWrap.append('div').classed('arrowBlock left', 1),
+    bottomBar = bottomWrap.append('div').classed('bar bottom', 1),
+    bottomWrap.append('div').classed('arrowBlock right', 1),
+];
 
 let rightScroll = workspace.append('div').classed('scrollbar right', 1);
 let rightWrap = rightScroll.append('div');
 
-rightWrap.append('div').classed('arrowBlock top', 1);
-let rightBar = rightWrap.append('div').classed('bar right', 1);
-rightWrap.append('div').classed('arrowBlock bottom', 1);
+let [arrowRU, rightBar, arrowRD] = [
+    rightWrap.append('div').classed('arrowBlock top', 1),
+    rightBar = rightWrap.append('div').classed('bar right', 1),
+    rightWrap.append('div').classed('arrowBlock bottom', 1),
+];
+
+// draw arrows
+
+[arrowRU, arrowRD, arrowBL, arrowBR]
+    .forEach((block, i) => {
+        block.append('svg')
+            .classed('arrow', 1)
+            .attr('width', '14px')
+            .attr('height', '14px')
+            .append('path')
+            .attr('d', 'M0,0V7L4,3.5Z')
+            .attr('transform', `translate(5, 3) rotate(${[-90, 90, 180, 0][i]} 2 3.5)`);
+    });
 
 function getDimensions() {
     let { width, height } = workspace.node().getBoundingClientRect();
