@@ -41,8 +41,8 @@ function getDimensions() {
     let bottomMaxDelta = bottomWidth - bottomBarWidth - 1;
     let rightMaxDelta = rightWidth - rightBarWidth - 1;
 
-    let bottomMaxWorkspaceDelta = CANVAS.width - width + (+showBottom * 16);
-    let rightMaxWorkspaceDelta = CANVAS.height - height + (+showRight * 16);
+    let bottomMaxWorkspaceDelta = CANVAS.width - width + (+showRight * 16) + 9;
+    let rightMaxWorkspaceDelta = CANVAS.height - height + (+showBottom * 16) + 7;
 
     return {
         bottomBarWidth, bottomWidth, bottomMaxDelta,
@@ -79,11 +79,14 @@ rightBar
     .call(d3.drag().on('drag', () => {
         let { dy } = d3event;
         let { rightBarWidth, rightWidth, rightMaxDelta, rightMaxWorkspaceDelta } = getDimensions();
+        // set scrollbar position
         let newOffset = rightOffset + dy;
         rightOffset = Math.max(0, Math.min(newOffset, rightMaxDelta));
         rightOffsetRatio = rightOffset / rightMaxDelta;
-        
         rightBar.style('transform', `translateY(${rightOffset}px)`);
+        // set canvas position
+        scrollPos.y = rightOffsetRatio * rightMaxWorkspaceDelta;
+        canvasWrap.style('margin-top', `${-scrollPos.y}px`);
     }));
 
 // handl resizing
@@ -117,6 +120,9 @@ function responder() {
         // update bar offset
         rightOffset = rightOffsetRatio * rightMaxDelta;
         rightBar.style('transform', `translateY(${rightOffset}px)`);
+        // set canvas position
+        scrollPos.y = rightOffsetRatio * rightMaxWorkspaceDelta;
+        canvasWrap.style('margin-top', `${-scrollPos.y}px`);
     }
     else {
         rightScroll.style('display', 'none');
