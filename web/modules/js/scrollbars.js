@@ -60,7 +60,7 @@ function getDimensions() {
     let rightMaxDelta = rightWidth - rightBarWidth - 1;
 
     let bottomMaxWorkspaceDelta = CANVAS.width - width + (+showRight * 16) + 9;
-    let rightMaxWorkspaceDelta = CANVAS.height - height + (+showBottom * 16) + 7;
+    let rightMaxWorkspaceDelta = CANVAS.height - height + (+showBottom * 16) + 8;
 
     return {
         bottomBarWidth, bottomWidth, bottomMaxDelta,

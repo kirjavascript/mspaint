@@ -96,6 +96,7 @@
 
     canvas {
         background-color: white;
+        margin-top: 1px;
     }
 }
 
@@ -243,11 +244,19 @@
             top: 0;
             left: 0; 
             position: absolute;
+            .arrow {
+                margin-left: -0.5px;
+                margin-top: 0.5px;
+            }
         }
         &.right {
             top: 0;
             right: 0;
             position: absolute;
+            .arrow {
+                margin-left: 0.5px;
+                margin-top: 0.5px;
+            }
         }
         &.top {
             top: 0;
@@ -258,6 +267,9 @@
             bottom: 0;
             right: 0;
             position: absolute;
+            .arrow {
+                margin-top: 1px;
+            }
         }
         .arrow {
             position: absolute;
