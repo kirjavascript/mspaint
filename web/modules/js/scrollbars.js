@@ -30,6 +30,7 @@ function getDimensions() {
     
     let showBottom = bottomRatio < 1 && width > (17 * 3) && height > 17;
     let showRight = rightRatio < 1 && height > (17 * 3) && width > 17;
+
     let showBoth = showBottom && showRight;
 
     let bottomWidth = width - 36 + (+showBoth * -16);
@@ -114,29 +115,37 @@ function responder() {
         bottomScroll.style('right', '1px');
     }
 
+    // right bar
+    
+    rightOffset = rightOffsetRatio * rightMaxDelta;
+    scrollPos.y = rightOffsetRatio * rightMaxWorkspaceDelta;
+    if (scrollPos.y <= 0) {
+        rightOffset = rightOffsetRatio = scrollPos.y = 0;
+    }
+    canvasWrap.style('margin-top', `${-scrollPos.y}px`);
+    rightBar.style('transform', `translateY(${rightOffset}px)`);
+
     if (showRight) {
         rightScroll.style('display', '');
         rightBar.style('height', `${rightBarWidth}px`);
-        // update bar offset
-        rightOffset = rightOffsetRatio * rightMaxDelta;
-        rightBar.style('transform', `translateY(${rightOffset}px)`);
-        // set canvas position
-        scrollPos.y = rightOffsetRatio * rightMaxWorkspaceDelta;
-        canvasWrap.style('margin-top', `${-scrollPos.y}px`);
     }
     else {
         rightScroll.style('display', 'none');
     }
 
+    // bottom bar
+    
+    bottomOffset = bottomOffsetRatio * bottomMaxDelta;
+    scrollPos.x = bottomOffsetRatio * bottomMaxWorkspaceDelta;
+    if (scrollPos.x <= 0) {
+        bottomOffset = bottomOffsetRatio = scrollPos.x = 0;
+    }
+    canvasWrap.style('margin-left', `${-scrollPos.x}px`);
+    bottomBar.style('transform', `translateX(${bottomOffset}px)`);
+
     if (showBottom) {
         bottomScroll.style('display', '');
         bottomBar.style('width', `${bottomBarWidth}px`);
-        // update bar offset
-        bottomOffset = bottomOffsetRatio * bottomMaxDelta;
-        bottomBar.style('transform', `translateX(${bottomOffset}px)`);
-        // update canvas offset
-        scrollPos.x = bottomOffsetRatio * bottomMaxWorkspaceDelta;
-        canvasWrap.style('margin-left', `${-scrollPos.x}px`);
     }
     else {
         bottomScroll.style('display', 'none');
