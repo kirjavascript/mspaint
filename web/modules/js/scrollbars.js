@@ -5,6 +5,7 @@ import { CANVAS } from '#shared/constants';
 export let scrollPos = {x: 0, y: 0};
 
 let workspace = d3.select('.workspace');
+let canvasWrap = d3.select(document.querySelector('canvas').parentNode);
 
 // draw bars
 
@@ -24,29 +25,31 @@ rightWrap.append('div').classed('arrowBlock bottom', 1);
 
 function getDimensions() {
     let { width, height } = workspace.node().getBoundingClientRect();
-    let { width: bWidth, height:bHeight } = bottomWrap.node().getBoundingClientRect();
     let bottomRatio = (width -6) / CANVAS.width;
     let rightRatio = (height -4) / CANVAS.height;
     
-    let showBottom = bottomRatio < 1;
-    let showRight = rightRatio < 1;
+    let showBottom = bottomRatio < 1 && width > (17 * 3) && height > 17;
+    let showRight = rightRatio < 1 && height > (17 * 3) && width > 17;
     let showBoth = showBottom && showRight;
 
     let bottomWidth = width - 36 + (+showBoth * -16);
     let rightWidth = height - 35 + (+showBoth * -16);
 
-    let bottomBarWidth = bottomRatio*bottomWidth;
-    let rightBarWidth = rightRatio*rightWidth;
+    let bottomBarWidth = bottomRatio * bottomWidth;
+    let rightBarWidth = rightRatio * rightWidth;
 
     let bottomMaxDelta = bottomWidth - bottomBarWidth - 1;
+    let rightMaxDelta = rightWidth - rightBarWidth - 1;
 
+    let bottomMaxWorkspaceDelta = CANVAS.width - width + (+showBottom * 16);
+    let rightMaxWorkspaceDelta = CANVAS.height - height + (+showRight * 16);
 
     return {
-        bottomBarWidth, bottomWidth,
-        bottomMaxDelta,
-        rightBarWidth, rightWidth,
+        bottomBarWidth, bottomWidth, bottomMaxDelta,
+        rightBarWidth, rightWidth, rightMaxDelta,
         bottomRatio, rightRatio,
         showBoth, showBottom, showRight,
+        bottomMaxWorkspaceDelta, rightMaxWorkspaceDelta,
     };
 }
 
@@ -58,12 +61,29 @@ let bottomOffsetRatio = 0;
 bottomBar
     .call(d3.drag().on('drag', () => {
         let { dx } = d3event;
-        let { bottomBarWidth, bottomWidth, bottomMaxDelta } = getDimensions();
+        let { bottomBarWidth, bottomWidth, bottomMaxDelta, bottomMaxWorkspaceDelta } = getDimensions();
+        // set scrollbar position
         let newOffset = bottomOffset + dx;
         bottomOffset = Math.max(0, Math.min(newOffset, bottomMaxDelta));
         bottomOffsetRatio = bottomOffset / bottomMaxDelta;
-        
         bottomBar.style('transform', `translateX(${bottomOffset}px)`);
+        // set canvas position
+        scrollPos.x = bottomOffsetRatio * bottomMaxWorkspaceDelta;
+        canvasWrap.style('margin-left', `${-scrollPos.x}px`);
+    }));
+
+let rightOffset = 0;
+let rightOffsetRatio = 0;
+
+rightBar
+    .call(d3.drag().on('drag', () => {
+        let { dy } = d3event;
+        let { rightBarWidth, rightWidth, rightMaxDelta, rightMaxWorkspaceDelta } = getDimensions();
+        let newOffset = rightOffset + dy;
+        rightOffset = Math.max(0, Math.min(newOffset, rightMaxDelta));
+        rightOffsetRatio = rightOffset / rightMaxDelta;
+        
+        rightBar.style('transform', `translateY(${rightOffset}px)`);
     }));
 
 // handl resizing
@@ -73,6 +93,9 @@ function responder() {
         bottomBarWidth,
         rightBarWidth,
         bottomMaxDelta,
+        rightMaxDelta,
+        bottomMaxWorkspaceDelta,
+        rightMaxWorkspaceDelta,
         showBottom,
         showLeft,
         showRight,
@@ -91,6 +114,9 @@ function responder() {
     if (showRight) {
         rightScroll.style('display', '');
         rightBar.style('height', `${rightBarWidth}px`);
+        // update bar offset
+        rightOffset = rightOffsetRatio * rightMaxDelta;
+        rightBar.style('transform', `translateY(${rightOffset}px)`);
     }
     else {
         rightScroll.style('display', 'none');
@@ -102,6 +128,9 @@ function responder() {
         // update bar offset
         bottomOffset = bottomOffsetRatio * bottomMaxDelta;
         bottomBar.style('transform', `translateX(${bottomOffset}px)`);
+        // update canvas offset
+        scrollPos.x = bottomOffsetRatio * bottomMaxWorkspaceDelta;
+        canvasWrap.style('margin-left', `${-scrollPos.x}px`);
     }
     else {
         bottomScroll.style('display', 'none');
