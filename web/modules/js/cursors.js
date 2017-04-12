@@ -70,9 +70,9 @@ function update() {
         .style('top', (d) => d.mouse.pageY + 'px');
     
     let exit = selection.exit()
-        .transition()
-        .duration(500)
-        .style('opacity', 0)
+        // .transition()
+        // .duration(500)
+        // .style('opacity', 0)
         .remove();
 
     setStatus('connectedUsers', clients.length + 1);

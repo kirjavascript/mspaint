@@ -17,7 +17,6 @@ Multiplayer mspaint
     contributors list
     clipboard
     link github - about
-    remove d3-transition ?
     legit scrollbars scrollTo(); ::-webkit-scrollbar width 0, adjust XY cursor location
     cursor location via event dispatch?
 ```
