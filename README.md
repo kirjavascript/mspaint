@@ -17,9 +17,9 @@ Multiplayer mspaint
     contributors list
     clipboard
     link github - about
-    legit scrollbars scrollTo(); ::-webkit-scrollbar width 0, adjust XY cursor location
+    legit scrollbars scrollTo(); ::-webkit-scrollbar width 0 
     add gzip to wrap array buffer
-    cursor location via event dispatch?
+    cursor only apeear on canvas?
 ```
 
 Thanks to whoever made this; http://copy.sh/v86/?profile=windows98

@@ -2,7 +2,7 @@ import d3 from '#lib/d3';
 import { event as d3event } from 'd3-selection';
 import { ws } from './socket';
 import { setStatus } from './statusbar';
-import { scrollPos, scrollEvt } from './scrollbars';
+// import { scrollPos, scrollEvt } from './scrollbars';
 
 let clients = [];
 
@@ -47,33 +47,17 @@ ws.addEventListener('message', (e) => {
 d3.select('canvas')
     .on('mousemove', function() {
         let [x, y] = d3.mouse(this);
+        ws.sendObj({cmd: 'XY', data: {x, y}});
         setStatus('xy', {x, y});
     })
     .on('mouseleave', () => {
+        ws.sendObj({cmd: 'XY', data: {x: null, y: null}});
         setStatus('xy');
     });
 
-// send local XY (full)
-
-document.addEventListener('mousemove', (e) => {
-
-    let { pageX, pageY } = e;
-
-    let { x, y } = scrollPos;
-    pageX += x;
-    pageY += y;
-
-    ws.sendObj({cmd: 'XY', data: {pageX, pageY}});
-
-});
-
-// check if scrollbars are scrolled
-
-scrollEvt.on('scroll', update);
-
 // dom manipulation and data binding
 
-let cursorGroup = d3.select(document.body).append('div');
+let cursorGroup = d3.select('.canvasWrap');
 
 function update() {
     let selection = cursorGroup
@@ -88,8 +72,9 @@ function update() {
         .classed('cursor', true)
         .html((d) => getCursorSVG(d.color))
         .merge(selection)
-        .style('left', (d) => d.mouse.pageX - scrollPos.x + 'px')
-        .style('top', (d) => d.mouse.pageY - scrollPos.y + 'px');
+        .style('left', (d) => d.mouse.x + 'px')
+        .style('top', (d) => d.mouse.y + 'px')
+        .style('opacity', (d) => +(d.mouse.x != null && d.mouse.y != null)); 
     
     let exit = selection.exit()
         .remove();

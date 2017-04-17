@@ -88,10 +88,15 @@
     @include innerBorder {
         border-right: 1px solid $grey;
         border-top: 1px solid black;
+        z-index: 1;
     }
     padding: 3px 4px 3px 3px;
     > div {
         overflow: visible;
+    }
+
+    .canvasWrap {
+        z-index: 0;
     }
 
     canvas {

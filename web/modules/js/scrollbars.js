@@ -3,7 +3,6 @@ import { event as d3event } from 'd3-selection';
 import { CANVAS } from '#shared/constants';
 
 export let scrollPos = {x: 0, y: 0};
-export let scrollEvt = d3.dispatch('scroll');
 
 let workspace = d3.select('.workspace');
 let canvasWrap = d3.select('.canvasWrap');
@@ -88,8 +87,7 @@ bottomBar
         bottomBar.style('transform', `translateX(${bottomOffset}px)`);
         // set canvas position
         scrollPos.x = bottomOffsetRatio * bottomMaxWorkspaceDelta;
-        canvasWrap.style('margin-left', `${-scrollPos.x}px`);
-        scrollEvt.call('scroll', null, scrollPos);
+        canvasWrap.style('transform', `translate(${-scrollPos.x}px, ${-scrollPos.y}px)`);
     }));
 
 let rightOffset = 0;
@@ -106,8 +104,7 @@ rightBar
         rightBar.style('transform', `translateY(${rightOffset}px)`);
         // set canvas position
         scrollPos.y = rightOffsetRatio * rightMaxWorkspaceDelta;
-        canvasWrap.style('margin-top', `${-scrollPos.y}px`);
-        scrollEvt.call('scroll', null, scrollPos);
+        canvasWrap.style('transform', `translate(${-scrollPos.x}px, ${-scrollPos.y}px)`);
     }));
 
 // handl resizing
@@ -142,7 +139,7 @@ function responder() {
     if (scrollPos.y <= 0) {
         rightOffset = rightOffsetRatio = scrollPos.y = 0;
     }
-    canvasWrap.style('margin-top', `${-scrollPos.y}px`);
+    canvasWrap.style('transform', `translate(${-scrollPos.x}px, ${-scrollPos.y}px)`);
     rightBar.style('transform', `translateY(${rightOffset}px)`);
 
     if (showRight) {
@@ -160,7 +157,7 @@ function responder() {
     if (scrollPos.x <= 0) {
         bottomOffset = bottomOffsetRatio = scrollPos.x = 0;
     }
-    canvasWrap.style('margin-left', `${-scrollPos.x}px`);
+    canvasWrap.style('transform', `translate(${-scrollPos.x}px, ${-scrollPos.y}px)`);
     bottomBar.style('transform', `translateX(${bottomOffset}px)`);
 
     if (showBottom) {
@@ -170,7 +167,6 @@ function responder() {
     else {
         bottomScroll.style('display', 'none');
     }
-    scrollEvt.call('scroll', null, scrollPos);
 }
 
 responder();

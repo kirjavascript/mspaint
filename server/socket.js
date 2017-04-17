@@ -49,7 +49,7 @@ function addClient(ws, wss) {
     room[uid] = {
         ws,
         config: {
-            uid, color, name: '', mouse: {/* pageX, pageY */}
+            uid, color, name: '', mouse: {/* x, y */}
         },
         pong: Date.now(),
     };
