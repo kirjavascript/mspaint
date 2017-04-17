@@ -18,6 +18,7 @@ Multiplayer mspaint
     clipboard
     link github - about
     legit scrollbars scrollTo(); ::-webkit-scrollbar width 0, adjust XY cursor location
+    add gzip to wrap array buffer
     cursor location via event dispatch?
 ```
 

@@ -19,9 +19,7 @@ ws.addEventListener('message', (e) => {
             let imageData = ctx.createImageData(width, height);
             imageData.data.set(typedArray);
             ctx.putImageData(imageData, 0, 0);
-            canvas.transition()
-                .duration(500)
-                .style('opacity', 1);
+            canvas.style('opacity', 1);
         }
 
         return;

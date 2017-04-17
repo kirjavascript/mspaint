@@ -44,4 +44,4 @@ ws.addEventListener('message', (e) => {
 // check if the server is dead
 const hasPinged = debounce(() => {
     setStatus('ping', `${PING_INTERVAL}+`);
-}, PING_INTERVAL);
+}, PING_INTERVAL*2);

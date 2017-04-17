@@ -2,6 +2,7 @@ import d3 from '#lib/d3';
 import { event as d3event } from 'd3-selection';
 import { ws } from './socket';
 import { setStatus } from './statusbar';
+import { scrollPos, scrollEvt } from './scrollbars';
 
 let clients = [];
 
@@ -41,13 +42,34 @@ ws.addEventListener('message', (e) => {
 
 });
 
+// get local X/Y (canvas)
+
+d3.select('canvas')
+    .on('mousemove', function() {
+        let [x, y] = d3.mouse(this);
+        setStatus('xy', {x, y});
+    })
+    .on('mouseleave', () => {
+        setStatus('xy');
+    });
+
+// send local XY (full)
+
 document.addEventListener('mousemove', (e) => {
 
     let { pageX, pageY } = e;
 
+    let { x, y } = scrollPos;
+    pageX += x;
+    pageY += y;
+
     ws.sendObj({cmd: 'XY', data: {pageX, pageY}});
 
 });
+
+// check if scrollbars are scrolled
+
+scrollEvt.on('scroll', update);
 
 // dom manipulation and data binding
 
@@ -66,28 +88,14 @@ function update() {
         .classed('cursor', true)
         .html((d) => getCursorSVG(d.color))
         .merge(selection)
-        .style('left', (d) => d.mouse.pageX + 'px')
-        .style('top', (d) => d.mouse.pageY + 'px');
+        .style('left', (d) => d.mouse.pageX - scrollPos.x + 'px')
+        .style('top', (d) => d.mouse.pageY - scrollPos.y + 'px');
     
     let exit = selection.exit()
-        // .transition()
-        // .duration(500)
-        // .style('opacity', 0)
         .remove();
 
     setStatus('connectedUsers', clients.length + 1);
 }
-
-// get local X/Y
-
-d3.select('canvas')
-    .on('mousemove', function() {
-        let [x, y] = d3.mouse(this);
-        setStatus('xy', {x, y});
-    })
-    .on('mouseleave', () => {
-        setStatus('xy');
-    });
 
 // util
 

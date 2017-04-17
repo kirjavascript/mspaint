@@ -3,6 +3,7 @@ import { event as d3event } from 'd3-selection';
 import { CANVAS } from '#shared/constants';
 
 export let scrollPos = {x: 0, y: 0};
+export let scrollEvt = d3.dispatch('scroll');
 
 let workspace = d3.select('.workspace');
 let canvasWrap = d3.select('.canvasWrap');
@@ -88,6 +89,7 @@ bottomBar
         // set canvas position
         scrollPos.x = bottomOffsetRatio * bottomMaxWorkspaceDelta;
         canvasWrap.style('margin-left', `${-scrollPos.x}px`);
+        scrollEvt.call('scroll', null, scrollPos);
     }));
 
 let rightOffset = 0;
@@ -105,6 +107,7 @@ rightBar
         // set canvas position
         scrollPos.y = rightOffsetRatio * rightMaxWorkspaceDelta;
         canvasWrap.style('margin-top', `${-scrollPos.y}px`);
+        scrollEvt.call('scroll', null, scrollPos);
     }));
 
 // handl resizing
@@ -167,6 +170,7 @@ function responder() {
     else {
         bottomScroll.style('display', 'none');
     }
+    scrollEvt.call('scroll', null, scrollPos);
 }
 
 responder();

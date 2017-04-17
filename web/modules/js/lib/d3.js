@@ -7,7 +7,7 @@ export default {
     // ...require('d3-chord'),
     // ...require('d3-collection'),
     // ...require('d3-color'),
-    // ...require('d3-dispatch'),
+    ...require('d3-dispatch'),
     ...require('./d3-drag'),
     // ...require('d3-dsv'),
     // ...require('d3-ease'),

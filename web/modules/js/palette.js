@@ -24,5 +24,5 @@ let colorList = d3.select('.palette')
 colorList
     .enter()
     .append('div')
-    .classed('color',1)
+    .classed('color', 1)
     .style('background-color', (d) => d);
