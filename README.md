@@ -20,6 +20,7 @@ Multiplayer mspaint
     legit scrollbars scrollTo(); ::-webkit-scrollbar width 0 
     add gzip to wrap array buffer
     always send X/Y, not just on canvas
+    canvas checksum check?
 ```
 
 Thanks to whoever made this; http://copy.sh/v86/?profile=windows98

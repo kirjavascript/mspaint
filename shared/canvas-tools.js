@@ -3,12 +3,13 @@ function drawToContext({ ctx, data, cmd }) {
     let drawCmd = cmd.substr(7);
 
     if (drawCmd == 'LINE') {
-        let { x, y, dx, dy } = data;
+        let { x, y, dx, dy, color } = data;
 
         ctx.beginPath();
         ctx.lineWidth = 15;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
+        ctx.strokeStyle = color;
         ctx.moveTo(x - dx, y - dy);
         ctx.lineTo(x, y);
         ctx.closePath();
