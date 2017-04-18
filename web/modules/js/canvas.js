@@ -4,6 +4,7 @@ import { ws } from './socket';
 import { drawToContext, unwrapBuffer } from '#shared/canvas-tools';
 import { CANVAS } from '#shared/constants';
 import { drawColor } from './palette';
+import { drawTool } from './tools';
 
 let {width, height} = CANVAS;
 let canvas = d3.select('canvas').style('opacity', 0);
@@ -62,6 +63,7 @@ function dragging(d) {
     let obj = {cmd: 'CANVAS_LINE', data: {
         x, y, dx, dy,
         color: drawColor[mouseName],
+        drawTool
     }};
 
     ws.sendObj(obj);

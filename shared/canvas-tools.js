@@ -3,10 +3,12 @@ function drawToContext({ ctx, data, cmd }) {
     let drawCmd = cmd.substr(7);
 
     if (drawCmd == 'LINE') {
-        let { x, y, dx, dy, color } = data;
+        let { x, y, dx, dy, color, drawTool } = data;
+
+        let { lineWidth } = drawTool;
 
         ctx.beginPath();
-        ctx.lineWidth = 15;
+        ctx.lineWidth = lineWidth;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
         ctx.strokeStyle = color;
@@ -14,7 +16,6 @@ function drawToContext({ ctx, data, cmd }) {
         ctx.lineTo(x, y);
         ctx.closePath();
         ctx.stroke();
-
     }
 
     //     let radius = 5;
