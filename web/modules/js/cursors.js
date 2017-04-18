@@ -2,7 +2,6 @@ import d3 from '#lib/d3';
 import { event as d3event } from 'd3-selection';
 import { ws } from './socket';
 import { setStatus } from './statusbar';
-// import { scrollPos, scrollEvt } from './scrollbars';
 
 let clients = [];
 
@@ -42,16 +41,27 @@ ws.addEventListener('message', (e) => {
 
 });
 
-// get local X/Y (canvas)
+// send local X/Y 
 
-d3.select('canvas')
+let canvas = d3.select('canvas');
+
+d3.select(window)
+    .on('mousemove', () => {
+        let [x, y] = d3.mouse(canvas.node());
+        ws.sendObj({cmd: 'XY', data: {x, y}});
+    })
+    .on('mouseout', () => {
+        ws.sendObj({cmd: 'XY', data: {x: null, y: null}});
+    });
+
+// display local X/Y
+
+canvas
     .on('mousemove', function() {
         let [x, y] = d3.mouse(this);
-        ws.sendObj({cmd: 'XY', data: {x, y}});
         setStatus('xy', {x, y});
     })
     .on('mouseleave', () => {
-        ws.sendObj({cmd: 'XY', data: {x: null, y: null}});
         setStatus('xy');
     });
 
