@@ -2,10 +2,19 @@ function drawToContext({ ctx, data, cmd }) {
     
     let drawCmd = cmd.substr(7);
 
-    if (drawCmd == 'LINE') {
-        let { x, y, dx, dy, color, drawTool } = data;
+    if (drawCmd == 'PENCIL') {
+        let { x, y, dx, dy, color } = data;
 
-        let { lineWidth } = drawTool;
+        ctx.beginPath();
+        ctx.lineWidth = 0.5;
+        ctx.strokeStyle = color;
+        ctx.moveTo(x - dx, y - dy);
+        ctx.lineTo(x, y);
+        ctx.closePath();
+        ctx.stroke();
+    }
+    else if (drawCmd == 'BRUSH') {
+        let { x, y, dx, dy, color, lineWidth } = data;
 
         ctx.beginPath();
         ctx.lineWidth = lineWidth;

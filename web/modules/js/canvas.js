@@ -60,10 +60,12 @@ function dragstarted(d) {
 function dragging(d) {
     let { x, y, dx, dy } = d3event;
 
-    let obj = {cmd: 'CANVAS_LINE', data: {
+    let { name, ...drawToolEtc } = drawTool;
+
+    let obj = {cmd: 'CANVAS_' + name, data: {
         x, y, dx, dy,
         color: drawColor[mouseName],
-        drawTool
+        ...drawToolEtc,
     }};
 
     ws.sendObj(obj);

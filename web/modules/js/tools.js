@@ -12,8 +12,13 @@ let tools = [
 ];
 
 export let drawTool = {
+    get name() {
+        return tools[selectedIndex];
+    },
     get lineWidth() {
-        return selectedIndex == 6 ? 0.5 : 15;
+        if (drawTool.name == 'BRUSH') {
+            return [3,2,1][brushIndex%3];
+        }
     },
 };
 
