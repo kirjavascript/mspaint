@@ -7,7 +7,7 @@ let selectedIndex = 6;
 let tools = [
     null, null,
     null, null,
-    null, null,
+    'PICK', 'ZOOM',
     'PENCIL', 'BRUSH',
 ];
 
@@ -26,6 +26,17 @@ export let drawTool = {
                 : brushIndex < 6 ? 'rect'
                 : brushIndex < 9 ? 'bkLine'
                 : 'fwLine';
+        }
+    },
+    set pickColor(color) {
+        if (drawTool.name == 'PICK') {
+            subTool.style('background-color', color);
+        }
+    },
+    get onEnd() {
+        if (drawTool.name == 'PICK') {
+            subTool.style('background-color', null);
+            return () => selectTool(null, 6);
         }
     },
 };
@@ -53,10 +64,10 @@ enter.append('img')
 
 function selectTool(d, i) {
     if (selectedIndex == i) return;
-    toolbox.select(`.tool:nth-child(${selectedIndex+1})`)
+    d3.selectAll('.tool')
         .select('img')
         .attr('src', 'tools/up.png');
-    d3.select(this)
+    toolbox.select(`.tool:nth-child(${i+1})`)
         .select('img')
         .attr('src', 'tools/down.png');
     selectedIndex = i;

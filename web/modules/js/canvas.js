@@ -3,7 +3,7 @@ import { event as d3event } from 'd3-selection';
 import { ws } from './socket';
 import { drawToContext, unwrapBuffer } from '#shared/canvas-tools';
 import { CANVAS } from '#shared/constants';
-import { drawColor } from './palette';
+import { drawColor, setColor } from './palette';
 import { drawTool } from './tools';
 
 let {width, height} = CANVAS;
@@ -73,17 +73,30 @@ function dragging(d) {
 
     let { name, ...drawToolEtc } = drawTool;
 
-    let obj = {cmd: 'CANVAS_' + name, data: {
-        x, y, dx, dy,
-        color: drawColor[mouseName],
-        ...drawToolEtc,
-    }};
+    if (name == 'PENCIL' || name == 'BRUSH') {
+        let obj = {cmd: 'CANVAS_' + name, data: {
+            x, y, dx, dy,
+            color: drawColor[mouseName],
+            ...drawToolEtc,
+        }};
 
-    ws.sendObj(obj);
-    drawToContext({ctx, ...obj });
+        ws.sendObj(obj);
+        drawToContext({ctx, ...obj });
+    }
+    else if (name == 'PICK') {
+        let pixelColor, pixelData = Array.from(ctx.getImageData(x, y, 1, 1).data);
+        if (pixelData[3] > 128) {
+            pixelColor = '#' + pixelData.splice(0, 3)
+                .map((d) => {d = d.toString(16); return d.length>1?d:'0'+d;})
+                .join``;
+            setColor({[mouseName]: pixelColor});
+            drawTool.pickColor = pixelColor;
+        }
+    }
 
 }
 
 function dragended(d) {
+    drawTool.onEnd && drawTool.onEnd();
 }
 

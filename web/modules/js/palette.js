@@ -5,19 +5,19 @@ import { event as d3event } from 'd3-selection';
 
 let colors = '00077770077007007700770777303326f03740f730fffbbbf00ff00f00ff30ff0fff70f77ff87ff07f73'.match(/.../g).map((d) => '#' + d);
 
-let mice = [0, 14];
-
 // external access
 
-export let drawColor = {};
+export let drawColor = {
+    primary: '#000',
+    secondary: '#FFF',
+};
 
-Object.defineProperty(drawColor, 'primary', {
-    get: () => colors[mice[0]],
-});
+// set colour
 
-Object.defineProperty(drawColor, 'secondary', {
-    get: () => colors[mice[1]],
-});
+export function setColor(obj) {
+    Object.assign(drawColor, obj);
+    updateSelected();
+}
 
 // selected colours
 
@@ -28,14 +28,14 @@ let selectedGroup = d3.select('.palette')
 function updateSelected() {
     let selectedSelection = selectedGroup
         .selectAll('.mice')
-        .data(mice);
+        .data(['primary','secondary']);
 
     selectedSelection
         .enter()
         .append('div')
         .classed('mice', 1)
         .merge(selectedSelection)
-        .style('background-color', (d) => colors[d]);
+        .style('background-color', (d) => drawColor[d]);
 }
 
 updateSelected();
@@ -56,11 +56,11 @@ function updatePalette() {
         .append('div')
         .classed('color', 1)
         .on('click', (d, i) => {
-            mice[0] = i;
+            drawColor.primary = d;
             updateSelected();
         })
         .on('contextmenu', (d, i) => {
-            mice[1] = i;
+            drawColor.secondary = d;
             updateSelected();
         })
         .merge(colorGroupSelection)

@@ -12,6 +12,8 @@ function initCanvas(wssInstance, roomInstance) {
     ctx = canvas.getContext('2d');
     wss = wssInstance;
     room = roomInstance;
+    ctx.fillStyle = '#FFF';
+    ctx.fillRect(0, 0, width, height);
 
     // load the canvas if there's a saved state
     fs.readFile('canvas.png', (err, png) => {
