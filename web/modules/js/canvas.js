@@ -22,7 +22,6 @@ ws.addEventListener('message', (e) => {
         //     imageData.data.set(typedArray);
         //     ctx.putImageData(imageData, 0, 0);
         //     canvas.style('opacity', 1);
-        //     console.log(performance.now()-diff, 'buffer');
         // }
 
         return;
@@ -42,20 +41,22 @@ canvas
     .attr('width', width)
     .attr('height', height);
 
-canvas.call(d3.drag()
-    .filter(() => d3event.button == 0 || d3event.button == 2)
-    .on('start', dragstarted)
-    .on('drag', dragging)
-    .on('end', dragended));
-
 // load initial canvas image
 
 let img = new Image();
+img.src = '/canvas.png?'+Math.random().toString(36).slice(2);
 img.addEventListener('load', function() {
     ctx.drawImage(img, 0, 0, width, height);
     canvas.style('opacity', 1);
+
+    // add events 
+    canvas.call(d3.drag()
+        .filter(() => d3event.button == 0 || d3event.button == 2)
+        .on('start', dragstarted)
+        .on('drag', dragging)
+        .on('end', dragended));
+
 });
-img.src = '/canvas.png?'+Math.random().toString(36).slice(2);
 
 // drawing
 

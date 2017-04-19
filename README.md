@@ -17,6 +17,7 @@ Multiplayer mspaint
     clipboard
     link github - about
     legit scrollbars scrollTo(); ::-webkit-scrollbar width 0 
+    virtual DOM for server side rendering
 ```
 
 Thanks to whoever made this; http://copy.sh/v86/?profile=windows98
