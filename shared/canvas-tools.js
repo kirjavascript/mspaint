@@ -14,17 +14,81 @@ function drawToContext({ ctx, data, cmd }) {
         ctx.stroke();
     }
     else if (drawCmd == 'BRUSH') {
-        let { x, y, dx, dy, color, lineWidth } = data;
+        let { x, y, dx, dy, color, size, shape } = data;
 
-        ctx.beginPath();
-        ctx.lineWidth = lineWidth;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        ctx.strokeStyle = color;
-        ctx.moveTo(x - dx, y - dy);
-        ctx.lineTo(x, y);
-        ctx.closePath();
-        ctx.stroke();
+        if (shape == 'circle') {
+            ctx.beginPath();
+            ctx.lineWidth = size;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.strokeStyle = color;
+            ctx.moveTo(x - dx, y - dy);
+            ctx.lineTo(x, y);
+            ctx.closePath();
+            ctx.stroke();
+        }
+        else if (shape == 'rect') {
+            ctx.beginPath();
+            ctx.fillStyle = color;
+            ctx.moveTo(x - dx, y - dy);
+            let x1,y1;
+            if (dx > 0) {
+                x1 = x - dx, y1 = y - dy;
+            }
+            else {
+                x1 = x, y1 = y;
+                x = x - dx, y = y - dy;
+            }
+            if ((dy < 0 && dx > 0) || (dy > 0 && dx <= 0)) {
+                ctx.lineTo(x1-size,y1-size); // <^
+                ctx.lineTo(x-size,y-size); // <^
+                ctx.lineTo(x+size,y-size); // ^>
+                ctx.lineTo(x+size,y+size); // v>
+                ctx.lineTo(x1+size,y1+size); // v>
+                ctx.lineTo(x1-size,y1+size); // <v
+                ctx.lineTo(x1-size,y1-size); // <^
+            }
+            else {
+                ctx.lineTo(x1+size,y1-size); // ^>
+                ctx.lineTo(x+size,y-size); // ^>
+                ctx.lineTo(x+size,y+size); // v>
+                ctx.lineTo(x-size,y+size); // <v
+                ctx.lineTo(x1-size,y1+size); // <v
+                ctx.lineTo(x1-size,y1-size); // <^
+                ctx.lineTo(x1+size,y1-size); // ^>
+            }
+
+            ctx.closePath();
+            ctx.fill();
+        }
+        else if (shape == 'bkLine') {
+            ctx.beginPath();
+            ctx.fillStyle = color;
+            ctx.strokeStyle = color;
+            let x1 = x - dx, y1 = y - dy;
+            ctx.moveTo(x1+size, y1-size);
+            ctx.lineTo(x+size, y-size);
+            ctx.lineTo(x-size, y+size);
+            ctx.lineTo(x1-size, y1+size); 
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+        }
+        else if (shape == 'fwLine') {
+            ctx.beginPath();
+            ctx.fillStyle = color;
+            ctx.strokeStyle = color;
+            let x1 = x - dx, y1 = y - dy;
+            ctx.moveTo(x1-size, y1-size);
+            ctx.lineTo(x-size, y-size);
+            ctx.lineTo(x+size, y+size);
+            ctx.lineTo(x1+size, y1+size); 
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+        }
+
+
     }
 
     //     let radius = 5;

@@ -15,9 +15,17 @@ export let drawTool = {
     get name() {
         return tools[selectedIndex];
     },
-    get lineWidth() {
+    get size() {
         if (drawTool.name == 'BRUSH') {
             return [3,2,1][brushIndex%3];
+        }
+    },
+    get shape() {
+        if (drawTool.name == 'BRUSH') {
+            return brushIndex < 3 ? 'circle'
+                : brushIndex < 6 ? 'rect'
+                : brushIndex < 9 ? 'bkLine'
+                : 'fwLine';
         }
     },
 };
@@ -64,7 +72,7 @@ let subToolSelectedIndex = 0;
 function selectSubTool() {
     subTool.html('');
 
-    if (selectedIndex == 7) {
+    if (drawTool.name == 'BRUSH') {
         drawBrushSub();
     }
 }
@@ -83,14 +91,10 @@ let brushData = [
 let brushIndex = 1;
 
 function drawBrushSub() {
-    let svg = do {
-        if (svg = subTool.select('svg'), svg.node()) { // eslint-disable-line no-cond-assign
-            svg;
-        }
-        else {
-            subTool.append('svg');
-        }
-    };
+    let svg = subTool.select('svg');
+    if (!svg.node()) {
+        svg = subTool.append('svg');
+    }
 
     let brushSelection = svg.selectAll('.brush')
         .data(brushData);
@@ -149,8 +153,12 @@ function drawBrushSub() {
 
             let isSelected = brushIndex == i;
             cover.attr('fill', isSelected ? '#008' : 'transparent');
-            shape.attr('fill', isSelected ? 'white' : 'black');
-            shape.style('stroke', isSelected ? 'white' : 'black');
+            if (i < 6) {
+                shape.attr('fill', isSelected ? 'white' : 'black');
+            }
+            else {
+                shape.style('stroke', isSelected ? 'white' : 'black');
+            }
         });
 
 }
