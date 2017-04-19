@@ -10,8 +10,6 @@ let {width, height} = CANVAS;
 let canvas = d3.select('canvas').style('opacity', 0);
 let ctx = canvas.node().getContext('2d');
 
-let diff = performance.now();
-
 // events
 
 ws.addEventListener('message', (e) => {
@@ -54,7 +52,6 @@ canvas.call(d3.drag()
 
 let img = new Image();
 img.addEventListener('load', function() {
-    console.log(performance.now()-diff, 'image');
     ctx.drawImage(img, 0, 0, width, height);
     canvas.style('opacity', 1);
 });

@@ -7,7 +7,8 @@ function routes(app) {
     });
 
     app.get('/canvas.png', (req, res) => {
-        res.send(getPNG());
+        res.writeHead(200, {'Content-Type': 'image/png'});
+        res.end(getPNG());
     });
 }
 

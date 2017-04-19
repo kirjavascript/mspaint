@@ -40,10 +40,6 @@ function addClient(ws, wss) {
     
     ws.sendObj({cmd: 'COLOR', data: color}); 
 
-    // send current canvas image data
-    
-    // ws.send(readCanvas());
-    
     // client object
     
     room[uid] = {
