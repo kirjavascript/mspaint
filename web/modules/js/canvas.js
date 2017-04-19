@@ -10,19 +10,22 @@ let {width, height} = CANVAS;
 let canvas = d3.select('canvas').style('opacity', 0);
 let ctx = canvas.node().getContext('2d');
 
+let diff = performance.now();
+
 // events
 
 ws.addEventListener('message', (e) => {
 
     if (e.data instanceof ArrayBuffer) {
-        let { cmd, typedArray } = unwrapBuffer(e.data);
+        // let { cmd, typedArray } = unwrapBuffer(e.data);
 
-        if (cmd == 'INIT') {
-            let imageData = ctx.createImageData(width, height);
-            imageData.data.set(typedArray);
-            ctx.putImageData(imageData, 0, 0);
-            canvas.style('opacity', 1);
-        }
+        // if (cmd == 'INIT') {
+        //     let imageData = ctx.createImageData(width, height);
+        //     imageData.data.set(typedArray);
+        //     ctx.putImageData(imageData, 0, 0);
+        //     canvas.style('opacity', 1);
+        //     console.log(performance.now()-diff, 'buffer');
+        // }
 
         return;
     }
@@ -46,6 +49,16 @@ canvas.call(d3.drag()
     .on('start', dragstarted)
     .on('drag', dragging)
     .on('end', dragended));
+
+// load initial canvas image
+
+let img = new Image();
+img.addEventListener('load', function() {
+    console.log(performance.now()-diff, 'image');
+    ctx.drawImage(img, 0, 0, width, height);
+    canvas.style('opacity', 1);
+});
+img.src = '/canvas.png?'+Math.random().toString(36).slice(2);
 
 // drawing
 

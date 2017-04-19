@@ -42,7 +42,7 @@ function addClient(ws, wss) {
 
     // send current canvas image data
     
-    ws.send(readCanvas());
+    // ws.send(readCanvas());
     
     // client object
     

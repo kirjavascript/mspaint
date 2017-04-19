@@ -1,4 +1,5 @@
 let Canvas = require('canvas');
+let fs = require('fs');
 let Image = Canvas.Image;
 let { drawToContext, wrapBuffer } = require('../shared/canvas-tools');
 let { CANVAS } = require('../shared/constants');
@@ -11,6 +12,22 @@ function initCanvas(wssInstance, roomInstance) {
     ctx = canvas.getContext('2d');
     wss = wssInstance;
     room = roomInstance;
+
+    // load the canvas if there's a saved state
+    fs.readFile('canvas.png', (err, png) => {
+        if (png) {
+            let img = new Image();
+            img.src = png;
+            ctx.drawImage(img, 0, 0, width, height);
+        }
+    });
+
+    // save the canvas every so often
+    setInterval(() => {
+        fs.writeFile('canvas.png', canvas.toBuffer(), 'utf8', (err, success) => {
+            err && console.error(err);
+        });
+    }, 5000);
 }
 
 function updateCanvas({ cmd, data, uid, ws }) {
@@ -23,7 +40,11 @@ function readCanvas() {
     return wrapBuffer('INIT', typedArray);
 }
 
+function getPNG() {
+    return canvas.toBuffer();
+}
+
 
 module.exports = {
-    initCanvas, updateCanvas, readCanvas
+    initCanvas, updateCanvas, readCanvas, getPNG,
 };
