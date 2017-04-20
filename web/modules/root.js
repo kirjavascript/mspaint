@@ -17,3 +17,5 @@ import './js/scrollbars';
     });
 
 document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+

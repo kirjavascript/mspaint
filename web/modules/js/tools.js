@@ -86,6 +86,9 @@ function selectSubTool() {
     if (drawTool.name == 'BRUSH') {
         drawBrushSub();
     }
+    else if (drawTool.name == 'ZOOM') {
+        drawZoomSub();
+    }
 }
 
 // brush
@@ -172,4 +175,10 @@ function drawBrushSub() {
             }
         });
 
+}
+
+// zoom
+
+function drawZoomSub() {
+    
 }
