@@ -19,7 +19,7 @@ module.exports = (env={}) => {
                             loader: 'babel-loader',
                             options: {
                                 presets: babelPresets = [
-                                    ['es2015', { modules: false }],
+                                    ['es2015', { modules: false, loose: true }],
                                     'stage-0'
                                 ]
                             }
@@ -52,7 +52,7 @@ module.exports = (env={}) => {
         plugins: [
             new webpack.DefinePlugin({
                 __DEV__: env.dev
-            })
+            }),
         ],
         resolve: {
             extensions: ['.js', '.json', '.jsx'],
