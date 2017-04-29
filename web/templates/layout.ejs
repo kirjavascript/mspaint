@@ -15,7 +15,6 @@
     <body>
         <%- body %>
         <img class="preload" src="/canvas.png?<%= Math.random().toString(36).slice(2) %>"/>
-        <% for (let i = 0; i < 16; i++) { %><img src="/tools/<%= i %>.png"/><% } %>
         <script src="/root.js"></script>
     </body>
 </html>
