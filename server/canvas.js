@@ -26,9 +26,13 @@ function initCanvas(wssInstance, roomInstance) {
 
     // save the canvas every so often
     setInterval(() => {
-        fs.writeFile('canvas.png', canvas.toBuffer(), 'utf8', (err, success) => {
+        let diff2 = new Date();
+        canvas.toBuffer((err, buf) => {
             err && console.error(err);
-        });
+            fs.writeFile('canvas.png', buf, 'utf8', (err, success) => {
+                err && console.error(err);
+            });
+        })
     }, 5000);
 }
 
@@ -43,10 +47,9 @@ function readCanvas() {
     return wrapBuffer('INIT', typedArray);
 }
 
-function getPNG() {
-    return canvas.toBuffer(undefined, 0);
+function getPNG(cb) {
+    return canvas.toBuffer(cb);
 }
-
 
 module.exports = {
     initCanvas, updateCanvas, readCanvas, getPNG,
