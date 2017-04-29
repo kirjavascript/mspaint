@@ -11,6 +11,7 @@ Multiplayer mspaint
     nick
     drag an image on
     max width/height
+    fix font
     native colour picker
     directory
     contributors list

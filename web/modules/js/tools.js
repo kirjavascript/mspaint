@@ -79,7 +79,6 @@ function selectTool(d, i) {
 let subTool = toolbox.append('div').classed('subtool', 1);
 let subToolSelectedIndex = 0;
 
-
 function selectSubTool() {
     subTool.html('');
 
@@ -91,6 +90,14 @@ function selectSubTool() {
     }
 }
 
+function getSubSVG() {
+    let svg = subTool.select('svg');
+    if (!svg.node()) {
+        svg = subTool.append('svg');
+    }
+    return svg;
+}
+
 // brush
 
 let brushData = [
@@ -99,16 +106,13 @@ let brushData = [
     // rectangles
     {x: 4, size: 8}, {x: 18, size: 5}, {x: 31, size: 2},
     // lines
-    {x1: 4, x2: 12, y1: 42, y2: 34},{x1: 18, x2: 23, y1: 41, y2: 36},{x1: 31, x2: 33, y1: 40, y2: 38},  
-    {x2: 4, x1: 12, y1: 57, y2: 49},{x2: 18, x1: 23, y1: 56, y2: 51},{x2: 31, x1: 33, y1: 55, y2: 53},  
+    {x1: 4, x2: 12, y1: 42, y2: 34},{x1: 18, x2: 23, y1: 41, y2: 36},{x1: 31, x2: 33, y1: 40, y2: 38},
+    {x2: 4, x1: 12, y1: 57, y2: 49},{x2: 18, x1: 23, y1: 56, y2: 51},{x2: 31, x1: 33, y1: 55, y2: 53},
 ];
 let brushIndex = 1;
 
 function drawBrushSub() {
-    let svg = subTool.select('svg');
-    if (!svg.node()) {
-        svg = subTool.append('svg');
-    }
+    let svg = getSubSVG();
 
     let brushSelection = svg.selectAll('.brush')
         .data(brushData);
@@ -179,6 +183,13 @@ function drawBrushSub() {
 
 // zoom
 
+let zoomData = [
+    {size: 1},
+    {size: 2},
+    {size: 6},
+    {size: 8},
+];
+
 function drawZoomSub() {
-    
+    let svg = getSubSVG();
 }

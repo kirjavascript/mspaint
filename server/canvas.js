@@ -3,6 +3,7 @@ let fs = require('fs');
 let Image = Canvas.Image;
 let { drawToContext, wrapBuffer } = require('../shared/canvas-tools');
 let { CANVAS } = require('../shared/constants');
+let { exec } = require('child_process');
 
 let {width, height} = CANVAS;
 let canvas, wss, room, ctx;
@@ -14,6 +15,8 @@ function initCanvas(wssInstance, roomInstance) {
     room = roomInstance;
     ctx.fillStyle = '#FFF';
     ctx.fillRect(0, 0, width, height);
+    ctx.patternQuality = 'best';
+    ctx.imageSmoothingEnabled = false;
 
     // load the canvas if there's a saved state
     fs.readFile('canvas.png', (err, png) => {
@@ -31,9 +34,12 @@ function initCanvas(wssInstance, roomInstance) {
             err && console.error(err);
             fs.writeFile('canvas.png', buf, 'utf8', (err, success) => {
                 err && console.error(err);
+                exec('pngquant --force -o canvas.min.png canvas.png', (err, stdout) => {
+                    err && console.error(err);
+                });
             });
         })
-    }, 5000);
+    }, 1000);
 }
 
 function updateCanvas({ cmd, data, uid, ws }) {
@@ -48,7 +54,10 @@ function readCanvas() {
 }
 
 function getPNG(cb) {
-    return canvas.toBuffer(cb);
+    // canvas.toBuffer(cb);
+    fs.readFile('canvas.min.png', (err, buf) => {
+        cb(err, buf);
+    });
 }
 
 module.exports = {

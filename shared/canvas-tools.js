@@ -1,5 +1,7 @@
 function drawToContext({ ctx, data, cmd }) {
     
+    // spray http://perfectionkills.com/exploring-canvas-drawing-techniques/#round-distribution
+
     let drawCmd = cmd.substr(7);
 
     if (drawCmd == 'PENCIL') {

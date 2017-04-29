@@ -14,6 +14,7 @@
     }
     span {
         margin-top: 3px;
+        white-space: nowrap;
     }
 }
 
@@ -76,6 +77,10 @@
         width: 39px;
         height: 64px;
         margin: 3px 4px;
+        svg {
+            width: 40px;
+            height: 64px;
+        }
     }
 }
 
