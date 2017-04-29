@@ -3,7 +3,6 @@ let fs = require('fs');
 let Image = Canvas.Image;
 let { drawToContext, wrapBuffer } = require('../shared/canvas-tools');
 let { CANVAS } = require('../shared/constants');
-let { exec } = require('child_process');
 
 let {width, height} = CANVAS;
 let canvas, wss, room, ctx;
@@ -29,17 +28,13 @@ function initCanvas(wssInstance, roomInstance) {
 
     // save the canvas every so often
     setInterval(() => {
-        let diff2 = new Date();
         canvas.toBuffer((err, buf) => {
             err && console.error(err);
             fs.writeFile('canvas.png', buf, 'utf8', (err, success) => {
                 err && console.error(err);
-                exec('pngquant --force -o canvas.min.png canvas.png', (err, stdout) => {
-                    err && console.error(err);
-                });
             });
         })
-    }, 1000);
+    }, 2000);
 }
 
 function updateCanvas({ cmd, data, uid, ws }) {
@@ -54,10 +49,7 @@ function readCanvas() {
 }
 
 function getPNG(cb) {
-    // canvas.toBuffer(cb);
-    fs.readFile('canvas.min.png', (err, buf) => {
-        cb(err, buf);
-    });
+    canvas.toBuffer(cb);
 }
 
 module.exports = {
