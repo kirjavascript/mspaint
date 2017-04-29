@@ -38,12 +38,13 @@ function updateCanvas({ cmd, data, uid, ws }) {
 }
 
 function readCanvas() {
+    // deprecated
     let typedArray = ctx.getImageData(0, 0, width, height).data;
     return wrapBuffer('INIT', typedArray);
 }
 
 function getPNG() {
-    return canvas.toBuffer();
+    return canvas.toBuffer(undefined, 0);
 }
 
 

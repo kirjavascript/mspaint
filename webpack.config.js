@@ -19,7 +19,7 @@ module.exports = (env={}) => {
                             loader: 'babel-loader',
                             options: {
                                 presets: babelPresets = [
-                                    ['es2015', { modules: false, loose: true }],
+                                    ['es2015', { modules: false }],
                                     'stage-0'
                                 ]
                             }

@@ -9,11 +9,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
         <style>
             html{background-color: #d4d0c8;}
-            body{display: none;}
+            body, .preload{display: none;}
         </style>
     </head>
     <body>
         <%- body %>
+        <img class="preload" src="/canvas.png?<%= Math.random().toString(36).slice(2) %>"/>
         <script src="/root.js"></script>
     </body>
 </html>

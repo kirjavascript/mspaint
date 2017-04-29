@@ -20,6 +20,7 @@ let app = express();
 let server = app.set('view engine', 'ejs')
     .use(require('express-ejs-layouts'))
     .set('views', 'web/templates')
+    .use(require('compression')())
     .listen(config.port, () => {
         console.log(`Listening on ${config.port}`)
     })

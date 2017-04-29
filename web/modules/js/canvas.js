@@ -43,20 +43,26 @@ canvas
 
 // load initial canvas image
 
-let img = new Image();
-img.src = '/canvas.png?'+Math.random().toString(36).slice(2);
-img.addEventListener('load', function() {
+let preload = d3.select('.preload').node();
+
+if (preload.complete) {
+    initCanvas(preload);
+}
+else {
+    preload.onload = () => initCanvas(preload);
+}
+
+function initCanvas(img) {
     ctx.drawImage(img, 0, 0, width, height);
     canvas.style('opacity', 1);
 
-    // add events 
+    // add events
     canvas.call(d3.drag()
         .filter(() => d3event.button == 0 || d3event.button == 2)
         .on('start', dragstarted)
         .on('drag', dragging)
         .on('end', dragended));
-
-});
+}
 
 // drawing
 
