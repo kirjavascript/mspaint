@@ -1,5 +1,5 @@
 let fillCanvas = require('./canvas/fill');
-let { drawRectLine } = require('./canvas/lines');
+let { rectLine, line } = require('./canvas/lines');
 
 function drawToContext({ ctx, data, cmd }) {
 
@@ -8,15 +8,16 @@ function drawToContext({ ctx, data, cmd }) {
     let drawCmd = cmd.substr(7);
 
     if (drawCmd == 'PENCIL') {
-        let { x, y, dx, dy, color } = data;
+        line(Object.assign({ ctx }, data));
+        // let { x, y, dx, dy, color } = data;
 
-        ctx.beginPath();
-        ctx.lineWidth = 0.5;
-        ctx.strokeStyle = color;
-        ctx.moveTo(x - dx|0, y - dy|0);
-        ctx.lineTo(x, y);
-        ctx.closePath();
-        ctx.stroke();
+        // ctx.beginPath();
+        // ctx.lineWidth = 0.5;
+        // ctx.strokeStyle = color;
+        // ctx.moveTo(x - dx|0, y - dy|0);
+        // ctx.lineTo(x, y);
+        // ctx.closePath();
+        // ctx.stroke();
     }
     else if (drawCmd == 'BRUSH') {
         let { x, y, dx, dy, color, size, shape } = data;
@@ -33,7 +34,7 @@ function drawToContext({ ctx, data, cmd }) {
             ctx.stroke();
         }
         else if (shape == 'rect') {
-            drawRectLine(Object.assign({ ctx }, data));
+            rectLine(Object.assign({ ctx }, data));
         }
         else if (shape == 'bkLine') {
             ctx.beginPath();
@@ -63,47 +64,12 @@ function drawToContext({ ctx, data, cmd }) {
         }
     }
     else if (drawCmd == 'ERASE') {
-        drawRectLine(Object.assign({ ctx }, data));
+        rectLine(Object.assign({ ctx }, data));
     }
     else if (drawCmd == 'FILL') {
         fillCanvas(Object.assign({ ctx }, data));
     }
 
-}
-
-function drawRectLine({ color, size, x, y, dx, dy, ctx }) {
-    ctx.beginPath();
-    ctx.fillStyle = color;
-    ctx.moveTo(x - dx, y - dy);
-    let x1,y1;
-    if (dx > 0) {
-        x1 = x - dx, y1 = y - dy;
-    }
-    else {
-        x1 = x, y1 = y;
-        x = x - dx, y = y - dy;
-    }
-    if ((dy < 0 && dx > 0) || (dy > 0 && dx <= 0)) {
-        ctx.lineTo(x1-size,y1-size); // <^
-        ctx.lineTo(x-size,y-size); // <^
-        ctx.lineTo(x+size,y-size); // ^>
-        ctx.lineTo(x+size,y+size); // v>
-        ctx.lineTo(x1+size,y1+size); // v>
-        ctx.lineTo(x1-size,y1+size); // <v
-        ctx.lineTo(x1-size,y1-size); // <^
-    }
-    else {
-        ctx.lineTo(x1+size,y1-size); // ^>
-        ctx.lineTo(x+size,y-size); // ^>
-        ctx.lineTo(x+size,y+size); // v>
-        ctx.lineTo(x-size,y+size); // <v
-        ctx.lineTo(x1-size,y1+size); // <v
-        ctx.lineTo(x1-size,y1-size); // <^
-        ctx.lineTo(x1+size,y1-size); // ^>
-    }
-
-    ctx.closePath();
-    ctx.fill();
 }
 
 module.exports = {

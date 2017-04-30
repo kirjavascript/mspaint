@@ -35,7 +35,7 @@ function initCanvas(wssInstance, roomInstance) {
                 err && console.error(err);
             });
         })
-    }, 2000);
+    }, 5000);
 }
 
 function updateCanvas({ cmd, data, uid, ws }) {

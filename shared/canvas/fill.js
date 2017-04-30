@@ -1,5 +1,5 @@
 let { CANVAS } = require('../constants');
-let colorConvert = require('../color-convert');
+let { colorConvert, getPos, createWriter, matchesSelected } = require('./util');
 
 // algorithm taken from http://www.williammalone.com/articles/html5-canvas-javascript-paint-bucket-tool/
 
@@ -65,26 +65,3 @@ module.exports = ({ ctx, x, y, color}) => {
     ctx.putImageData(imgData, 0, 0);
 };
 
-function getPos(x, y) {
-    return (y * CANVAS.width + x) * 4;
-}
-
-function createWriter(data, colorData) {
-    let [r, g, b] = colorData;
-    return (pos) => {
-        data[pos] = r;
-        data[pos+1] = g;
-        data[pos+2] = b;
-    };
-}
-
-function matchesSelected(data, x, y) {
-    let initialPos = getPos(x, y);
-    let selectedData = Array.from({length: 3}, (_, i) => data[initialPos + i]);
-
-    return (pos) => (
-        selectedData[0] == data[pos] &&
-        selectedData[1] == data[pos+1] &&
-        selectedData[2] == data[pos+2]
-    );
-}
