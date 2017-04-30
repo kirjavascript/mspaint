@@ -12,6 +12,12 @@ module.exports = ({ ctx, x, y, color}) => {
     let checkMatch = matchesSelected(imgData.data, x, y);
     let setPixel = createWriter(imgData.data, colorData);
 
+    // check if already filled
+    let firstPos = getPos(x, y);
+    if (!colorData.map((c, i) => c != imgData.data[firstPos+i]).filter((d) => d).length) {
+        return;
+    }
+
     let stack = [[x, y]];
 
     while (stack.length) {

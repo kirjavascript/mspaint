@@ -24,8 +24,13 @@ function grabSquare({ x, y, dx, dy, ctx }) {
 
     let imgData = ctx.getImageData(left, top, width+1, height+1);
 
+    console.log(imgData.data.length);
+
     let x0 = dx < 0 ? width : 0;
     let y0 = dy < 0 ? height : 0;
+
+    // node bug
+    // chrome bug
 
     return new Promise((resolve) => {
         resolve({
