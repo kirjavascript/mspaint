@@ -27,24 +27,33 @@ function grabSquare({ x, y, dx, dy, ctx }, callback) {
     let y0 = dy < 0 ? height : 0;
 
     // adjust for boundaries (required for node-canvas)
-    if (top < 0) { return;
+    let overflowX = 0;
+    let overflowY = 0;
+
+    if (top < 0) {
         if (height < Math.abs(top)) return;
+        overflowY = top;
+        height += top;
         top = 0;
     }
-    else if (left < 0) {return;
+    if (left < 0) {
         if (width < Math.abs(left)) return;
-        // width += left;
+        overflowX = left;
+        width += left;
         left = 0;
     }
-    else if (top + height > CANVAS.height) {return;
+    if (top + height > CANVAS.height) {
+        let overflow = (top + height) - CANVAS.height;
+        if (height < overflow) return;
+        height -= overflow;
         top = CANVAS.height - height;
+        console.log(height);
     }
-    else if (left + width > CANVAS.width) {return;
+    if (left + width > CANVAS.width) {return;
         left = CANVAS.width - width;
     }
 
-
-    // node bug
+    // console.log(overflowX, overflowY);
 
     let imgData = ctx.getImageData(left, top, width+1, height+1);
 
@@ -56,7 +65,15 @@ function grabSquare({ x, y, dx, dy, ctx }, callback) {
         imgData,
         setPixel(x, y, colorData) {
             let [r, g, b] = colorData;
+
+            // adjust for overflow
+            y += overflowY;
+            // y += overflowX;
+
             let pos = ((y * (width+1)) + x) * 4;
+
+            if (pos < 0 && pos > imgData.length) return;
+
             imgData.data[pos] = r;
             imgData.data[pos+1] = g;
             imgData.data[pos+2] = b;

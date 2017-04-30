@@ -20,6 +20,7 @@ Multiplayer mspaint
 http://rosettacode.org/wiki/Bitmap/Bresenham%27s_line_algorithm#JavaScript
 http://members.chello.at/~easyfilter/bresenham.html
     virtual DOM for server side rendering (https://github.com/WebReflection/hyperHTML)
+    fix mobile support
 ```
 
 Thanks to whoever made this; http://copy.sh/v86/?profile=windows98
