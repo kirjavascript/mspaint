@@ -5,13 +5,14 @@ function line({ color, x, y, dx, dy, ctx }) {
 
     let colorData = colorConvert(color);
 
-    grabSquare({ x, y, dx, dy, ctx })
-        .then(({ x, y, dx, dy, write, setPixel}) => {
+    grabSquare({ x, y, dx, dy, ctx },
+        ({ x, y, dx, dy, write, setPixel}) => {
             bline({ x, y, dx, dy}, (x, y) => {
                 setPixel(x, y, colorData);
             });
             write();
-        });
+        }
+    );
 }
 
 function bline({ x, y, dx, dy }, callback) {
