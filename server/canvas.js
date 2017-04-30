@@ -47,9 +47,19 @@ function readCanvas() {
     let typedArray = ctx.getImageData(0, 0, width, height).data;
     return wrapBuffer('INIT', typedArray);
 }
+const imagemin = require('imagemin');
+const imageminPngquant = require('imagemin-pngquant');
 
 function getPNG(cb) {
-    canvas.toBuffer(cb);
+    canvas.toBuffer((err, buf) => {
+        imagemin.buffer(buf, {
+            plugins: [imageminPngquant({speed: 11})],
+        }).then(bufOpt => {
+            cb(null, bufOpt);
+        });
+    });
+
+    // canvas.toBuffer(cb);
 }
 
 module.exports = {

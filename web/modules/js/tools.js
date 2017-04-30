@@ -212,7 +212,7 @@ function drawZoomSub() {
                 .on('click', () => {
                     zoomIndex = i;
                     setZoom(d);
-                    drawZoomSub();
+                    selectTool(null, lastDrawTool);
                 });
 
             // number
