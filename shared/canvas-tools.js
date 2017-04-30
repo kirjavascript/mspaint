@@ -1,5 +1,7 @@
+let fillCanvas = require('./fill-canvas');
+
 function drawToContext({ ctx, data, cmd }) {
-    
+
     // spray http://perfectionkills.com/exploring-canvas-drawing-techniques/#round-distribution
 
     let drawCmd = cmd.substr(7);
@@ -10,7 +12,7 @@ function drawToContext({ ctx, data, cmd }) {
         ctx.beginPath();
         ctx.lineWidth = 0.5;
         ctx.strokeStyle = color;
-        ctx.moveTo(x - dx, y - dy);
+        ctx.moveTo(x - dx|0, y - dy|0);
         ctx.lineTo(x, y);
         ctx.closePath();
         ctx.stroke();
@@ -63,7 +65,7 @@ function drawToContext({ ctx, data, cmd }) {
         drawRectLine(Object.assign({ ctx }, data));
     }
     else if (drawCmd == 'FILL') {
-        console.log(data);
+        fillCanvas(Object.assign({ ctx }, data));
     }
 
 }
