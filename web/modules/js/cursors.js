@@ -2,6 +2,7 @@ import d3 from '#lib/d3';
 import { event as d3event } from 'd3-selection';
 import { ws } from './socket';
 import { setStatus } from './statusbar';
+import { scrollPos } from './scrollbars';
 
 let clients = [];
 
@@ -48,7 +49,8 @@ let canvas = d3.select('canvas');
 d3.select(window)
     .on('mousemove', () => {
         let [x, y] = d3.mouse(canvas.node());
-        ws.sendObj({cmd: 'XY', data: {x, y}});
+        let { zoom } = scrollPos;
+        ws.sendObj({cmd: 'XY', data: {x: x / zoom, y: y / zoom}});
     })
     .on('mouseout', () => {
         ws.sendObj({cmd: 'XY', data: {x: null, y: null}});
@@ -59,7 +61,8 @@ d3.select(window)
 canvas
     .on('mousemove', function() {
         let [x, y] = d3.mouse(this);
-        setStatus('xy', {x, y});
+        let { zoom } = scrollPos;
+        setStatus('xy', {x: x / zoom, y: y / zoom});
     })
     .on('mouseleave', () => {
         setStatus('xy');

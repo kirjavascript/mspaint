@@ -4,6 +4,7 @@ import { ws } from './socket';
 import { drawToContext, unwrapBuffer } from '#shared/canvas-tools';
 import { CANVAS } from '#shared/constants';
 import { drawColor, setColor } from './palette';
+import { setZoom, scrollPos } from './scrollbars';
 import { drawTool } from './tools';
 
 let {width, height} = CANVAS;
@@ -75,7 +76,7 @@ function dragstarted(d) {
 }
 
 function dragging(d) {
-    let { x, y, dx, dy } = d3event;
+    let { x, y, dx, dy } = getMotion();
 
     let { name, ...drawToolEtc } = drawTool;
 
@@ -106,3 +107,13 @@ function dragended(d) {
     drawTool.onEnd && drawTool.onEnd();
 }
 
+function getMotion() {
+    let { x, y, dx, dy } = d3event;
+    let { zoom } = scrollPos;
+    return {
+        x: x / zoom,
+        y: y / zoom,
+        dx: dx / zoom,
+        dy: dy / zoom,
+    };
+}

@@ -1,8 +1,10 @@
 import d3 from '#lib/d3';
+import { setZoom } from './scrollbars';
 
 // variables
 
 let selectedIndex = 6;
+let lastDrawTool = 6;
 
 let tools = [
     null, null,
@@ -36,7 +38,7 @@ export let drawTool = {
     get onEnd() {
         if (drawTool.name == 'PICK') {
             subTool.style('background-color', null);
-            return () => selectTool(null, 6);
+            return () => selectTool(null, lastDrawTool);
         }
     },
 };
@@ -71,13 +73,15 @@ function selectTool(d, i) {
         .select('img')
         .attr('src', 'tools/down.png');
     selectedIndex = i;
+    if (~[2,3,6,7,8,10,11,12,13,14,15].indexOf(i)) {
+        lastDrawTool = i;
+    }
     selectSubTool();
 }
 
 // subtool
 
 let subTool = toolbox.append('div').classed('subtool', 1);
-let subToolSelectedIndex = 0;
 
 function selectSubTool() {
     subTool.html('');
@@ -207,6 +211,7 @@ function drawZoomSub() {
                 .attr('height', 12)
                 .on('click', () => {
                     zoomIndex = i;
+                    setZoom(d);
                     drawZoomSub();
                 });
 

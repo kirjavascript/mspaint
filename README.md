@@ -6,18 +6,16 @@ Multiplayer mspaint
     open/new/save = list/newroom/png
     multiple pages /thing = different thing
     save history (diff/save anyway)
-    room owner / admin menu / only admin can change size of canvas
-    infinite canvas?!? panning
+    room owner / admin menu
     nick
     drag an image on
-    max width/height
     fix font
     native colour picker
     directory
     contributors list
     clipboard
     link github - about
-    legit scrollbars scrollTo(); ::-webkit-scrollbar width 0 
+    msgpack
     virtual DOM for server side rendering (https://github.com/WebReflection/hyperHTML)
 ```
 
