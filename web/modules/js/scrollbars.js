@@ -3,8 +3,7 @@ import { event as d3event } from 'd3-selection';
 import { CANVAS } from '#shared/constants';
 
 export let scrollPos = {x: 0, y: 0, zoom: 1};
-export let setScroll = (obj = {}) => {
-    let { zoom, x, y } = obj;
+export let setScroll = ({ zoom, x, y } = {}) => {
     zoom && (scrollPos.zoom = zoom);
     // rightOffset, bottomOffset and scroll x/y get redefined in responder
     x && (bottomOffsetRatio = x / CANVAS.width);
