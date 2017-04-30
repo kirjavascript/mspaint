@@ -8,7 +8,7 @@ let lastDrawTool = 6;
 
 let tools = [
     null, null,
-    null, null,
+    'ERASE', null,
     'PICK', 'ZOOM',
     'PENCIL', 'BRUSH',
 ];
@@ -20,6 +20,9 @@ export let drawTool = {
     get size() {
         if (drawTool.name == 'BRUSH') {
             return [3,2,1][brushIndex%3];
+        }
+        else if (drawTool.name == 'ERASE') {
+            return eraseRadii[eraseIndex];
         }
     },
     get shape() {
@@ -91,6 +94,9 @@ function selectSubTool() {
     }
     else if (drawTool.name == 'ZOOM') {
         drawZoomSub();
+    }
+    else if (drawTool.name == 'ERASE') {
+        drawEraseSub();
     }
 }
 
@@ -230,7 +236,7 @@ function drawZoomSub() {
                 .append('rect')
                 .classed('desc', 1)
                 .attr('x', 28 - (d/2))
-                .attr('y', (i * 14.15) + 9 + +(i==3))
+                .attr('y', (i * 14.15) + 9 +(i==3))
                 .attr('width', d)
                 .attr('height', d)
                 .style('pointer-events', 'none');
@@ -248,4 +254,49 @@ function drawZoomSub() {
                 .attr('fill', zoomIndex == i ? 'white' : 'black');
         });
 
+}
+
+// erase
+
+let eraseIndex = 2;
+let eraseRadii = [2, 3, 4, 5];
+
+function drawEraseSub() {
+    let svg = getSubSVG();
+
+    let eraseSelection = svg.selectAll('.erase')
+        .data(eraseRadii);
+
+    eraseSelection
+        .enter()
+        .append('g')
+        .classed('erase', 1)
+        .each(function(d, i) {
+            let group = d3.select(this);
+            group.append('rect')
+                .classed('select', 1)
+                .attr('x', 12)
+                .attr('y', (i * 15) + 2 +(i==3))
+                .attr('width', 14)
+                .attr('height', 14)
+                .on('click', () => {
+                    eraseIndex = i;
+                    drawEraseSub();
+                });
+            group.append('rect')
+                .classed('size', 1)
+                .attr('x', 19 - d)
+                .attr('y', (i * 14) + 7 +(i==3))
+                .attr('width', d*2)
+                .attr('height', d*2)
+                .style('pointer-events', 'none');
+        })
+        .merge(eraseSelection)
+        .each(function(d, i) {
+            let group = d3.select(this);
+            group.selectAll('.select')
+                .attr('fill', eraseIndex == i ? '#008' : 'transparent');
+            group.selectAll('.size')
+                .attr('fill', eraseIndex == i ? 'white' : 'black');
+        });
 }

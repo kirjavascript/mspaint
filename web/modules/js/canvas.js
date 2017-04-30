@@ -90,6 +90,18 @@ function dragging(d) {
         ws.sendObj(obj);
         drawToContext({ctx, ...obj });
     }
+    else if (name == 'ERASE') {
+        if (drawColor.match && mouseName == 'secondary') return;
+
+        let obj = {cmd: 'CANVAS_ERASE', data: {
+            x, y, dx, dy,
+            color: drawColor.secondary,
+            ...drawToolEtc,
+        }};
+
+        ws.sendObj(obj);
+        drawToContext({ctx, ...obj });
+    }
     else if (name == 'PICK') {
         let pixelColor, pixelData = Array.from(ctx.getImageData(x, y, 1, 1).data);
         if (pixelData[3] > 128) {
@@ -123,9 +135,9 @@ function getMotion() {
     let { x, y, dx, dy } = d3event;
     let { zoom } = scrollPos;
     return {
-        x: x / zoom,
-        y: y / zoom,
-        dx: dx / zoom,
-        dy: dy / zoom,
+        x: (x / zoom)|0,
+        y: (y / zoom)|0,
+        dx: (dx / zoom)|0,
+        dy: (dy / zoom)|0,
     };
 }

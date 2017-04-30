@@ -12,6 +12,10 @@ export let drawColor = {
     secondary: '#FFF',
 };
 
+Object.defineProperty(drawColor, 'match', {
+    get: () => drawColor.primary == drawColor.secondary
+});
+
 // set colour
 
 export function setColor(obj) {

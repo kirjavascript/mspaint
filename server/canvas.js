@@ -18,6 +18,7 @@ function initCanvas(wssInstance, roomInstance) {
     ctx.imageSmoothingEnabled = false;
 
     // load the canvas if there's a saved state
+    // yes, the database for this thing is a png file
     fs.readFile('canvas.png', (err, png) => {
         if (png) {
             let img = new Image();

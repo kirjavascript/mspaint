@@ -16,12 +16,8 @@ Multiplayer mspaint
     clipboard
     link github - about
     msgpack
+    https://www.npmjs.com/package/bresenham
     virtual DOM for server side rendering (https://github.com/WebReflection/hyperHTML)
 ```
-
-Installation requirements
-==
-
-cairo, pango
 
 Thanks to whoever made this; http://copy.sh/v86/?profile=windows98

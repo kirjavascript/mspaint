@@ -30,38 +30,7 @@ function drawToContext({ ctx, data, cmd }) {
             ctx.stroke();
         }
         else if (shape == 'rect') {
-            ctx.beginPath();
-            ctx.fillStyle = color;
-            ctx.moveTo(x - dx, y - dy);
-            let x1,y1;
-            if (dx > 0) {
-                x1 = x - dx, y1 = y - dy;
-            }
-            else {
-                x1 = x, y1 = y;
-                x = x - dx, y = y - dy;
-            }
-            if ((dy < 0 && dx > 0) || (dy > 0 && dx <= 0)) {
-                ctx.lineTo(x1-size,y1-size); // <^
-                ctx.lineTo(x-size,y-size); // <^
-                ctx.lineTo(x+size,y-size); // ^>
-                ctx.lineTo(x+size,y+size); // v>
-                ctx.lineTo(x1+size,y1+size); // v>
-                ctx.lineTo(x1-size,y1+size); // <v
-                ctx.lineTo(x1-size,y1-size); // <^
-            }
-            else {
-                ctx.lineTo(x1+size,y1-size); // ^>
-                ctx.lineTo(x+size,y-size); // ^>
-                ctx.lineTo(x+size,y+size); // v>
-                ctx.lineTo(x-size,y+size); // <v
-                ctx.lineTo(x1-size,y1+size); // <v
-                ctx.lineTo(x1-size,y1-size); // <^
-                ctx.lineTo(x1+size,y1-size); // ^>
-            }
-
-            ctx.closePath();
-            ctx.fill();
+            drawRectLine({ ctx, ...data });
         }
         else if (shape == 'bkLine') {
             ctx.beginPath();
@@ -71,7 +40,7 @@ function drawToContext({ ctx, data, cmd }) {
             ctx.moveTo(x1+size, y1-size);
             ctx.lineTo(x+size, y-size);
             ctx.lineTo(x-size, y+size);
-            ctx.lineTo(x1-size, y1+size); 
+            ctx.lineTo(x1-size, y1+size);
             ctx.closePath();
             ctx.fill();
             ctx.stroke();
@@ -84,24 +53,51 @@ function drawToContext({ ctx, data, cmd }) {
             ctx.moveTo(x1-size, y1-size);
             ctx.lineTo(x-size, y-size);
             ctx.lineTo(x+size, y+size);
-            ctx.lineTo(x1+size, y1+size); 
+            ctx.lineTo(x1+size, y1+size);
             ctx.closePath();
             ctx.fill();
             ctx.stroke();
         }
-
-
+    }
+    else if (drawCmd == 'ERASE') {
+        drawRectLine({ ctx, ...data });
     }
 
-    //     let radius = 5;
-    //     cbel stagetx.beginPath();
-    //     ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
-    //     ctx.fillStyle = 'green';
-    //     ctx.fill();
-    //
-    //     selection/drag;
-    //     should save imageData buffers and repaint them when requested
-    //     d3-brush
+}
+
+function drawRectLine({ color, size, x, y, dx, dy, ctx }) {
+    ctx.beginPath();
+    ctx.fillStyle = color;
+    ctx.moveTo(x - dx, y - dy);
+    let x1,y1;
+    if (dx > 0) {
+        x1 = x - dx, y1 = y - dy;
+    }
+    else {
+        x1 = x, y1 = y;
+        x = x - dx, y = y - dy;
+    }
+    if ((dy < 0 && dx > 0) || (dy > 0 && dx <= 0)) {
+        ctx.lineTo(x1-size,y1-size); // <^
+        ctx.lineTo(x-size,y-size); // <^
+        ctx.lineTo(x+size,y-size); // ^>
+        ctx.lineTo(x+size,y+size); // v>
+        ctx.lineTo(x1+size,y1+size); // v>
+        ctx.lineTo(x1-size,y1+size); // <v
+        ctx.lineTo(x1-size,y1-size); // <^
+    }
+    else {
+        ctx.lineTo(x1+size,y1-size); // ^>
+        ctx.lineTo(x+size,y-size); // ^>
+        ctx.lineTo(x+size,y+size); // v>
+        ctx.lineTo(x-size,y+size); // <v
+        ctx.lineTo(x1-size,y1+size); // <v
+        ctx.lineTo(x1-size,y1-size); // <^
+        ctx.lineTo(x1+size,y1-size); // ^>
+    }
+
+    ctx.closePath();
+    ctx.fill();
 }
 
 // message passing via ArrayBuffers

@@ -1,10 +1,9 @@
 import d3 from '#lib/d3';
 import { setStatus } from './statusbar';
-import debounce from 'lodash.debounce';
+import debounce from '#lib/debounce';
 import { PING_INTERVAL } from '#shared/constants';
 
 // http://websocket.org/echo.html
-// http://msgpack.org/index.html
 
 export const ws = new WebSocket(`ws://${location.host}/`);
 
@@ -26,7 +25,7 @@ ws.addEventListener('close', () => {
 
 ws.addEventListener('message', (e) => {
 
-    if (e.data instanceof ArrayBuffer) return; 
+    if (e.data instanceof ArrayBuffer) return;
 
     let { cmd, uid, data } = JSON.parse(e.data);
 
