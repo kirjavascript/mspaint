@@ -4,7 +4,7 @@ import { ws } from './socket';
 import { drawToContext, unwrapBuffer } from '#shared/canvas-tools';
 import { CANVAS } from '#shared/constants';
 import { drawColor, setColor } from './palette';
-import { setZoom, scrollPos } from './scrollbars';
+import { setScroll, scrollPos } from './scrollbars';
 import { drawTool } from './tools';
 
 let {width, height} = CANVAS;
@@ -104,6 +104,18 @@ function dragging(d) {
 }
 
 function dragended(d) {
+    let { x, y } = getMotion();
+    let { name } = drawTool;
+
+    if (name == 'ZOOM') {
+        if (scrollPos.zoom != 1) {
+            setScroll({zoom: 1});
+        }
+        else {
+            setScroll({zoom: 4, x, y});
+        }
+    }
+
     drawTool.onEnd && drawTool.onEnd();
 }
 

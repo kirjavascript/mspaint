@@ -1,5 +1,5 @@
 import d3 from '#lib/d3';
-import { setZoom } from './scrollbars';
+import { setScroll, scrollPos } from './scrollbars';
 
 // variables
 
@@ -36,7 +36,7 @@ export let drawTool = {
         }
     },
     get onEnd() {
-        if (drawTool.name == 'PICK') {
+        if (drawTool.name == 'PICK' || drawTool.name == 'ZOOM') {
             subTool.style('background-color', null);
             return () => selectTool(null, lastDrawTool);
         }
@@ -187,13 +187,13 @@ function drawBrushSub() {
 
 // zoom
 
-let zoomIndex = 0;
+let zoomFactors = [1, 2, 6, 8];
 
 function drawZoomSub() {
     let svg = getSubSVG();
 
     let zoomSelection = svg.selectAll('.zoom')
-        .data([1, 2, 6, 8]);
+        .data(zoomFactors);
 
     let zoomGroup = zoomSelection
         .enter()
@@ -210,8 +210,7 @@ function drawZoomSub() {
                 .attr('width', 40)
                 .attr('height', 12)
                 .on('click', () => {
-                    zoomIndex = i;
-                    setZoom(d);
+                    setScroll({zoom: d});
                     selectTool(null, lastDrawTool);
                 });
 
@@ -239,6 +238,8 @@ function drawZoomSub() {
         .merge(zoomSelection)
         .each(function(d, i) {
             let group = d3.select(this);
+            let { zoom } = scrollPos;
+            let zoomIndex = zoomFactors.indexOf(zoom);
             group
                 .selectAll('.cover')
                 .attr('fill', zoomIndex == i ? '#008' : 'transparent');
