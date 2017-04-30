@@ -102,6 +102,7 @@
 
     .canvasWrap {
         z-index: 0;
+        transform-origin: left top;
     }
 
     canvas {

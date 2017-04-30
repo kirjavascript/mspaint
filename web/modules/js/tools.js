@@ -60,7 +60,7 @@ enter.append('img')
 enter.append('img')
     .attr('src', (d,i) => `tools/${i}.png`);
 
-// change tool... 
+// change tool...
 
 function selectTool(d, i) {
     if (selectedIndex == i) return;
@@ -183,13 +183,63 @@ function drawBrushSub() {
 
 // zoom
 
-let zoomData = [
-    {size: 1},
-    {size: 2},
-    {size: 6},
-    {size: 8},
-];
+let zoomIndex = 0;
 
 function drawZoomSub() {
     let svg = getSubSVG();
+
+    let zoomSelection = svg.selectAll('.zoom')
+        .data([1, 2, 6, 8]);
+
+    let zoomGroup = zoomSelection
+        .enter()
+        .append('g')
+        .classed('zoom', 1)
+        .each(function(d, i) {
+            let zoomGroup = d3.select(this);
+            // selection
+            zoomGroup
+                .append('rect')
+                .classed('cover', 1)
+                .attr('x', 0)
+                .attr('y', (i * 16) + 2)
+                .attr('width', 40)
+                .attr('height', 12)
+                .on('click', () => {
+                    zoomIndex = i;
+                    drawZoomSub();
+                });
+
+            // number
+            zoomGroup
+                .append('text')
+                .classed('desc', 1)
+                .attr('x', 6)
+                .attr('y', i * 16)
+                .attr('dy', '1.1em')
+                .style('font-size', '11px')
+                .text(d + 'x')
+                .style('pointer-events', 'none');
+
+            // shape
+            zoomGroup
+                .append('rect')
+                .classed('desc', 1)
+                .attr('x', 28 - (d/2))
+                .attr('y', (i * 14.15) + 9 + +(i==3))
+                .attr('width', d)
+                .attr('height', d)
+                .style('pointer-events', 'none');
+        })
+        .merge(zoomSelection)
+        .each(function(d, i) {
+            let group = d3.select(this);
+            group
+                .selectAll('.cover')
+                .attr('fill', zoomIndex == i ? '#008' : 'transparent');
+            group
+                .selectAll('.desc')
+                .attr('fill', zoomIndex == i ? 'white' : 'black');
+        });
+
 }

@@ -2,7 +2,7 @@ import d3 from '#lib/d3';
 import { event as d3event } from 'd3-selection';
 import { CANVAS } from '#shared/constants';
 
-export let scrollPos = {x: 0, y: 0};
+export let scrollPos = {x: 0, y: 0, zoom: 1};
 
 let workspace = d3.select('.workspace');
 let canvasWrap = d3.select('.canvasWrap');
@@ -42,8 +42,12 @@ let [arrowRU, rightBar, arrowRD] = [
 
 function getDimensions() {
     let { width, height } = workspace.node().getBoundingClientRect();
-    let bottomRatio = (width -6) / CANVAS.width;
-    let rightRatio = (height -4) / CANVAS.height;
+
+    let canvasWidth = CANVAS.width * scrollPos.zoom;
+    let canvasHeight = CANVAS.height * scrollPos.zoom;
+
+    let bottomRatio = (width -6) / canvasWidth;
+    let rightRatio = (height -4) / canvasHeight;
     
     let showBottom = bottomRatio < 1 && width > (17 * 3) && height > 17;
     let showRight = rightRatio < 1 && height > (17 * 3) && width > 17;
@@ -59,8 +63,8 @@ function getDimensions() {
     let bottomMaxDelta = bottomWidth - bottomBarWidth - 1;
     let rightMaxDelta = rightWidth - rightBarWidth - 1;
 
-    let bottomMaxWorkspaceDelta = CANVAS.width - width + (+showRight * 16) + 9;
-    let rightMaxWorkspaceDelta = CANVAS.height - height + (+showBottom * 16) + 8;
+    let bottomMaxWorkspaceDelta = canvasWidth - width + (+showRight * 16) + 9;
+    let rightMaxWorkspaceDelta = canvasHeight - height + (+showBottom * 16) + 8;
 
     return {
         bottomBarWidth, bottomWidth, bottomMaxDelta,
@@ -87,7 +91,7 @@ bottomBar
         bottomBar.style('transform', `translateX(${bottomOffset}px)`);
         // set canvas position
         scrollPos.x = bottomOffsetRatio * bottomMaxWorkspaceDelta;
-        canvasWrap.style('transform', `translate(${-scrollPos.x}px, ${-scrollPos.y}px)`);
+        canvasWrap.style('transform', `scale(${scrollPos.zoom}) translate(${-scrollPos.x}px, ${-scrollPos.y}px)`);
     }));
 
 let rightOffset = 0;
@@ -104,7 +108,7 @@ rightBar
         rightBar.style('transform', `translateY(${rightOffset}px)`);
         // set canvas position
         scrollPos.y = rightOffsetRatio * rightMaxWorkspaceDelta;
-        canvasWrap.style('transform', `translate(${-scrollPos.x}px, ${-scrollPos.y}px)`);
+        canvasWrap.style('transform', `scale(${scrollPos.zoom}) translate(${-scrollPos.x}px, ${-scrollPos.y}px)`);
     }));
 
 // handl resizing
@@ -139,7 +143,6 @@ function responder() {
     if (scrollPos.y <= 0) {
         rightOffset = rightOffsetRatio = scrollPos.y = 0;
     }
-    canvasWrap.style('transform', `translate(${-scrollPos.x}px, ${-scrollPos.y}px)`);
     rightBar.style('transform', `translateY(${rightOffset}px)`);
 
     if (showRight) {
@@ -157,7 +160,6 @@ function responder() {
     if (scrollPos.x <= 0) {
         bottomOffset = bottomOffsetRatio = scrollPos.x = 0;
     }
-    canvasWrap.style('transform', `translate(${-scrollPos.x}px, ${-scrollPos.y}px)`);
     bottomBar.style('transform', `translateX(${bottomOffset}px)`);
 
     if (showBottom) {
@@ -167,6 +169,9 @@ function responder() {
     else {
         bottomScroll.style('display', 'none');
     }
+
+    // set scroll position / zoom
+    canvasWrap.style('transform', `scale(${scrollPos.zoom}) translate(${-scrollPos.x}px, ${-scrollPos.y}px)`);
 }
 
 responder();
