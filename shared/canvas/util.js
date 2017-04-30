@@ -47,32 +47,28 @@ function grabSquare({ x, y, dx, dy, ctx }, callback) {
         if (height < overflow) return;
         height -= overflow;
         top = CANVAS.height - height;
-        console.log(height);
     }
     if (left + width > CANVAS.width) {return;
         left = CANVAS.width - width;
     }
 
-    // console.log(overflowX, overflowY);
-
     let imgData = ctx.getImageData(left, top, width+1, height+1);
-
 
     callback({
         x: x0,
         y: y0,
         dx, dy,
-        imgData,
         setPixel(x, y, colorData) {
             let [r, g, b] = colorData;
 
             // adjust for overflow
             y += overflowY;
-            // y += overflowX;
+            x += overflowX;
+            if (x < 0) return;
 
             let pos = ((y * (width+1)) + x) * 4;
 
-            if (pos < 0 && pos > imgData.length) return;
+            if (pos < 0 && pos >= imgData.length) return;
 
             imgData.data[pos] = r;
             imgData.data[pos+1] = g;
