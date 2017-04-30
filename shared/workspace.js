@@ -9,15 +9,6 @@ function drawToContext({ ctx, data, cmd }) {
 
     if (drawCmd == 'PENCIL') {
         line(Object.assign({ ctx }, data));
-        // let { x, y, dx, dy, color } = data;
-
-        // ctx.beginPath();
-        // ctx.lineWidth = 0.5;
-        // ctx.strokeStyle = color;
-        // ctx.moveTo(x - dx|0, y - dy|0);
-        // ctx.lineTo(x, y);
-        // ctx.closePath();
-        // ctx.stroke();
     }
     else if (drawCmd == 'BRUSH') {
         let { x, y, dx, dy, color, size, shape } = data;

@@ -19,13 +19,13 @@ function initCanvas(wssInstance, roomInstance) {
 
     // load the canvas if there's a saved state
     // yes, the database for this thing is a png file
-    // fs.readFile('canvas.png', (err, png) => {
-    //     if (png) {
-    //         let img = new Image();
-    //         img.src = png;
-    //         ctx.drawImage(img, 0, 0, width, height);
-    //     }
-    // });
+    fs.readFile('canvas.png', (err, png) => {
+        if (png) {
+            let img = new Image();
+            img.src = png;
+            ctx.drawImage(img, 0, 0, width, height);
+        }
+    });
 
     // save the canvas every so often
     setInterval(() => {

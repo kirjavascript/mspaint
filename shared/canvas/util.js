@@ -31,44 +31,48 @@ function grabSquare({ x, y, dx, dy, ctx }, callback) {
     let overflowY = 0;
 
     if (top < 0) {
-        if (height < Math.abs(top)) return;
+        if (height <= Math.abs(top)) return;
         overflowY = top;
         height += top;
         top = 0;
     }
     if (left < 0) {
-        if (width < Math.abs(left)) return;
+        if (width <= Math.abs(left)) return;
         overflowX = left;
         width += left;
         left = 0;
     }
     if (top + height > CANVAS.height) {
         let overflow = (top + height) - CANVAS.height;
-        if (height < overflow) return;
+        if (height <= overflow) return;
         height -= overflow;
-        top = CANVAS.height - height;
     }
-    if (left + width > CANVAS.width) {return;
-        left = CANVAS.width - width;
+    if (left + width > CANVAS.width) {
+        let overflow = (left + width) - CANVAS.width;
+        if (width <= overflow) return;
+        // not sure why not using a + 1 causes bugs here ¯\_(ツ)_/¯
+        width -= overflow + 1;
     }
 
     let imgData = ctx.getImageData(left, top, width+1, height+1);
+    let [xx, yy] = [x, y];
 
     callback({
         x: x0,
         y: y0,
-        dx, dy,
+        dx,
+        dy,
         setPixel(x, y, colorData) {
             let [r, g, b] = colorData;
 
             // adjust for overflow
             y += overflowY;
             x += overflowX;
-            if (x < 0) return;
+            if (x < 0 || x >= width+1 || y < 0 || y >= height+1) return;
 
             let pos = ((y * (width+1)) + x) * 4;
 
-            if (pos < 0 && pos >= imgData.length) return;
+            if (pos < 0 || pos >= imgData.length) return;
 
             imgData.data[pos] = r;
             imgData.data[pos+1] = g;
