@@ -13,6 +13,7 @@ Multiplayer mspaint
     native colour picker
     directory
     contributors list
+    tool specific cursors?
     clipboard
     link github - about
     msgpack

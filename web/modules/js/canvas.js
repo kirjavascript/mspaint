@@ -48,12 +48,20 @@ function initCanvas(img) {
 
     // add events
     canvas.call(d3.drag()
-        .filter(() => d3event.button == 0 || d3event.button == 2)
+        .filter(dragFilter)
         .on('start', dragstarted)
         .on('drag', dragging)
         .on('end', dragended));
 
     setScroll();
+}
+
+function dragFilter() {
+    return (
+        d3event.button == 0 ||
+        d3event.button == 2 ||
+        d3event.type == 'touchstart'
+    );
 }
 
 // drawing
@@ -62,7 +70,10 @@ let buttons = ['primary', void 0, 'secondary'];
 let mouseName = buttons[0];
 
 function dragstarted(d) {
-    mouseName = buttons[d3event.sourceEvent.button];
+
+    console.log(d3event);
+
+    mouseName = buttons[d3event.sourceEvent.button] || 'primary';
 
     let { x, y } = getMotion();
 
