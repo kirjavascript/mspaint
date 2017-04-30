@@ -8,7 +8,7 @@ let lastDrawTool = 6;
 
 let tools = [
     null, null,
-    'ERASE', null,
+    'ERASE', 'FILL',
     'PICK', 'ZOOM',
     'PENCIL', 'BRUSH',
 ];

@@ -63,6 +63,8 @@ function initCanvas(img) {
         .on('start', dragstarted)
         .on('drag', dragging)
         .on('end', dragended));
+
+    setScroll();
 }
 
 // drawing
@@ -72,6 +74,18 @@ let mouseName = buttons[0];
 
 function dragstarted(d) {
     mouseName = buttons[d3event.sourceEvent.button];
+
+    let { x, y } = getMotion();
+
+    if (drawTool.name == 'FILL') {
+        let obj = {cmd: 'CANVAS_FILL', data: {
+            x, y, color: drawColor[mouseName],
+        }};
+
+        ws.sendObj(obj);
+        drawToContext({ctx, ...obj });
+    }
+
     dragging(d);
 }
 
@@ -80,7 +94,7 @@ function dragging(d) {
 
     let { name, ...drawToolEtc } = drawTool;
 
-    if (name == 'PENCIL' || name == 'BRUSH') {
+    if (~['PENCIL','BRUSH'].indexOf(name)) {
         let obj = {cmd: 'CANVAS_' + name, data: {
             x, y, dx, dy,
             color: drawColor[mouseName],
@@ -135,9 +149,9 @@ function getMotion() {
     let { x, y, dx, dy } = d3event;
     let { zoom } = scrollPos;
     return {
-        x: (x / zoom)|0,
-        y: (y / zoom)|0,
-        dx: (dx / zoom)|0,
-        dy: (dy / zoom)|0,
+        x: (x / zoom),
+        y: (y / zoom),
+        dx: (dx / zoom),
+        dy: (dy / zoom),
     };
 }

@@ -30,7 +30,7 @@ function drawToContext({ ctx, data, cmd }) {
             ctx.stroke();
         }
         else if (shape == 'rect') {
-            drawRectLine({ ctx, ...data });
+            drawRectLine(Object.assign({ ctx }, data));
         }
         else if (shape == 'bkLine') {
             ctx.beginPath();
@@ -60,7 +60,10 @@ function drawToContext({ ctx, data, cmd }) {
         }
     }
     else if (drawCmd == 'ERASE') {
-        drawRectLine({ ctx, ...data });
+        drawRectLine(Object.assign({ ctx }, data));
+    }
+    else if (drawCmd == 'FILL') {
+        console.log(data);
     }
 
 }

@@ -3,7 +3,8 @@ import { event as d3event } from 'd3-selection';
 import { CANVAS } from '#shared/constants';
 
 export let scrollPos = {x: 0, y: 0, zoom: 1};
-export let setScroll = ({ zoom, x, y }) => {
+export let setScroll = (obj = {}) => {
+    let { zoom, x, y } = obj;
     zoom && (scrollPos.zoom = zoom);
     // rightOffset, bottomOffset and scroll x/y get redefined in responder
     x && (bottomOffsetRatio = x / CANVAS.width);
@@ -33,6 +34,8 @@ let [arrowRU, rightBar, arrowRD] = [
     rightBar = rightWrap.append('div').classed('bar right', 1),
     rightWrap.append('div').classed('arrowBlock bottom', 1),
 ];
+
+d3.selectAll('.scrollbar').style('display', 'none');
 
 // draw arrows
 
@@ -181,7 +184,6 @@ function responder() {
     canvasWrap.style('transform', `scale(${scrollPos.zoom}) translate(${-scrollPos.x}px, ${-scrollPos.y}px)`);
 }
 
-responder();
 d3.select(window).on('resize', () => {
     requestAnimationFrame(responder);
 });
