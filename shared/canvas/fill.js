@@ -1,5 +1,5 @@
-let { CANVAS } = require('./constants');
-let colorConvert = require('./color-convert');
+let { CANVAS } = require('../constants');
+let colorConvert = require('../color-convert');
 
 // algorithm taken from http://www.williammalone.com/articles/html5-canvas-javascript-paint-bucket-tool/
 

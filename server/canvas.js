@@ -1,7 +1,7 @@
 let Canvas = require('canvas');
 let fs = require('fs');
 let Image = Canvas.Image;
-let { drawToContext, wrapBuffer } = require('../shared/canvas-tools');
+let { drawToContext } = require('../shared/workspace');
 let { CANVAS } = require('../shared/constants');
 
 let {width, height} = CANVAS;
@@ -43,16 +43,10 @@ function updateCanvas({ cmd, data, uid, ws }) {
     drawToContext({ cmd, data, ctx });
 }
 
-function readCanvas() {
-    // deprecated
-    let typedArray = ctx.getImageData(0, 0, width, height).data;
-    return wrapBuffer('INIT', typedArray);
-}
-
 function getPNG(cb) {
     canvas.toBuffer(cb);
 }
 
 module.exports = {
-    initCanvas, updateCanvas, readCanvas, getPNG,
+    initCanvas, updateCanvas, getPNG,
 };

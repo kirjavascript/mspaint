@@ -1,7 +1,7 @@
 import d3 from '#lib/d3';
 import { event as d3event } from 'd3-selection';
 import { ws } from './socket';
-import { drawToContext, unwrapBuffer } from '#shared/canvas-tools';
+import { drawToContext } from '#shared/workspace';
 import { CANVAS } from '#shared/constants';
 import { drawColor, setColor } from './palette';
 import { setScroll, scrollPos } from './scrollbars';
@@ -15,18 +15,7 @@ let ctx = canvas.node().getContext('2d');
 
 ws.addEventListener('message', (e) => {
 
-    if (e.data instanceof ArrayBuffer) {
-        // let { cmd, typedArray } = unwrapBuffer(e.data);
-
-        // if (cmd == 'INIT') {
-        //     let imageData = ctx.createImageData(width, height);
-        //     imageData.data.set(typedArray);
-        //     ctx.putImageData(imageData, 0, 0);
-        //     canvas.style('opacity', 1);
-        // }
-
-        return;
-    }
+    if (e.data instanceof ArrayBuffer) return;
 
     let { cmd, uid, data } = JSON.parse(e.data);
 
