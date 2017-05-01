@@ -7,7 +7,7 @@ import './js/statusbar';
 import './js/palette';
 import './js/scrollbars';
 
-// grr firefox
+// disable image dragging in firefox
 [...document.querySelectorAll('img')]
     .forEach((node) => {
         node.setAttribute('draggable','false');
@@ -15,5 +15,10 @@ import './js/scrollbars';
             e.preventDefault();
         });
     });
+
+// disable elastic scroll in iOS
+document.body.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+});
 
 document.addEventListener('contextmenu', (e) => e.preventDefault());

@@ -70,9 +70,6 @@ let buttons = ['primary', void 0, 'secondary'];
 let mouseName = buttons[0];
 
 function dragstarted(d) {
-
-    console.log(d3event);
-
     mouseName = buttons[d3event.sourceEvent.button] || 'primary';
 
     let { x, y } = getMotion();

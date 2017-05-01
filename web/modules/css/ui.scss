@@ -51,8 +51,8 @@
     border-bottom: 1px solid $darkgrey;
     width: 50px;
     padding: 0 3px;
-    line-height: 0;
     flex-shrink: 0;
+    line-height: 0;
 
     .tool {
         display: inline-block; 
@@ -80,6 +80,10 @@
         svg {
             width: 40px;
             height: 64px;
+
+            text {
+                line-height: initial; // edge inherits this. wtf?
+            }
         }
     }
 }

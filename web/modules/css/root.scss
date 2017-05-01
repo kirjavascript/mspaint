@@ -6,8 +6,6 @@ html {
     overflow: hidden;
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 12px;
-    font-smooth: never;
-    -webkit-font-smoothing : none;
 }
 
 body {
@@ -20,12 +18,7 @@ div {
 }
 
 img {
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -webkit-user-drag: none;
-    user-drag: none;
+    @extend .noselect;
 }
 
 img, canvas {
@@ -36,16 +29,22 @@ img, canvas {
     -ms-interpolation-mode: nearest-neighbor;
 }
 
+.noselect {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    user-drag: none;
+}
+
 .window {
+    @extend .noselect;
     position: relative;
     background-color: $grey;
     height: 100vh;
     padding: 4px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
-    user-select: none;
     display: flex;
     flex-direction: column;
 }
