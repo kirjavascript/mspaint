@@ -14,7 +14,6 @@ function initCanvas(wssInstance, roomInstance) {
     room = roomInstance;
     ctx.fillStyle = '#FFF';
     ctx.fillRect(0, 0, width, height);
-    ctx.patternQuality = 'best';
     ctx.imageSmoothingEnabled = false;
 
     // load the canvas if there's a saved state
