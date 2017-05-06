@@ -51,6 +51,7 @@ function grabSquare({ x, y, dx, dy, ctx }, callback) {
         let overflow = (left + width) - CANVAS.width;
         if (width <= overflow) return;
         // not sure why not using a + 1 causes bugs here ¯\_(ツ)_/¯
+        // (this still might be broken)
         width -= overflow + 1;
     }
 
