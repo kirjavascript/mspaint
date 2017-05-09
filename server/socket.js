@@ -31,17 +31,17 @@ function addClient(ws, wss) {
     while (room[uid]);
 
     // send list of existing to ws
-    
-    ws.sendObj({cmd: 'LIST', data: Object.keys(room).map(key => {
+
+    ws.sendObj({cmd: 'LIST', list: Object.keys(room).map(key => {
         return room[key].config;
     })})
 
     // send mouse colour to client
-    
-    ws.sendObj({cmd: 'COLOR', data: color}); 
+
+    ws.sendObj({cmd: 'COLOR', color});
 
     // client object
-    
+
     room[uid] = {
         ws,
         config: {
@@ -52,14 +52,14 @@ function addClient(ws, wss) {
 
     // broadcast join to others
 
-    ws.broadcastObj({cmd: 'JOIN', data: room[uid].config, uid});
+    ws.broadcastObj({cmd: 'JOIN', config: room[uid].config, uid});
 
     // keep alive / ping
 
     let pingFunc = setInterval(() => {
         let ping = Math.abs(- room[uid].pong + Date.now() - PING_INTERVAL);
         if (ping <= PING_INTERVAL) {
-            ws.sendObj({cmd: 'PING', data: ping});   
+            ws.sendObj({cmd: 'PING', ping});
         }
         else if (ping > PING_INTERVAL*2) {
             room[uid].remove();
@@ -87,16 +87,20 @@ function addClient(ws, wss) {
         // JSON
         if (!binary) {
             try {
-                let { cmd, data } = JSON.parse(__data);
-                
+                let message = JSON.parse(__data);
+
+                let { cmd, data } = message;
+
                 if (cmd == 'PONG') {
                     room[uid].pong = Date.now();
                 }
                 else if (cmd == 'XY') {
-                    Object.assign(room[uid].config.mouse, data);
+                    let { mouse } = message;
+
+                    Object.assign(room[uid].config.mouse, mouse);
 
                     ws.broadcastObj({
-                        cmd: 'XY', data, uid
+                        cmd: 'XY', mouse, uid
                     });
                 }
                 else if (cmd.indexOf('CANVAS_') == 0) {
@@ -109,7 +113,7 @@ function addClient(ws, wss) {
         else {
 
         }
-        
+
     });
 
 }

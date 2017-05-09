@@ -12,19 +12,23 @@ ws.addEventListener('message', (e) => {
 
     if (e.data instanceof ArrayBuffer) return;
 
-    let { cmd, uid, data } = JSON.parse(e.data);
+    let message = JSON.parse(e.data);
+
+    let { cmd, uid } = message;
 
     if (cmd == 'LIST') {
-        clients = data;
+        clients = message.list;
         update();
     }
 
     else if (cmd == 'COLOR') {
-        d3.select(document.body).style('cursor', 'url(\'data:image/svg+xml;utf8,'+encodeURIComponent(getCursorSVG(data))+'\'), auto');
+        let { color } = message;
+        d3.select(document.body)
+            .style('cursor', 'url(\'data:image/svg+xml;utf8,'+encodeURIComponent(getCursorSVG(color))+'\'), auto');
     }
 
     else if (cmd == 'JOIN') {
-        clients.push(data);
+        clients.push(message.config);
         update();
     }
 
@@ -35,14 +39,15 @@ ws.addEventListener('message', (e) => {
     }
 
     else if (cmd == 'XY') {
+        let { mouse } = message;
         let client = clients.find((d) => d.uid == uid);
-        Object.assign(client, { mouse: data });
+        Object.assign(client, { mouse });
         update();
     }
 
 });
 
-// send local X/Y 
+// send local X/Y
 
 let canvas = d3.select('canvas');
 
@@ -50,10 +55,10 @@ d3.select(window)
     .on('mousemove', () => {
         let [x, y] = d3.mouse(canvas.node());
         let { zoom } = scrollPos;
-        ws.sendObj({cmd: 'XY', data: {x: x / zoom, y: y / zoom}});
+        ws.sendObj({cmd: 'XY', mouse: {x: x / zoom, y: y / zoom}});
     })
     .on('mouseout', () => {
-        ws.sendObj({cmd: 'XY', data: {x: null, y: null}});
+        ws.sendObj({cmd: 'XY', mouse: {x: null, y: null}});
     });
 
 // display local X/Y

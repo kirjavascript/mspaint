@@ -47,6 +47,7 @@ let properties = [
 // {name: 'data.color', pack() {}, unpack() {}, length() {}}
 // defaults for string (max 255 length, ascii)
 // number, store length in high nybble
+// mouse needs to support negative and null
 
 function pack(obj) {
     let out = [];

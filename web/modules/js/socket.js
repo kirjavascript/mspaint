@@ -27,7 +27,9 @@ ws.addEventListener('message', (e) => {
 
     if (e.data instanceof ArrayBuffer) return;
 
-    let { cmd, uid, data } = JSON.parse(e.data);
+    let message = JSON.parse(e.data);
+
+    let { cmd } = message;
 
     if (cmd == 'RELOAD') {
         location.reload();
@@ -35,7 +37,7 @@ ws.addEventListener('message', (e) => {
 
     else if (cmd == 'PING') {
         ws.sendObj({cmd: 'PONG'});
-        setStatus('ping', data);
+        setStatus('ping', message.ping);
         hasPinged();
     }
 });
