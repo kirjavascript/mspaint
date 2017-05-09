@@ -1,17 +1,18 @@
 let fillCanvas = require('./canvas/fill');
 let { rectLine, line } = require('./canvas/lines');
 
-function drawToContext({ ctx, data, cmd }) {
+function drawToContext(obj) {
 
     // spray http://perfectionkills.com/exploring-canvas-drawing-techniques/#round-distribution
+    let { cmd, ctx, message } = unwrap(obj);
 
     let drawCmd = cmd.substr(7);
 
     if (drawCmd == 'PENCIL') {
-        line(Object.assign({ ctx }, data));
+        line(Object.assign({ ctx }, message));
     }
     else if (drawCmd == 'BRUSH') {
-        let { x, y, dx, dy, color, size, shape } = data;
+        let { x, y, dx, dy, color, size, shape } = message;
 
         if (shape == 'circle') {
             ctx.beginPath();
@@ -25,7 +26,7 @@ function drawToContext({ ctx, data, cmd }) {
             ctx.stroke();
         }
         else if (shape == 'rect') {
-            rectLine(Object.assign({ ctx }, data));
+            rectLine(Object.assign({ ctx }, message));
         }
         else if (shape == 'bkLine') {
             ctx.beginPath();
@@ -55,12 +56,21 @@ function drawToContext({ ctx, data, cmd }) {
         }
     }
     else if (drawCmd == 'ERASE') {
-        rectLine(Object.assign({ ctx }, data));
+        rectLine(Object.assign({ ctx }, message));
     }
     else if (drawCmd == 'FILL') {
-        fillCanvas(Object.assign({ ctx }, data));
+        fillCanvas(Object.assign({ ctx }, message));
     }
 
+}
+
+// because we don't have object spread in node yet
+function unwrap(obj) {
+    let { cmd, ctx } = obj;
+    let message = obj;
+    delete message.cmd;
+    delete message.ctx;
+    return { cmd, ctx, message };
 }
 
 module.exports = {

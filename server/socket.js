@@ -89,7 +89,7 @@ function addClient(ws, wss) {
             try {
                 let message = JSON.parse(__data);
 
-                let { cmd, data } = message;
+                let { cmd } = message;
 
                 if (cmd == 'PONG') {
                     room[uid].pong = Date.now();
@@ -104,7 +104,8 @@ function addClient(ws, wss) {
                     });
                 }
                 else if (cmd.indexOf('CANVAS_') == 0) {
-                    updateCanvas({ cmd, data, uid, ws });
+                    // replace with updateWorkspace() ?
+                    updateCanvas({ message, uid, ws });
                 }
 
             } catch(e) { console.error(e); };

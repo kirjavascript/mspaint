@@ -37,9 +37,9 @@ function initCanvas(wssInstance, roomInstance) {
     }, 5000);
 }
 
-function updateCanvas({ cmd, data, uid, ws }) {
-    ws.broadcastObj({ cmd, data });
-    drawToContext({ cmd, data, ctx });
+function updateCanvas({ message, uid, ws }) {
+    ws.broadcastObj(message);
+    drawToContext(Object.assign({ ctx }, message));
 }
 
 function getPNG(cb) {

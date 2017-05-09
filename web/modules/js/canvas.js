@@ -18,11 +18,11 @@ ws.addEventListener('message', (e) => {
 
     if (e.data instanceof ArrayBuffer) return;
 
-    let { cmd, uid, data } = JSON.parse(e.data);
+    let message = JSON.parse(e.data);
 
-    if (cmd.indexOf('CANVAS_') != 0) return;
+    if (message.cmd.indexOf('CANVAS_') != 0) return;
 
-    drawToContext({ cmd, data, ctx });
+    drawToContext({ ctx, ...message });
 
 });
 
@@ -76,9 +76,9 @@ function dragstarted(d) {
     let { x, y } = getMotion();
 
     if (drawTool.name == 'FILL') {
-        let obj = {cmd: 'CANVAS_FILL', data: {
+        let obj = {cmd: 'CANVAS_FILL',
             x, y, color: drawColor[mouseName],
-        }};
+        };
 
         ws.sendObj(obj);
         drawToContext({ctx, ...obj });
@@ -94,11 +94,11 @@ function dragging(d) {
     let { name, ...drawToolEtc } = drawTool;
 
     if (~['PENCIL','BRUSH'].indexOf(name)) {
-        let obj = {cmd: 'CANVAS_' + name, data: {
+        let obj = {cmd: 'CANVAS_' + name,
             x, y, dx, dy,
             color: drawColor[mouseName],
             ...drawToolEtc,
-        }};
+        };
 
         ws.sendObj(obj);
         drawToContext({ctx, ...obj });
@@ -107,11 +107,11 @@ function dragging(d) {
         // I don't understand the logic here but this is what mspaint does, so...
         if (drawColor.match && mouseName == 'secondary') return;
 
-        let obj = {cmd: 'CANVAS_ERASE', data: {
+        let obj = {cmd: 'CANVAS_ERASE',
             x, y, dx, dy,
             color: drawColor.secondary,
             ...drawToolEtc,
-        }};
+        };
 
         ws.sendObj(obj);
         drawToContext({ctx, ...obj });
