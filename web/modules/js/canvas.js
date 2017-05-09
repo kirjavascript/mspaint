@@ -3,6 +3,7 @@ import { event as d3event } from 'd3-selection';
 import { ws } from './socket';
 import { drawToContext } from '#shared/workspace';
 import { CANVAS } from '#shared/constants';
+import { pixelConvert } from '#shared/canvas/util';
 import { drawColor, setColor } from './palette';
 import { setScroll, scrollPos } from './scrollbars';
 import { drawTool } from './tools';
@@ -82,8 +83,9 @@ function dragstarted(d) {
         ws.sendObj(obj);
         drawToContext({ctx, ...obj });
     }
-
-    dragging(d);
+    else {
+        dragging(d);
+    }
 }
 
 function dragging(d) {
@@ -102,6 +104,7 @@ function dragging(d) {
         drawToContext({ctx, ...obj });
     }
     else if (name == 'ERASE') {
+        // I don't understand the logic here but this is what mspaint does, so...
         if (drawColor.match && mouseName == 'secondary') return;
 
         let obj = {cmd: 'CANVAS_ERASE', data: {
@@ -116,9 +119,7 @@ function dragging(d) {
     else if (name == 'PICK') {
         let pixelColor, pixelData = Array.from(ctx.getImageData(x, y, 1, 1).data);
         if (pixelData[3] > 128) {
-            pixelColor = '#' + pixelData.splice(0, 3)
-                .map((d) => {d = d.toString(16); return d.length>1?d:'0'+d;})
-                .join``;
+            pixelColor = pixelConvert(pixelData.splice(0, 3));
             setColor({[mouseName]: pixelColor});
             drawTool.pickColor = pixelColor;
         }

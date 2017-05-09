@@ -17,6 +17,10 @@ function colorConvert(str) {
 
 }
 
+function pixelConvert(arr) {
+    return '#' + arr.map((d) => {d = d.toString(16); return d.length>1?d:'0'+d;}).join``;
+}
+
 
 function grabSquare({ x, y, dx, dy, ctx }, callback) {
     dx = dx | 0; dy = dy | 0; x = x | 0; y = y | 0;
@@ -115,5 +119,6 @@ module.exports = {
     createWriter,
     matchesSelected,
     colorConvert,
+    pixelConvert,
     grabSquare,
 };
