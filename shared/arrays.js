@@ -7,6 +7,7 @@ setTimeout(() => {
     let data = {
         cmd: 'CANVAS_FILL',
         uid: Math.random().toString(36).slice(7),
+        color: '#341256',
     };
 
     let sfd = JSON.stringify(data);
@@ -38,16 +39,24 @@ let commands = ['RELOAD','JOIN','PART','LIST','COLOR','PING','PONG','XY','CANVAS
 
 let properties = [
     {name: 'uid', string: 1},
+    {
+        name: 'color',
+        pack: colorConvert,
+        unpack(index, arr) {
+            // pixelConvert
+            // return [length, data];
+        },
+    },
 ];
 
 // command is stored as a single byte header
 // strings have a max length and charCode of 255
 
-// flatten all the things
-// {name: 'data.color', pack() {}, unpack() {}, length() {}}
+// {name: 'data.color', pack() {}, unpack() {}}
 // defaults for string (max 255 length, ascii)
 // number, store length in high nybble
 // mouse needs to support negative and null
+// x, y, color, size, shape, list,
 
 function pack(obj) {
     let out = [];
@@ -72,11 +81,19 @@ function pack(obj) {
             let prop = properties[propIndex];
 
             // convert to bytes
+            
+            // strings
             if (prop.string) {
                 out.push(
                     propIndex,
                     value.length,
                     ...[...value].map(d => d.charCodeAt(0))
+                );
+            }
+            else if (prop.pack) {
+                out.push(
+                    propIndex,
+                    ...prop.pack(value)
                 );
             }
 
@@ -101,6 +118,8 @@ function unpack(arr) {
         let prop = properties[arr[i]];
 
         // convert to object data
+
+        // strings
         if (prop.string) {
             let length = arr[i + 1];
             let str = Array.from(arr)
@@ -109,6 +128,11 @@ function unpack(arr) {
                 .join``
             i += length + 1;
             out[prop.name] = str;
+        }
+        // everything else
+        else if (prop.unpack) {
+            out[prop.name] = prop.unpack(data);
+            // [length, value]
         }
 
     }
