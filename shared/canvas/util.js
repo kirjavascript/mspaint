@@ -18,7 +18,7 @@ function colorConvert(str) {
 }
 
 function pixelConvert(arr) {
-    return '#' + arr.map((d) => {d = d.toString(16); return d.length>1?d:'0'+d;}).join``;
+    return '#' + [...arr].map((d) => {d = d.toString(16); return d.length>1?d:'0'+d;}).join``;
 }
 
 
@@ -60,7 +60,6 @@ function grabSquare({ x, y, dx, dy, ctx }, callback) {
     }
 
     let imgData = ctx.getImageData(left, top, width+1, height+1);
-    let [xx, yy] = [x, y];
 
     callback({
         x: x0,

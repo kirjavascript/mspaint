@@ -1,13 +1,12 @@
 // Custom format for crushing object data to send over the wire
 
-// 52.3kB
-
 setTimeout(() => {
 
     let data = {
         cmd: 'CANVAS_FILL',
         uid: Math.random().toString(36).slice(7),
-        color: '#341256',
+        color: '#' + Array.from({length: 3}, (_,i) => (0|Math.random()*256).toString(16)).map(d=>d.length<2?'0'+d:d).join``,
+        x: 31337,
     };
 
     let sfd = JSON.stringify(data);
@@ -39,24 +38,33 @@ let commands = ['RELOAD','JOIN','PART','LIST','COLOR','PING','PONG','XY','CANVAS
 
 let properties = [
     {name: 'uid', string: 1},
+    {name: 'x', number: 1},
     {
         name: 'color',
         pack: colorConvert,
         unpack(index, arr) {
-            // pixelConvert
-            // return [length, data];
+            return {
+                length: 3,
+                value: pixelConvert(arr.subarray(index, index + 3)),
+            };
         },
     },
 ];
 
+// create index lookup to avoid using .findIndex
+
+let propertyIndicies = properties.map(d => d.name);
+
 // command is stored as a single byte header
 // strings have a max length and charCode of 255
 
-// {name: 'data.color', pack() {}, unpack() {}}
-// defaults for string (max 255 length, ascii)
-// number, store length in high nybble
+// number, store length in high nybble, sign in low nybble (!)
+// IEEE float?
+// new Uint8Array(new Float64Array([num]).buffer)
+// endianness check; new Uint8Array(Uint16Array.of(1).buffer)
+// detect endianness, modify based on it
 // mouse needs to support negative and null
-// x, y, color, size, shape, list,
+// x, y, dx, dy, size, shape, list,
 
 function pack(obj) {
     let out = [];
@@ -77,7 +85,7 @@ function pack(obj) {
             let value = obj[key];
 
             // load schema
-            let propIndex = properties.findIndex(d => d.name == key);
+            let propIndex = propertyIndicies.indexOf(key);
             let prop = properties[propIndex];
 
             // convert to bytes
@@ -109,30 +117,38 @@ function unpack(arr) {
     out.cmd = commands[arr[0]];
     if (!out.cmd) {
         console.error('Unpacker: Command not found');
+        return out;
     }
 
     // run through array, skipping command byte and skipping chunk header each iteration
     for (let i = 1; i < arr.length; i++) {
 
+        // incrementing i again within this loop makes me feel extremely uneasy
+
         // load schema from chunk header
         let prop = properties[arr[i]];
+        if (!prop) {
+            console.error('Unpacker: Error unpacking data');
+            return out;
+        }
 
         // convert to object data
 
         // strings
         if (prop.string) {
-            let length = arr[i + 1];
-            let str = Array.from(arr)
-                .slice(i + 2, i + 2 + length)
+            let strLength = arr[i + 1];
+            let str = [...arr]
+                .slice(i + 2, i + 2 + strLength)
                 .map(d => String.fromCharCode(d))
                 .join``
-            i += length + 1;
+            i += strLength + 1; // plus length byte
             out[prop.name] = str;
         }
         // everything else
         else if (prop.unpack) {
-            out[prop.name] = prop.unpack(data);
-            // [length, value]
+            let { length, value } = prop.unpack(i + 1, arr);
+            i += length;
+            out[prop.name] = value;
         }
 
     }
@@ -146,6 +162,7 @@ let obj = {
     arr: Uint8ClampedArray.from(Array.from({length: 4*8}, (_,i) => 0|Math.random()*256)),
 }
 // BUFFERS~~~
+// test browser compat after this
 // base64 numbers (MAX_SAFE_INT CHECK) (STRIP RGBA)
 // Packs canvas image data for sending over the wire
 // Input has to be a multiple of 4
