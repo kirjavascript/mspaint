@@ -6,7 +6,7 @@ setTimeout(() => {
         cmd: 'CANVAS_FILL',
         // uid: Math.random().toString(36).slice(7),
         // color: '#' + Array.from({length: 3}, (_,i) => (0|Math.random()*256).toString(16)).map(d=>d.length<2?'0'+d:d).join``,
-        x: Math.random()*(Math.random()*Number.MAX_SAFE_INTEGER),
+        x: NaN,
     };
 
     let sfd = JSON.stringify(data);
@@ -59,9 +59,7 @@ let propertyIndicies = properties.map(d => d.name);
 // strings have a max length and charCode of 255
 
 // IEEE float?
-// new Uint8Array(new Float64Array([num]).buffer)
 // endianness check; new Uint8Array(Uint16Array.of(1).buffer)
-// detect endianness, modify based on it
 // mouse needs to support negative and null
 // x, y, dx, dy, size, shape, list,
 

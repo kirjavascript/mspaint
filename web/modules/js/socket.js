@@ -7,7 +7,7 @@ import { PING_INTERVAL } from '#shared/constants';
 
 export const ws = new WebSocket(`ws://${location.host}/`);
 
-ws.sendObj = (obj) => ws.send(JSON.stringify(obj));
+ws.sendObj = (obj) => ws.readyState == WebSocket.OPEN && ws.send(JSON.stringify(obj));
 ws.binaryType = 'arraybuffer';
 
 window.addEventListener('beforeunload', () => {
