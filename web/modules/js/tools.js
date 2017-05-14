@@ -98,6 +98,9 @@ function selectSubTool() {
     else if (drawTool.name == 'ERASE') {
         drawEraseSub();
     }
+    else if (drawTool.name == 'SELECT') {
+        drawTransparencySub();
+    }
 }
 
 function getSubSVG() {
@@ -299,4 +302,55 @@ function drawEraseSub() {
             group.selectAll('.size')
                 .attr('fill', eraseIndex == i ? 'white' : 'black');
         });
+}
+
+// transparency
+// coverheight is 29 with 3 difference either way
+
+let transIndex = 0;
+let transTypes = [
+    {
+        name: 'opaque',
+        top: 4,
+    },
+    {
+        name: 'transparent',
+        top: 36,
+    }
+];
+
+function drawTransparencySub() {
+    let transSelection = subTool.selectAll('.trans')
+        .data(transTypes);
+
+    transSelection
+        .enter()
+        .append('img')
+        .classed('trans', 1)
+        .attr('src', (d) => `tools/${d.name}.png`)
+        .style('position', 'absolute')
+        .style('pointer-events', 'none')
+        .style('z-index', 2)
+        .style('top', (d) => d.top + 'px');
+
+    let coverSelection = subTool.selectAll('.cover')
+        .data(transTypes);
+
+    coverSelection
+        .enter()
+        .append('div')
+        .classed('cover', 1)
+        .style('position', 'absolute')
+        .style('top', (d) => d.top - 3 + 'px')
+        .style('left', 0)
+        .style('right', 0)
+        .style('height', '29px')
+        .style('z-index', 1)
+        .on('click', (d, i) => {
+            transIndex = i;
+            drawTransparencySub();
+        })
+        .merge(coverSelection)
+        .style('background-color', (d, i) => i == transIndex ? '#008' : 'rgba(0,0,0,0)');
+
 }
