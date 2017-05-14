@@ -4,9 +4,9 @@ setTimeout(() => {
 
     let data = {
         cmd: 'CANVAS_FILL',
-        uid: Math.random().toString(36).slice(7),
-        color: '#' + Array.from({length: 3}, (_,i) => (0|Math.random()*256).toString(16)).map(d=>d.length<2?'0'+d:d).join``,
-        x: 31337,
+        // uid: Math.random().toString(36).slice(7),
+        // color: '#' + Array.from({length: 3}, (_,i) => (0|Math.random()*256).toString(16)).map(d=>d.length<2?'0'+d:d).join``,
+        x: Math.random()*(Math.random()*Number.MAX_SAFE_INTEGER),
     };
 
     let sfd = JSON.stringify(data);
@@ -58,7 +58,6 @@ let propertyIndicies = properties.map(d => d.name);
 // command is stored as a single byte header
 // strings have a max length and charCode of 255
 
-// number, store length in high nybble, sign in low nybble (!)
 // IEEE float?
 // new Uint8Array(new Float64Array([num]).buffer)
 // endianness check; new Uint8Array(Uint16Array.of(1).buffer)
@@ -96,6 +95,14 @@ function pack(obj) {
                     propIndex,
                     value.length,
                     ...[...value].map(d => d.charCodeAt(0))
+                );
+            }
+            // numbers
+            else if (prop.number) {
+                out.push(
+                    propIndex,
+                    // grab the IEEE754 value of the number
+                    ...(new Uint8Array(new Float64Array([value]).buffer))
                 );
             }
             else if (prop.pack) {
@@ -143,6 +150,15 @@ function unpack(arr) {
                 .join``
             i += strLength + 1; // plus length byte
             out[prop.name] = str;
+        }
+        else if (prop.number) {
+            let num = new Float64Array([0]);
+            let uint8 = new Uint8Array(num.buffer);
+            for (let j = 0; j < 8; j++) {
+                uint8[j] = arr[i + 1 + j];
+            }
+            i += 8;
+            out[prop.name] = num[0];
         }
         // everything else
         else if (prop.unpack) {
