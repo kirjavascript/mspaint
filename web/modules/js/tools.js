@@ -7,7 +7,7 @@ let selectedIndex = 6;
 let lastDrawTool = 6;
 
 let tools = [
-    null, null,
+    null, 'SELECT',
     'ERASE', 'FILL',
     'PICK', 'ZOOM',
     'PENCIL', 'BRUSH',

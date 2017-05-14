@@ -1,7 +1,7 @@
 let Canvas = require('canvas');
 let fs = require('fs');
 let Image = Canvas.Image;
-let { drawToContext } = require('../shared/workspace');
+let { updateWorkspace } = require('../shared/workspace');
 let { CANVAS } = require('../shared/constants');
 
 let {width, height} = CANVAS;
@@ -37,9 +37,8 @@ function initCanvas(wssInstance, roomInstance) {
     }, 5000);
 }
 
-function updateCanvas({ message, uid, ws }) {
-    ws.broadcastObj(message);
-    drawToContext(Object.assign({ ctx }, message));
+function updateCanvas({ message, uid }) {
+    updateWorkspace(Object.assign({ ctx }, message));
 }
 
 function getPNG(cb) {

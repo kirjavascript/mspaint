@@ -1,7 +1,7 @@
 import d3 from '#lib/d3';
 import { event as d3event } from 'd3-selection';
 import { ws } from './socket';
-import { drawToContext } from '#shared/workspace';
+import { updateWorkspace } from '#shared/workspace';
 import { CANVAS } from '#shared/constants';
 import { pixelConvert } from '#shared/canvas/util';
 import { drawColor, setColor } from './palette';
@@ -22,7 +22,7 @@ ws.addEventListener('message', (e) => {
 
     if (message.cmd.indexOf('CANVAS_') != 0) return;
 
-    drawToContext({ ctx, ...message });
+    updateWorkspace({ ctx, ...message });
 
 });
 
@@ -81,7 +81,7 @@ function dragstarted(d) {
         };
 
         ws.sendObj(obj);
-        drawToContext({ctx, ...obj });
+        updateWorkspace({ctx, ...obj });
     }
     else {
         dragging(d);
@@ -101,7 +101,7 @@ function dragging(d) {
         };
 
         ws.sendObj(obj);
-        drawToContext({ctx, ...obj });
+        updateWorkspace({ctx, ...obj });
     }
     else if (name == 'ERASE') {
         // I don't understand the logic here but this is what mspaint does, so...
@@ -114,7 +114,7 @@ function dragging(d) {
         };
 
         ws.sendObj(obj);
-        drawToContext({ctx, ...obj });
+        updateWorkspace({ctx, ...obj });
     }
     else if (name == 'PICK') {
         let pixelColor, pixelData = Array.from(ctx.getImageData(x, y, 1, 1).data);

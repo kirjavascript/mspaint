@@ -13,13 +13,11 @@ Multiplayer mspaint
     native colour picker
     directory
     contributors list
-    tool specific cursors?
+    tool specific cursors
     clipboard
     link github - about
-    msgpack
 http://members.chello.at/~easyfilter/bresenham.html
 https://github.com/1j01/jspaint/blob/gh-pages/src/image-manipulation.js
-    virtual DOM for server side rendering (https://github.com/WebReflection/hyperHTML)
     fix mobile support
     closure compiler
 ```
