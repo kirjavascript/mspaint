@@ -120,7 +120,7 @@ function addClient(ws, wss) {
 
 }
 
-module.exports = (app, wss) => {
+function initSocket(app, wss) {
 
     // broadcast to _all_ clients
     wss.broadcast = (data) => {
@@ -146,4 +146,9 @@ module.exports = (app, wss) => {
 
     initCanvas(wss, room);
 
+};
+
+module.exports = {
+    initSocket,
+    room,
 };

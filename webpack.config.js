@@ -1,6 +1,6 @@
 let webpack = require('webpack');
 
-module.exports = (env={}) => {
+module.exports = (env={}, args={}) => {
 
     let config = {
         entry : {
@@ -66,7 +66,7 @@ module.exports = (env={}) => {
         },
         devtool: env.dev ? 'source-map' : false,
     };
-    
+
     return config;
 
 }

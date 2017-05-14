@@ -31,7 +31,9 @@ let WebSocket = require('ws');
 
 let wss = new WebSocket.Server({server});
 
-require('./socket')(app, wss);
+let { initSocket } = require('./socket');
+
+initSocket(app, wss);
 
 // webpack-dev-middleware //
 
