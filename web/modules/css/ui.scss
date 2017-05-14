@@ -104,6 +104,8 @@
         overflow: visible;
     }
 
+    // canvas
+
     .canvasWrap {
         z-index: 0;
         margin-top: 1px;
@@ -112,6 +114,14 @@
 
     canvas {
         background-color: white;
+    }
+
+    // "vdom"
+
+    .select {
+        // noselect: black, select: #008
+        // dash width: 4px
+        border: 1px dashed black;
     }
 }
 
@@ -131,7 +141,6 @@
     }
 
     .current {
-        @extend .paletteShading;
         position: relative;
         width: 32px;
         height: 32px;
@@ -174,10 +183,10 @@
         flex: 0 0 auto;
         width: 14px;
         height: 14px;
-        @extend .paletteShading;
     }
 
-    .paletteShading {
+    // shading
+    .color, .current  {
         border-top: 1px solid $darkergrey;
         border-left: 1px solid $darkergrey;
         border-right: 1px solid whitesmoke;
@@ -236,7 +245,6 @@
     }
 
     .bar {
-        @extend .scrollShading;
         &.right {
             position: absolute;
            width: $base; 
@@ -252,7 +260,6 @@
     }
 
     .arrowBlock {
-        @extend .scrollShading;
         width: $base;
         height: $base;
         &.left {
@@ -294,7 +301,8 @@
         }
     }
 
-    .scrollShading {
+    // shading
+    .bar, .arrowBlock {
         background-color: $grey;
         border-top: 1px solid $grey;
         border-left: 1px solid $grey;

@@ -20,9 +20,9 @@ ws.addEventListener('message', (e) => {
 
     let message = JSON.parse(e.data);
 
-    if (message.cmd.indexOf('CANVAS_') != 0) return;
-
-    updateWorkspace({ ctx, ...message });
+    if (message.cmd.indexOf('CANVAS_') == 0) {
+        updateWorkspace({ ctx, ...message });
+    }
 
 });
 
@@ -75,7 +75,9 @@ function dragstarted(d) {
 
     let { x, y } = getMotion();
 
-    if (drawTool.name == 'FILL') {
+    let { name, ...drawToolEtc } = drawTool;
+
+    if (name == 'FILL') {
         let obj = {cmd: 'CANVAS_FILL',
             x, y, color: drawColor[mouseName],
         };
