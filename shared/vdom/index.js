@@ -1,5 +1,4 @@
-// forward PART event from socket.js/cursors.js
-// normalize xydxdy
+// create DOM_VDOM as a LIST alternative
 
 let { render } = require('./render');
 
@@ -11,29 +10,46 @@ function updateVDOM(obj) {
 
     let domCmd = cmd.substr(4);
 
-    let key = uid || 'local';
+    let target = uid || 'local';
 
-    if (domCmd == 'SELECT') {
+    if (domCmd == 'VDOM') {
+        vdom = obj.vdom;
+        render(vdom, dom);
+    }
+    else if (domCmd == 'SELECT') {
         let { event, x, y } = obj;
 
         if (event == 'start') {
-            vdom[key] = {
-                x0: x, y0: y,
-                type: 'SELECTION_ACTIVE',
+            vdom[target] = {
+                x0: x, y0: y, x1: x, y1: y,
+                type: 'SELECTION',
+                selecting: true,
             };
         }
         else if (event == 'drag' || event == 'end') {
-            vdom[key].x1 = x;
-            vdom[key].y1 = y;
+            vdom[target].x1 = x;
+            vdom[target].y1 = y;
             if (event == 'end') {
-                vdom[key].type = 'SELECTION';
+                vdom[target].type = 'SELECTION';
+                vdom[target].selecting = false;
             }
         }
 
         render(vdom, dom);
     }
+    else if (domCmd == 'PART') {
+        // is redirected from the standard part command
+        // (not part of the communication schema)
+        delete vdom[target];
+        render(vdom, dom);
+    }
+}
+
+function getVDOM() {
+    return vdom;
 }
 
 module.exports = {
     updateVDOM,
+    getVDOM,
 };

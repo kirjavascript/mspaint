@@ -1,7 +1,8 @@
 let WebSocket = require('ws');
 let { scaleOrdinal, schemeCategory10 } = require('d3-scale');
-let { initCanvas, updateCanvas, readCanvas } = require('./canvas');
+let { initCanvas, updateCanvas } = require('./canvas');
 let { PING_INTERVAL } = require('../shared/constants');
+let { updateWorkspace, getVDOM } = require('../shared/workspace');
 
 let colorGenerator = (() => {
     let i = 0;
@@ -30,11 +31,14 @@ function addClient(ws, wss) {
     do { uid = Math.random().toString(36).slice(7); }
     while (room[uid]);
 
-    // send list of existing to ws
+    // send list of existing clients to ws
 
     ws.sendObj({cmd: 'LIST', list: Object.keys(room).map(key => {
         return room[key].config;
     })})
+
+    // send copy of vdom
+    ws.sendObj({cmd: 'DOM_VDOM', vdom: getVDOM()});
 
     // send mouse colour to client
 
@@ -70,6 +74,7 @@ function addClient(ws, wss) {
 
     room[uid].remove = () => {
         ws.broadcastObj({cmd: 'PART', uid});
+        updateWorkspace({cmd: 'DOM_PART', uid});
         clearInterval(pingFunc);
         ws.close();
         delete room[uid];
@@ -107,6 +112,11 @@ function addClient(ws, wss) {
                     // replace with updateWorkspace() ?
                     updateCanvas({ message, uid });
                     ws.broadcastObj(message);
+                }
+                else if (cmd.indexOf('DOM_') == 0) {
+                    let uidMessage = Object.assign({uid}, message);
+                    updateWorkspace(uidMessage);
+                    ws.broadcastObj(uidMessage);
                 }
 
             } catch(e) { console.error(e); };

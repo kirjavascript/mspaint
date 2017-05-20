@@ -61,6 +61,7 @@ module.exports = (env={}, args={}) => {
                 '#css': __dirname + '/web/modules/css',
                 '#lib': __dirname + '/web/modules/lib',
                 '#shared': __dirname + '/shared',
+                'd3': __dirname + '/web/modules/lib/d3',
             }
             
         },

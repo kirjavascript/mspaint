@@ -25,6 +25,16 @@ ws.addEventListener('message', (e) => {
     if (message.cmd.indexOf('CANVAS_') == 0) {
         updateWorkspace({ ctx, ...message });
     }
+    else if (message.cmd.indexOf('DOM_') == 0) {
+        updateWorkspace({ dom, ...message });
+    }
+    else if (message.cmd == 'PART') {
+        updateWorkspace({
+            dom,
+            cmd: 'DOM_PART',
+            uid: message.uid,
+        });
+    }
 
 });
 
@@ -94,6 +104,7 @@ function dragstarted(d) {
             x, y, event: 'start',
         };
 
+        ws.sendObj(obj);
         updateWorkspace({dom, ...obj});
     }
     // other
@@ -137,6 +148,7 @@ function dragging(d) {
             x, y, event: 'drag',
         };
 
+        ws.sendObj(obj);
         updateWorkspace({dom, ...obj});
     }
     // other
@@ -160,6 +172,7 @@ function dragended(d) {
             x, y, event: 'end',
         };
 
+        ws.sendObj(obj);
         updateWorkspace({dom, ...obj});
     }
     // other

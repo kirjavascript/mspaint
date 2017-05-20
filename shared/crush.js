@@ -32,7 +32,7 @@ let { pixelConvert, colorConvert } = require('./canvas/util');
 
 // lookup table for commands
 
-let commands = ['RELOAD','JOIN','PART','LIST','COLOR','PING','PONG','XY','CANVAS_FILL','CANVAS_PENCIL','CANVAS_BRUSH','CANVAS_ERASE','DOM_SELECT'];
+let commands = ['RELOAD','JOIN','PART','LIST','COLOR','PING','PONG','XY','CANVAS_FILL','CANVAS_PENCIL','CANVAS_BRUSH','CANVAS_ERASE','DOM_VDOM','DOM_SELECT'];
 
 // schema definition
 
@@ -59,7 +59,7 @@ let propertyIndicies = properties.map(d => d.name);
 // strings have a max length and charCode of 255
 
 // mouse needs to support negative and null
-// x, y, dx, dy, size, shape, list, event,
+// x, y, dx, dy, size, shape, list, event, vdom
 
 function pack(obj) {
     let out = [];

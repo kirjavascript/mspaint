@@ -1,7 +1,9 @@
 let { drawToContext } = require('./canvas/');
-let { updateVDOM } = require('./vdom/');
+let { updateVDOM, getVDOM } = require('./vdom/');
 
 function updateWorkspace(obj) {
+    if (!obj.cmd) return;
+
     if (obj.cmd.indexOf('CANVAS_') == 0) {
         // ctx is added to message
         drawToContext(obj);
@@ -14,4 +16,5 @@ function updateWorkspace(obj) {
 
 module.exports = {
     updateWorkspace,
+    getVDOM,
 };

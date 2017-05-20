@@ -30,15 +30,19 @@
     // "vdom"
 
     .dom {
-        .select-active {
+        .element {
+            pointer-events: none;
+            position: absolute;
+        }
+        .selection {
+            border: 1px dashed #008;
+        }
+        .selection.selecting {
             // dash width: 4px
             border: 1px dashed black;
         }
-        .select {
-            border: 1px dashed #008;
-        }
-        .noevents {
-            pointer-events: none;
+        .local {
+            pointer-events: auto;
         }
     }
 }
