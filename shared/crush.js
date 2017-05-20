@@ -58,8 +58,6 @@ let propertyIndicies = properties.map(d => d.name);
 // command is stored as a single byte header
 // strings have a max length and charCode of 255
 
-// IEEE float?
-// endianness check; new Uint8Array(Uint16Array.of(1).buffer)
 // mouse needs to support negative and null
 // x, y, dx, dy, size, shape, list,
 
