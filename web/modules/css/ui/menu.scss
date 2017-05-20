@@ -1,0 +1,27 @@
+.menu {
+
+    border-bottom: 1px solid $darkgrey;
+    display: flex;
+    flex-shrink: 0;
+    margin-right: 1px;
+
+    // the following code draws a single pixel
+    overflow: visible;
+    @include innerBorder {
+        border-bottom: 1px solid whitesmoke;
+        right: -1px;
+        bottom: -1px;
+        left: 100%;
+    }
+
+    .item {
+        padding: 2px 5px;
+        flex-shrink: 0;
+        &:hover {
+            background-color: $blue;
+            color: white;
+        }
+    }
+
+}
+

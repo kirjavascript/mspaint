@@ -1,0 +1,39 @@
+.workspace {
+    position: relative;
+    flex-grow: 1;
+    background-color: $darkergrey;
+    border-bottom: 1px solid $grey;
+    border-left: 1px solid black;
+    border-right: 1px solid whitesmoke;
+    @include innerBorder {
+        border-right: 1px solid $grey;
+        border-top: 1px solid black;
+        z-index: 1;
+    }
+    padding: 3px 4px 3px 3px;
+    > div {
+        overflow: visible;
+    }
+
+    // canvas
+
+    .canvasWrap {
+        z-index: 0;
+        margin-top: 1px;
+        transform-origin: left top;
+    }
+
+    canvas {
+        background-color: white;
+    }
+
+    // "vdom"
+
+    .select {
+        // noselect: black, select: #008
+        // dash width: 4px
+        border: 1px dashed black;
+    }
+}
+
+

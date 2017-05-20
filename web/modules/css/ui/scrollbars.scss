@@ -1,0 +1,94 @@
+.scrollbar {
+    @extend .fuzzy;
+    $base: 14px;
+    z-index: 1;
+    position: absolute;
+
+    &.bottom {
+        top: calc(100% - 16px);
+        bottom: 0;
+        left: 0;
+        right: 1px;
+        border-right: 16px solid $grey;
+        margin-right: -16px;
+    }
+    &.right {
+        right: 1px;
+        top: 1px;
+        bottom: 0;
+        left: calc(100% - 17px);
+    }
+
+    .bar {
+        &.right {
+            position: absolute;
+           width: $base;
+           top: $base + 2px;
+           right: 0;
+        }
+        &.bottom {
+            height: $base;
+            position: absolute;
+            left: $base + 2px;
+            top: 0;
+        }
+    }
+
+    .arrowBlock {
+        width: $base;
+        height: $base;
+        &.left {
+            top: 0;
+            left: 0;
+            position: absolute;
+            .arrow {
+                margin-left: -0.5px;
+                margin-top: 0.5px;
+            }
+        }
+        &.right {
+            top: 0;
+            right: 0;
+            position: absolute;
+            .arrow {
+                margin-left: 0.5px;
+                margin-top: 0.5px;
+            }
+        }
+        &.top {
+            top: 0;
+            right: 0;
+            position: absolute;
+        }
+        &.bottom {
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            .arrow {
+                margin-top: 1px;
+            }
+        }
+        .arrow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+    }
+
+    // shading
+    .bar, .arrowBlock {
+        background-color: $grey;
+        border-top: 1px solid $grey;
+        border-left: 1px solid $grey;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        @include innerBorder {
+            border-top: 1px solid white;
+            border-left: 1px solid white;
+            border-right: 1px solid $darkgrey;
+            border-bottom: 1px solid $darkgrey;
+        }
+    }
+}
+

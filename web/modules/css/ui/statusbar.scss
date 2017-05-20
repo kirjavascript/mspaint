@@ -1,0 +1,23 @@
+.statusbar {
+    border-top: 1px solid whitesmoke;
+    padding-top: 2px;
+    display: flex;
+    flex-shrink: 0;
+
+    .cell {
+        @extend .basicShading;
+        flex: 1 0 0;
+        margin-right: 2px;
+        padding: 5px 2px;
+        white-space: nowrap;
+        &:last-of-type {
+            margin-right: 0;
+        }
+
+        span {
+            display: inline-block;
+            margin-right: 2px;
+        }
+    }
+}
+

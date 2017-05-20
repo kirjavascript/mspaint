@@ -1,0 +1,44 @@
+
+.toolbox {
+    border-top: 1px solid white;
+    border-right: 1px solid $darkgrey;
+    border-bottom: 1px solid $darkgrey;
+    width: 50px;
+    padding: 0 3px;
+    flex-shrink: 0;
+    line-height: 0;
+
+    .tool {
+        display: inline-block;
+
+        > div {
+
+            position: relative;
+            width: 25px;
+            height: 25px;
+
+            img {
+                position: absolute;
+                z-index: 0;
+                top: 0;
+                left: 0;
+            }
+        }
+    }
+
+    .subtool {
+        @extend .basicShading;
+        width: 39px;
+        height: 64px;
+        margin: 3px 4px;
+        position: relative;
+        svg {
+            width: 40px;
+            height: 64px;
+
+            text {
+                line-height: initial; // edge inherits this. wtf?
+            }
+        }
+    }
+}
