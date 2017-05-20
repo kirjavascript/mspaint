@@ -49,7 +49,7 @@ ws.addEventListener('message', (e) => {
 
 // send local X/Y
 
-let canvas = d3.select('canvas');
+let canvas = d3.select('canvas, .local');
 
 d3.select(window)
     .on('mousemove', () => {
@@ -57,7 +57,7 @@ d3.select(window)
         let { zoom } = scrollPos;
         ws.sendObj({cmd: 'XY', mouse: {x: x / zoom, y: y / zoom}});
     })
-    .on('mouseout', () => {
+    .on('mouseleave', () => {
         ws.sendObj({cmd: 'XY', mouse: {x: null, y: null}});
     });
 
