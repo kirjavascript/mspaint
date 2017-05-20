@@ -1,15 +1,9 @@
-// send LIST in script/json tags? (dont do this, concurrency issues...)
-// jsdom not needed if data is send as JSON
-
-// no UID = local
 // forward PART event from socket.js/cursors.js
 // normalize xydxdy
-// render()
 
-let vdom = {
-    local: [],
-    items: [],
-};
+let { render } = require('./render');
+
+let vdom = {};
 
 function updateVDOM(obj) {
 
@@ -17,8 +11,27 @@ function updateVDOM(obj) {
 
     let domCmd = cmd.substr(4);
 
-    console.log(obj, domCmd);
+    let key = uid || 'local';
 
+    if (domCmd == 'SELECT') {
+        let { event, x, y } = obj;
+
+        if (event == 'start') {
+            vdom[key] = {
+                x0: x, y0: y,
+                type: 'SELECTION_ACTIVE',
+            };
+        }
+        else if (event == 'drag' || event == 'end') {
+            vdom[key].x1 = x;
+            vdom[key].y1 = y;
+            if (event == 'end') {
+                vdom[key].type = 'SELECTION';
+            }
+        }
+
+        render(vdom, dom);
+    }
 }
 
 module.exports = {

@@ -29,10 +29,17 @@
 
     // "vdom"
 
-    .select {
-        // noselect: black, select: #008
-        // dash width: 4px
-        border: 1px dashed black;
+    .dom {
+        .select-active {
+            // dash width: 4px
+            border: 1px dashed black;
+        }
+        .select {
+            border: 1px dashed #008;
+        }
+        .noevents {
+            pointer-events: none;
+        }
     }
 }
 

@@ -38,7 +38,7 @@ module.exports = (env={}, args={}) => {
                     test: /\.js$/,
                     enforce: 'pre',
                     loader: 'eslint-loader',
-                    exclude: __dirname + '/lib',
+                    exclude: __dirname + '/web/modules/lib',
                     options: {
                         configFile: '.eslintrc',
                         failOnWarning: false,
@@ -59,8 +59,8 @@ module.exports = (env={}, args={}) => {
             alias: {
                 '#js': __dirname + '/web/modules/js',
                 '#css': __dirname + '/web/modules/css',
+                '#lib': __dirname + '/web/modules/lib',
                 '#shared': __dirname + '/shared',
-                '#lib': __dirname + '/lib',
             }
             
         },

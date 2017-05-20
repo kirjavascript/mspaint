@@ -305,18 +305,11 @@ function drawEraseSub() {
 }
 
 // transparency
-// coverheight is 29 with 3 difference either way
 
 let transIndex = 0;
 let transTypes = [
-    {
-        name: 'opaque',
-        top: 4,
-    },
-    {
-        name: 'transparent',
-        top: 36,
-    }
+    { name: 'opaque', top: 4 },
+    { name: 'transparent', top: 36 },
 ];
 
 function drawTransparencySub() {

@@ -9,7 +9,9 @@ import { setScroll, scrollPos } from './scrollbars';
 import { drawTool } from './tools';
 
 let {width, height} = CANVAS;
-let canvas = d3.select('canvas').style('opacity', 0);
+let canvasWrap = d3.select('.canvasWrap');
+let canvas = canvasWrap.select('canvas').style('opacity', 0);
+let dom = canvasWrap.append('div').classed('dom', 1);
 let ctx = canvas.node().getContext('2d');
 
 // events
@@ -77,6 +79,7 @@ function dragstarted(d) {
 
     let { name, ...drawToolEtc } = drawTool;
 
+    // canvas
     if (name == 'FILL') {
         let obj = {cmd: 'CANVAS_FILL',
             x, y, color: drawColor[mouseName],
@@ -85,6 +88,15 @@ function dragstarted(d) {
         ws.sendObj(obj);
         updateWorkspace({ctx, ...obj });
     }
+    // dom
+    else if (name == 'SELECT') {
+        let obj = {cmd: 'DOM_SELECT',
+            x, y, event: 'start',
+        };
+
+        updateWorkspace({dom, ...obj});
+    }
+    // other
     else {
         dragging(d);
     }
@@ -95,6 +107,7 @@ function dragging(d) {
 
     let { name, ...drawToolEtc } = drawTool;
 
+    // canvas
     if (~['PENCIL','BRUSH'].indexOf(name)) {
         let obj = {cmd: 'CANVAS_' + name,
             x, y, dx, dy,
@@ -118,6 +131,15 @@ function dragging(d) {
         ws.sendObj(obj);
         updateWorkspace({ctx, ...obj });
     }
+    // dom
+    else if (name == 'SELECT') {
+        let obj = {cmd: 'DOM_SELECT',
+            x, y, event: 'drag',
+        };
+
+        updateWorkspace({dom, ...obj});
+    }
+    // other
     else if (name == 'PICK') {
         let pixelColor, pixelData = Array.from(ctx.getImageData(x, y, 1, 1).data);
         if (pixelData[3] > 128) {
@@ -133,7 +155,15 @@ function dragended(d) {
     let { x, y } = getMotion();
     let { name } = drawTool;
 
-    if (name == 'ZOOM') {
+    if (name == 'SELECT') {
+        let obj = {cmd: 'DOM_SELECT',
+            x, y, event: 'end',
+        };
+
+        updateWorkspace({dom, ...obj});
+    }
+    // other
+    else if (name == 'ZOOM') {
         if (scrollPos.zoom != 1) {
             setScroll({zoom: 1});
         }
