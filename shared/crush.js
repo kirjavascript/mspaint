@@ -25,6 +25,8 @@ setTimeout(() => {
         status: ${unpacked == sfd ? 'PASS' : 'FAIL'}
     `);
 
+    console.log(unpack(packed))
+
 });
 //
 
