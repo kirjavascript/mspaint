@@ -49,7 +49,7 @@ ws.addEventListener('message', (e) => {
 
 // send local X/Y
 
-let canvas = d3.select('canvas, .local');
+let canvas = d3.select('canvas');
 
 d3.select(window)
     .on('mousemove', () => {

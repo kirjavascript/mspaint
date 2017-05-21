@@ -58,6 +58,7 @@ let propertyIndicies = properties.map(d => d.name);
 // command is stored as a single byte header
 // strings have a max length and charCode of 255
 
+// support string numbers
 // mouse needs to support negative and null
 // x, y, dx, dy, size, shape, list, event, vdom
 

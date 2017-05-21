@@ -1,5 +1,3 @@
-// create DOM_VDOM as a LIST alternative
-
 let { render } = require('./render');
 
 let vdom = {};
@@ -37,9 +35,9 @@ function updateVDOM(obj) {
 
         render(vdom, dom);
     }
+    // the following commands are redirected from elsewhere,
+    // and are not part of the communication schema
     else if (domCmd == 'PART') {
-        // is redirected from the standard part command
-        // (not part of the communication schema)
         delete vdom[target];
         render(vdom, dom);
     }
