@@ -11,9 +11,8 @@ function updateVDOM(obj) {
     let target = uid || 'local';
 
     if (domCmd == 'VDOM') {
-        Object.assign(vdom, obj.vdom);
+        Object.assign(vdom, parseVDOM(obj.vdom));
         render(vdom, dom);
-        console.log(JSON.stringify(obj));
     }
     else if (domCmd == 'SELECT') {
         let { event, x, y } = obj;
@@ -44,8 +43,21 @@ function updateVDOM(obj) {
     }
 }
 
-function getVDOM() {
+// for converting to/from wire data
+
+function parseVDOM(vdomWireData) {
+    let vdom = {};
+    vdomWireData.forEach((d) => {
+        vdom[d.uid] = d;
+        delete vdom[d.uid].uid;
+    });
     return vdom;
+}
+
+function getVDOM() {
+    return Object.keys(vdom).map((key) => {
+        return Object.assign({ uid: key }, vdom[key]);
+    });
 }
 
 module.exports = {
