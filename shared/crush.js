@@ -2,6 +2,7 @@
 //
 // strings have a max length and charCode of 255
 // arrays have a max length of 255
+// properties with the value undefined will not be sent
 
 let { pixelConvert, colorConvert } = require('./canvas/util');
 let { USE_JSON } = require('./constants');
@@ -19,6 +20,8 @@ let commands = [
 let properties = [
     {name: 'uid', string: 1},
     {name: 'event', string: 1},
+    {name: 'ping', number: 1},
+    {name: 'dx', number: 1},
     {name: 'x', number: 1},
     {name: 'y', number: 1},
     {name: 'dx', number: 1},
@@ -34,6 +37,7 @@ let properties = [
     {name: 'y1', number: 1},
     {name: 'type', string: 1},
     {name: 'selecting', bool: 1},
+    {name: 'config', object: 1},
     {
         name: 'color',
         pack: colorConvert,
@@ -48,9 +52,7 @@ let properties = [
 
 // create index lookup to avoid using .findIndex
 
-let propertyIndicies = properties.map(d => d.name);
-
-// TODO: vdom, enum type
+let propertyIndicies = properties.map((d) => d.name);
 
 function pack(obj, typed = true) {
 
@@ -77,13 +79,13 @@ function packFragment(obj) {
     // enumerate properties
     Object
         .keys(obj)
-        .forEach(key => {
-            if (key == 'cmd') {
-                return;
-            }
-
+        .forEach((key) => {
             // get value to compress
             let value = obj[key];
+
+            if (key === 'cmd' || value === undefined) {
+                return;
+            }
 
             // load schema
             let propIndex = propertyIndicies.indexOf(key);
@@ -93,11 +95,16 @@ function packFragment(obj) {
 
             // strings & numbers
             if (prop.string || prop.number) {
-                value = String(value);
+                if (prop.number) {
+                    if (typeof value === 'number') {
+                        value = value.toFixed(4);
+                    }
+                    value = String(value);
+                }
                 out.push(
                     propIndex,
                     value.length,
-                    ...[...value].map(d => d.charCodeAt(0))
+                    ...[...value].map((d) => d.charCodeAt(0))
                 );
             }
             // IEEE754 numbers
@@ -118,7 +125,7 @@ function packFragment(obj) {
             }
             // arrays
             else if (prop.array) {
-                let fragments = value.map(f => {
+                let fragments = value.map((f) => {
                     let fragment = packFragment(f);
                     fragment.unshift(fragment.length);
                     return fragment;
@@ -143,6 +150,9 @@ function packFragment(obj) {
                     ...prop.pack(value)
                 );
             }
+            else {
+                console.error(`Packer: ${key} not in scema`);
+            }
 
         });
 
@@ -153,6 +163,10 @@ function unpack(arr) {
 
     if (USE_JSON) {
         return JSON.parse(arr); // should be a string in this mode
+    }
+
+    if (arr instanceof ArrayBuffer) {
+        arr = new Uint8Array(arr, 0, arr.byteLength);
     }
 
     let out = {};
@@ -188,10 +202,16 @@ function unpackFragment(arr, out) {
             let strLength = arr[i + 1];
             let str = [...arr]
                 .slice(i + 2, i + 2 + strLength)
-                .map(d => String.fromCharCode(d))
-                .join``
+                .map((d) => String.fromCharCode(d))
+                .join``;
             i += strLength + 1; // plus length byte
-            out[prop.name] = prop.number ? Number(str) : str;
+            // number also supports null, for historic reasons
+            if (prop.number && str == 'null') {
+                out[prop.name] = null;
+            }
+            else {
+                out[prop.name] = prop.number ? Number(str) : str;
+            }
         }
         else if (prop.stdNumber) {
             let num = new Float64Array([0]);
@@ -238,7 +258,7 @@ function unpackFragment(arr, out) {
 
 let obj = {
     arr: Uint8ClampedArray.from(Array.from({length: 4*8}, (_,i) => 0|Math.random()*256)),
-}
+};
 // BUFFERS~~~
 // test browser compat after this
 // base64 numbers (MAX_SAFE_INT CHECK) (STRIP RGBA)

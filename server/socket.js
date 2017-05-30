@@ -2,6 +2,7 @@ let WebSocket = require('ws');
 let { scaleOrdinal, schemeCategory10 } = require('d3-scale');
 let { initCanvas, updateCanvas } = require('./canvas');
 let { PING_INTERVAL } = require('../shared/constants');
+let { pack, unpack } = require('../shared/crush');
 let { updateWorkspace, getVDOM } = require('../shared/workspace');
 
 let colorGenerator = (() => {
@@ -16,7 +17,7 @@ function addClient(ws, wss) {
 
     // broadcast to all _other_ clients
     ws.broadcastObj = (data) => {
-        data = JSON.stringify(data);
+        data = pack(data);
         wss.clients.forEach((client) => {
             if (client != ws && client.readyState === WebSocket.OPEN) {
                 client.send(data);
@@ -25,7 +26,7 @@ function addClient(ws, wss) {
     }
 
     ws.sendObj = (obj) =>
-        (ws.readyState == WebSocket.OPEN) && ws.send(JSON.stringify(obj));
+        (ws.readyState == WebSocket.OPEN) && ws.send(pack(obj));
 
     let uid, color = colorGenerator();
     do { uid = Math.random().toString(36).slice(15); }
@@ -89,42 +90,35 @@ function addClient(ws, wss) {
     ws.on('message', (__data, {binary}) => {
         if (!room[uid]) return;
 
-        // JSON
-        if (!binary) {
-            try {
-                let message = JSON.parse(__data);
+        try {
+            let message = unpack(__data);
 
-                let { cmd } = message;
+            let { cmd } = message;
 
-                if (cmd == 'PONG') {
-                    room[uid].pong = Date.now();
-                }
-                else if (cmd == 'XY') {
-                    let { mouse } = message;
+            if (cmd == 'PONG') {
+                room[uid].pong = Date.now();
+            }
+            else if (cmd == 'XY') {
+                let { mouse } = message;
 
-                    Object.assign(room[uid].config.mouse, mouse);
+                Object.assign(room[uid].config.mouse, mouse);
 
-                    ws.broadcastObj({
-                        cmd: 'XY', mouse, uid
-                    });
-                }
-                else if (cmd.indexOf('CANVAS_') == 0) {
-                    // replace with updateWorkspace() ?
-                    updateCanvas({ message, uid });
-                    ws.broadcastObj(message);
-                }
-                else if (cmd.indexOf('DOM_') == 0) {
-                    let uidMessage = Object.assign({uid}, message);
-                    updateWorkspace(uidMessage);
-                    ws.broadcastObj(uidMessage);
-                }
+                ws.broadcastObj({
+                    cmd: 'XY', mouse, uid
+                });
+            }
+            else if (cmd.indexOf('CANVAS_') == 0) {
+                // replace with updateWorkspace() ?
+                updateCanvas({ message, uid });
+                ws.broadcastObj(message);
+            }
+            else if (cmd.indexOf('DOM_') == 0) {
+                let uidMessage = Object.assign({uid}, message);
+                updateWorkspace(uidMessage);
+                ws.broadcastObj(uidMessage);
+            }
 
-            } catch(e) { console.error(e); };
-        }
-        // TypedArray
-        else {
-
-        }
+        } catch(e) { console.error(e); };
 
     });
 
@@ -142,7 +136,7 @@ function initSocket(app, wss) {
     };
 
     wss.broadcastObj = (data) => {
-        data = JSON.stringify(data);
+        data = pack(data);
         wss.clients.forEach((client) => {
             if (client.readyState === WebSocket.OPEN) {
                 client.send(data);

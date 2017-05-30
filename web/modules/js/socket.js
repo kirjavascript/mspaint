@@ -2,12 +2,13 @@ import d3 from '#lib/d3';
 import { setStatus } from './statusbar';
 import debounce from '#lib/debounce';
 import { PING_INTERVAL } from '#shared/constants';
+import { pack, unpack } from '#shared/crush';
 
 // http://websocket.org/echo.html
 
 export const ws = new WebSocket(`ws://${location.host}/`);
 
-ws.sendObj = (obj) => ws.readyState == WebSocket.OPEN && ws.send(JSON.stringify(obj));
+ws.sendObj = (obj) => ws.readyState == WebSocket.OPEN && ws.send(pack(obj));
 ws.binaryType = 'arraybuffer';
 
 window.addEventListener('beforeunload', () => {
@@ -25,9 +26,7 @@ ws.addEventListener('close', () => {
 
 ws.addEventListener('message', (e) => {
 
-    if (e.data instanceof ArrayBuffer) return;
-
-    let message = JSON.parse(e.data);
+    let message = unpack(e.data);
 
     let { cmd } = message;
 

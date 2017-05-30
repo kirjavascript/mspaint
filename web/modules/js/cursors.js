@@ -3,6 +3,7 @@ import { event as d3event } from 'd3-selection';
 import { ws } from './socket';
 import { setStatus } from './statusbar';
 import { scrollPos } from './scrollbars';
+import { pack, unpack } from '#shared/crush';
 
 let clients = [];
 
@@ -10,9 +11,7 @@ let clients = [];
 
 ws.addEventListener('message', (e) => {
 
-    if (e.data instanceof ArrayBuffer) return;
-
-    let message = JSON.parse(e.data);
+    let message = unpack(e.data);
 
     let { cmd, uid } = message;
 
@@ -51,7 +50,7 @@ ws.addEventListener('message', (e) => {
 
 let canvas = d3.select('canvas');
 
-d3.select(window)
+d3.select(document.body)
     .on('mousemove', () => {
         let [x, y] = d3.mouse(canvas.node());
         let { zoom } = scrollPos;
@@ -92,7 +91,7 @@ function update() {
         .merge(selection)
         .style('left', (d) => d.mouse.x + 'px')
         .style('top', (d) => d.mouse.y + 'px')
-        .style('opacity', (d) => +(d.mouse.x != null && d.mouse.y != null)); 
+        .style('opacity', (d) => +(d.mouse.x != null && d.mouse.y != null));
     
     let exit = selection.exit()
         .remove();

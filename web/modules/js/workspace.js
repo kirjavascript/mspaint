@@ -7,6 +7,7 @@ import { pixelConvert } from '#shared/canvas/util';
 import { drawColor, setColor } from './palette';
 import { setScroll, scrollPos } from './scrollbars';
 import { drawTool } from './tools';
+import { pack, unpack } from '#shared/crush';
 
 let {width, height} = CANVAS;
 let canvasWrap = d3.select('.canvasWrap');
@@ -18,9 +19,9 @@ let ctx = canvas.node().getContext('2d');
 
 ws.addEventListener('message', (e) => {
 
-    if (e.data instanceof ArrayBuffer) return;
+    let message = unpack(e.data);
 
-    let message = JSON.parse(e.data);
+    // console.log(message);
 
     if (message.cmd.indexOf('CANVAS_') == 0) {
         updateWorkspace({ ctx, ...message });
