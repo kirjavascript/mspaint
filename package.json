@@ -1,15 +1,10 @@
 {
-  "name": "express-webpack-boilerplate",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "mspaint",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server/index.js --ignore 'web/modules/**/*' --ignore 'shared/**/*' --env.dev",
     "deploy": "git pull origin master && yarn && webpack -p"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "canvas": "^1.6.5",
     "compression": "^1.6.2",
@@ -17,8 +12,6 @@
     "ejs": "^2.5.2",
     "express": "^4.14.0",
     "express-ejs-layouts": "^2.2.0",
-    "global": "^4.3.1",
-    "nodemon": "^1.11.0",
     "ws": "^2.1.0"
   },
   "devDependencies": {
@@ -26,6 +19,7 @@
     "babel-eslint": "^7.0.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.16.0",
+    "nodemon": "^1.11.0",
     "babel-preset-stage-0": "^6.16.0",
     "chokidar": "^1.6.0",
     "css-loader": "^0.25.0",
@@ -36,9 +30,6 @@
     "raw-loader": "^0.5.1",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
-    "svg-url-loader": "^1.1.0",
-    "svgo": "^0.7.1",
-    "svgo-loader": "^1.1.0",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.0"
   }
