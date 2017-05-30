@@ -34,15 +34,15 @@
             pointer-events: none;
             position: absolute;
         }
+        .element.local {
+            pointer-events: auto;
+        }
         .selection {
             border: 1px dashed #008;
         }
         .selection.selecting {
             // dash width: 4px
             border: 1px dashed black;
-        }
-        .local {
-            pointer-events: auto;
         }
     }
 }

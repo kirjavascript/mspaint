@@ -50,30 +50,30 @@ d3.selectAll('.scrollbar').style('display', 'none');
     });
 
 function getDimensions() {
-    let { width, height } = workspace.node().getBoundingClientRect();
+    const { width, height } = workspace.node().getBoundingClientRect();
 
-    let canvasWidth = CANVAS.width * scrollPos.zoom;
-    let canvasHeight = CANVAS.height * scrollPos.zoom;
+    const canvasWidth = CANVAS.width * scrollPos.zoom;
+    const canvasHeight = CANVAS.height * scrollPos.zoom;
 
-    let bottomRatio = (width -6) / canvasWidth;
-    let rightRatio = (height -4) / canvasHeight;
-    
-    let showBottom = bottomRatio < 1 && width > (17 * 3) && height > 17;
-    let showRight = rightRatio < 1 && height > (17 * 3) && width > 17;
+    const bottomRatio = (width -6) / canvasWidth;
+    const rightRatio = (height -4) / canvasHeight;
 
-    let showBoth = showBottom && showRight;
+    const showBottom = bottomRatio < 1 && width > (17 * 3) && height > 17;
+    const showRight = rightRatio < 1 && height > (17 * 3) && width > 17;
 
-    let bottomWidth = width - 36 + (+showBoth * -16);
-    let rightWidth = height - 35 + (+showBoth * -16);
+    const showBoth = showBottom && showRight;
 
-    let bottomBarWidth = bottomRatio * bottomWidth;
-    let rightBarWidth = rightRatio * rightWidth;
+    const bottomWidth = width - 36 + (+showBoth * -16);
+    const rightWidth = height - 35 + (+showBoth * -16);
 
-    let bottomMaxDelta = bottomWidth - bottomBarWidth - 1;
-    let rightMaxDelta = rightWidth - rightBarWidth - 1;
+    const bottomBarWidth = bottomRatio * bottomWidth;
+    const rightBarWidth = rightRatio * rightWidth;
 
-    let bottomMaxWorkspaceDelta = canvasWidth - width + (+showRight * 16) + 9;
-    let rightMaxWorkspaceDelta = canvasHeight - height + (+showBottom * 16) + 8;
+    const bottomMaxDelta = bottomWidth - bottomBarWidth - 1;
+    const rightMaxDelta = rightWidth - rightBarWidth - 1;
+
+    const bottomMaxWorkspaceDelta = canvasWidth - width + (+showRight * 16) + 9;
+    const rightMaxWorkspaceDelta = canvasHeight - height + (+showBottom * 16) + 8;
 
     return {
         bottomBarWidth, bottomWidth, bottomMaxDelta,

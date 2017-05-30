@@ -11,7 +11,7 @@ function updateVDOM(obj) {
     let target = uid || 'local';
 
     if (domCmd == 'VDOM') {
-        vdom = obj.vdom;
+        Object.assign(vdom, obj.vdom);
         render(vdom, dom);
     }
     else if (domCmd == 'SELECT') {

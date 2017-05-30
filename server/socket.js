@@ -28,7 +28,7 @@ function addClient(ws, wss) {
         (ws.readyState == WebSocket.OPEN) && ws.send(JSON.stringify(obj));
 
     let uid, color = colorGenerator();
-    do { uid = Math.random().toString(36).slice(7); }
+    do { uid = Math.random().toString(36).slice(15); }
     while (room[uid]);
 
     // send list of existing clients to ws
