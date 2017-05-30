@@ -19,7 +19,7 @@ let commands = [
 
 let properties = [
     {name: 'uid', string: 1},
-    {name: 'event', string: 1},
+    {name: 'event', enum: ['start', 'drag', 'end']},
     {name: 'ping', number: 1},
     {name: 'dx', number: 1},
     {name: 'x', number: 1},
@@ -143,6 +143,13 @@ function packFragment(obj) {
                     +value
                 );
             }
+            // enum
+            else if (prop.enum) {
+                out.push(
+                    propIndex,
+                    prop.enum.indexOf(value)
+                );
+            }
             // custom
             else if (prop.pack) {
                 out.push(
@@ -243,6 +250,10 @@ function unpackFragment(arr, out) {
         }
         else if (prop.bool) {
             out[prop.name] = !!arr[i + 1];
+            i++;
+        }
+        else if (prop.enum) {
+            out[prop.name] = prop.enum[arr[i + 1]];
             i++;
         }
         // everything else

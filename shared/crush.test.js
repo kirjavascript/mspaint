@@ -19,6 +19,8 @@ let data = {
     //     {"uid":"3m9bhplj714i"},
     //     {"uid":"7m9bhplj714i"},
     // ],
+    //
+    event: 'start',
     dx: null,
 };
 
