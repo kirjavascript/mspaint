@@ -13,6 +13,7 @@ function updateVDOM(obj) {
     if (domCmd == 'VDOM') {
         Object.assign(vdom, obj.vdom);
         render(vdom, dom);
+        console.log(JSON.stringify(obj));
     }
     else if (domCmd == 'SELECT') {
         let { event, x, y } = obj;

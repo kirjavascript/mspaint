@@ -1,19 +1,23 @@
 // Custom format for crushing object data to send over the wire
 //
-// TODO: add USE_JSON constant
+// strings have a max length and charCode of 255
+// arrays have a max length of 255
 
 setTimeout(() => {
 
     let data = {
         cmd: 'CANVAS_FILL',
-        uid: Math.random().toString(36).slice(7),
-        color: '#' + Array.from({length: 3}, (_,i) => (0|Math.random()*256).toString(16)).map(d=>d.length<2?'0'+d:d).join``,
-        x: 123,
-        mouse: {
-            x: 12,
-            y: 17,
-        },
+        // uid: Math.random().toString(36).slice(7),
+        // color: '#' + Array.from({length: 3}, (_,i) => (0|Math.random()*256).toString(16)).map(d=>d.length<2?'0'+d:d).join``,
+        // x: 123,
+        // mouse: {
+        //     x: 12,
+        //     y: 17,
+        // },
 
+        "vdom":[
+            {"uid":"9ocx7f7ds4i","x0":142,"y0":91,"x1":293,"y1":200,"type":"SELECTION","selecting":false}
+        ],
         list: [
             {"uid":"7m9bhplj714i","color":"#7f7f7f","mouse":{"x":239,"y":375}},
             {"uid":"ire2myytlnmi","color":"#bcbd22","mouse":{"x":null,"y":14}},
@@ -68,6 +72,13 @@ let properties = [
     {name: 'shape', string: 1},
     {name: 'mouse', object: 1},
     {name: 'list', array: 1},
+    {name: 'vdom', array: 1},
+    {name: 'x0', number: 1},
+    {name: 'y0', number: 1},
+    {name: 'x1', number: 1},
+    {name: 'y1', number: 1},
+    {name: 'type', string: 1},
+    {name: 'selecting', bool: 1},
     {
         name: 'color',
         pack: colorConvert,
@@ -84,7 +95,7 @@ let properties = [
 
 let propertyIndicies = properties.map(d => d.name);
 
-// TODO: vdom
+// TODO: vdom, enum type
 
 function pack(obj, typed = true) {
 
@@ -127,7 +138,6 @@ function packFragment(obj) {
 
             // strings & numbers
             if (prop.string || prop.number) {
-                // strings have a max length and charCode of 255
                 value = String(value);
                 out.push(
                     propIndex,
@@ -153,7 +163,6 @@ function packFragment(obj) {
             }
             // arrays
             else if (prop.array) {
-                // arrays have a max length of 255
                 let fragments = value.map(f => {
                     let fragment = packFragment(f);
                     fragment.unshift(fragment.length);
@@ -163,6 +172,13 @@ function packFragment(obj) {
                     propIndex,
                     fragments.length,
                     ...[].concat(...fragments)
+                );
+            }
+            // boolean
+            else if (prop.bool) {
+                out.push(
+                    propIndex,
+                    +value
                 );
             }
             // custom
@@ -250,6 +266,10 @@ function unpackFragment(arr, out) {
             }
             i -= 1; // adjust for autoinc
         }
+        else if (prop.bool) {
+            out[prop.name] = !!arr[i + 1];
+            i++;
+        }
         // everything else
         else if (prop.unpack) {
             let { length, value } = prop.unpack(i + 1, arr);
@@ -271,15 +291,6 @@ let obj = {
 // Input has to be a multiple of 4
 // RGBA -> RGB -> char*1.5
 // alpha is 255
-// "1fffffffffffff"
-
-// console.log(JSON.stringify(obj));
-
-// obj.arr = cmp(obj.arr)
-
-// console.log(JSON.stringify(obj));
-
-
 // new ArrayBuffer(len)
 // new Uint8ClampedArray(buf)
 
