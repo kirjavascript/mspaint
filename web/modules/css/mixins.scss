@@ -1,5 +1,6 @@
 @mixin innerBorder {
     position: relative;
+
     &:before {
         position: absolute;
         display: block;

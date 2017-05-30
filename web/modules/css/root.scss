@@ -23,7 +23,8 @@ div {
     overflow: hidden;
 }
 
-img, canvas {
+img,
+canvas {
     image-rendering: -moz-crisp-edges;
     image-rendering: -o-crisp-edges;
     image-rendering: -webkit-optimize-contrast;
@@ -31,7 +32,9 @@ img, canvas {
     -ms-interpolation-mode: nearest-neighbor;
 }
 
-.noselect, .window, img {
+.noselect,
+.window,
+img {
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;

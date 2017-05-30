@@ -1,5 +1,4 @@
 .menu {
-
     border-bottom: 1px solid $darkgrey;
     display: flex;
     flex-shrink: 0;
@@ -17,11 +16,11 @@
     .item {
         padding: 2px 5px;
         flex-shrink: 0;
+
         &:hover {
             background-color: $blue;
             color: white;
         }
     }
-
 }
 

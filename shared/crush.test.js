@@ -10,7 +10,7 @@ let data = {
         y: 17,
     },
 
-    "vdom":[
+    vdom:[
         {"uid":"9ocx7f7ds4i","x0":142,"y0":91,"x1":293,"y1":200,"type":"SELECTION","selecting":false}
     ],
     list: [

@@ -3,6 +3,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server/index.js --ignore 'web/modules/**/*' --ignore 'shared/**/*' --env.dev",
+    "format-styles": "stylefmt -r \"web/modules/css/**/*\" -c .stylelintrc",
     "deploy": "git pull origin master && yarn && webpack -p"
   },
   "dependencies": {
