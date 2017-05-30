@@ -1,4 +1,5 @@
 let { render } = require('./render');
+let { getContext } = require('./util');
 
 let vdom = {};
 

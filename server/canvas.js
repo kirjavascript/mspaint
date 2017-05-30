@@ -33,7 +33,7 @@ function initCanvas(wssInstance, roomInstance) {
             fs.writeFile('canvas.png', buf, 'utf8', (err, success) => {
                 err && console.error(err);
             });
-        })
+        });
     }, 5000);
 }
 
@@ -45,6 +45,10 @@ function getPNG(cb) {
     canvas.toBuffer(cb);
 }
 
+function getContext() {
+    return ctx;
+}
+
 module.exports = {
-    initCanvas, updateCanvas, getPNG,
+    initCanvas, updateCanvas, getPNG, getContext,
 };

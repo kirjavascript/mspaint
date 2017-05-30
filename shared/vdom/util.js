@@ -27,6 +27,15 @@ function normalizeObj(obj) {
     }
 }
 
+function getContext() {
+    return (
+        typeof __WEB__ != 'undefined'
+        ? require('#js/workspace').getContext
+        : require('../../server/canvas').getContext
+    )();
+}
+
 module.exports = {
     normalizeObj,
+    getContext,
 };

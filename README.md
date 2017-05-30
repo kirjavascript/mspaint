@@ -22,6 +22,4 @@ http://www.rcramer.com/tech/windows/kbd_mspaint.shtml
     fix mobile support
 ```
 
-TODO: change vdom format
-
 Thanks to whoever made this; http://copy.sh/v86/?profile=windows98

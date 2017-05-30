@@ -51,7 +51,8 @@ module.exports = (env={}, args={}) => {
         },
         plugins: [
             new webpack.DefinePlugin({
-                __DEV__: env.dev
+                __DEV__: env.dev,
+                __WEB__: true,
             }),
         ],
         resolve: {
