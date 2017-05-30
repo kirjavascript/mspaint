@@ -96,7 +96,7 @@ function packFragment(obj) {
             // strings & numbers
             if (prop.string || prop.number) {
                 if (prop.number) {
-                    if (typeof value === 'number') {
+                    if (typeof value === 'number' && value % 1 !== 0) {
                         value = value.toFixed(4);
                     }
                     value = String(value);
