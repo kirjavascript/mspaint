@@ -12,8 +12,8 @@ function normalizeObj(obj) {
         let { x0, y0, x1, y1 } = obj;
         obj.x = Math.min(x0, x1);
         obj.y = Math.min(y0, y1);
-        obj.width = Math.max(0, Math.abs(x0 - x1) - 1);
-        obj.height = Math.max(0, Math.abs(y0 - y1) - 1);
+        obj.width = Math.max(1, Math.abs(x0 - x1) - 1);
+        obj.height = Math.max(1, Math.abs(y0 - y1) - 1);
 
         // snap to bbox
         if (obj.x < 0) {
@@ -31,6 +31,7 @@ function normalizeObj(obj) {
             obj.height = CANVAS.height - obj.y - 2;
         }
     }
+    return obj;
 }
 
 module.exports = {

@@ -70,7 +70,7 @@ let properties = [
 
 let propertyIndicies = properties.map((d) => d.name);
 
-function pack(obj, typed = true) {
+function pack(obj) {
 
     if (USE_JSON) {
         return JSON.stringify(obj);
@@ -86,7 +86,7 @@ function pack(obj, typed = true) {
     // add header
     out.unshift(commandIndex);
 
-    return typed ? Uint8Array.from(out) : out;
+    return Uint8Array.from(out);
 }
 
 function packFragment(obj) {

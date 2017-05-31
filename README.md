@@ -18,6 +18,7 @@ Multiplayer mspaint
     link github - about
 http://members.chello.at/~easyfilter/bresenham.html
 https://github.com/1j01/jspaint/blob/gh-pages/src/image-manipulation.js
+    server side rendering (vdom's canvas?)
 http://www.rcramer.com/tech/windows/kbd_mspaint.shtml
 ```
 

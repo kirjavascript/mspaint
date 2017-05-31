@@ -42,6 +42,20 @@ function render(vdom) {
                     .style('left', d.x + 'px')
                     .style('width', d.width + 'px')
                     .style('height', d.height + 'px');
+
+                if (d.imgData && !this.querySelector('canvas')) {
+                    element
+                        .append('canvas')
+                        .attr('width', d.width + 'px')
+                        .attr('height', d.height + 'px')
+                        .each(function(d) {
+                            let ctx = this.getContext('2d');
+                            ctx.putImageData(d.imgData, 0, 0, 0, 0, d.width, d.height);
+                        });
+                }
+                else if (!d.imgData) {
+                    element.select('canvas').remove();
+                }
             }
         });
 }

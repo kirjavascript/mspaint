@@ -1,4 +1,6 @@
 let { render } = require('./render');
+let { getContext } = require('../canvas/util');
+let { normalizeObj } = require('./util');
 
 let vdom = {};
 
@@ -30,6 +32,19 @@ function updateVDOM(obj) {
             if (event == 'end') {
                 vdom[target].type = 'SELECTION';
                 vdom[target].selecting = false;
+                const ctx = getContext();
+                let { x, y, width, height } = normalizeObj({
+                    x0: vdom[target].x0,
+                    y0: vdom[target].y0,
+                    x1: vdom[target].x1,
+                    y1: vdom[target].y1,
+                });
+                vdom[target].imgData = ctx.getImageData(x, y, width, height);
+                let copy = ctx.getImageData(x, y, width, height);
+                for (let i = 0; i < width*height*4; i++) {
+                    copy.data[i] = 0xFF;
+                }
+                ctx.putImageData(copy, x, y, 0, 0, width, height);
             }
         }
 

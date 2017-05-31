@@ -42,11 +42,16 @@
 
         .selection {
             border: 1px dashed #008;
+            margin: -1px 0 0 -1px;
+            canvas {
+                display: block;
+            }
         }
 
         .selection.selecting {
             // dash width: 4px
             border: 1px dashed black;
+            margin: none;
         }
     }
 }
