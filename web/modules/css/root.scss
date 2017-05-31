@@ -9,7 +9,6 @@
 @import './ui/palette.scss';
 
 html {
-    overflow: hidden;
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 12px;
 }
@@ -19,7 +18,7 @@ body {
     display: block;
 }
 
-div {
+div, html, body {
     overflow: hidden;
 }
 
@@ -47,8 +46,8 @@ img {
 .window {
     position: relative;
     background-color: $grey;
-    height: 100vh;
     padding: 4px;
+    height: 100vh; // overwritten via JS on chrome mobile
     display: flex;
     flex-direction: column;
 }

@@ -43,8 +43,9 @@ function updateVDOM(obj) {
     }
 }
 
-// for converting to/from wire data
+// for converting VDOM to/from wire data
 
+// run once clientside when receiving initial VDOM
 function parseVDOM(vdomWireData) {
     let vdom = {};
     vdomWireData.forEach((d) => {
@@ -54,6 +55,7 @@ function parseVDOM(vdomWireData) {
     return vdom;
 }
 
+// run serverside to generate VDOM for new clients
 function getVDOM() {
     return Object.keys(vdom).map((key) => {
         return Object.assign({ uid: key }, vdom[key]);
