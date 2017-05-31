@@ -4,21 +4,7 @@
 // arrays have a max length of 255
 // properties with the value undefined will not be sent
 // canvas data has the alpha channel stripped out
-//
-// --------------
-
-// let obj = {
-//     arr: Uint8ClampedArray.from(Array.from({length: 4*8}, (_,i) => 0|Math.random()*256)),
-// };
-// BUFFERS~~~
-// test browser compat after this
-// base64 numbers (MAX_SAFE_INT CHECK) (STRIP RGBA)
-// Packs canvas image data for sending over the wire
-// Input has to be a multiple of 4
-// RGBA -> RGB -> char*1.5
-// alpha is 255
-// new ArrayBuffer(len)
-// new Uint8ClampedArray(buf)
+// (alpha is 255)
 
 let { pixelConvert, colorConvert } = require('./canvas/util');
 let { USE_JSON } = require('./constants');
@@ -54,6 +40,33 @@ let properties = [
     {name: 'type', string: 1},
     {name: 'selecting', bool: 1},
     {name: 'config', object: 1},
+    {
+        name: 'imgData',
+        pack(obj) {
+            let arr = [];
+            for (let i = 0; i < obj.length; i += (i % 4 === 2 ? 2 : 1)) {
+                arr.push(obj[i]);
+            }
+            arr.unshift(arr.length);
+            return arr;
+        },
+        unpack(index, arr) {
+            let length = arr[index] + 1;
+            let imgData = arr.subarray(index + 1, index + length);
+            let fullLength = (imgData.length/3)*4;
+            let value = new Uint8ClampedArray(fullLength);
+            for (let i = j = 0; i < imgData.length; i++, j++) {
+                value[j] = imgData[i];
+                if (i % 3 === 2) {
+                    value[++j] = 255;
+                }
+            }
+            return {
+                length,
+                value,
+            };
+        },
+    },
     {
         name: 'color',
         pack: colorConvert,

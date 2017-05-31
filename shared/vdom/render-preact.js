@@ -7,8 +7,6 @@ let ws = typeof __WEB__ != 'undefined' ? require('#js/socket') : void 0;
 let dom = typeof __WEB__ != 'undefined' ? document.querySelector('.dom') : void 0;
 let d3 = typeof __WEB__ != 'undefined' ? require('#lib/d3').default : void 0;
 
-// currently, this function should nop in node
-
 let render = () => null;
 class Container extends Component {
 
@@ -29,12 +27,10 @@ class Container extends Component {
         };
     }
 
-    getDrag = (node) => {
+    onMove = (node) => {
         if (node) {
             d3.select(node)
                 .call(d3.drag()
-                .on('start', () => {
-                })
                 .on('drag', () => {
                     let { dx, dy } = require('d3-selection').event;
                     let obj = {
@@ -43,8 +39,6 @@ class Container extends Component {
                     };
                     require('#js/socket').ws.sendObj(obj);
                     require('../workspace').updateWorkspace(obj);
-                })
-                .on('end', () => {
                 }));
         }
     };
@@ -66,7 +60,7 @@ class Container extends Component {
                         height: element.height,
                     }}
                     key={element.key}
-                    ref={this.getDrag}
+                    ref={element.target == 'local' && this.onMove}
                 >
                     {element.imgData && <CanvasFragment data={element}/>}
                 </div>;
@@ -98,4 +92,8 @@ class CanvasFragment extends Component {
 __WEB__ &&
 renderDOM(<Container/>, dom);
 
-module.exports = render;
+module.exports = {
+    render,
+    CanvasFragment,
+    Container,
+};

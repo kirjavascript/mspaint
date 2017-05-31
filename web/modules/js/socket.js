@@ -1,12 +1,12 @@
 import d3 from '#lib/d3';
 import { setStatus } from './statusbar';
 import debounce from '#lib/debounce';
-import { PING_INTERVAL } from '#shared/constants';
+import { PING_INTERVAL, PORT } from '#shared/constants';
 import { pack, unpack } from '#shared/crush';
 
 // http://websocket.org/echo.html
 
-export const ws = new WebSocket(`ws://${location.host}/`);
+export const ws = new WebSocket(`ws://${location.hostname}:${PORT}/`);
 
 ws.sendObj = (obj) => ws.readyState == WebSocket.OPEN && ws.send(pack(obj));
 ws.binaryType = 'arraybuffer';

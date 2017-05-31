@@ -1,14 +1,6 @@
 // load config //
 
-let config;
-
-try {
-    config = require('../config.json');
-}
-catch (e) {
-    console.log('config.json missing');
-    process.exit();
-}
+let { PORT } = require('../shared/constants');
 
 let devMode = ~process.argv.indexOf('--env.dev');
 
@@ -21,8 +13,8 @@ let server = app.set('view engine', 'ejs')
     .use(require('express-ejs-layouts'))
     .set('views', 'web/templates')
     .use(require('compression')())
-    .listen(config.port, () => {
-        console.log(`Listening on ${config.port}`)
+    .listen(PORT, () => {
+        console.log(`Listening on ${PORT}`)
     })
 
 // sockets //

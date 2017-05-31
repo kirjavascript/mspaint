@@ -22,7 +22,10 @@ let data = {
     // ],
     //
     event: 'start',
-    dx: null,
+    imgData: Uint8ClampedArray.from(
+        [].concat(...new Array(3).fill([255, 0, 0, 255]))
+    ),
+    dx: 5,
 };
 
 let sfd = JSON.stringify(data);
@@ -45,23 +48,26 @@ console.log(`
 
 // benchmarks
 
+process.exit();
+
 let getData = {
-    vdom:[
-        {"uid":"9ocx7f7ds4i","x0":142,"y0":91,"x1":293,"y1":200,"type":"SELECTION","selecting":false}
-    ],
-    list: [
-        {"uid":"7m9bhplj714i","color":"#7f7f7f","mouse":{"x":239,"y":375}},
-        {"uid":"ire2myytlnmi","color":"#bcbd22","mouse":{"x":null,"y":14}},
-        {"uid":"3m9bhplj714i"},
-        {"uid":"7m9bhplj714i"},
-    ],    cmd: 'RELOAD',
-    mouse: {
-        x: 12,
-        y: 17,
-    },
-    dx: 4,
-    uid: Math.random().toString(36).slice(7),
-    color: '#' + Array.from({length: 3}, (_,i) => (0|Math.random()*256).toString(16)).map(d=>d.length<2?'0'+d:d).join``,
+    // vdom:[
+    //     {"uid":"9ocx7f7ds4i","x0":142,"y0":91,"x1":293,"y1":200,"type":"SELECTION","selecting":false}
+    // ],
+    // list: [
+    //     {"uid":"7m9bhplj714i","color":"#7f7f7f","mouse":{"x":239,"y":375}},
+    //     {"uid":"ire2myytlnmi","color":"#bcbd22","mouse":{"x":null,"y":14}},
+    //     {"uid":"3m9bhplj714i"},
+    //     {"uid":"7m9bhplj714i"},
+    // ],    cmd: 'RELOAD',
+    // mouse: {
+    //     x: 12,
+    //     y: 17,
+    // },
+    // dx: 4,
+    // uid: Math.random().toString(36).slice(7),
+    // color: '#' + Array.from({length: 3}, (_,i) => (0|Math.random()*256).toString(16)).map(d=>d.length<2?'0'+d:d).join``,
+    // imgData:
 };
 
 let strData = JSON.stringify(getData);
