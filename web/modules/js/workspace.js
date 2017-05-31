@@ -12,10 +12,9 @@ import { pack, unpack } from '#shared/crush';
 let {width, height} = CANVAS;
 let canvasWrap = d3.select('.canvasWrap');
 let canvas = canvasWrap.select('canvas').style('opacity', 0);
-let dom = canvasWrap.append('div').classed('dom', 1);
+let dom = canvasWrap.select('.dom');
 let ctx = canvas.node().getContext('2d');
 export const getContext = () => ctx;
-export const getDOM = () => dom;
 
 // events
 

@@ -1,11 +1,5 @@
 let { CANVAS } = require('../constants');
 
-function getDOM() {
-    return typeof __WEB__ != 'undefined'
-        ? require('#js/workspace').getDOM()
-        : void 0;
-}
-
 function normalizeObj(obj) {
     // normalize x0, y0, x1, y1
     if ('x0' in obj) {
@@ -36,5 +30,4 @@ function normalizeObj(obj) {
 
 module.exports = {
     normalizeObj,
-    getDOM,
 };
