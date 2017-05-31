@@ -29,11 +29,10 @@ ws.addEventListener('message', (e) => {
         updateWorkspace(message);
     }
     else if (message.cmd.indexOf('DOM_') == 0) {
-        updateWorkspace({ dom, ...message });
+        updateWorkspace(message);
     }
     else if (message.cmd == 'PART') {
         updateWorkspace({
-            dom,
             cmd: 'DOM_PART',
             uid: message.uid,
         });
@@ -108,7 +107,7 @@ function dragstarted(d) {
         };
 
         ws.sendObj(obj);
-        updateWorkspace({dom, ...obj});
+        updateWorkspace(obj);
     }
     // other
     else {
@@ -152,7 +151,7 @@ function dragging(d) {
         };
 
         ws.sendObj(obj);
-        updateWorkspace({dom, ...obj});
+        updateWorkspace(obj);
     }
     // other
     else if (name == 'PICK') {
@@ -176,7 +175,7 @@ function dragended(d) {
         };
 
         ws.sendObj(obj);
-        updateWorkspace({dom, ...obj});
+        updateWorkspace(obj);
     }
     // other
     else if (name == 'ZOOM') {

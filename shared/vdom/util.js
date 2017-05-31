@@ -1,11 +1,9 @@
 let { CANVAS } = require('../constants');
 
 function getDOM() {
-    return (
-        typeof __WEB__ != 'undefined'
-        ? require('#js/workspace').getDOM
-        : void 0
-    )();
+    return typeof __WEB__ != 'undefined'
+        ? require('#js/workspace').getDOM()
+        : void 0;
 }
 
 function normalizeObj(obj) {

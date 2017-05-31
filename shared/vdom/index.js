@@ -4,7 +4,7 @@ let vdom = {};
 
 function updateVDOM(obj) {
 
-    let { cmd, dom, uid } = obj;
+    let { cmd, uid } = obj;
 
     let domCmd = cmd.substr(4);
 
@@ -12,7 +12,7 @@ function updateVDOM(obj) {
 
     if (domCmd == 'VDOM') {
         Object.assign(vdom, parseVDOM(obj.vdom));
-        render(vdom, dom);
+        render(vdom);
     }
     else if (domCmd == 'SELECT') {
         let { event, x, y } = obj;
@@ -33,13 +33,13 @@ function updateVDOM(obj) {
             }
         }
 
-        render(vdom, dom);
+        render(vdom);
     }
     // the following commands are redirected from elsewhere,
     // and are not part of the communication schema
     else if (domCmd == 'PART') {
         delete vdom[target];
-        render(vdom, dom);
+        render(vdom);
     }
 }
 

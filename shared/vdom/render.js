@@ -3,7 +3,9 @@ let d3 = typeof __WEB__ != 'undefined' ? require('#lib/d3').default : void 0;
 
 // currently, this function should nop in node
 
-function render(vdom, dom) {
+function render(vdom) {
+    let dom = getDOM();
+
     if (!dom || !d3) return;
 
     let vdomList = Object.keys(vdom).map((target) => {
