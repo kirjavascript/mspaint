@@ -174,7 +174,7 @@ function packFragment(obj) {
                 );
             }
             else {
-                console.error(`Packer: ${key} not in scema`);
+                console.error(`Packer: ${key} not in schema`);
             }
 
         });
