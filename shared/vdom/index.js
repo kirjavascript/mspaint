@@ -50,6 +50,14 @@ function updateVDOM(obj) {
 
         render(vdom);
     }
+    else if (domCmd == 'MOVE') {
+        let { dx, dy } = obj;
+        vdom[target].x0 += dx;
+        vdom[target].x1 += dx;
+        vdom[target].y0 += dy;
+        vdom[target].y1 += dy;
+        render(vdom);
+    }
     // the following commands are redirected from elsewhere,
     // and are not part of the communication schema
     else if (domCmd == 'PART') {
