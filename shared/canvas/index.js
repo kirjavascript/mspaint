@@ -1,10 +1,12 @@
 let fillCanvas = require('./fill');
 let { rectLine, line } = require('./lines');
+let { getContext } = require('./util');
 
 function drawToContext(obj) {
 
     // spray http://perfectionkills.com/exploring-canvas-drawing-techniques/#round-distribution
-    let { cmd, ctx, message } = unwrap(obj);
+    let { cmd, message } = unwrap(obj);
+    let ctx = getContext();
 
     let drawCmd = cmd.substr(7);
 
@@ -66,11 +68,10 @@ function drawToContext(obj) {
 
 // because we don't have object spread in node yet
 function unwrap(obj) {
-    let { cmd, ctx } = obj;
+    let { cmd } = obj;
     let message = obj;
     delete message.cmd;
-    delete message.ctx;
-    return { cmd, ctx, message };
+    return { cmd, message };
 }
 
 module.exports = {

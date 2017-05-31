@@ -108,8 +108,7 @@ function addClient(ws, wss) {
                 });
             }
             else if (cmd.indexOf('CANVAS_') == 0) {
-                // replace with updateWorkspace() ?
-                updateCanvas({ message, uid });
+                updateWorkspace(Object.assign({}, message));
                 ws.broadcastObj(message);
             }
             else if (cmd.indexOf('DOM_') == 0) {

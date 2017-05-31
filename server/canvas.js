@@ -37,10 +37,6 @@ function initCanvas(wssInstance, roomInstance) {
     }, 5000);
 }
 
-function updateCanvas({ message, uid }) {
-    updateWorkspace(Object.assign({ ctx }, message));
-}
-
 function getPNG(cb) {
     canvas.toBuffer(cb);
 }
@@ -50,5 +46,5 @@ function getContext() {
 }
 
 module.exports = {
-    initCanvas, updateCanvas, getPNG, getContext,
+    initCanvas, getPNG, getContext,
 };

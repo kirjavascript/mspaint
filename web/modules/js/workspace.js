@@ -15,6 +15,7 @@ let canvas = canvasWrap.select('canvas').style('opacity', 0);
 let dom = canvasWrap.append('div').classed('dom', 1);
 let ctx = canvas.node().getContext('2d');
 export const getContext = () => ctx;
+export const getDOM = () => dom;
 
 // events
 
@@ -25,7 +26,7 @@ ws.addEventListener('message', (e) => {
     // console.log(message);
 
     if (message.cmd.indexOf('CANVAS_') == 0) {
-        updateWorkspace({ ctx, ...message });
+        updateWorkspace(message);
     }
     else if (message.cmd.indexOf('DOM_') == 0) {
         updateWorkspace({ dom, ...message });
@@ -98,7 +99,7 @@ function dragstarted(d) {
         };
 
         ws.sendObj(obj);
-        updateWorkspace({ctx, ...obj });
+        updateWorkspace(obj);
     }
     // dom
     else if (name == 'SELECT') {
@@ -129,7 +130,7 @@ function dragging(d) {
         };
 
         ws.sendObj(obj);
-        updateWorkspace({ctx, ...obj });
+        updateWorkspace(obj);
     }
     else if (name == 'ERASE') {
         // I don't understand the logic here but this is what mspaint does, so...
@@ -142,7 +143,7 @@ function dragging(d) {
         };
 
         ws.sendObj(obj);
-        updateWorkspace({ctx, ...obj });
+        updateWorkspace(obj);
     }
     // dom
     else if (name == 'SELECT') {

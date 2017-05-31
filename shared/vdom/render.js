@@ -1,4 +1,4 @@
-let { normalizeObj } = require('./util');
+let { normalizeObj, getDOM } = require('./util');
 let d3 = typeof __WEB__ != 'undefined' ? require('#lib/d3').default : void 0;
 
 // currently, this function should nop in node

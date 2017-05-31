@@ -1,5 +1,13 @@
 let { CANVAS } = require('../constants');
 
+function getContext() {
+    return (
+        typeof __WEB__ != 'undefined'
+        ? require('#js/workspace').getContext
+        : require('../../server/canvas').getContext
+    )();
+}
+
 function colorConvert(str) {
 
     // #000
@@ -120,4 +128,5 @@ module.exports = {
     colorConvert,
     pixelConvert,
     grabSquare,
+    getContext,
 };
