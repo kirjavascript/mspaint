@@ -19,7 +19,6 @@ Multiplayer mspaint
 http://members.chello.at/~easyfilter/bresenham.html
 https://github.com/1j01/jspaint/blob/gh-pages/src/image-manipulation.js
 http://www.rcramer.com/tech/windows/kbd_mspaint.shtml
-    fix mobile support
 ```
 
 Thanks to whoever made this; http://copy.sh/v86/?profile=windows98
