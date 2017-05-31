@@ -21,6 +21,7 @@ export const getContext = () => ctx;
 ws.addEventListener('message', (e) => {
 
     let message = unpack(e.data);
+    console.log(message);
 
     if (message.cmd.indexOf('CANVAS_') == 0) {
         updateWorkspace(message);

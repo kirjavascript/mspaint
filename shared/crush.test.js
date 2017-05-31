@@ -23,7 +23,7 @@ let data = {
     //
     event: 'start',
     imgData: Uint8ClampedArray.from(
-        [].concat(...new Array(3).fill([255, 0, 0, 255]))
+        [].concat(...new Array(123).fill([255, 0, 0, 255]))
     ),
     dx: 5,
 };

@@ -13,7 +13,7 @@ function updateVDOM(obj) {
     let target = uid || 'local';
 
     if (domCmd == 'VDOM') {
-        Object.assign(vdom, parseVDOM(obj.vdom));
+        vdom = parseVDOM(obj.vdom);
         render(vdom);
     }
     else if (domCmd == 'SELECT') {

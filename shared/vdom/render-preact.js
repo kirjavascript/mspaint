@@ -75,6 +75,9 @@ class CanvasFragment extends Component {
             requestAnimationFrame(() => {
                 let ctx = node.getContext('2d');
                 let { imgData, width, height } = this.props.data;
+                if (imgData instanceof Uint8ClampedArray) {
+                    imgData = new ImageData(imgData, width, height);
+                }
                 ctx.putImageData(imgData, 0, 0, 0, 0, width, height);
             });
         }
