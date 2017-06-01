@@ -3,8 +3,7 @@
 // strings have a max length and charCode of 255
 // arrays have a max length of 255
 // properties with the value undefined will not be sent
-// canvas data has the alpha channel stripped out
-// (alpha is 255)
+// canvas data has the alpha channel stripped out (alpha is 255)
 
 let { pixelConvert, colorConvert } = require('./canvas/util');
 let { USE_JSON } = require('./constants');
@@ -48,6 +47,7 @@ let properties = [
                 arr.push(obj[i]);
             }
             arr.unshift(arr.length >> 8, arr.length & 0xFF);
+            console.log(arr);
             return arr;
         },
         unpack(index, arr) {

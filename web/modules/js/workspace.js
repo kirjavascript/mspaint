@@ -1,6 +1,6 @@
 import d3 from '#lib/d3';
 import { event as d3event } from 'd3-selection';
-import { ws } from './socket';
+import { ws, wsMessage } from './socket';
 import { updateWorkspace } from '#shared/workspace';
 import { CANVAS } from '#shared/constants';
 import { pixelConvert } from '#shared/canvas/util';
@@ -18,10 +18,7 @@ export const getContext = () => ctx;
 
 // events
 
-ws.addEventListener('message', (e) => {
-
-    let message = unpack(e.data);
-    console.log(message);
+wsMessage.on('message.workspace', ({message}) => {
 
     if (message.cmd.indexOf('CANVAS_') == 0) {
         updateWorkspace(message);

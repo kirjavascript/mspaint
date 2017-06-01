@@ -22,4 +22,11 @@ https://github.com/1j01/jspaint/blob/gh-pages/src/image-manipulation.js
 http://www.rcramer.com/tech/windows/kbd_mspaint.shtml
 ```
 
+increase array limit from 255-65535 (write helper)
+increase imgData limit to >1280*800
+
+preload canvas fragments as PNG
+jsdom
+crush
+
 Thanks to whoever made this; http://copy.sh/v86/?profile=windows98

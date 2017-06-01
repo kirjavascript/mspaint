@@ -1,11 +1,8 @@
-let { h, render: renderDOM, Component } = require('preact');
+import { h, render as renderDOM, Component } from 'preact';
+import { normalizeObj } from './util';
+import d3 from '#lib/d3';
 
-let { normalizeObj } = require('./util');
-let { updateWorkspace } = require('../workspace');
-let ws = typeof __WEB__ != 'undefined' ? require('#js/socket') : void 0;
-
-let dom = typeof __WEB__ != 'undefined' ? document.querySelector('.dom') : void 0;
-let d3 = typeof __WEB__ != 'undefined' ? require('#lib/d3').default : void 0;
+const dom = document.querySelector('.dom');
 
 let render = () => null;
 class Container extends Component {
@@ -38,7 +35,7 @@ class Container extends Component {
                         dx, dy,
                     };
                     require('#js/socket').ws.sendObj(obj);
-                    require('../workspace').updateWorkspace(obj);
+                    require('#shared/workspace').updateWorkspace(obj);
                 }));
         }
     };
@@ -93,9 +90,9 @@ class CanvasFragment extends Component {
 }
 
 __WEB__ &&
-renderDOM(<Container/>, dom);
+renderDOM(<Container/>, null, dom);
 
-module.exports = {
+export {
     render,
     CanvasFragment,
     Container,

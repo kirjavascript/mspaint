@@ -7,6 +7,7 @@ import { pack, unpack } from '#shared/crush';
 // http://websocket.org/echo.html
 
 export const ws = new WebSocket(`ws://${location.hostname}:${PORT}/`);
+export const wsMessage = d3.dispatch('message');
 
 ws.sendObj = (obj) => ws.readyState == WebSocket.OPEN && ws.send(pack(obj));
 ws.binaryType = 'arraybuffer';
@@ -27,6 +28,8 @@ ws.addEventListener('close', () => {
 ws.addEventListener('message', (e) => {
 
     let message = unpack(e.data);
+
+    wsMessage.call('message', this, { message });
 
     let { cmd } = message;
 
