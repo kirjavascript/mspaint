@@ -18,7 +18,6 @@ class Container extends Component {
             this.setState({vdom: Object.keys(vdom).map((target) => {
                 let key = `${target}:${vdom[target].type}`;
                 let obj = Object.assign({key, target}, vdom[target]);
-                normalizeObj(obj);
                 return obj;
             })});
         };

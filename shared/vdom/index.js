@@ -25,21 +25,19 @@ function updateVDOM(obj) {
                 type: 'SELECTION',
                 selecting: true,
             };
+            normalizeObj(vdom[target]);
         }
         else if (event == 'drag' || event == 'end') {
             vdom[target].x1 = x;
             vdom[target].y1 = y;
+            normalizeObj(vdom[target]);
             if (event == 'end') {
-                vdom[target].type = 'SELECTION';
-                vdom[target].selecting = false;
                 const ctx = getContext();
-                let { x, y, width, height } = normalizeObj({
-                    x0: vdom[target].x0,
-                    y0: vdom[target].y0,
-                    x1: vdom[target].x1,
-                    y1: vdom[target].y1,
-                });
+                let { x, y, width, height } = normalizeObj(vdom[target]);
+
+                vdom[target].selecting = false;
                 vdom[target].imgData = ctx.getImageData(x, y, width, height);
+
                 let copy = ctx.getImageData(x, y, width, height);
                 for (let i = 0; i < width*height*4; i++) {
                     copy.data[i] = 0xFF;
@@ -52,10 +50,8 @@ function updateVDOM(obj) {
     }
     else if (domCmd == 'MOVE') {
         let { dx, dy } = obj;
-        vdom[target].x0 += dx;
-        vdom[target].x1 += dx;
-        vdom[target].y0 += dy;
-        vdom[target].y1 += dy;
+        vdom[target].x += dx;
+        vdom[target].y += dy;
         render(vdom);
     }
     // the following commands are redirected from elsewhere,
@@ -79,8 +75,8 @@ function parseVDOM(vdomWireData) {
 }
 
 // run serverside to generate VDOM for new clients
-function getVDOM() {
-    return Object.keys(vdom).map((key) => {
+function getVDOM(uid) {
+    return uid ? vdom[uid] : Object.keys(vdom).map((key) => {
         return Object.assign({ uid: key }, vdom[key]);
     });
 }

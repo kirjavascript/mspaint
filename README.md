@@ -23,10 +23,17 @@ http://www.rcramer.com/tech/windows/kbd_mspaint.shtml
 ```
 
 increase array limit from 255-65535 (write helper)
-increase imgData limit to >1280*800
+~increase imgData limit to >1280*800
 
 preload canvas fragments as PNG
 jsdom
 crush
+babel-register
+
+// console.log(require('babel-core')
+//     .transformFileSync('./shared/vdom/render-preact.js', {
+//         presets: ['es2015', 'stage-0'],
+//         plugins: [['transform-react-jsx', { pragma: 'h' }]],
+//     }).code);
 
 Thanks to whoever made this; http://copy.sh/v86/?profile=windows98

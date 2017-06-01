@@ -1,5 +1,4 @@
 let { pack, unpack } = require('./crush');
-let { Suite } = require('benchmark');
 
 let data = {
     cmd: 'CANVAS_FILL',
@@ -49,6 +48,7 @@ console.log(`
 // benchmarks
 
 process.exit();
+let { Suite } = require('benchmark');
 
 let getData = {
     // vdom:[

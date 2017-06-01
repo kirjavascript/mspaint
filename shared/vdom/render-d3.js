@@ -1,5 +1,6 @@
 let d3 = typeof __WEB__ != 'undefined' ? require('#lib/d3').default : void 0;
 let dom = typeof __WEB__ != 'undefined' ? document.querySelector('.dom') : void 0;
+let { normalizeObj } = require('./util');
 
 function render(vdom) {
     if (!dom || !d3) return;
@@ -7,7 +8,6 @@ function render(vdom) {
     let vdomList = Object.keys(vdom).map((target) => {
         let key = `${target}:${vdom[target].type}`;
         let obj = Object.assign({key, target}, vdom[target]);
-        normalizeObj(obj);
         return obj;
     });
 
@@ -56,4 +56,4 @@ function render(vdom) {
         });
 }
 
-module.exports = render;
+module.exports = { render };
