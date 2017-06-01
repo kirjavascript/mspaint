@@ -1,5 +1,6 @@
 import { h, render as renderDOM, Component } from 'preact';
 import { normalizeObj } from './util';
+import { getVDOM } from './index';
 import d3 from '#lib/d3';
 
 const dom = document.querySelector('.dom');
@@ -17,8 +18,11 @@ class Container extends Component {
         render = (vdom) => {
             this.setState({vdom: Object.keys(vdom).map((target) => {
                 let key = `${target}:${vdom[target].type}`;
-                let obj = Object.assign({key, target}, vdom[target]);
-                return obj;
+                return {
+                    key,
+                    target,
+                    element: vdom[target],
+                };
             })});
         };
     }
@@ -41,24 +45,34 @@ class Container extends Component {
 
     render(props, {vdom}) {
         return <div>
-            {vdom.map((element) => {
+            <pre class="debug">
+                {JSON.stringify(vdom,null,4)}
+            </pre>
+            {vdom.map((fragment) => {
+                let {
+                    key, target, element,
+                } = fragment;
+                let {
+                    x, y, width, height, selecting, imgData
+                } = element;
                 return <div
                     class={`
                         element
                         selection
-                        ${element.selecting ?'selecting':''}
-                        ${element.target == 'local' ? 'local' : ''}
+                        ${selecting ?'selecting':''}
+                        ${target == 'local' ? 'local' : ''}
                     `}
                     style={{
-                        top: element.y,
-                        left: element.x,
-                        width: element.width,
-                        height: element.height,
+                        top: y,
+                        left: x,
+                        width: width,
+                        height: height,
                     }}
-                    key={element.key}
-                    ref={element.target == 'local' && this.onMove}
+                    key={key}
+                    ref={target == 'local' && this.onMove}
                 >
-                    {element.imgData && <CanvasFragment data={element}/>}
+                    {imgData && <CanvasFragment element={element} target={target}/>}
+                    <pre class="debug">{target}</pre>
                 </div>;
             })}
         </div>;
@@ -68,18 +82,30 @@ class Container extends Component {
 class CanvasFragment extends Component {
     loadImgData = (node) => {
         if (node) {
+            node.imageSmoothingEnabled = true;
             requestAnimationFrame(() => {
-                let ctx = node.getContext('2d');
-                let { imgData, width, height } = this.props.data;
-                if (imgData instanceof Uint8ClampedArray) {
-                    imgData = new ImageData(imgData, width, height);
+                let { target, element } = this.props;
+                let { width, height, imgData } = element;
+
+                if (imgData == 'USE_PNG') {
+                    let ctx = node.getContext('2d');
+                    let img = new Image();
+                    img.onload = function() {
+                        ctx.drawImage(this, 0, 0);
+                    };
+                    img.src = '/vdom/' + target;
+                    // mutating props is dangerous! but we don't need a rerender...
+                    this.props.element.imgData = ctx.getImageData(0, 0, width, height);
                 }
-                ctx.putImageData(imgData, 0, 0, 0, 0, width, height);
+                else {
+                    let ctx = node.getContext('2d');
+                    ctx.putImageData(imgData, 0, 0, 0, 0, width, height);
+                }
             });
         }
     };
 
-    render({data: {width, height}}) {
+    render({element: {width, height}}) {
         return <canvas
             ref={this.loadImgData}
             width={width}

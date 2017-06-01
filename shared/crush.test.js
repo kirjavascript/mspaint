@@ -44,7 +44,33 @@ console.log(`
 `);
 
 // console.log(unpack(packed))
-
+//
+// crush canvas:
+//
+// let arr = [];
+// for (let i = 0; i < obj.data.length; i += (i % 4 === 2 ? 2 : 1)) {
+//     arr.push(obj.data[i]);
+// }
+// arr.unshift(arr.length >> 8, arr.length & 0xFF);
+// return arr;
+//
+// unpack canvas:
+//
+// let length = (arr[index + 1]) + ((arr[index]) << 8);
+// let imgData = arr.subarray(index + 2, index + 2 + length);
+// let fullLength = (imgData.length/3)*4;
+// let value = new Uint8ClampedArray(fullLength);
+// for (let i = j = 0; i < length; i++, j++) {
+//     value[j] = imgData[i];
+//     if (i % 3 === 2) {
+//         value[++j] = 255;
+//     }
+// }
+// return {
+//     length: length + 2,
+//     value,
+// };
+//
 // benchmarks
 
 process.exit();

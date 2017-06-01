@@ -20,7 +20,7 @@ function routes(app) {
     app.get('/vdom/:uid', (req, res) => {
         let { uid } = req.params;
         let vdom = getVDOM(uid);
-        if (!vdom) res.send('nope');
+        if (!vdom) return res.send('nope');
         let { width, height, imgData } = vdom;
         let canvas = new Canvas(width, height);
         let ctx = canvas.getContext('2d');

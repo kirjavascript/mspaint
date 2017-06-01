@@ -55,6 +55,16 @@
             border: 1px dashed black;
             margin: none;
         }
+
+        .debug {
+            position: absolute;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+            opacity: 0.5;
+            margin: 0;
+            font-weight: 900;
+        }
     }
 }
 
