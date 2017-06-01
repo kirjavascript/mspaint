@@ -43,11 +43,10 @@ let properties = [
         name: 'imgData',
         pack(obj) {
             let arr = [];
-            for (let i = 0; i < obj.length; i += (i % 4 === 2 ? 2 : 1)) {
-                arr.push(obj[i]);
+            for (let i = 0; i < obj.data.length; i += (i % 4 === 2 ? 2 : 1)) {
+                arr.push(obj.data[i]);
             }
             arr.unshift(arr.length >> 8, arr.length & 0xFF);
-            console.log(arr);
             return arr;
         },
         unpack(index, arr) {
@@ -61,6 +60,7 @@ let properties = [
                     value[++j] = 255;
                 }
             }
+            console.log(fullLength);
             return {
                 length: length + 2,
                 value,
