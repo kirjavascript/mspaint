@@ -1,4 +1,4 @@
-# mspaint
+![mspaint](mspaint.png)
 
 mesmerizing multiplayer masterpiece maker
 
@@ -100,6 +100,8 @@ https://github.com/1j01/jspaint/blob/gh-pages/src/image-manipulation.js
 
 increase array limit from 255-65535 (write helper)
 ~increase imgData limit to >1280*800
+
+zoom vdom bug
 
 preload canvas fragments as PNG
 jsdom

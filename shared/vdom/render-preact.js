@@ -45,9 +45,9 @@ class Container extends Component {
 
     render(props, {vdom}) {
         return <div>
-            <pre class="debug">
+            {false && <pre class="debug">
                 {JSON.stringify(vdom,null,4)}
-            </pre>
+            </pre>}
             {vdom.map((fragment) => {
                 let {
                     key, target, element,
