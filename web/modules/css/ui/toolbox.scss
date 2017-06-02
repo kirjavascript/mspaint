@@ -39,5 +39,9 @@
                 line-height: initial; // edge inherits this. wtf?
             }
         }
+
+        .size, .trans, .shape, .desc {
+            pointer-events: none;
+        }
     }
 }

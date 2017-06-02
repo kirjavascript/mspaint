@@ -28,6 +28,10 @@
         background-color: white;
     }
 
+    .cursor {
+        pointer-events: none;
+    }
+
     // "vdom"
 
     .dom {

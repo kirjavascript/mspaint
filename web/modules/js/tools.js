@@ -169,8 +169,7 @@ function drawBrushSub() {
             }
 
             subShape
-                .classed('shape',1)
-                .style('pointer-events', 'none');
+                .classed('shape',1);
         })
         .on('click', (d, i) => {
             brushIndex = i;
@@ -231,8 +230,7 @@ function drawZoomSub() {
                 .attr('y', i * 16)
                 .attr('dy', '1.1em')
                 .style('font-size', '11px')
-                .text(d + 'x')
-                .style('pointer-events', 'none');
+                .text(d + 'x');
 
             // shape
             zoomGroup
@@ -241,8 +239,7 @@ function drawZoomSub() {
                 .attr('x', 28 - (d/2))
                 .attr('y', (i * 14.15) + 9 +(i==3))
                 .attr('width', d)
-                .attr('height', d)
-                .style('pointer-events', 'none');
+                .attr('height', d);
         })
         .merge(zoomSelection)
         .each(function(d, i) {
@@ -291,8 +288,7 @@ function drawEraseSub() {
                 .attr('x', 19 - d)
                 .attr('y', (i * 14) + 7 +(i==3))
                 .attr('width', d*2)
-                .attr('height', d*2)
-                .style('pointer-events', 'none');
+                .attr('height', d*2);
         })
         .merge(eraseSelection)
         .each(function(d, i) {
@@ -322,7 +318,6 @@ function drawTransparencySub() {
         .classed('trans', 1)
         .attr('src', (d) => `tools/${d.name}.png`)
         .style('position', 'absolute')
-        .style('pointer-events', 'none')
         .style('z-index', 2)
         .style('top', (d) => d.top + 'px');
 

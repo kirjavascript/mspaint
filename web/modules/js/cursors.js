@@ -82,7 +82,6 @@ function update() {
     let enter = selection.enter()
         .append('div')
         .style('position', 'absolute')
-        .style('pointer-events', 'none')
         .style('z-index', 10)
         .classed('cursor', true)
         .html((d) => getCursorSVG(d.color))
