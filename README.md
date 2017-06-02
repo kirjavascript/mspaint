@@ -1,8 +1,15 @@
-![mspaint](mspaint.png)
+<div align="center">
+    ![mspaint](mspaint.png)
+    <br>
+    ![](https://img.shields.io/david/kirjavascript/mspaint.svg)
+    ![](https://img.shields.io/badge/babel-stage--0-blue.svg)
+    ![](https://img.shields.io/badge/tools-7/16-orange.svg)
+    ![](https://img.shields.io/badge/live-NO-red.svg)
+</div>
 
  * complete realtime support
  * public domain
- * 7/16 classic mspaint tools
+ * classic mspaint tools
  * virtual DOM
  * server side rendering
 
@@ -28,7 +35,7 @@ So, this is embedded in the initial markup as an `<img/>` tag and is copied to t
 
 I tried applying lossless compression to the image before sending it, but this seems to take more time than is saved by reducing the image size. This could be cached instead, but the state would be out of date.
 
-A PNG is also periodically saved to disk to restore the state on server restart. First time I've used PNG as a database.
+PNG is a great database format for storing pixels; the canvas is periodically saved to disk to restore the state on server restart.
 
 The fragments of user UI seen in the workspace are generated from a nonstandard virtual DOM representation that is shared between everyone. This is rendered using [preact](https://github.com/developit/preact). Preact was chosen for its tiny size and the fact that it seemed to perform better than my [d3](https://d3js.org/) renderer.
 
