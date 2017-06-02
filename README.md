@@ -22,15 +22,15 @@
 
 There are many mspaint clones on the web, of varying levels of completeness.
 
-This is my implementation; everyone shares the same workspace, and canvas interactions, UI updates, mouse events or similar are displayed to everyone as they happen.
+In this implementation, everyone shares the same workspace. Canvas interactions, UI updates, mouse events or similar are displayed to everyone as they happen.
 
-This has presented various technical challenges. I'm not aware of any desyncing, but I can't really know for sure.
+This has presented various technical challenges with ensuring everything is fast and in sync.
 
 The style is based on win98 paint, except the icon. I prefer the other icon.
 
 ## implementation notes
 
-A focus has been made on keeping everything fast and lean. Keeping the script payload low, using vector art where possible, reducing traffic required.
+A main focus has been to be fast and lean. Keeping the script payload low, using vector art where possible, reducing traffic required. Canvas drawing operations particularly seem to require optimizations for decent speed.
 
 Providing the state of the canvas to the user quickly to reduce the time to first paint has been the subject of much thought. Sending a raw Uint8ClampedArray down the wire after getting a websocket connection just seemed way too slow.
 
