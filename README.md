@@ -1,12 +1,16 @@
 <div align="center">
     <img src="mspaint.png" alt="mspaint">
     <br>
+</div>
+<br>
+<p align="center">
     <img src="https://img.shields.io/david/kirjavascript/mspaint.svg">
     <img src="https://img.shields.io/badge/babel-stage--0-brightgreen.svg">
     <img src="https://img.shields.io/badge/version-win98-0000ff.svg">
     <img src="https://img.shields.io/badge/tools-7/16-orange.svg">
     <img src="https://img.shields.io/badge/live-no-red.svg">
-</div>
+</p>
+<br>
 
  * complete realtime support
  * public domain
