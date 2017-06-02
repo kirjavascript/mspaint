@@ -1,8 +1,8 @@
 <div align="center">
     <img src="mspaint.png" alt="mspaint">
     <br>
-    <img src="https://img.shields.io/david/kirjavascript/mspaint.svg)">
-    <img src="https://img.shields.io/badge/babel-stage--0-blue.svg)">
+    <img src="https://img.shields.io/david/kirjavascript/mspaint.svg">
+    <img src="https://img.shields.io/badge/babel-stage--0-blue.svg">
     <img src="https://img.shields.io/badge/tools-7/16-orange.svg">
     <img src="https://img.shields.io/badge/live-NO-red.svg">
 </div>
