@@ -3,7 +3,6 @@
 // strings have a max length and charCode of 255
 // arrays have a max length of 255
 // properties with the value undefined will not be sent
-// canvas data has the alpha channel stripped out (alpha is 255)
 
 let { pixelConvert, colorConvert } = require('./canvas/util');
 let { USE_JSON } = require('./constants');

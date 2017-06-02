@@ -8,7 +8,6 @@ function updateWorkspace(obj) {
         drawToContext(obj);
     }
     else if (obj.cmd.indexOf('DOM_') == 0) {
-        // uid* is added to message
         updateVDOM(obj);
     }
 }

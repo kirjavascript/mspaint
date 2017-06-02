@@ -13,18 +13,14 @@
 <br>
 
  * complete realtime support
- * public domain
  * classic mspaint tools
- * virtual DOM
- * server side rendering
+ * public domain
 
 ## what
 
 There are many mspaint clones on the web, of varying levels of completeness.
 
 In this implementation, everyone shares the same workspace. Canvas interactions, UI updates, mouse events or similar are displayed to everyone as they happen.
-
-This has presented various technical challenges with ensuring everything is fast and in sync.
 
 The style is based on win98 paint, except the icon. I prefer the other icon.
 
@@ -38,7 +34,7 @@ The canvas is rendered serverside with [node-canvas](https://github.com/Automatt
 
 So, this is embedded in the initial markup as an `<img/>` tag and is copied to the canvas when finished. This means that the data can be loaded async before any scripts are reached.
 
-I tried applying lossless compression to the image before sending it, but this seems to take more time than is saved by reducing the image size. This could be cached instead, but the state would be out of date.
+I tried applying lossless compression to the image before sending it, but this seems to take more time than is saved by reducing the image size. This could be cached instead, but the state would be out of date. It feels like there are endless tradeoffs to consider.
 
 PNG is a great database format for storing pixels; the canvas is periodically saved to disk to restore the state on server restart.
 
@@ -107,11 +103,6 @@ This project should work nearly everywhere, including mobile. Older browsers are
 https://github.com/1j01/jspaint/blob/gh-pages/src/image-manipulation.js
 ```
 
-increase array limit from 255-65535 (write helper)
-
-zoom vdom bug
-DOM_PLACE
-
 babel-register
 
 // console.log(require('babel-core')
@@ -119,4 +110,14 @@ babel-register
 //         presets: ['es2015', 'stage-0'],
 //         plugins: [['transform-react-jsx', { pragma: 'h' }]],
 //     }).code);
+
+add routes for badges to show active users
+https://github.com/github/markup/issues/224
+
+increase array limit from 255-65535 (write helper)
+
+zoom vdom bug
+DOM_PLACE
+
+imgData dirtyflag
 -->

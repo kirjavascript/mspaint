@@ -4,7 +4,8 @@
     "test": "node shared/crush.test",
     "start": "nodemon server/index.js --host 0.0.0.0 --ignore 'web/modules/**/*' --ignore 'shared/**/*' --env.dev",
     "format-styles": "stylefmt -r \"web/modules/css/**/*\" -c .stylelintrc",
-    "deploy": "git pull origin master && yarn && webpack -p"
+    "deploy": "git pull origin master && yarn && webpack -p",
+    "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json"
   },
   "dependencies": {
     "babel-plugin-transform-react-jsx": "^6.24.1",
