@@ -1,0 +1,754 @@
+[33mcommit ce35d51d450d8190a0ec87a235f51e7638963e4c[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Fri Jun 2 04:00:25 2017 +0100
+
+    badges
+
+[33mcommit fa25318cb1311c8d4db29b079a1e9b373a3642f2[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Fri Jun 2 03:57:10 2017 +0100
+
+    badges
+
+[33mcommit 07dc76afbc82f616978f997c226eae5705402f23[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Fri Jun 2 03:51:28 2017 +0100
+
+    badges
+
+[33mcommit 30455405c085a2856774b142e8f46feaba4ff2fd[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Fri Jun 2 03:49:36 2017 +0100
+
+    badges
+
+[33mcommit ec540439176fb187933c88170add617b90e50d16[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Fri Jun 2 03:47:14 2017 +0100
+
+    badges
+
+[33mcommit 73ca0539e5a8fe27fdaef06531c79490fff6f368[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Fri Jun 2 03:44:46 2017 +0100
+
+    badges
+
+[33mcommit 82019a21d842ecfe4c5e12b95939551790207281[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Fri Jun 2 03:04:14 2017 +0100
+
+    added stylelint plugin
+
+[33mcommit 6b06fdfe2f86379b315f898c6e718de2d3410493[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Fri Jun 2 00:40:16 2017 +0100
+
+    image
+
+[33mcommit c8a48ef586fe42dc1a3c390e2da71c426a472887[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Fri Jun 2 00:27:59 2017 +0100
+
+    readme
+
+[33mcommit 3878e83501d73479146eaa4a4c680f41dcad8dfe[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Thu Jun 1 22:21:45 2017 +0100
+
+    README.md
+
+[33mcommit affd5221c7ea8a984d7f6dd39c6e1e73bc923003[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Thu Jun 1 22:02:44 2017 +0100
+
+    fragment restoring
+
+[33mcommit c874ef9c48b8823585a1fd9efd0e19ecebd40cf0[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Thu Jun 1 20:56:07 2017 +0100
+
+    server side rendering of canvas fragments
+
+[33mcommit ba8e416f4144621e33cbb6ba2e8c3180d1b46b3a[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Thu Jun 1 16:49:44 2017 +0100
+
+    crusher fixes
+
+[33mcommit 0d57ef27fcc2936051b8245d4d70b20dedb48318[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Thu Jun 1 15:41:40 2017 +0100
+
+    improved parsing performance
+
+[33mcommit a6584c1a780b4aea222c839bce8b46900778099b[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed May 31 16:33:06 2017 +0100
+
+    imagedata wip
+
+[33mcommit a47a2c848adbff0bf00c7eb456b99c29b26e4075[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed May 31 15:56:43 2017 +0100
+
+    imgData packer
+
+[33mcommit 056e7c1846b22bfa2931aca981981b57bdfffa38[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed May 31 13:46:18 2017 +0100
+
+    crappy selection moving
+
+[33mcommit 02a17e4d3facff5e48e6aa2b58f9c9207f3b42e9[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed May 31 12:51:24 2017 +0100
+
+    trying preact renderer
+
+[33mcommit 876b822d6e645e454c415005344fd345fbbb8c64[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed May 31 10:57:14 2017 +0100
+
+    ...
+
+[33mcommit 79f8b430fef2a64db4bd216158f5528d8b331a69[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed May 31 09:03:13 2017 +0100
+
+    selection dragging prelim
+
+[33mcommit bdfac8c6308006f0fd2e97cafc2bf9f92d56e31c[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed May 31 04:32:44 2017 +0100
+
+    stupid modification :P
+
+[33mcommit 7432ff313dfa7179c397af9ec4e4a57361d8480c[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed May 31 03:38:50 2017 +0100
+
+    IE11 Support (+others)
+
+[33mcommit bca47cc730e09a222ec3eab45f8d5ff59cc3acf7[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed May 31 02:03:54 2017 +0100
+
+    chrome mobile height fix
+
+[33mcommit e03332941b7b52b7c3f2cf179dd18ec089f27d83[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed May 31 01:19:18 2017 +0100
+
+    getVDOM()
+
+[33mcommit 80681922c95988d3dd15067a971e28bf7a33b5a8[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed May 31 01:08:25 2017 +0100
+
+    replaced ctx access
+
+[33mcommit 99e05d520785ec7bea0f9d71583fe389a5b0cd64[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed May 31 00:25:05 2017 +0100
+
+    getContext():w
+
+[33mcommit 25b73a8b99c5ed5de8a4b469be6882b1c58dc685[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue May 30 22:20:12 2017 +0100
+
+    trucating numbers
+
+[33mcommit e7f1ac817da9a09edbae5eaf59209ea213dc166b[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue May 30 22:12:05 2017 +0100
+
+    added enum datatype
+
+[33mcommit b3bcce58f7045b4ba8433d8d9d846a7d1fb48c75[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue May 30 21:54:21 2017 +0100
+
+    crusher working!
+
+[33mcommit e1c42c0b533e25698d6cef0ec365cd0b1bc497d3[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue May 30 19:26:46 2017 +0100
+
+    crush savestate
+
+[33mcommit 274fd58498a4ab46625faf0db2c55fc2e3754fc8[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue May 30 19:15:29 2017 +0100
+
+    crushing cleanup
+
+[33mcommit a6dba9e2298fe763c5aa151e7fe7a59bbabf6580[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue May 30 18:45:35 2017 +0100
+
+    added array-like VDOM
+
+[33mcommit cf33dc4eff46fc81d49d50376a55a50eaef5ed4f[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue May 30 18:06:58 2017 +0100
+
+    added objects and arrays to crusher
+
+[33mcommit aae172f7d48830e6b15d085b8336a0f7e4bd8c63[m[33m ([m[1;32mstylefmt[m[33m)[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue May 30 15:12:00 2017 +0100
+
+    Tue 30 May 15:12:00 BST 2017
+
+[33mcommit 0559eee8a071d10f37665ff0fbd2eeb66f8f9985[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue May 30 14:58:26 2017 +0100
+
+    Tue 30 May 14:58:26 BST 2017
+
+[33mcommit ac844869ac1b0ecce7f2abe32a8c1827f1c40acc[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun May 21 14:00:39 2017 +0100
+
+    stupid vim
+
+[33mcommit 4ca3debbd0d5fc12130e6b61601bcded4e59e414[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun May 21 01:01:39 2017 +0100
+
+    tweaked bbox
+
+[33mcommit 63f9c90f816dd16059640539ffe9bfa793eafe32[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sat May 20 23:45:50 2017 +0100
+
+    fixed mouseout bug
+
+[33mcommit 7fa62f118373f2fb6c1505cd6cb0024277b5c0fb[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sat May 20 23:27:16 2017 +0100
+
+    full vdom support
+
+[33mcommit bf458923546df8234c18494ac4d0a888e5215c68[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sat May 20 19:05:27 2017 +0100
+
+    base vdom rendering
+
+[33mcommit bd8b3272cce578c3775b664d26046dda9adc8126[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sat May 20 17:14:32 2017 +0100
+
+    refactored js
+
+[33mcommit a82e7327567f74b406d4bf2b2807f6a6f8694f4b[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sat May 20 16:43:59 2017 +0100
+
+    refactored scss
+
+[33mcommit 1624338b7c95e36f476ad239678c7364646a6ed5[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun May 14 23:50:25 2017 +0100
+
+    savestate
+
+[33mcommit 1f6be201067a35e641d80e825e7c5c69ea70e00c[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun May 14 22:27:58 2017 +0100
+
+    select tool
+
+[33mcommit da99291eb5a3e32889cb413d353bf9e1f74bfe99[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun May 14 19:52:16 2017 +0100
+
+    draw tool prep
+
+[33mcommit 362d62a5f0bb819f56d4bd808aa11da8a266c030[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun May 14 18:44:05 2017 +0100
+
+    restructure for vdom prep
+
+[33mcommit 4e06254d3fd77384e68dbde17525fe58343a51e0[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun May 14 16:21:37 2017 +0100
+
+    checked socket is open before sending
+
+[33mcommit 5871ee69f518c444827d4680df9894bddcc0ab05[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun May 14 12:44:50 2017 +0100
+
+    added IEEE754 support
+
+[33mcommit 6d1fe9d6f5b975598fb672fdc880dd082ab9fd24[m[33m ([m[1;31morigin/develop_packer[m[33m, [m[1;32mdevelop_packer[m[33m)[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed May 10 23:14:31 2017 +0100
+
+    endianness check
+
+[33mcommit 1d448ebd29ce0e0c4e78a88814af0c486fb5f4fd[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue May 9 23:58:41 2017 +0100
+
+    packer color definition wip
+
+[33mcommit 45072b034704576bbbf13a546072050b9b5f8b6d[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue May 9 23:20:49 2017 +0100
+
+    the great flattening
+
+[33mcommit f2d86aae7fbf85b5edd4582dc6b10f046d4768df[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue May 9 22:51:48 2017 +0100
+
+    flattened everything but canvas stuff
+
+[33mcommit 6f4720b41f967797b843275c4e813de86e477a3d[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue May 9 22:19:07 2017 +0100
+
+    savestate
+
+[33mcommit 55832089d566804d14ca22e296b2524e04283c4f[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sat May 6 19:45:02 2017 +0100
+
+    .
+
+[33mcommit 5fdfe061a4ac8303ee2dc630da94c64b416aa72f[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Mon May 1 21:10:40 2017 +0100
+
+    fuck msgpack
+
+[33mcommit 2324953540aac2e59f149abbe0b1095ce2b37b26[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Mon May 1 03:09:11 2017 +0100
+
+    browser compat testing
+
+[33mcommit 77acc97eb7a087c16806157a4dddcf734adb76e6[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Mon May 1 00:58:10 2017 +0100
+
+    firefox mobile fix
+
+[33mcommit 5c73538549fb334210244c0fc3f13ff440fe2580[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Mon May 1 00:05:06 2017 +0100
+
+    bbox clamping works. pixel perfect pencil tool!
+
+[33mcommit f75e54d82a3287ee2d0b45dc5acd1569010a4d5b[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun Apr 30 22:45:37 2017 +0100
+
+    left boundary border fix
+
+[33mcommit 82e3b4bd166bd2df8e539f9f894a2e198b872c01[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun Apr 30 21:38:49 2017 +0100
+
+    bottom boundary overflow fix
+
+[33mcommit bd4c10e819175c5bca665627a161e518d50007ff[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun Apr 30 18:42:11 2017 +0100
+
+    wip perfect l;ine!
+
+[33mcommit c6537a08cb2fa9f73cb6848b01e4c0cf26d20741[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun Apr 30 15:35:42 2017 +0100
+
+    fixed chrome bug and vert rendering bug
+
+[33mcommit 29210f41d562928d4cc8ca526d30291a6061dd24[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun Apr 30 14:00:19 2017 +0100
+
+    fixed bug in fill tool
+
+[33mcommit ad48f40bccdd1c3645d286c4054e335cd3dbfa31[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun Apr 30 13:40:29 2017 +0100
+
+    non anti aliased pencil line!
+
+[33mcommit 7315e07ae83670444bad75e8adf8acf41d53ed25[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun Apr 30 11:19:03 2017 +0100
+
+    refactor
+
+[33mcommit beb18591d02234ce4f40107f91a511efed73e0ad[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun Apr 30 11:07:17 2017 +0100
+
+    fill tool!
+
+[33mcommit 1dc058a550d20ddc2f2f010df22e59a3392c77c1[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun Apr 30 08:28:45 2017 +0100
+
+    adjusted cursors to be more correct (no idea how they broke)
+
+[33mcommit 8caaaf41c16e9f7b0cf45c0478d947d2e432767c[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun Apr 30 07:19:20 2017 +0100
+
+    fixed scrollbar bug, fixed delta bug
+
+[33mcommit ed958a76bfe4ea43032f07b5d40cc70853631c82[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun Apr 30 06:47:21 2017 +0100
+
+    erase tool
+
+[33mcommit 34f56a434b864178a7a1d88037d519cf5589e82c[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun Apr 30 04:24:45 2017 +0100
+
+    zoom working :D
+
+[33mcommit ef74523e7eb0ff3d78c49449e01e46057862fa85[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun Apr 30 03:53:30 2017 +0100
+
+    img compress test
+
+[33mcommit d3b45e3a434798e1b1b15ec152c860a88ce62063[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun Apr 30 03:41:21 2017 +0100
+
+    zoom adjustments working :)
+
+[33mcommit d705471feab5675c2580bfaa477aca75abcd2c9e[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun Apr 30 02:00:13 2017 +0100
+
+    zoom tool working, zoom scrolling completely broken :)
+
+[33mcommit 05cfb0f0833b7e2fda1478cdd38818b8715289ad[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun Apr 30 00:38:00 2017 +0100
+
+    .
+
+[33mcommit a76478af894a5b53d8045d59a84767cefec65574[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sun Apr 30 00:36:15 2017 +0100
+
+    preload tools
+
+[33mcommit e57f1a57881550490cb95a0d9422048a1032e193[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sat Apr 29 23:48:07 2017 +0100
+
+    compressed png test
+
+[33mcommit dbf5003cdd425ecfea1cbfd5ea890c8d95ba7a0d[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sat Apr 29 20:48:37 2017 +0100
+
+    async is ebtter :D
+
+[33mcommit 9b72f212cdee7b7a957674fa3d88dcc5df50688b[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sat Apr 29 20:45:09 2017 +0100
+
+    test
+
+[33mcommit 57129a6776704ae7e58bc1976b2b393934088f2b[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Sat Apr 29 20:05:23 2017 +0100
+
+    preloaded canvas for better perf
+
+[33mcommit 97a629ef71dd88df351c9683b02a55081e70b12a[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Mon Apr 24 23:00:09 2017 +0100
+
+    .
+
+[33mcommit 5deebce25ebf88d7332337f6122b5adcb122da5b[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Thu Apr 20 18:48:07 2017 +0100
+
+    Ţ̶̗̣̤̗̬͍̜̱͈̟͕̳̱̂͌̎̽̓̎͑͋̉̑͢͜͝o̴͎̟͚͔̞̖̲͆̽͆̾͢͞ ̴̸̧̗̘͔̥̠̼͖̩̹̞̲͚̞̮ͩ̀́͗i̶ͣ͑͊̍̈̿͐͏̧̻̭̰̗̭̜̩̣̞͉̥͎̝͎̯͜͢ͅͅn̶̡̟̹̬̲͎̯͎̻̤̯͇͇̞̰̩̦̅̀̋ͮ̊̾͑ͦ̒̓ͬͫ̚v̷̧̮͚͈̜̪̹̫̯͈̘̫̟̦͍̂͗͋͌͒͒ͤ́̒ͥ̇̃ͅo̤͓̼̘̱̱͎͖̰͚ͧͥ͛̽ͧ̈̎́̈́̏ͥͤ̂̀͟k̢̺̝̞̰͍̪ͣ̇́̎̉̓͒͒̓̓̂̅̍̕e̷ͤͬ͆͛ͪ̄ͪ́ͭ͛̆̅̄ͭͥͥ̚̕̕͞҉̯͈͓͙̰̖̳̘ ̡̧̠͎̻͚͎̳̓͗̆̽͗ͮ̿̿͠t̵̷̳̻̻̭̫̩̹̖͂͑̓̆ͤ̍̒ͥ̔ͯ̄̍̃͘͡͞h̨̢̯̗̻̹͔̪͇̳̳͕͎͈͓̘̬ͬ̈̈́̓̉̊ͯ̔̐͛ͥ̆̂͑ͦ̌͒͜e̵̺̜̣̬̹̫̅ͨ͛̈ͩ̏̍ͫ͑̅ͫ͛̏̿̊͑̂̿͟ ͤ͑̆ͫ̓͐͋ͭ͘҉̝̝͓̜̥̞̻h͕͙̬̖͎̬̭̤͔̫̟͙̮̫ͬ̅͒̿ͫͦ̅ͤͣ̽͜͜i̷̡̜̠̣͓̺̞̠͙̬͓ͭͨ̉̾̃̑͘v̮̪͓͈͕̟͖̖̺͖̠͍͇̳̭̾̋ͯͫͩ́̚͞͡͝ͅę͕̙̤̟̬̅̎ͦ̊ͧ̽ͦͥͩ͞-̂̉̌̂̍̀͂̑̒̅͛̿̀̉̏̍͏̞͍͔́ͅm̶̢͚͙̺͈̹̳͎̳̣̲̳͇͉̯̤͕̈̋͊̌̂̄͞ͅį̧͕̫̣̣̰͙̦̖̺̥͔͔ͫ̋̉͢͜n̬̦͉̖̜̳̜̹̯̈̐̏̾͛ͪ̑͌ͣͬ͌͌̽̅̿͊ͫ̓̚͞d̛ͪ̅͛̐ͣͧͭ̎ͯ҉͇̺̱̀ ̡͓͙͓͉̖̦̆ͪͥ͑̑ͦ́͡r͉̮̙̞͓͚̜̭͇̖̝͚͉͈̝̯̅̏̃̃ͯ̊͌͂̏͆ͫ̄͑ͭͫ̈́́͢e̹͔̼͙̫̞̻̹̬̪̱͇͕͈̖̭̞̟̿ͪ̽́̋͗̊ͫ͗̔͌̈ͣͮ̀͘ͅp̛̑̿̏͐͂̍ͭ̓̑ͫ̒ͧ̒ͬ̓̿̚͝҉̶̣̭̻̝͓r̡̡̫̟̼̱ͤ̒͒͗͛̂ͮ̒͌͐̔̿ͯ͒̕͞ḛ̬͓̟̗̭͕̝̗͔̺̝͉̖̳͙̯ͦͩ̆ͫ̎͘s̫͚̘̙͙̟̱̙̳̗̠̙̺̺̱͙̭͚̐̂̎̃͑͊̌̅͘͜͞e̡͍̻̤̥̤̣̲͎͈̲͕ͧ͗̋͐ͬ̉͌̎͑̎ͯ͋̄͐̆́ͯͫ̍̀ͅņ̦̟̲̯̟̮̭͍̳͕͔͖̬̞̖͙̝̮̮̆̋̔̔̄́ͬ̌̄̈́̈́̅͌̓̚͞ţ͉͚̥̟̤̯̖͍͖͎̟̰ͫ̃̅̒̚͟͡͠i̾̆̈́̈́̎̉̓̀̀̌͏̸̧҉͔͉͓͓̘͔n̷̶̡̞̘̞̰̘̯͎̬̗̥̮̰͈̞̘̣̹̙̐̇̔̃ͬ̈́̊̅͛̐͂̀͌g̛̹̙͚̱̥̞ͥͤ̔͑ ̣͖̱͎̙̫̝̭̰̟̦̹͎̹͇̥̗̻̔̉͒̈́̅ͦ̐͊́͟͠ć̴̷̢̛̫̮͖̭͖́ͮ͑h̴͎̻̬̤͇̺̙͈̣̞͒̓ͬ̃͟͠ͅa̧͊̂ͩ̈̾̕͏̶̛͔̦̤͈̜̮̩͚̹̮͚͔̼̜ͅơ̶̴̡͚͈̝̜̗͉̻͈̹̙͕̰̥̰̗̲̱ͪ̈ͦ̒̓͗͞s̆ͥ̈́̽ͩ̓̋̑ͨͣ͌̅͂̚҉̵̭͉̟̲̰̙͖̩͕̝ͅͅͅ.̢̖͎̹ͨ̎ͬͥ̓̒̅͗ͥͤ̌̿ͩ̉̒͝
+    ̴̶̟̤̬̙̟͎̮̍ͭ̉͐̎ͬ͆̀̽̈͘͟͜ͅI̞͇̪͎͙͖̙͉̠̼̬͙̱̭ͣ̉̊ͧ͊͊̋̿̾ͨ̏̂͆́͞n̶͕͕̗̺̥̦̼̞̹̜̝̣̫͍̰ͮ̒̐̇̍ͨ̀͠͝ͅv̵̶̻̘̮͖̓͐ͭ̂ͣ̀̅̒͒̄̿́͞ͅơ̵̟̯̮̔ͦͦ͒̉̄͢k̻͉͉̳̙̞̥͎̭̪͓͈̤̤͕͓̮ͧ̒͆̊ͦ̒́̈ͦ̄̈́̆͛͒́̽̔̀̚͜͞ĭ̓̎ͭ͋͏͏͚̰͚͔̱͇̰̣̤̙̙͈͍̳ͅͅn̸̲͓̣̙̩̯̱̠̲̜̮̖͉̜͂̎̊̌ͨͮ̄ͭͭ͛̊̊͆͝ġ̷̇̎̄̊͐̄̃̈́̊̽ͫ͆͏̙̜̘͔̠̫̮͎͔̦͖̗͉̘͖̟̺ ͥ̃̿ͤ̆̿ͬ̎̓ͮ̅͗ͫͬ͝͏̬̞̣̗͚̳̝̹̜͉͈t̛̗͎̺̱̥̦̳͎̖̫̻̭̬̬̩͔͉̏̂̎̉̓̈́̈́̑ͣ͑ͮ͞h̶̑̋͆̐̄̒ͮͨ͘͏͚̬̱̱͈ȩ̸̙̺͔͕̩͎̼̝̪̇̏̃̿͒̄ͨ͆́͟͞ ̳̪̠̹͍̜̍̊̈́̈́̿͊ͤ́ͨ́̎ͮ͌̈́̅͌ͯͭ̚͢͝f̀̎̊̑́͠҉̷̦̮̩̯͡ȩ̫̩̞̠̜͇͔̥͕̙͌̄̆ͥ̽̓̋̔ͥ̅̒ͮͥ͟͢eͪ̑͑ͥͭͦ͆̑́͑ͣ̐̉̽̌ͮ̅̚͏̴̤͙͕̘̗̰̠͕̘̬̠͉̻͉̥͍͜ͅl͊̀̑͋ͧͪͮ͑̉͌̂̆ͤ̐̚͏̵̢̯̠̗͖̼̖͇͎̼̜̳̠̭̘͙͍̦į̴͂͋́͛ͣ̿̿̔ͨͬͭͯ̊҉̲͕̻̳̹͇͜n̶͖̼̪͔̠͇͉̜̩̱̘̭͈̗̖̘̺͈͒ͪͨ̉̓͆͋́͋͐̏̆ͭͤ͊͋͗̚͜͟ͅg̶̡̱̞͍̝͇͈̖̦̖̓̌͌ͩ͌ͩ̋̃ͦ̏ͪ̉ͬ͑ͮ̍͘ ̢̋̈́̓ͬ͌͌͋ͮ̓̒͢͏̡̻͉̙͓̤̭̥̪̖̳ơ̷̸̱̰͓͉̫̙̣͔̯̲͎̫̭̹̖̤͉̣ͤͤ̈́f̷̪͙̠͍͓̪̯͈̪̪̫̮̫͍̯̠͙̟͂̒̑̾͋̒͑ͦ͒ͬ͟͜͢ ̶̡̧͎̝̦̘̹̽͗ͧ̎ͮ͜͠c͈̼̝͈̪͓̰͊̾ͪͭ̈̽̆̊̎́͜͠h̸̛̛̺͎̖̻͈̞̪̖̮̊͊ͭ̊̈́ͨ͝a̶ͣ̔ͦ͊̾̓̓̾ͩ̾ͨ̊ͬ͗ͦ̀̚͞҉͔̖͖̥̰̤͚͎ő̴ͤ͊͋̉̋ͧ̈́̍̽͗͒ͫ̅͛̕͏̣̯̲̝s̡̮̞̹͍͚̲̯͓̻̟̪̹̗̭̥̬̯͒̿̍͑ͯ͢͝ͅ.͖̳̫̗̣̘̲̰̤̻̼̞̙̱̖̖ͦ͐͌͒̓͠ͅͅ
+    ̨̯̞͇̖̱͍̹ͬͩͤͪ̓ͯ̈͜͢͡͡W̌͐̃̽̈ͥ̓̐ͪ̂͆̈́̏̋͒̚͏͓̦̖̝̲̫̺̳͎̖͉ͅi̧̛͔͉̜͈ͫͪͬ̅̓̐̃̿̚̕͜t̏ͬ̍ͮ͌͊̒̔ͣ̉͏̦̥͉͖͎̲̭̺͈h̡̭̳̤̰̐ͯ͋̏ͭ̎̾ͮ͋̌ͫ̀͟ ̍̏̓ͭ҉̷̤͖͓̖̘͚͟͡ơ̴̡̜͔̯̖̯͓͓̟̳̔ͮ͋ͦ̽̄́̓̂͝͞ͅṳ͉̺̩̫̪̹̙̙̦͓̲̳̘̞͚͐̆̿ͨͩ̓̄̅́̇̇̏ͤ̕͢ͅt̷̡̨̮̬̥͚̥̜̫̮̘̬̠ͥ̀̑̍̾͠ ̵̞͙̥̳͙̠͔̞̝̦̟͉̩̳ͪ͑̆̂̈̌̓ͯͨ̀͡͞ͅͅó̷͙̮͕̰̙̻̤̼͆̓ͦ̃̈́̓͆̍̔ͮ̏̏͌̈͂͐ͯ̚͘͜͝r̷̸̵̨̞͖̻̞̝̺̻͔̺̯̝͍̼̘̪ͯͭͣ̾͊ͅͅḋ̷̜̺̥̘̦͇̹̺̟̠̞̺̖̰̟̼̤̙ͫͥ̐ͮ͌͛ͥ͜͠ę̶̸͂ͭͭ̂̓̊ͧ̔̽̐͑͐̾̑̚̚͜͏̱̯̱̱̼͈̦̠͍͉r̴̶̢̛̩̬̰̙̺̪̟̓̔̔ͩ̓ͬ͛ͤ̽̀ͥ͑̈͂͊͟ͅ.̵̶̝̤̘̠̱̒͒̉͊̇́͂ͨͫ͞
+    ͍̣̞̦͖̰͍͙̤͇̺̖̦̌ͥ͊ͪͫ̔́͜͠T̡͓̲͚̹̗̳̱ͥ̽̑̀̚̕h̸͇̰̟̠͇̤͕͆ͪͥ̔̐̈̓͂̉ͮ̔̍͋̕͟e̶̢ͣ͊͐̎ͪ͑ͦ̈ͣͨͥ̎̑ͥ̅̑́͏͖͔̱̝ ̩̗͙̜̬͚̬̖̳̠͓̻̣̓ͫ̎ͥ̂ͮ̅̀̂͒̑̑͞N̢̢̟̦̤̮̭̼̟̪̪͈̺̩̥̻̤̗̅ͯ̂̓̇͌͜͝e̊̽ͦ̋̌̊ͯ͂ͣ̏͒͗͋͒̎̚҉͈̰̝̟͍̺̯̭͟ź̡̛̛͓̗̳̫͍͓̹̹͍̹̩̩̱͉̔ͨͬ͐ͧ̈́̌̕͞p̧̢̭̗̰͚̬̗͗̅̓́͋͌ͫ̂͑̒̈̓ͫ́̕͡e̵̩̪͖̻̫̰͔̦̙͈͎͑̃̓͐̉ͥ͑́̂̊͘͞ͅr̷̢̭̦͇̆ͦ̓̈́́̇̇̃͐̉̍́́̚͢ďͨͯ̑͂ͨ̒̉̂̽̑̋͆̽҉̷̨̲̱̹̟͇̠͕̙͟i͗̑̈̏ͫ͛ͭ̓ͦ̆̌ͮ̉́́͢͡͏͇̭̩͎͎̭͇̯̝̠̤͎͓͟ą̵̝̭̼̝͕ͯ͒̂̿͑̎̂̃͂̅ͩ͗̾̇ͫ̒̃͢͝n̴̟̲̪̼̩̫̗͔̹͎̼͕̝̒̄̊ͦ̂̆ͭ̾̇ͧ̽ͣ͢͜ ̶̸͉͕̥͍͉͚̤̖͓͖ͨ͐ͭ̋̔̓̋͒̓ͯ̾͘͜͡ͅh́ͧ̅ͣͮ͂̏͑̉͒͂͆̓ͣ͒͂͊̐̉͏̧̭̬̝̞̺̜̹̣̱͝i̵̴̢̬̺̟̳̞͉̝̹͉̹̣̗͕̤̣͋ͫ̾̄̂̽ͭͭ̎ͩͥ̿̂̃̄̆͐ͅv̓ͨ͋̎̅ͨͯ͊͞͏̝̹̫͓͚͙̻̳͚͕̬̺͈̞̖̦ͅë̸̢͕̝̝̰̠̥͙͓̩̪̤͇̼͇͍̰͒͆ͨ̓͊̂͊̍ͨ̑̈́͐̾̈̓͝-̷̺̫͉̰̙͇̎̋̄̔̅̋͐ͮͦ͛̂ͬͧ̒̀̕͠ͅm̸̨̲̱͈̥̙͗̈́̏̅̋̀̇ͨ̒͌ͭ́̀͡i̡̓͊͐ͫ̿̐͐ͧ͗̿̊͐͏̷̟͖̹̙͔ͅņ̸̷̵̩̖̥̼͈̼̰̺̺̭̱̪̞͈̻͙̟̇͒̐̓ͅd̵̗̳̙̮͉͍̝͔̬̣̪̥͍̜͓̙̋͗́̒̌́̀͟ ̷̹̗͎͔̥̰̣̘̬̲̻̬̪̟̙͕̺̺̣̂̐̂̍̈̿ͫ̋ͩ͂̈́ͦ͛͆͐͒̚͠o̞̗̜̩̠͈̺͎ͬ̇ͣ͗ͨ̑͛͑͂̏ͥͬ̎ͬͫ́̚͜f̶̢͑ͥͦ̀͟҉̷͇͈̦̠̫̠ ̴̵̹̭̟̮̝̮͈̊͛̂́ͧ̌̅ͦ͋͋̀̕͝c̸̡͔̻͕̼̻̻͉͕̹̿̅̑̉̑̅ͦ́̃̊͆ͥ̍̆ͦͤ́̚̚h̒̐ͪ͒̽ͬͤ́ͣͨͧ̏̕͟͏̼̻͓̬̻̫͉̻͈̟͕͚̗͟a̴̵̱̲̞̞̞̦͕̟̥͈͇̞͔̰͈ͣ̐̿͊ͦ̿ͦ͌ͧ̃͋̽ͬͭ̃̃̚̚̕o̧̅̅ͪͤ̈́͋ͭ̊̋̃ͭ҉͕̱̪͎̺̻̰͓͇͍̘̩̠̩͞s̶̸̝͖̹̗̞͖̝͚̝̼̣̖̠̱̮̼̱̱ͦ͑̾̋̀̋̌̅ͬ͊ͨ̆ͫͬ̚̚̚̕͝.̛̤̤̫͇͓̜̪̖̭̩͚̹̣͙ͩ͊̃̆̈́͌͗́̄ͮ̽ͦ̃ͤ̉ͨ̚̚͠͞͠ ̾̊̑͂̽͌͆ͫ̂͏̨̞̝̼̩̠̮̼̝͈͙̬̗̼͈͚̬ͅZ̷̡̩̼͇̳̻̼͙̽̅ͩ͐ͩ͒ͪ̂̋ͭͭ̑͒̀͆́ḁ̷͉̲̼̫̤̯̱̳̬̟̝̼̫̦͚͈͈͒͊ͬ́͟ͅľͯ̋̎̈́́̂͆̓ͣ́͠͡͏̴̼̬̬͇̬̗̝͖̞̜͔g̨̢̞̫̙̮͚ͨ͆̔͐̓͐̉̿ͦ̿̅̒͊ͧ͜͠o̘̲̬͈̭͎͔̥͈̺̜͔̞͎̣̱̗̖̪͆̿̾̃͛̈̃̇͢͟͞͞.͔̻̠̻̦͖̠̼̞̤̗͒ͯ̾̃̎̏̿̉͜͡
+    ̴̴̡̖͚̺̬̬̟̠͖̙̹͖̖̞̙̋ͩ̆̾̑̇ͪͫ̎Ĥ̫̫̱̪̟̘͈̺̻͚̮̞̫̮̆ͧ̔͗̾̆̇̽͐͊̀̑ͭ̅̈́̈͐́̕͘͠ę̡̔̒ͭ̋̓̆̈́̉͏̡̯͇͓̕ ̶̗̤̺̤̃̅͆͊̀͠w̸̿̿ͦ̈́ͮͪ͋̊͆͒̈́̉̾͝͏̵̟͉͖̳̹̞̭̩̰̜̱̟̼̜͜ḩ̸͕̩̯̰̲̗̪̪̪͎ͫ̂͂ͯ͟ǫ̴̥̼̗͔̲̋͛̎ͭͪ͑͆͜͜͡ ̶͋̄̋̆̌͊̔̐̊̏ͨ̈҉̡̼̙̬͇̖͎͓̤̘̠͍̬̜̣͉̼W̧̳̩͕͔̳̖͚̞̠̭͇͙̙̪̟̠͙̳ͧ͛ͮ̊ͪ̑ͭ̅̽̕͠͝a̷̧̩̳̲̙͌̏ͪ̆̈́͐̆́ͥ̄̉ͨ̄̄̚̚͟͠͝í̖͖̝͔̳̜̆̏͑ͪ͌ͪ͐͂ͩͦ̃͡͠ť̨̝̫͉̺̠̪̜̪̠͕͇̙͍̥͙̉ͬͦ̓ͣ̎͛̏͂̌́́͠ş̨̱̪̞͉̦̜̦̜̱̳͔̦̘̐̂̐͆̐̇̉̾͗̎ ̡̛̻̤̘̩͑͐̓͊̾̓̍̏̔̃̊͐́ͅͅB̭̼̺̤͉̤̻̩̥̻̤͚̗̩̥̬ͪ̔́̉̈́̃͆̽͐̐ͫ̄͒͡͞ͅę̴̴̳̭̻͈̞̖̺̺̪̻̳̺̩̼͚̜͔̹̍̋̏ͭ͟͠ͅh̵́̓̓ͥ͊͡͏̭͈̱͔̰̗̻͝ḯ̉̔ͩ͏҉͝͏͈̬̩̺͈͓̹̰̪̦̻͓̜̮̺̳̲͓͉n̯̙̜͖̟ͭ̏̌̑̌̋̆̅̈́ͪ̑́d̢̞̝͎͎͙̦́͆̀͛̈́ ̨̰̣̰͈̮̯̖͈̼̣̭̼̇͑ͤͪ̐ͦ́̚͘͘͠T̴̻̟͙̬͔͙̭̜̱̘̱̾̍̆̐ͨͨ͆ͤͣ̂ͨ̽̂̒̌͟hͭͬ̋̑̿̓̅҉̢̪̙̗̲͎̪̗̻̳̣̮̼͙̮̣e̿̃͐ͣ͛̈́̂̇ͫ͛́ͨ͏̱̫̮̜̳͉̠̥͟ͅ ̡̨͎̙͎̹̜ͯ̿̽̉ͤ̓ͮ͌̿̉͌͘͘͡W̡̗͓͕̮̳̟̘̝̦̲͉͕̐̈ͩ̋͢͜ãͤ͂͋́̎͆̆̓ͪͥ̀͐ͭͥ͛ͥ͏̢̨̡̱̦͖̗̠̖̠̬̩̥͎͙̦̳͙ͅl̷̸̡̼͉̦͍̖̣ͨ͊ͬͦ̅͋̓̈́̐̇̍̒͒͟ļ̹̞͇̙̟̗͓̮̖͕ͫ̿̈́̊͑̕.̧̨̪̥͈̜̰̫̟̮͖̘͚̜̐̀͊͛͆̔ͥͬͤ́́̀
+    ̴̦̘͕̬̳ͫͮ̒͊ͯ͆̀̄ͩͪ̕Ẓ̼̳̳͕̫ͥ̓͆ͪ̋̈́̔̓͒ͧ̍ͩ̎̃̊̑͡Ả̧̜̺̥̖̗̬͙̗̲̤̲̥̫̅ͬ̎ͪͥͤͮͥ̀ͪ͒̆͗̌͞͞ͅL̸̍ͮ̊ͬ̾̌͆̏̊͊̍͡҉͈͚̭̳͓̯̖̕ͅG̑̐̈͆́̈́̈̃̏̈̑ͫ̾͌͐̎̂̚̚͞͏̞͎͙̩̭͖O̶̡̡̯̤̘̝̠͔͖̬̳͉̩͕̖ͭ̔̇̎̓͟͠ͅ!̢̗̬̣̞̝̙̩͇̹̰̝̲̬͚̣̼̎̑ͭ̎̃ͬͥ͜
+
+[33mcommit bab71f3784223b873b2fe8a9e667fca2587dc43f[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed Apr 19 22:56:13 2017 +0100
+
+    added picker tool
+
+[33mcommit 44edce44a21e741100bb4a7d10caadcee53f2787[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed Apr 19 10:00:47 2017 +0100
+
+    faster loading
+
+[33mcommit 4c64c3eb2fa5ab1ab419731cbb6213b74f297ab5[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed Apr 19 05:32:14 2017 +0100
+
+    PNG is faster than an arraybuffer
+
+[33mcommit cfc906f3565cb72e6a015a3bd9a36c3d12be85f9[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed Apr 19 05:02:44 2017 +0100
+
+    removed bundles
+
+[33mcommit fe8bf0154eb0de9c2c57b38fca9efe6fe630da6d[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed Apr 19 05:00:11 2017 +0100
+
+    speedtest
+
+[33mcommit 87a96f4c2d13ec7bbd6318a8699284b6a3955005[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed Apr 19 01:34:31 2017 +0100
+
+    brush tool complete
+
+[33mcommit 14438bfca2cbdd660a1d45995cdd941c2f42065b[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue Apr 18 22:54:52 2017 +0100
+
+    added brush canvas stuff
+
+[33mcommit a76ebe576bc47f33555007963f21554a4a93c5ea[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue Apr 18 22:41:56 2017 +0100
+
+    added brush selector
+
+[33mcommit 9a7541119914c56cba7d80ccdc0273c77d3478d9[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue Apr 18 17:51:12 2017 +0100
+
+    palette + drawing
+
+[33mcommit f907e8b6b628de6387defb8a75723d3172cbd6b4[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue Apr 18 15:14:51 2017 +0100
+
+    improved cursor tracking
+
+[33mcommit 64e2bf4bd44d9ca5abd4111cee0c6e8dc3cb2514[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue Apr 18 00:50:03 2017 +0100
+
+    cursors only appear when on canvas now
+
+[33mcommit d408e6f74423c03ae2dd433b4bee63633e3499c5[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Mon Apr 17 19:20:45 2017 +0100
+
+    fixed cursor position on scroll
+
+[33mcommit 6084a34145e480c0b44423644afe2000992549fa[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Thu Apr 13 00:08:34 2017 +0100
+
+    reduced filesize
+
+[33mcommit a2bf0bc578051fb7095df365e017bde040fd3018[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Thu Apr 13 00:02:31 2017 +0100
+
+    margin tweaks
+
+[33mcommit ab17a82540604e91aff954caa772efdad0cc11d5[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed Apr 12 23:40:52 2017 +0100
+
+    scrollbar arrows
+
+[33mcommit ee03897665e0e328bb736688bcb82f835c6b2dff[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed Apr 12 22:41:46 2017 +0100
+
+    scrollbars work! :D
+
+[33mcommit 2b4ada0000ad203a1a601b07823b767bb8860e61[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed Apr 12 22:01:48 2017 +0100
+
+    bothscroll complete
+
+[33mcommit b215e2cd67d0507ca98a234f9bddcf2aacf142cd[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed Apr 12 21:45:29 2017 +0100
+
+    bottom scoll complete
+
+[33mcommit 364f67bd7f6cb135db8084a964237c63db51eb66[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Wed Apr 12 00:06:10 2017 +0100
+
+    bottom scroll behaviour
+
+[33mcommit 30019e7739d02dda7a57d84a27f9d3ee87bba72b[m
+Author: kirjavascript <snkenjoi@gmail.com>
+Date:   Tue Apr 11 00:03:24 2017 +0100
+
+    scrollbar position calculation
+
+[33mcommit cbbadc60c176ae4c716228119831bc0ce45a058e[m
+Author: thom <thom@kirjava.xyz>
+Date:   Mon Apr 10 22:43:15 2017 +0100
+
+    bottom scrollbar
+
+[33mcommit e9784c1ad269b2bbc08fc43597ad6dc13b9509b2[m
+Author: thom <thom@kirjava.xyz>
+Date:   Mon Apr 10 20:53:59 2017 +0100
+
+    refactor
+
+[33mcommit 1c8a3905fd3ef035c56aa1605137853de495a138[m
+Author: thom <thom@kirjava.xyz>
+Date:   Mon Apr 10 00:19:32 2017 +0100
+
+    mouse shit
+
+[33mcommit 648b04cdf7cb22e57fcc76139a088a9bf46058de[m
+Author: thom <thom@kirjava.xyz>
+Date:   Sun Apr 9 23:58:07 2017 +0100
+
+    palette
+
+[33mcommit 8b277bbf7a044017df39ff64d82a3487496d0d26[m
+Author: thom <thom@kirjava.xyz>
+Date:   Sun Apr 9 21:59:01 2017 +0100
+
+    .
+
+[33mcommit 19692b80bb04eef22c180281b6ce02ef13e00c4b[m
+Author: thom <thom@kirjava.xyz>
+Date:   Sun Apr 9 21:58:28 2017 +0100
+
+    .
+
+[33mcommit 8531975267d08a56ee706eb8c09cdb191ba01b1f[m
+Author: thom <thom@kirjava.xyz>
+Date:   Sun Apr 9 21:54:03 2017 +0100
+
+    .
+
+[33mcommit 43dc8793e0810bc30c4d7860dccaf7724e9e70a0[m
+Author: thom <thom@kirjava.xyz>
+Date:   Sun Apr 9 20:08:33 2017 +0100
+
+    xy, colors
+
+[33mcommit 23e0976b6091bbce07933bee2e99ebc006df3e0c[m
+Author: thom <thom@kirjava.xyz>
+Date:   Sun Apr 9 19:30:46 2017 +0100
+
+    statusbar
+
+[33mcommit 5ebfa1ba56aabed9608ccdc08e7e9baaa72d829c[m
+Author: thom <thom@kirjava.xyz>
+Date:   Sun Apr 9 17:36:52 2017 +0100
+
+    flexbox
+
+[33mcommit f7664bde10e9186ff10f9ea6239993eaa399a27a[m
+Author: thom <thom@kirjava.xyz>
+Date:   Sun Apr 9 00:44:25 2017 +0100
+
+    toolbawkz
+
+[33mcommit d39f2d05c9dabc80977c933b7cd72862f7204ec2[m
+Author: thom <thom@kirjava.xyz>
+Date:   Sun Apr 9 00:18:30 2017 +0100
+
+    .
+
+[33mcommit 2df3c91c5584cc3df2beade998ca43868157cbd1[m
+Author: thom <thom@kirjava.xyz>
+Date:   Sun Apr 9 00:13:48 2017 +0100
+
+    toolbox css
+
+[33mcommit 871b6d92796056f2239a5881134bb599b19731ee[m
+Author: thom <thom@kirjava.xyz>
+Date:   Sat Apr 8 22:32:32 2017 +0100
+
+    .
+
+[33mcommit 806a1c4b1ceb0c3e1170cd5b30c145cb6aed81c6[m
+Author: thom <thom@kirjava.xyz>
+Date:   Sat Apr 8 21:46:56 2017 +0100
+
+    canvas, node-canvas
+
+[33mcommit 353beb104500eea62f46235890378130d405476a[m
+Author: thom <thom@kirjava.xyz>
+Date:   Sat Apr 8 17:57:21 2017 +0100
+
+    bugfixes
+
+[33mcommit c842cf973a70c4b583c8220c4d06162a20637cd5[m
+Author: thom <thom@kirjava.xyz>
+Date:   Sat Apr 8 17:31:34 2017 +0100
+
+    cursors complete
+
+[33mcommit b5148ecc3a5714ef2b7d317a81d8fe5f5f41b6c4[m
+Author: thom <thom@kirjava.xyz>
+Date:   Sat Apr 8 15:51:19 2017 +0100
+
+    added pingpong
+
+[33mcommit 8278942f3ad84efcab013154bc3a252f0a396fd6[m
+Author: Thom <snkenjoi@gmail.com>
+Date:   Mon Feb 27 22:51:42 2017 +0000
+
+    >
+
+[33mcommit 362a195a9394c007b9204f18f391812b370e4c52[m[33m ([m[1;31morigin/ws[m[33m, [m[1;32mws[m[33m)[m
+Author: Thom <snkenjoi@gmail.com>
+Date:   Sun Feb 26 21:23:01 2017 +0000
+
+    ws
+
+[33mcommit db1b3a400c7444a2181d1efec298815f06ef7c69[m
+Author: thom <snkenjoi@gmail.com>
+Date:   Fri Feb 24 15:31:45 2017 +0000
+
+    ws client/server stuff
+
+[33mcommit 4471a5c645a0c46466c9275efd85885465f0fdba[m
+Author: thom <snkenjoi@gmail.com>
+Date:   Fri Feb 24 15:13:16 2017 +0000
+
+    ws test
+
+[33mcommit 52bda312c25a8eb6974e7374d4643a0129dc50ff[m
+Author: Thom <snkenjoi@gmail.com>
+Date:   Fri Feb 24 00:41:59 2017 +0000
+
+    .
+
+[33mcommit fa662e46f564e9cdb6f9e1bc79063eed023c7df7[m
+Author: Thom <snkenjoi@gmail.com>
+Date:   Sun Feb 19 12:53:28 2017 +0000
+
+    `date`
