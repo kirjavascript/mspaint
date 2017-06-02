@@ -1,6 +1,7 @@
 <div align="center">
     <img src="mspaint.png" alt="mspaint">
 </div>
+<br>
 
  * complete realtime support
  * public domain
@@ -10,10 +11,13 @@
 
 <div align="center">
     <img src="https://img.shields.io/david/kirjavascript/mspaint.svg">
-    <img src="https://img.shields.io/badge/babel-stage--0-blue.svg">
+    <img src="https://img.shields.io/badge/babel-stage--0-green.svg">
+    <img src="https://img.shields.io/badge/version-win98-0000ff.svg">
     <img src="https://img.shields.io/badge/tools-7/16-orange.svg">
-    <img src="https://img.shields.io/badge/live-NO-red.svg">
+    <img src="https://img.shields.io/badge/live-no-red.svg">
 </div>
+<br>
+
 ## what
 
 There are many mspaint clones on the web, of varying levels of completeness.
