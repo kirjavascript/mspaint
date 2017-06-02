@@ -1,4 +1,5 @@
 let webpack = require('webpack');
+let StyleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = (env={}, args={}) => {
 
@@ -56,6 +57,10 @@ module.exports = (env={}, args={}) => {
             new webpack.DefinePlugin({
                 __DEV__: env.dev,
                 __WEB__: true,
+            }),
+            new StyleLintPlugin({
+                configFile: '.stylelintrc',
+                syntax: 'scss',
             }),
         ],
         resolve: {

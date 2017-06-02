@@ -40,6 +40,13 @@
         width: $base;
         height: $base;
 
+        .arrow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
         &.left {
             top: 0;
             left: 0;
@@ -76,13 +83,6 @@
             .arrow {
                 margin-top: 1px;
             }
-        }
-
-        .arrow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            pointer-events: none;
         }
     }
 

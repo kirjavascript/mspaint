@@ -13,7 +13,7 @@ let { USE_JSON } = require('./constants');
 let commands = [
     'RELOAD','JOIN','PART','LIST','COLOR','PING','PONG','XY',
     'CANVAS_FILL','CANVAS_PENCIL','CANVAS_BRUSH','CANVAS_ERASE',
-    'DOM_VDOM','DOM_SELECT','DOM_MOVE',
+    'DOM_VDOM','DOM_SELECT','DOM_MOVE','DOM_PLACE',
 ];
 
 // schema definition

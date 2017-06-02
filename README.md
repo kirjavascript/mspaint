@@ -1,12 +1,10 @@
 ![mspaint](mspaint.png)
 
-mesmerizing multiplayer masterpiece maker
-
  * complete realtime support
- * 7/16 classic mspaint tools
  * public domain
- * server side rendering
+ * 7/16 classic mspaint tools
  * virtual DOM
+ * server side rendering
 
 ## what
 
@@ -46,7 +44,7 @@ This gives a huge improvement in reducing the overall traffic required for commu
 
 For the scrollbars, I could not find a universal solution for styling them natively, so ended up rolling my own. This was pretty awful to do - d3's d3-scale module would have added 63kb to the final bundle size (why doesn't tree shaking work properly in webpack 2?), so I went without it.
 
-This project should work nearly everywhere, including mobile. Older browsers are made to download a polyfill and incur a performance hit. Please open an issue if it's broken anywhere.
+This project should work nearly everywhere, including mobile. Older browsers are made to download a polyfill and incur a performance hit. [Please open an issue](https://github.com/kirjavascript/mspaint/issues/new) if it's broken anywhere.
 
 ## directory tree
 
@@ -95,17 +93,13 @@ This project should work nearly everywhere, including mobile. Older browsers are
     link github - about
 
 https://github.com/1j01/jspaint/blob/gh-pages/src/image-manipulation.js
-    server side rendering (vdom's canvas?)
 ```
 
 increase array limit from 255-65535 (write helper)
-~increase imgData limit to >1280*800
 
 zoom vdom bug
+DOM_PLACE
 
-preload canvas fragments as PNG
-jsdom
-crush
 babel-register
 
 // console.log(require('babel-core')
