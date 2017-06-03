@@ -13,7 +13,7 @@ export default class CanvasFragment extends Component {
                     let img = new Image();
                     img.onload = function() {
                         ctx.drawImage(this, 0, 0);
-                        // mutating props is dangerous! but we don't need a rerender...
+                        // awkward mutation to sync imgData...
                         element.imgData = ctx.getImageData(0, 0, width, height);
                     };
                     img.src = '/vdom/' + target;

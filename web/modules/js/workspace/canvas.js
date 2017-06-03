@@ -97,10 +97,17 @@ function dragstarted(d) {
     // dom
     else if (name == 'SELECT') {
         let vdom = getVDOM('local');
-        let selected = vdom.type == 'SELECTION';
 
-        let obj = {cmd: 'DOM_SELECT',
-            x, y, event: selected ? 'drop' : 'start',
+        let obj = do {
+            if (vdom.type == 'SELECTION') ({
+                cmd: 'DOM_SELECT',
+                event: 'drop',
+            });
+            else ({
+                cmd: 'DOM_SELECT',
+                x, y, event: 'start',
+                color: drawColor.secondary,
+            });
         };
 
         ws.sendObj(obj);
