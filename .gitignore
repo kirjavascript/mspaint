@@ -2,3 +2,4 @@ node_modules
 npm-debug.log
 canvas.png
 web/bundles
+stats.json
