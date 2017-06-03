@@ -1,5 +1,4 @@
 import d3 from '#lib/d3';
-import { event as d3event } from 'd3-selection';
 import { ws, wsMessage } from './socket';
 import { updateWorkspace } from '#shared/workspace';
 import { CANVAS } from '#shared/constants';
@@ -68,9 +67,9 @@ function initCanvas(img) {
 
 function dragFilter() {
     return (
-        d3event.button == 0 ||
-        d3event.button == 2 ||
-        d3event.type == 'touchstart'
+        d3.event.button == 0 ||
+        d3.event.button == 2 ||
+        d3.event.type == 'touchstart'
     );
 }
 
@@ -80,7 +79,7 @@ let buttons = ['primary', void 0, 'secondary'];
 let mouseName = buttons[0];
 
 function dragstarted(d) {
-    mouseName = buttons[d3event.sourceEvent.button] || 'primary';
+    mouseName = buttons[d3.event.sourceEvent.button] || 'primary';
 
     let { x, y } = getMotion();
 
@@ -186,7 +185,7 @@ function dragended(d) {
 }
 
 function getMotion() {
-    let { x, y, dx, dy } = d3event;
+    let { x, y, dx, dy } = d3.event;
     let { zoom } = scrollPos;
     return {
         x: (x / zoom),

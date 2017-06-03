@@ -1,6 +1,6 @@
 // d3-drag was forked to remove preventDefault()
 
-export default {
+let d3 = {
     // ...require('d3-array'),
     // ...require('d3-axis'),
     // ...require('d3-brush'),
@@ -32,3 +32,15 @@ export default {
     // ...require('d3-voronoi'),
     // ...require('d3-zoom')
 };
+
+// patch export with d3.event workaround
+
+const d3Selection = require('d3-selection');
+
+Object.defineProperty(d3, 'event', {
+    get: function () {
+        return d3Selection.event;
+    },
+});
+
+export default d3;

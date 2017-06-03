@@ -1,5 +1,4 @@
 import d3 from '#lib/d3';
-import { event as d3event } from 'd3-selection';
 import { CANVAS } from '#shared/constants';
 
 export let scrollPos = {x: 0, y: 0, zoom: 1};
@@ -91,7 +90,7 @@ let bottomOffsetRatio = 0;
 
 bottomBar
     .call(d3.drag().on('drag', () => {
-        let { dx } = d3event;
+        let { dx } = d3.event;
         let { bottomBarWidth, bottomWidth, bottomMaxDelta, bottomMaxWorkspaceDelta } = getDimensions();
         // set scrollbar position
         let newOffset = bottomOffset + dx;
@@ -108,7 +107,7 @@ let rightOffsetRatio = 0;
 
 rightBar
     .call(d3.drag().on('drag', () => {
-        let { dy } = d3event;
+        let { dy } = d3.event;
         let { rightBarWidth, rightWidth, rightMaxDelta, rightMaxWorkspaceDelta } = getDimensions();
         // set scrollbar position
         let newOffset = rightOffset + dy;

@@ -2,8 +2,7 @@ import { h, render as renderDOM, Component } from 'preact';
 import { normalizeObj } from './util';
 import { getVDOM } from './index';
 import d3 from '#lib/d3';
-
-const dom = document.querySelector('.dom');
+import { ws, wsMessage } from '#js/socket';
 
 let render = () => null;
 class Container extends Component {
@@ -32,12 +31,12 @@ class Container extends Component {
             d3.select(node)
                 .call(d3.drag()
                 .on('drag', () => {
-                    let { dx, dy } = require('d3-selection').event;
+                    let { dx, dy } = d3.event;
                     let obj = {
                         cmd: 'DOM_MOVE',
                         dx, dy,
                     };
-                    require('#js/socket').ws.sendObj(obj);
+                    ws.sendObj(obj);
                     require('#shared/workspace').updateWorkspace(obj);
                 }));
         }
@@ -115,7 +114,7 @@ class CanvasFragment extends Component {
 }
 
 __WEB__ &&
-renderDOM(<Container/>, null, dom);
+renderDOM(<Container/>, null, document.querySelector('.dom'));
 
 export {
     render,

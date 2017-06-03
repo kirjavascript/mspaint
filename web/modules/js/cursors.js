@@ -1,5 +1,4 @@
 import d3 from '#lib/d3';
-import { event as d3event } from 'd3-selection';
 import { ws, wsMessage } from './socket';
 import { setStatus } from './statusbar';
 import { scrollPos } from './scrollbars';
