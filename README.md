@@ -16,7 +16,7 @@
  * classic mspaint tools
  * public domain
 
-## what
+## 🖌️ what
 
 There are many mspaint clones on the web, of varying levels of completeness.
 
@@ -28,7 +28,7 @@ The style is based on win98 paint, except the icon. I prefer the other icon.
 
 A main focus has been to be fast and lean. Keeping the script payload low, using vector art where possible, reducing traffic required. Canvas drawing operations particularly seem to require optimizations for decent speed.
 
-### initial render
+### ⚡️ initial render
 
 Providing the state of the canvas to the user quickly to reduce the time to first paint has been the subject of much thought. Sending a raw Uint8ClampedArray down the wire after getting a websocket connection just seemed way too slow.
 
@@ -38,13 +38,13 @@ So, this is embedded in the initial markup as an `<img/>` tag and is copied to t
 
 I tried applying lossless compression to the image before sending it, but this seems to take more time than is saved by reducing the image size. This could be cached instead, but the state would be out of date. It feels like there are endless tradeoffs to consider.
 
-### shared UI
+### 🖱️ shared UI
 
-The fragments of user UI seen in the workspace are generated from a nonstandard virtual DOM representation. This is rendered using [preact](https://github.com/developit/preact). Preact was chosen for its tiny size and the fact that it seemed to perform better than my [d3](https://d3js.org/) renderer.
+The fragments of user UI seen in the workspace are generated from a nonstandard virtual DOM representation and are shared as an initial state then patched. This is rendered using [preact](https://github.com/developit/preact). Preact was chosen for its tiny size and the fact that it seemed to perform better than my [d3](https://d3js.org/) renderer.
 
 All of the code for interacting with the canvas and virtual DOM is shared between front and backend.
 
-### networking
+### 💻 networking
 
 Initially communication between client and server was done via JSON strings, which seemed quite wasteful. Using something like msgpack or protobuf would improve this, but would incur a significant bundle size penalty. Therefore, a [custom format](https://github.com/kirjavascript/mspaint/blob/master/shared/crush.js) has been created.
 
