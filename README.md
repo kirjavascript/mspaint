@@ -16,7 +16,7 @@
  * classic mspaint tools
  * public domain
 
-## 🖌️ what
+##  what
 
 There are many mspaint clones on the web, of varying levels of completeness.
 
@@ -38,13 +38,13 @@ So, this is embedded in the initial markup as an `<img/>` tag and is copied to t
 
 I tried applying lossless compression to the image before sending it, but this seems to take more time than is saved by reducing the image size. This could be cached instead, but the state would be out of date. It feels like there are endless tradeoffs to consider.
 
-### 🖱️ shared UI
+### 🖌️ shared UI
 
 The fragments of user UI seen in the workspace are generated from a nonstandard virtual DOM representation and are shared as an initial state then patched. This is rendered using [preact](https://github.com/developit/preact). Preact was chosen for its tiny size and the fact that it seemed to perform better than my [d3](https://d3js.org/) renderer.
 
 All of the code for interacting with the canvas and virtual DOM is shared between front and backend.
 
-### 💻 networking
+### 📡 networking
 
 Initially communication between client and server was done via JSON strings, which seemed quite wasteful. Using something like msgpack or protobuf would improve this, but would incur a significant bundle size penalty. Therefore, a [custom format](https://github.com/kirjavascript/mspaint/blob/master/shared/crush.js) has been created.
 
@@ -52,7 +52,7 @@ A notable detail is that property names or enums are all preindexed and reduced 
 
 This method of packing / unpacking of data is much slower than JSON, but gives a huge reduction in data size.
 
-### browsers 🖥️
+### 🖥️ browsers
 
 This project should work mostly everywhere, including mobile. Older browsers need to download a polyfill and incur a performance hit, newer ones can skip it. [Open an issue](https://github.com/kirjavascript/mspaint/issues/new) if it's broken anywhere.
 
