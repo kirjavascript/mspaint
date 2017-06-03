@@ -28,6 +28,8 @@ The style is based on win98 paint, except the icon. I prefer the other icon.
 
 A main focus has been to be fast and lean. Keeping the script payload low, using vector art where possible, reducing traffic required. Canvas drawing operations particularly seem to require optimizations for decent speed.
 
+### initial render
+
 Providing the state of the canvas to the user quickly to reduce the time to first paint has been the subject of much thought. Sending a raw Uint8ClampedArray down the wire after getting a websocket connection just seemed way too slow.
 
 The canvas is rendered serverside with [node-canvas](https://github.com/Automattic/node-canvas). This can produce PNGs, so I set up a route for accessing the current state as a PNG.
@@ -36,23 +38,25 @@ So, this is embedded in the initial markup as an `<img/>` tag and is copied to t
 
 I tried applying lossless compression to the image before sending it, but this seems to take more time than is saved by reducing the image size. This could be cached instead, but the state would be out of date. It feels like there are endless tradeoffs to consider.
 
-PNG is a great database format for storing pixels; the canvas is periodically saved to disk to restore the state on server restart.
+### shared UI
 
-The fragments of user UI seen in the workspace are generated from a nonstandard virtual DOM representation that is shared between everyone. This is rendered using [preact](https://github.com/developit/preact). Preact was chosen for its tiny size and the fact that it seemed to perform better than my [d3](https://d3js.org/) renderer.
+The fragments of user UI seen in the workspace are generated from a nonstandard virtual DOM representation. This is rendered using [preact](https://github.com/developit/preact). Preact was chosen for its tiny size and the fact that it seemed to perform better than my [d3](https://d3js.org/) renderer.
 
 All of the code for interacting with the canvas and virtual DOM is shared between front and backend.
 
+### networking
+
 Initially communication between client and server was done via JSON strings, which seemed quite wasteful. Using something like msgpack or protobuf would improve this, but would incur a significant bundle size penalty. Therefore, a [custom format](https://github.com/kirjavascript/mspaint/blob/master/shared/crush.js) has been created.
 
-One advantage of this is that property names or enums can be preindexed and reduced to single bytes.
+A notable detail is that property names or enums are all preindexed and reduced to single bytes.
 
-Strings now take up half the space they would otherwise, numbers are more interesting. Treating numbers like strings is best a lot of the time, but the IEEE754 representation works better for numbers that tend to be larger. Both methods have been implemented.
+This method of packing / unpacking of data is much slower than JSON, but gives a huge reduction in data size.
 
-This gives a huge improvement in reducing the overall traffic required for communication.
+### browsers
+
+This project should work mostly everywhere, including mobile. Older browsers need to download a polyfill and incur a performance hit, newer ones can skip it. [Open an issue](https://github.com/kirjavascript/mspaint/issues/new) if it's broken anywhere.
 
 For the scrollbars, I could not find a universal solution for styling them natively, so ended up rolling my own. This was pretty awful to do - d3's d3-scale module would have added 63kb to the final bundle size (why doesn't tree shaking work properly in webpack 2?), so I went without it.
-
-This project should work nearly everywhere, including mobile. Older browsers are made to download a polyfill and incur a performance hit. [Please open an issue](https://github.com/kirjavascript/mspaint/issues/new) if it's broken anywhere.
 
 ## directory tree
 

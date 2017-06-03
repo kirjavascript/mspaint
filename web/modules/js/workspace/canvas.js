@@ -1,17 +1,17 @@
 import d3 from '#lib/d3';
-import { ws, wsMessage } from './socket';
+import { pack, unpack } from '#shared/crush';
 import { updateWorkspace } from '#shared/workspace';
 import { CANVAS } from '#shared/constants';
 import { pixelConvert } from '#shared/canvas/util';
-import { drawColor, setColor } from './palette';
-import { setScroll, scrollPos } from './scrollbars';
-import { drawTool } from './tools';
-import { pack, unpack } from '#shared/crush';
+import { drawColor, setColor } from '#js/palette';
+import { setScroll, scrollPos } from '#js/scrollbars';
+import { drawTool } from '#js/tools';
+import { ws, wsMessage } from '#js/socket';
+import { getMotion } from './index';
 
 let {width, height} = CANVAS;
 let canvasWrap = d3.select('.canvasWrap');
 let canvas = canvasWrap.select('canvas').style('opacity', 0);
-let dom = canvasWrap.select('.dom');
 let ctx = canvas.node().getContext('2d');
 export const getContext = () => ctx;
 
@@ -182,15 +182,4 @@ function dragended(d) {
     }
 
     drawTool.onEnd && drawTool.onEnd();
-}
-
-function getMotion() {
-    let { x, y, dx, dy } = d3.event;
-    let { zoom } = scrollPos;
-    return {
-        x: (x / zoom),
-        y: (y / zoom),
-        dx: (dx / zoom),
-        dy: (dy / zoom),
-    };
 }

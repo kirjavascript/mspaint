@@ -11,7 +11,7 @@
     require('#css/root.scss');
     require('#js/socket');
     require('#js/cursors');
-    require('#js/workspace');
+    require('#js/workspace/index');
     require('#js/tools');
     require('#js/statusbar');
     require('#js/palette');

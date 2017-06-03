@@ -2,7 +2,7 @@ let { CANVAS } = require('../constants');
 
 function getContext() {
     return typeof __WEB__ != 'undefined'
-        ? require('#js/workspace').getContext()
+        ? require('#js/workspace/canvas').getContext()
         : require('../../server/canvas').getContext();
 }
 

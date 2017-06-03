@@ -1,8 +1,7 @@
 import { h, render as renderDOM, Component } from 'preact';
-import { normalizeObj } from './util';
 import { getVDOM } from './index';
 import d3 from '#lib/d3';
-import { ws, wsMessage } from '#js/socket';
+import { ws } from '#js/socket';
 
 let render = () => null;
 class Container extends Component {

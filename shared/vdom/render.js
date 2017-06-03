@@ -1,5 +1,5 @@
 let render = typeof __WEB__ != 'undefined'
-    ? require('./render-preact').render
+    ? require('#js/workspace/dom').render
     : () => false;
 
 module.exports = {

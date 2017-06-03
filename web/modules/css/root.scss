@@ -1,12 +1,12 @@
 @import './variables.scss';
 @import './mixins.scss';
-@import './ui/titlebar.scss';
-@import './ui/menu.scss';
-@import './ui/toolbox.scss';
-@import './ui/workspace.scss';
-@import './ui/statusbar.scss';
-@import './ui/scrollbars.scss';
-@import './ui/palette.scss';
+@import './components/titlebar.scss';
+@import './components/menu.scss';
+@import './components/toolbox.scss';
+@import './components/workspace.scss';
+@import './components/statusbar.scss';
+@import './components/scrollbars.scss';
+@import './components/palette.scss';
 
 html {
     font-family: Tahoma, Geneva, sans-serif;
