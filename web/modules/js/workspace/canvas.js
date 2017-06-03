@@ -1,6 +1,6 @@
 import d3 from '#lib/d3';
 import { pack, unpack } from '#shared/crush';
-import { updateWorkspace } from '#shared/workspace';
+import { updateWorkspace, getVDOM } from '#shared/workspace';
 import { CANVAS } from '#shared/constants';
 import { pixelConvert } from '#shared/canvas/util';
 import { drawColor, setColor } from '#js/palette';
@@ -96,8 +96,11 @@ function dragstarted(d) {
     }
     // dom
     else if (name == 'SELECT') {
+        let vdom = getVDOM('local');
+        let selected = vdom.type == 'SELECTION';
+
         let obj = {cmd: 'DOM_SELECT',
-            x, y, event: 'start',
+            x, y, event: selected ? 'drop' : 'start',
         };
 
         ws.sendObj(obj);
@@ -140,6 +143,7 @@ function dragging(d) {
     }
     // dom
     else if (name == 'SELECT') {
+
         let obj = {cmd: 'DOM_SELECT',
             x, y, event: 'drag',
         };

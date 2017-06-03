@@ -1,5 +1,7 @@
 <div align="center">
-    <img src="mspaint.png" alt="mspaint">
+    <a href="http://mspaint.us/">
+        <img src="mspaint.png" alt="mspaint">
+    </a>
     <br>
 </div>
 <br>
@@ -20,7 +22,7 @@
 
 There are many mspaint clones on the web, of varying levels of completeness.
 
-In this implementation, everyone shares the same workspace. Canvas interactions, UI updates, mouse events or similar are displayed to everyone as they happen.
+In this implementation, everyone shares the same canvas. Pixel drawing, UI updates, mouse events or similar are displayed to everyone in realtime.
 
 The style is based on win98 paint, except the icon. I prefer the other icon.
 
@@ -40,7 +42,7 @@ I tried applying lossless compression to the image before sending it, but this s
 
 ### 🖌️ shared UI
 
-The fragments of user UI seen in the workspace are generated from a nonstandard virtual DOM representation and are shared as an initial state then patched. This is rendered using [preact](https://github.com/developit/preact). Preact was chosen for its tiny size and the fact that it seemed to perform better than my [d3](https://d3js.org/) renderer.
+The fragments of user UI seen in the workspace are generated from a nonstandard virtual DOM representation and are shared as an initial state then patched. This is then rendered using [Preact](https://github.com/developit/preact).
 
 All of the code for interacting with the canvas and virtual DOM is shared between front and backend.
 
@@ -54,7 +56,7 @@ This method of packing / unpacking of data is much slower than JSON, but gives a
 
 ### 🖥️ browsers
 
-This project should work mostly everywhere, including mobile. Older browsers need to download a polyfill and incur a performance hit, newer ones can skip it. [Open an issue](https://github.com/kirjavascript/mspaint/issues/new) if it's broken anywhere.
+This project seems to work in most browsers, mobile even has multitouch support. Older browsers need to download a polyfill and incur a performance hit, newer ones can skip it. [Open an issue](https://github.com/kirjavascript/mspaint/issues/new) if it's broken anywhere.
 
 For the scrollbars, I could not find a universal solution for styling them natively, so ended up rolling my own. This was pretty awful to do - d3's d3-scale module would have added 63kb to the final bundle size (why doesn't tree shaking work properly in webpack 2?), so I went without it.
 
@@ -74,11 +76,11 @@ For the scrollbars, I could not find a universal solution for styling them nativ
         ├── static/      - other assets
         └── root.js      - entrypoint
 
-## TODO (maybe)
+## potential ideas
 
- * Support multiple rooms
- * Add nicknames
- * Save canvas history
+ * multiple rooms
+ * nicknames / better multiplay
+ * canvas history
 
 ### related links
 
@@ -120,8 +122,7 @@ https://github.com/github/markup/issues/224
 
 increase array limit from 255-65535 (write helper)
 
-zoom vdom bug
-DOM_PLACE
+select secondary colour
 
 imgData dirtyflag
 -->

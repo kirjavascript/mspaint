@@ -19,7 +19,7 @@ let commands = [
 
 let properties = [
     {name: 'uid', string: 1},
-    {name: 'event', enum: ['start', 'drag', 'end']},
+    {name: 'event', enum: ['start', 'drag', 'end', 'drop']},
     {name: 'ping', number: 1},
     {name: 'dx', number: 1},
     {name: 'x', number: 1},

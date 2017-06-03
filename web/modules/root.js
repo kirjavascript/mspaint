@@ -6,11 +6,11 @@
 //_/ /_/ /_/____/ .___/\__,_/_/_/ /_/\___/
               //_/
 
+
 (() => {
 
     require('#css/root.scss');
     require('#js/socket');
-    require('#js/cursors');
     require('#js/workspace/index');
     require('#js/tools');
     require('#js/statusbar');

@@ -19,6 +19,7 @@
     "ws": "^2.1.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.16.0",
     "babel-eslint": "^7.0.0",
     "babel-loader": "^6.2.5",

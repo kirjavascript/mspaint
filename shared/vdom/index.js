@@ -1,6 +1,6 @@
-let { render } = require('./render');
 let { getContext } = require('../canvas/util');
 let { normalizeObj } = require('./util');
+let { render, vdomEmitter } = require('./render');
 
 let vdom = {};
 
@@ -28,6 +28,9 @@ function updateVDOM(obj) {
             normalizeObj(vdom[target]);
         }
         else if (event == 'drag' || event == 'end') {
+            // skip deleted selections
+            if (!vdom[target]) return;
+
             vdom[target].x1 = x;
             vdom[target].y1 = y;
             normalizeObj(vdom[target]);
@@ -38,12 +41,19 @@ function updateVDOM(obj) {
                 vdom[target].selecting = false;
                 vdom[target].imgData = ctx.getImageData(x, y, width, height);
 
+                // remove copied section
                 let copy = ctx.getImageData(x, y, width, height);
                 for (let i = 0; i < width*height*4; i++) {
                     copy.data[i] = 0xFF;
                 }
                 ctx.putImageData(copy, x, y, 0, 0, width, height);
             }
+        }
+        else if (event == 'drop') {
+            const ctx = getContext();
+            let { x, y, width, height, imgData } = vdom[target];
+            ctx.putImageData(imgData, x, y, 0, 0, width, height);
+            delete vdom[target];
         }
 
         render(vdom);
@@ -76,7 +86,7 @@ function parseVDOM(vdomWireData) {
 
 // run serverside to generate VDOM for new clients
 function getVDOM(uid) {
-    return uid ? vdom[uid] : Object.keys(vdom).map((key) => {
+    return uid ? vdom[uid] || {} : Object.keys(vdom).map((key) => {
         return Object.assign({ uid: key }, vdom[key]);
     });
 }
@@ -84,4 +94,5 @@ function getVDOM(uid) {
 module.exports = {
     updateVDOM,
     getVDOM,
+    vdomEmitter,
 };
