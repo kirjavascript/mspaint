@@ -52,7 +52,7 @@ A notable detail is that property names or enums are all preindexed and reduced 
 
 This method of packing / unpacking of data is much slower than JSON, but gives a huge reduction in data size.
 
-### browsers
+### browsers 🖥️
 
 This project should work mostly everywhere, including mobile. Older browsers need to download a polyfill and incur a performance hit, newer ones can skip it. [Open an issue](https://github.com/kirjavascript/mspaint/issues/new) if it's broken anywhere.
 
