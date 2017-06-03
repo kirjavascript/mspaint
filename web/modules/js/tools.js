@@ -1,5 +1,7 @@
 import d3 from '#lib/d3';
 import { setScroll, scrollPos } from './scrollbars';
+import { updateWorkspace, getVDOM } from '#shared/workspace';
+import { ws } from './socket';
 
 // variables
 
@@ -31,6 +33,11 @@ export let drawTool = {
                 : brushIndex < 6 ? 'rect'
                 : brushIndex < 9 ? 'bkLine'
                 : 'fwLine';
+        }
+    },
+    get transparency() {
+        if (drawTool.name == 'SELECT') {
+            return transIndex == 1 ? true : false;
         }
     },
     set pickColor(color) {
@@ -68,6 +75,15 @@ enter.append('img')
 // change tool...
 
 function selectTool(d, i) {
+    if (getVDOM('local').type == 'SELECTION') {
+        let obj = {
+            cmd: 'DOM_SELECT',
+            event: 'drop',
+        };
+        ws.sendObj(obj);
+        updateWorkspace(obj);
+    }
+
     if (selectedIndex == i) return;
     d3.selectAll('.tool')
         .select('img')
@@ -337,6 +353,15 @@ function drawTransparencySub() {
         .on('click', (d, i) => {
             transIndex = i;
             drawTransparencySub();
+            let obj = {
+                cmd: 'DOM_ASSIGN',
+                properties: {
+                    transparency: drawTool.transparency,
+                    dirty: true,
+                },
+            };
+            ws.sendObj(obj);
+            updateWorkspace(obj);
         })
         .merge(coverSelection)
         .style('background-color', (d, i) => i == transIndex ? '#008' : 'rgba(0,0,0,0)');

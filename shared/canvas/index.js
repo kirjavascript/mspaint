@@ -28,7 +28,8 @@ function drawToContext(obj) {
             ctx.stroke();
         }
         else if (shape == 'rect') {
-            rectLine(Object.assign({ ctx }, message));
+            // rectLine(Object.assign({ ctx }, message));
+            rectLine({ ctx, ...message });
         }
         else if (shape == 'bkLine') {
             ctx.beginPath();

@@ -121,9 +121,9 @@ add routes for badges to show active users
 https://github.com/github/markup/issues/224
 
 increase array limit from 255-65535 (write helper)
+canvas transparent merge
+mutate imgData in VDOM
+check dirty flag server side
 
-select secondary colour
 ssl
-
-imgData dirtyflag
 -->

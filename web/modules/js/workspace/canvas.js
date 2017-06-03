@@ -1,5 +1,4 @@
 import d3 from '#lib/d3';
-import { pack, unpack } from '#shared/crush';
 import { updateWorkspace, getVDOM } from '#shared/workspace';
 import { CANVAS } from '#shared/constants';
 import { pixelConvert } from '#shared/canvas/util';
@@ -107,6 +106,7 @@ function dragstarted(d) {
                 cmd: 'DOM_SELECT',
                 x, y, event: 'start',
                 color: drawColor.secondary,
+                transparency: drawTool.transparency,
             });
         };
 

@@ -21,10 +21,11 @@ function updateVDOM(obj) {
 
         if (event == 'start') {
             vdom[target] = {
-                color: obj.color,
                 x0: x, y0: y, x1: x, y1: y,
                 type: 'SELECTION',
                 selecting: true,
+                color: obj.color,
+                transparency: obj.transparency,
             };
             normalizeObj(vdom[target]);
         }
@@ -37,7 +38,7 @@ function updateVDOM(obj) {
             normalizeObj(vdom[target]);
             if (event == 'end') {
                 const ctx = getContext();
-                let { x, y, width, height } = normalizeObj(vdom[target]);
+                let { x, y, width, height, transparency } = normalizeObj(vdom[target]);
 
                 vdom[target].selecting = false;
                 vdom[target].imgData = ctx.getImageData(x, y, width, height);
@@ -62,6 +63,12 @@ function updateVDOM(obj) {
         }
 
         render(vdom);
+    }
+    else if (domCmd == 'ASSIGN') {
+        if (vdom[target]) {
+            Object.assign(vdom[target], obj.properties);
+            render(vdom);
+        }
     }
     else if (domCmd == 'MOVE') {
         let { dx, dy } = obj;

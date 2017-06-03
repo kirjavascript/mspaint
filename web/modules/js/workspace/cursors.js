@@ -2,7 +2,6 @@ import d3 from '#lib/d3';
 import { ws, wsMessage } from '#js/socket';
 import { setStatus } from '#js/statusbar';
 import { scrollPos } from '#js/scrollbars';
-import { pack, unpack } from '#shared/crush';
 
 let clients = [];
 

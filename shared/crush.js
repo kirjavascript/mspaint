@@ -12,7 +12,7 @@ let { USE_JSON } = require('./constants');
 let commands = [
     'RELOAD','JOIN','PART','LIST','COLOR','PING','PONG','XY',
     'CANVAS_FILL','CANVAS_PENCIL','CANVAS_BRUSH','CANVAS_ERASE',
-    'DOM_VDOM','DOM_SELECT','DOM_MOVE','DOM_PLACE',
+    'DOM_VDOM','DOM_SELECT','DOM_MOVE','DOM_ASSIGN',
 ];
 
 // schema definition
@@ -28,6 +28,7 @@ let properties = [
     {name: 'dy', number: 1},
     {name: 'size', number: 1},
     {name: 'shape', string: 1},
+    {name: 'transparency', bool: 1},
     {name: 'mouse', object: 1},
     {name: 'list', array: 1},
     {name: 'vdom', array: 1},
@@ -39,7 +40,9 @@ let properties = [
     {name: 'height', number: 1},
     {name: 'type', string: 1},
     {name: 'selecting', bool: 1},
+    {name: 'dirty', bool: 1},
     {name: 'config', object: 1},
+    {name: 'properties', object: 1},
     {
         name: 'imgData',
         pack(obj) { return []; },
