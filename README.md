@@ -124,6 +124,7 @@ increase array limit from 255-65535 (write helper)
 canvas transparent merge
 mutate imgData in VDOM
 check dirty flag server side
+create ImageData abstraction object (setters update)
 
 ssl
 -->

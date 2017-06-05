@@ -1,5 +1,4 @@
 import { h, render, Component } from 'preact';
-import { colorConvert } from '#shared/canvas/util';
 
 export default class CanvasFragment extends Component {
 
@@ -14,18 +13,7 @@ export default class CanvasFragment extends Component {
     }
 
     drawFragment = () => {
-        let { imgData, color, width, height, transparency } = this.props.element;
-        // let [r, g, b] = colorConvert(color);
-        // for (let i = 0; i < width*height; i++) {
-        //     let index = i * 4;
-        //     if (
-        //         imgData.data[index + 0] === r &&
-        //         imgData.data[index + 1] === g &&
-        //         imgData.data[index + 2] === b
-        //     ) {
-        //         imgData.data[index + 3] =  transparency ? 0 : 0xFF;
-        //     }
-        // }
+        let { imgData, width, height } = this.props.element;
         this.ctx.putImageData(imgData, 0, 0, 0, 0, width, height);
     };
 

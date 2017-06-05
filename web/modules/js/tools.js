@@ -357,7 +357,6 @@ function drawTransparencySub() {
                 cmd: 'DOM_ASSIGN',
                 properties: {
                     transparency: drawTool.transparency,
-                    dirty: true,
                 },
             };
             ws.sendObj(obj);

@@ -1,6 +1,7 @@
 let { getContext, colorConvert } = require('../canvas/util');
 let { normalizeObj } = require('./util');
 let { render, vdomEmitter } = require('./render');
+let { createElement } = require('./create-element');
 
 let vdom = {};
 
@@ -20,13 +21,13 @@ function updateVDOM(obj) {
         let { event, x, y } = obj;
 
         if (event == 'start') {
-            vdom[target] = {
+            vdom[target] = createElement({
                 x0: x, y0: y, x1: x, y1: y,
                 type: 'SELECTION',
                 selecting: true,
                 color: obj.color,
                 transparency: obj.transparency,
-            };
+            });
             normalizeObj(vdom[target]);
         }
         else if (event == 'drag' || event == 'end') {
@@ -90,7 +91,7 @@ function updateVDOM(obj) {
 function parseVDOM(vdomWireData) {
     let vdom = {};
     vdomWireData.forEach((d) => {
-        vdom[d.uid] = d;
+        vdom[d.uid] = createElement(d);
         delete vdom[d.uid].uid;
     });
     return vdom;
