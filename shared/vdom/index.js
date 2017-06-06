@@ -32,31 +32,18 @@ function updateVDOM(obj) {
             // skip deleted selections
             if (!vdom[target]) return;
 
-            vdom[target].bbox = { ...vdom[target].bbox, x1: x, y1: y, };
-            if (event == 'end') {
-                const ctx = getContext();
-                // bbox update changes x y
-                let { x, y, width, height } = vdom[target];
+            vdom[target].bbox = {
+                ...vdom[target].bbox,
+                x1: x,
+                y1: y,
+            };
 
-                vdom[target].selecting = false;
-                vdom[target].imgData = ctx.getImageData(x, y, width, height);
-                // remove copied section
-                let [r, g, b] = colorConvert(vdom[target].color);
-                let copy = ctx.getImageData(x, y, width, height);
-                for (let i = 0; i < width*height; i++) {
-                    let index = i * 4;
-                    copy.data[index + 0] = r;
-                    copy.data[index + 1] = g;
-                    copy.data[index + 2] = b;
-                    copy.data[index + 3] = 0xFF;
-                }
-                ctx.putImageData(copy, x, y, 0, 0, width, height);
+            if (event == 'end') {
+                vdom[target].yank();
             }
         }
         else if (event == 'drop') {
-            const ctx = getContext();
-            let { x, y, width, height, imgData } = vdom[target];
-            ctx.putImageData(imgData, x, y, 0, 0, width, height);
+            vdom[target].drop();
             delete vdom[target];
         }
 

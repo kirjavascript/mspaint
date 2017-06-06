@@ -105,6 +105,7 @@ For the scrollbars, I could not find a universal solution for styling them nativ
     tool specific cursors
     clipboard
     link github - about
+    hyperpack
 
 https://github.com/1j01/jspaint/blob/gh-pages/src/image-manipulation.js
 ```

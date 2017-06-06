@@ -2,7 +2,47 @@ let { getContext, colorConvert } = require('../canvas/util');
 let { CANVAS } = require('../constants');
 
 function createElement(config) {
-    let element = {};
+    const ctx = getContext();
+
+    // selection
+
+    let element = Object.create({
+        // imgData to canvas
+        drop() {
+            let { x, y, width, height, imgData, transparency } = element;
+            // merge transparency
+            if (transparency) {
+                let below = ctx.getImageData(x, y, width, height);
+                for (let i = 0; i < width*height; i++) {
+                    let index = i * 4;
+                    if (imgData.data[index + 3] == 0) {
+                        imgData.data[index + 0] = below.data[index + 0];
+                        imgData.data[index + 1] = below.data[index + 1];
+                        imgData.data[index + 2] = below.data[index + 2];
+                        imgData.data[index + 3] = 0xFF;
+                    }
+                }
+            }
+            ctx.putImageData(imgData, x, y, 0, 0, width, height);
+        },
+        // canvas to imgData
+        yank() {
+            let { x, y, width, height } = element;
+            element.selecting = false;
+            element.imgData = ctx.getImageData(x, y, width, height);
+            // remove copied section
+            let [r, g, b] = colorConvert(element.color);
+            let copy = ctx.getImageData(x, y, width, height);
+            for (let i = 0; i < width*height; i++) {
+                let index = i * 4;
+                copy.data[index + 0] = r;
+                copy.data[index + 1] = g;
+                copy.data[index + 2] = b;
+                copy.data[index + 3] = 0xFF;
+            }
+            ctx.putImageData(copy, x, y, 0, 0, width, height);
+        },
+    });
 
     observe(element, 'transparency', (obj, transparency) => {
         if (obj.imgData) {

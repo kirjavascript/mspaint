@@ -45,9 +45,7 @@ class Container extends Component {
 
     render(props, {vdom}) {
         return <div>
-            <pre class="debug">
-                {JSON.stringify(vdom,null,4)}
-            </pre>
+            {__DEV__ && <pre class="debug">{JSON.stringify(vdom,null,4)}</pre>}
             {vdom.map((fragment) => {
                 let {
                     key, target, element,
@@ -72,7 +70,7 @@ class Container extends Component {
                     ref={target == 'local' && this.onMove}
                 >
                     {imgData && <CanvasFragment element={element} target={target}/>}
-                    <pre class="debug">{target}</pre>
+                    {__DEV__ && <pre class="debug">{target}</pre>}
                 </div>;
             })}
         </div>;

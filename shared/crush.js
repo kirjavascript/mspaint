@@ -38,10 +38,11 @@ let properties = [
     {name: 'y1', number: 1},
     {name: 'width', number: 1},
     {name: 'height', number: 1},
-    {name: 'type', string: 1},
+    {name: 'type', string: 1},      // TODO: should be an enum
     {name: 'selecting', bool: 1},
     {name: 'dirty', bool: 1},
     {name: 'config', object: 1},
+    {name: 'bbox', object: 1},
     {name: 'properties', object: 1},
     {
         name: 'imgData',
