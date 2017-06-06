@@ -1,5 +1,4 @@
 let { getContext, colorConvert } = require('../canvas/util');
-let { normalizeObj } = require('./util');
 let { render, vdomEmitter } = require('./render');
 let { createElement } = require('./create-element');
 
@@ -22,24 +21,22 @@ function updateVDOM(obj) {
 
         if (event == 'start') {
             vdom[target] = createElement({
-                x0: x, y0: y, x1: x, y1: y,
                 type: 'SELECTION',
                 selecting: true,
                 color: obj.color,
                 transparency: obj.transparency,
+                bbox: { x0: x, y0: y, x1: x, y1: y, },
             });
-            normalizeObj(vdom[target]);
         }
         else if (event == 'drag' || event == 'end') {
             // skip deleted selections
             if (!vdom[target]) return;
 
-            vdom[target].x1 = x;
-            vdom[target].y1 = y;
-            normalizeObj(vdom[target]);
+            vdom[target].bbox = { ...vdom[target].bbox, x1: x, y1: y, };
             if (event == 'end') {
                 const ctx = getContext();
-                let { x, y, width, height, transparency } = normalizeObj(vdom[target]);
+                // bbox update changes x y
+                let { x, y, width, height } = vdom[target];
 
                 vdom[target].selecting = false;
                 vdom[target].imgData = ctx.getImageData(x, y, width, height);
