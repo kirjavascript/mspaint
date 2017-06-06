@@ -31,7 +31,17 @@ export default class CanvasFragment extends Component {
                     img.onload = function() {
                         ctx.drawImage(this, 0, 0);
                         // awkward mutation to sync imgData...
-                        element.imgData = ctx.getImageData(0, 0, width, height);
+                        let newImgData = ctx.getImageData(0, 0, width, height);
+                        element.imgData = newImgData;
+                        let [r, g, b] = element.getRGB();
+                        for (let i = 0; i < width*height; i++) {
+                            let index = i * 4;
+                            if (newImgData.data[index + 3] == 0) {
+                                newImgData.data[index + 0] = r;
+                                newImgData.data[index + 1] = g;
+                                newImgData.data[index + 2] = b;
+                            }
+                        }
                     };
                     img.src = '/vdom/' + target;
                 }

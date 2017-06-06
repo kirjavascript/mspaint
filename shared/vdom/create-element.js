@@ -27,11 +27,12 @@ function createElement(config) {
         },
         // canvas to imgData
         yank() {
-            let { x, y, width, height } = element;
+            let { x, y, width, height, transparency } = element;
             element.selecting = false;
             element.imgData = ctx.getImageData(x, y, width, height);
+            transparency && element.setTransparency();
             // remove copied section
-            let [r, g, b] = colorConvert(element.color);
+            let [r, g, b] = element.getRGB();
             let copy = ctx.getImageData(x, y, width, height);
             for (let i = 0; i < width*height; i++) {
                 let index = i * 4;
@@ -42,12 +43,9 @@ function createElement(config) {
             }
             ctx.putImageData(copy, x, y, 0, 0, width, height);
         },
-    });
-
-    observe(element, 'transparency', (obj, transparency) => {
-        if (obj.imgData) {
-            let { imgData, color, width, height } = obj;
-            let [r, g, b] = colorConvert(color);
+        setTransparency() {
+            let { imgData, width, height, transparency } = element;
+            let [r, g, b] = element.getRGB();
             for (let i = 0; i < width*height; i++) {
                 let index = i * 4;
                 if (
@@ -58,6 +56,17 @@ function createElement(config) {
                     imgData.data[index + 3] = transparency ? 0 : 0xFF;
                 }
             }
+        },
+        getRGB() {
+            return colorConvert(element.color);
+        },
+    });
+
+    observe(element, 'transparency', (obj, transparency) => {
+        // trans -> normal on USE_PNG (might b useful to do this in preact)
+
+        if (obj.imgData) {
+            obj.setTransparency();
             obj.dirty = true;
         }
     });
@@ -88,9 +97,6 @@ function createElement(config) {
 
     return Object.assign(element, config);
 }
-
-// place - merge ctx
-// transparency still broken
 
 function observe(obj, prop, reaction) {
     let state = void 0;

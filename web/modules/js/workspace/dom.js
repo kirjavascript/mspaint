@@ -45,7 +45,9 @@ class Container extends Component {
 
     render(props, {vdom}) {
         return <div>
-            {__DEV__ && <pre class="debug">{JSON.stringify(vdom,null,4)}</pre>}
+            {__DEV__ && <pre class="debug">
+                {JSON.stringify(vdom,(k,v)=>k=='imgData'?'__removed__':v,4)}
+            </pre>}
             {vdom.map((fragment) => {
                 let {
                     key, target, element,
