@@ -63,8 +63,6 @@ function createElement(config) {
     });
 
     observe(element, 'transparency', (obj, transparency) => {
-        // trans -> normal on USE_PNG (might b useful to do this in preact)
-
         if (obj.imgData) {
             obj.setTransparency();
             obj.dirty = true;
@@ -87,11 +85,11 @@ function createElement(config) {
             obj.height += obj.y;
             obj.y = 0;
         }
-        if (obj.x + obj.width + 2 >= CANVAS.width) {
-            obj.width = CANVAS.width - obj.x - 2;
+        if (obj.x + obj.width >= CANVAS.width) {
+            obj.width = CANVAS.width - obj.x;
         }
-        if (obj.y + obj.height + 2 >= CANVAS.height) {
-            obj.height = CANVAS.height - obj.y - 2;
+        if (obj.y + obj.height >= CANVAS.height) {
+            obj.height = CANVAS.height - obj.y;
         }
     });
 

@@ -3,7 +3,7 @@ import { setScroll, scrollPos } from '#js/scrollbars';
 
 import './cursors';
 import './canvas';
-import './dom';
+import './dom/index';
 
 export function getMotion() {
     let { x, y, dx, dy } = d3.event;

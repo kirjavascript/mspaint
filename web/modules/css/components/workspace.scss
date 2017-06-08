@@ -5,14 +5,14 @@
     border-bottom: 1px solid $grey;
     border-left: 1px solid black;
     border-right: 1px solid whitesmoke;
+    padding: 3px 4px 3px 3px;
     @include innerBorder {
         border-right: 1px solid $grey;
         border-top: 1px solid black;
         z-index: 1;
     }
-    padding: 3px 4px 3px 3px;
 
-    > div {
+    div {
         overflow: visible;
     }
 
@@ -48,6 +48,15 @@
 
             canvas {
                 display: block;
+                z-index: 0;
+            }
+
+            .handle {
+                position: absolute;
+                z-index: 1;
+                background-color: #008;
+                width: 3px;
+                height: 3px;
             }
         }
 

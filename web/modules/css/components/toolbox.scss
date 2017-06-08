@@ -40,7 +40,10 @@
             }
         }
 
-        .size, .trans, .shape, .desc {
+        .size,
+        .trans,
+        .shape,
+        .desc {
             pointer-events: none;
         }
     }

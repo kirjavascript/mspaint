@@ -105,13 +105,14 @@ For the scrollbars, I could not find a universal solution for styling them nativ
     tool specific cursors
     clipboard
     link github - about
-    hyperpack
+    print
+    licenced to everyone
+    ssl
 
 https://github.com/1j01/jspaint/blob/gh-pages/src/image-manipulation.js
 ```
 
 babel-register
-
 // console.log(require('babel-core')
 //     .transformFileSync('./shared/vdom/render-preact.js', {
 //         presets: ['es2015', 'stage-0'],
@@ -122,10 +123,5 @@ add routes for badges to show active users
 https://github.com/github/markup/issues/224
 
 increase array limit from 255-65535 (write helper)
-canvas transparent merge
-mutate imgData in VDOM
-check dirty flag server side
-create ImageData abstraction object (setters update)
 
-ssl
 -->
