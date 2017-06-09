@@ -11,16 +11,14 @@
 
     require('#css/root.scss');
     require('#js/socket');
-    require('#js/workspace/index');
-    require('#js/tools');
-    require('#js/statusbar');
-    require('#js/palette');
-    require('#js/scrollbars');
+    require('#workspace/index');
+    require('#ui/index');
     require('#js/browser');
 
 }) ::function() {
 
     // load polyfill in bad browsers
+    // TODO: replace with polyfill.io & list
     if (!Array.from || !Array.prototype.fill) {
         console.warn('Old browser; installing polyfills');
         let polyfill = document.createElement('script');

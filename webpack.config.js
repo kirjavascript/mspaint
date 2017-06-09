@@ -67,6 +67,8 @@ module.exports = (env={}, args={}) => {
             extensions: ['.js', '.json', '.jsx'],
             alias: {
                 '#js': __dirname + '/web/modules/js',
+                '#ui': __dirname + '/web/modules/js/ui',
+                '#workspace': __dirname + '/web/modules/js/workspace',
                 '#css': __dirname + '/web/modules/css',
                 '#lib': __dirname + '/web/modules/lib',
                 '#shared': __dirname + '/shared',

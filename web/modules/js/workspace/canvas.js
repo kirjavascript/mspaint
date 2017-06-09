@@ -2,9 +2,9 @@ import d3 from '#lib/d3';
 import { updateWorkspace, getVDOM } from '#shared/workspace';
 import { CANVAS } from '#shared/constants';
 import { pixelConvert } from '#shared/canvas/util';
-import { drawColor, setColor } from '#js/palette';
-import { setScroll, scrollPos } from '#js/scrollbars';
-import { drawTool } from '#js/tools';
+import { drawColor, setColor } from '#ui/palette';
+import { setScroll, scrollPos } from '#ui/scrollbars';
+import { drawTool } from '#ui/tools';
 import { ws, wsMessage } from '#js/socket';
 import { getMotion } from './index';
 
@@ -13,25 +13,6 @@ let canvasWrap = d3.select('.canvasWrap');
 let canvas = canvasWrap.select('canvas').style('opacity', 0);
 let ctx = canvas.node().getContext('2d');
 export const getContext = () => ctx;
-
-// events
-
-wsMessage.on('message.workspace', ({message}) => {
-
-    if (message.cmd.indexOf('CANVAS_') == 0) {
-        updateWorkspace(message);
-    }
-    else if (message.cmd.indexOf('DOM_') == 0) {
-        updateWorkspace(message);
-    }
-    else if (message.cmd == 'PART') {
-        updateWorkspace({
-            cmd: 'DOM_PART',
-            uid: message.uid,
-        });
-    }
-
-});
 
 // init canvas
 

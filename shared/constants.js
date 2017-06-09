@@ -4,6 +4,6 @@ module.exports = {
         height: 800,
     },
     PING_INTERVAL: 5000,
-    PORT: __DEV__ ? 8000 : 8999,
+    PORT: 8000,
     USE_JSON: false, // crusher setting
 };

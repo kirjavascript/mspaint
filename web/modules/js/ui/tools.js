@@ -1,7 +1,7 @@
 import d3 from '#lib/d3';
 import { setScroll, scrollPos } from './scrollbars';
 import { updateWorkspace, getVDOM } from '#shared/workspace';
-import { ws } from './socket';
+import { ws } from '../socket';
 
 // variables
 

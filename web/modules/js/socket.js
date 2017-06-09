@@ -1,5 +1,5 @@
 import d3 from '#lib/d3';
-import { setStatus } from './statusbar';
+import { setStatus } from '#ui/statusbar';
 import debounce from '#lib/debounce';
 import { PING_INTERVAL, PORT } from '#shared/constants';
 import { pack, unpack } from '#shared/crush';
