@@ -14,7 +14,7 @@ let server = app.set('view engine', 'ejs')
     .set('views', 'web/templates')
     .use(require('compression')())
     .listen(PORT, () => {
-        console.log(`Listening on ${PORT}`)
+        !devMode && console.info(`Listening on ${PORT}`)
     });
 
 // sockets //
@@ -30,7 +30,7 @@ initSocket(app, wss);
 // webpack-dev-middleware //
 
 if (devMode) {
-    require('./webpack-middleware')(app, wss);
+    require('./development-middleware')(app, wss, server);
 }
 
 // load routes //
