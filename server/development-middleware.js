@@ -53,9 +53,9 @@ module.exports = function(app, wss, server) {
 
     // check server code and restart
 
-    chokidar
-        .watch('server/**/*', {ignored: /[\/\\]\./})
-        .on('change', restart);
+    // chokidar
+    //     .watch('server/**/*', {ignored: /[\/\\]\./})
+    //     .on('change', restart);
 
     // load middleware
 
@@ -71,6 +71,9 @@ module.exports = function(app, wss, server) {
 // check node files for restart
 // restart button
 // drop nodemon
+// node-dev
+// supervisor --
+// ./index.js process runner & chokidar
 // broadcast noreload signal on node restart
 
 function reporter(reload, screen) {
