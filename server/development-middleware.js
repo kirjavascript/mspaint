@@ -30,20 +30,20 @@ module.exports = function(app, wss, server) {
     }
 
     // node process restart
-    function restart() {
-        screen.destroy();
-        server.close(() => {
-            const { exit, execPath, argv, env, cwd } = process;
-            require('child_process')
-                .spawn(execPath, ['--harmony', ...argv.slice(1)], {
-                    env,
-                    cwd: cwd(),
-                    detached: true,
-                    stdio: 'inherit'
-                }).unref();
-            exit();
-        });
-    }
+    // function restart() {
+    //     screen.destroy();
+    //     server.close(() => {
+    //         const { exit, execPath, argv, env, cwd } = process;
+    //         require('child_process')
+    //             .spawn(execPath, ['--harmony', ...argv.slice(1)], {
+    //                 env,
+    //                 cwd: cwd(),
+    //                 detached: true,
+    //                 stdio: 'inherit'
+    //             }).unref();
+    //         exit();
+    //     });
+    // }
 
     // check templates for changes
 
@@ -68,11 +68,7 @@ module.exports = function(app, wss, server) {
 
 }
 
-// check node files for restart
 // restart button
-// drop nodemon
-// node-dev
-// supervisor --
 // ./index.js process runner & chokidar
 // broadcast noreload signal on node restart
 
