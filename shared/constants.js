@@ -5,5 +5,5 @@ module.exports = {
     },
     PING_INTERVAL: 5000,
     PORT: 8000,
-    USE_JSON: false, // crusher setting
+    USE_JSON: false,
 };

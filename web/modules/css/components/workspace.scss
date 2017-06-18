@@ -58,6 +58,15 @@
                 width: 3px;
                 height: 3px;
             }
+
+            .resize {
+                position: absolute;
+                left: 1px;
+                top: 1px;
+                right: 1px;
+                bottom: 1px;
+                border: 1px dotted #000;
+            }
         }
 
         .selection.selecting {

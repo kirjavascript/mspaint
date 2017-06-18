@@ -12,7 +12,7 @@ let { USE_JSON } = require('./constants');
 let commands = [
     'RELOAD','JOIN','PART','LIST','COLOR','PING','PONG','XY',
     'CANVAS_FILL','CANVAS_PENCIL','CANVAS_BRUSH','CANVAS_ERASE',
-    'DOM_VDOM','DOM_SELECT','DOM_MOVE','DOM_ASSIGN',
+    'DOM_VDOM','DOM_SELECT','DOM_MOVE','DOM_ASSIGN','DOM_RESIZE',
 ];
 
 // schema definition
@@ -40,6 +40,8 @@ let properties = [
     {name: 'height', number: 1},
     {name: 'type', string: 1},      // TODO: should be an enum
     {name: 'selecting', bool: 1},
+    {name: 'resize', object: 1},
+    {name: 'direction', enum: ['NW','N','NE','E','SE','S','SW','W']},
     {name: 'dirty', bool: 1},
     {name: 'config', object: 1},
     {name: 'bbox', object: 1},
@@ -73,7 +75,7 @@ let propertyIndicies = properties.map((d) => d.name);
 function pack(obj) {
 
     if (USE_JSON) {
-        return JSON.stringify(obj);
+        return JSON.stringify(obj,(k,v)=>k=='imgData'?'USE_PNG':v);
     }
 
     // get command (is stored as a single byte header)

@@ -15,7 +15,7 @@ let server = app.set('view engine', 'ejs')
     .use(require('compression')())
     .listen(PORT, () => {
         console.log(`Listening on ${PORT}`)
-    })
+    });
 
 // sockets //
 

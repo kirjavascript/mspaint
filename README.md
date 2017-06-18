@@ -112,15 +112,9 @@ For the scrollbars, I could not find a universal solution for styling them nativ
 https://github.com/1j01/jspaint/blob/gh-pages/src/image-manipulation.js
 ```
 
-babel-register
-// console.log(require('babel-core')
-//     .transformFileSync('./shared/vdom/render-preact.js', {
-//         presets: ['es2015', 'stage-0'],
-//         plugins: [['transform-react-jsx', { pragma: 'h' }]],
-//     }).code);
-
 add routes for badges to show active users
 https://github.com/github/markup/issues/224
+node shrinkray for compression
 
 increase array limit from 255-65535 (write helper)
 

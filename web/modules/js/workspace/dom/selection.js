@@ -23,9 +23,15 @@ export default class Selection extends Component {
         }
     };
 
+    onResize = (node) => {
+        if (node) {
+
+        }
+    };
+
     render({fragment: { key, target, element }}) {
         let {
-            x, y, width, height, selecting, imgData
+            x, y, width, height, selecting, imgData, resize,
         } = element;
 
         // only calculate this when needed
@@ -62,8 +68,12 @@ export default class Selection extends Component {
                 <div
                     class="handle"
                     style={handleStyleList[i]}
+                    ref={target == 'local' && this.onResize}
                 />
             ))}
+            {resize && <div
+                class="resize"
+            />}
         </div>;
     }
 }
