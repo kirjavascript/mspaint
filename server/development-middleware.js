@@ -69,7 +69,7 @@ function reporter(reload, screen) {
         parent: screen,
         left: 0,
         bottom: 0,
-        height: '100%-1',
+        height: '100%-5',
         label: 'webpack',
         scrollable: true,
         alwaysScroll: true,
@@ -89,8 +89,8 @@ function reporter(reload, screen) {
         },
     });
 
-    const log = (obj) => {
-        let output = '';
+    const log = (() => {
+        let output;
 
         // create write steam
         let wStream = require('stream').Writable();
@@ -101,11 +101,14 @@ function reporter(reload, screen) {
 
         // create faux logger
         let logger = new console.Console(wStream, process.stderr);
-        logger.log(obj);
 
-        // setContent
-        wpStatus.setContent(output);
-    };
+        return (obj) => {
+            output = '';
+            logger.log(obj);
+            wpStatus.setContent(output);
+        };
+
+    })();
 
     return ({ state, stats, options}) => {
         if(state) {
@@ -113,15 +116,18 @@ function reporter(reload, screen) {
             const { hash, startTime, endTime, compilation } = stats;
             const { errors, assets, records, chunks, modules, entries } = compilation;
 
-            const diff = `${endTime - startTime}{bold}ms{/bold}`;
+            const time = `{bold}${endTime - startTime}{/bold}ms`;
 
-            log({
-                hash,
-                diff,
-                stats,
-            });
+            // log({
+            //     hash,
+            //     time,
+            //     errors: errors[0].error,
+            // });
 
-            // log(stats);
+            wpStatus.setContent(errors[0].error)
+
+            // TODO: warnings
+
             // let displayStats = (!options.quiet && options.stats !== false);
             // if(displayStats &&
                 // !(stats.hasErrors() || stats.hasWarnings()) &&
