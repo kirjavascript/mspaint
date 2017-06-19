@@ -1,6 +1,6 @@
 <div align="center">
     <a href="http://mspaint.us/">
-        <img src="mspaint.png" alt="mspaint">
+        <img src="web/static/docs/mspaint.png" alt="mspaint">
     </a>
     <br>
 </div>

@@ -1,7 +1,6 @@
 let webpack = require('webpack');
 let webpackConfig = require('../webpack.config.js')({dev:true});
-let chokidar = require('chokidar');
-let { Screen, Box, BigText, FileManager } = require('blessed');
+let { Screen, Box, BigText, FileManager, Text } = require('blessed');
 
 webpackConfig.output.path = '/';
 
@@ -16,12 +15,14 @@ module.exports = function(app, wss, server) {
         dockBorders: true,
     });
 
-    screen.key('escape', () => {
+    function rip() {
         screen.destroy();
         server.close(() => {
             process.exit(0);
         });
-    });
+    }
+
+    screen.key(['escape', 'q', 'C-c'], rip);
 
     // browser reload
     function reload() {
@@ -29,33 +30,11 @@ module.exports = function(app, wss, server) {
         wss.broadcastObj({cmd: 'RELOAD'});
     }
 
-    // node process restart
-    // function restart() {
-    //     screen.destroy();
-    //     server.close(() => {
-    //         const { exit, execPath, argv, env, cwd } = process;
-    //         require('child_process')
-    //             .spawn(execPath, ['--harmony', ...argv.slice(1)], {
-    //                 env,
-    //                 cwd: cwd(),
-    //                 detached: true,
-    //                 stdio: 'inherit'
-    //             }).unref();
-    //         exit();
-    //     });
-    // }
-
     // check templates for changes
 
-    chokidar
+    require('chokidar')
         .watch('web/templates/**/*', {ignored: /[\/\\]\./})
         .on('change', reload);
-
-    // check server code and restart
-
-    // chokidar
-    //     .watch('server/**/*', {ignored: /[\/\\]\./})
-    //     .on('change', restart);
 
     // load middleware
 
@@ -64,85 +43,105 @@ module.exports = function(app, wss, server) {
         reporter: reporter(reload, screen)
     }));
 
+
+     // title //
+
+    const title = new Text({
+        left: 0,
+        top: 0,
+        content: `{yellow-fg}⚡️{/yellow-fg}mspaint`,
+        parent: screen,
+        tags: true,
+        style: { bold: true },
+    });
+
     screen.render();
 
 }
 
 // restart button
-// ./index.js process runner & chokidar
 // broadcast noreload signal on node restart
 
 function reporter(reload, screen) {
 
-     // title //
-
-    new Box({
-        left: 0,
-        top: 0,
-        content: `mspaint debugger`,
-        parent: screen,
-        style: {
-            fg: 'white',
-            bold: true,
-            border: {
-                fg: 'black',
-                bg: 'white',
-
-            },
-        },
-        // width: 'shrink',
-        // height: 'shrink',
-        // left: 'center',
-    });
 
     let wpStatus = new Box({
         parent: screen,
         left: 0,
         bottom: 0,
-        height: '100%-2',
+        height: '100%-1',
+        label: 'webpack',
         scrollable: true,
         alwaysScroll: true,
-        label: 'webpack',
+        mouse: true,
+        tags: true,
+        scrollbar: { },
         border: {
             type: 'line',
         },
         style: {
             border: {
-                fg: 'red'
+                fg: '#FA0'
             },
             scrollbar: {
-                bg: 'blue',
-                fg: 'red',
+                bg: 'grey',
             },
         },
-        mouse: true,
-          scrollbar: {
-            ch: ' ',
-            // inverse: true
-        },
-        // draggable: true,
     });
+
+    const log = (obj) => {
+        let output = '';
+
+        // create write steam
+        let wStream = require('stream').Writable();
+        wStream._write = function (chunk, enc, next) {
+            output += chunk;
+            next();
+        };
+
+        // create faux logger
+        let logger = new console.Console(wStream, process.stderr);
+        logger.log(obj);
+
+        // setContent
+        wpStatus.setContent(output);
+    };
 
     return ({ state, stats, options}) => {
         if(state) {
-            let displayStats = (!options.quiet && options.stats !== false);
-            if(displayStats &&
-                !(stats.hasErrors() || stats.hasWarnings()) &&
-                options.noInfo)
-                displayStats = false;
-            if(displayStats) {
+
+            const { hash, startTime, endTime, compilation } = stats;
+            const { errors, assets, records, chunks, modules, entries } = compilation;
+
+            const diff = `${endTime - startTime}{bold}ms{/bold}`;
+
+            log({
+                hash,
+                diff,
+                stats,
+            });
+
+            // log(stats);
+            // let displayStats = (!options.quiet && options.stats !== false);
+            // if(displayStats &&
+                // !(stats.hasErrors() || stats.hasWarnings()) &&
+                // options.noInfo)
+                // displayStats = false;
+            // if(displayStats) {
                 // options.log(stats.toString(options.stats));
-                wpStatus.setContent(stats.toString(options.stats));
-                screen.render();
-            }
+                // wpStatus.setContent(stats.toString(options.stats));
+                // screen.render();
+            // }
             if(!options.noInfo && !options.quiet) {
                 // options.log('webpack: bundle is now VALID.');
+                wpStatus.style.border.fg = '#06A';
+                screen.render();
                 reload();
             }
         } else {
             // options.log('webpack: bundle is now INVALID.');
-
-
+            wpStatus.style.border.fg = '#FA0';
+            screen.render();
         }
     }
 
