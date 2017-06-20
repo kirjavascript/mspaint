@@ -12,7 +12,7 @@
     proc.on('exit', rip);
 
     require('chokidar')
-        .watch('server/**/*', {ignored: /[\/\\]\./})
+        .watch(['server/**/*', 'development/**/*'], {ignored: /[\/\\]\./})
         .on('change', () => {
             proc.removeListener('exit', rip);
             proc.on('exit', arguments.callee);

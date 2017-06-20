@@ -43,13 +43,16 @@ module.exports = function(app, wss, server) {
         reporter: reporter(reload, screen)
     }));
 
-
-     // title //
+    // title //
 
     const title = new Text({
         left: 0,
         top: 0,
-        content: `{yellow-fg}⚡️{/yellow-fg}mspaint`,
+        content: `mspaint`,
+        content: `┌┬┐┌─┐┌─┐┌─┐┬┌┐┌┬┐
+│││└─┐├─┘├─┤│││││
+┴ ┴└─┘┴  ┴ ┴┴┘└┘┴
+{yellow-fg}⚡️{/yellow-fg}`,
         parent: screen,
         tags: true,
         style: { bold: true },
@@ -59,8 +62,12 @@ module.exports = function(app, wss, server) {
 
 }
 
-// restart button
+// restart button VDOM, room
 // broadcast noreload signal on node restart
+// development log2string blessed daemon
+//DEFAULT_SCROLL_OPTIONS
+// stats.toJson()
+// webpack_dashboard
 
 function reporter(reload, screen) {
 
@@ -114,19 +121,19 @@ function reporter(reload, screen) {
         if(state) {
 
             const { hash, startTime, endTime, compilation } = stats;
-            const { errors, assets, records, chunks, modules, entries } = compilation;
+            const { errors, warnings, assets, records, chunks, modules, entries } = compilation;
 
             const time = `{bold}${endTime - startTime}{/bold}ms`;
 
-            // log({
-            //     hash,
-            //     time,
-            //     errors: errors[0].error,
-            // });
+            log({
+                hash,
+                time,
+                // errors: errors[0],
+            });
 
-            wpStatus.setContent(errors[0].error)
+            // wpStatus.setContent(errors[0].error)
+            // wpStatus.setContent(warnings[0].warning)
 
-            // TODO: warnings
 
             // let displayStats = (!options.quiet && options.stats !== false);
             // if(displayStats &&
@@ -139,13 +146,11 @@ function reporter(reload, screen) {
                 // screen.render();
             // }
             if(!options.noInfo && !options.quiet) {
-                // options.log('webpack: bundle is now VALID.');
                 wpStatus.style.border.fg = '#06A';
                 screen.render();
                 reload();
             }
         } else {
-            // options.log('webpack: bundle is now INVALID.');
             wpStatus.style.border.fg = '#FA0';
             screen.render();
         }

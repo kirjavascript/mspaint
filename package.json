@@ -2,12 +2,12 @@
   "name": "mspaint",
   "scripts": {
     "test": "node shared/crush.test",
-    "start": "node --harmony server/index.js --env.dev",
-    "nodemon": "nodemon --harmony server/index.js --host 0.0.0.0 --ignore 'web/modules/**/*' --ignore 'shared/**/*' --env.dev",
-    "supervisor": "node-supervisor --watch server/ --non-interactive --no-restart-on exit -- --harmony server/index.js --env.dev",
+    "start": "node development/daemon",
+    "build": "git pull origin master && yarn && webpack -p",
+    "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json",
     "format-styles": "stylefmt -r \"web/modules/css/**/*\" -c .stylelintrc",
-    "deploy": "git pull origin master && yarn && webpack -p",
-    "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json"
+    "deprecated-nodemon": "nodemon --harmony server/index.js --host 0.0.0.0 --ignore 'web/modules/**/*' --ignore 'shared/**/*' --env.dev",
+    "deprecated-supervisor": "node-supervisor --watch server/ --non-interactive --no-restart-on exit -- --harmony server/index.js --env.dev"
   },
   "dependencies": {
     "babel-plugin-transform-react-jsx": "^6.24.1",

@@ -30,7 +30,7 @@ initSocket(app, wss);
 // webpack-dev-middleware //
 
 if (devMode) {
-    require('./development-middleware')(app, wss, server);
+    require('../development/middleware')(app, wss, server);
 }
 
 // load routes //

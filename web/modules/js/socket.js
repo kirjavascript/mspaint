@@ -48,3 +48,5 @@ ws.addEventListener('message', (e) => {
 const hasPinged = debounce(() => {
     setStatus('ping', `${PING_INTERVAL}+`);
 }, PING_INTERVAL*2);
+
+console.log('asdasd');
