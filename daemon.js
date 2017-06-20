@@ -7,12 +7,16 @@
             stdio: 'inherit',
         });
 
+    const rip = () => {process.exit()};
+
+    proc.on('exit', rip);
+
     require('chokidar')
         .watch('server/**/*', {ignored: /[\/\\]\./})
         .on('change', () => {
+            proc.removeListener('exit', rip);
+            proc.on('exit', arguments.callee);
             proc.kill('SIGINT');
         });
-
-    proc.on('exit', arguments.callee);
 
 } ();
