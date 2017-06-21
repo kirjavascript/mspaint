@@ -2,15 +2,12 @@ let webpack = require('webpack');
 let webpackConfig = require('../webpack.config.js')({dev:true});
 let { Screen, Box, BigText, FileManager, Text, Button } = require('blessed');
 let webpackBox = require('./webpack-box');
+let consoleBox = require('./console-box');
 
 // restart button VDOM, room
 // broadcast noreload signal on node restart
-// parse = webpack
 // DEFAULT_SCROLL_OPTIONS
-// stats.toJson()
-// webpack_dashboard
 // patch console.log to a window
-// reporter file, console file
 
 module.exports = function(app, wss, server) {
 
@@ -62,8 +59,9 @@ module.exports = function(app, wss, server) {
         content: require('./ascii-logo')(),
         parent: screen,
         tags: true,
-        // style: { bold: true },
     });
+
+    consoleBox(screen);
 
     screen.render();
 

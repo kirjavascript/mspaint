@@ -95,11 +95,14 @@ function addClient(ws, wss) {
 
             let { cmd } = message;
 
+
             if (cmd == 'PONG') {
                 room[uid].pong = Date.now();
             }
             else if (cmd == 'XY') {
                 let { mouse } = message;
+
+            console.log(message);
 
                 Object.assign(room[uid].config.mouse, mouse);
 
