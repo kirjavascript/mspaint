@@ -29,9 +29,16 @@ module.exports = function (screen) {
         },
     });
 
-    console.log = (...obj) => {
-        container.setContent(conStr(...obj));
+    console.log = (obj) => {
+        let str = conStr(obj)
+            .replace(/(\[(.*?)\])/g, (a, b) => {
+                return `{bold}{#0AF-fg}${a}{/}`;
+            });
+
+        container.setContent(str);
         screen.render();
     };
+
+    console.log(screen);
 
 }
