@@ -102,8 +102,6 @@ function addClient(ws, wss) {
             else if (cmd == 'XY') {
                 let { mouse } = message;
 
-            console.log(message);
-
                 Object.assign(room[uid].config.mouse, mouse);
 
                 ws.broadcastObj({
