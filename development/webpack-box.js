@@ -8,13 +8,14 @@ module.exports = function webpackBox(screen, reload) {
         parent: screen,
         left: 0,
         bottom: 0,
-        height: '100%-3',
+        height: '50%',
         label: 'webpack',
         scrollable: true,
         alwaysScroll: true,
         mouse: true,
         tags: true,
         scrollbar: { },
+        padding: 1,
         border: {
             type: 'line',
         },
@@ -23,14 +24,19 @@ module.exports = function webpackBox(screen, reload) {
                 fg: '#FA0',
             },
             scrollbar: {
-                bg: 'grey',
+                bg: '#0AF',
             },
         },
     });
 
+    function formatBytes(bytes) {
+        const sizes = ['ʙ','ᴋʙ','ᴍʙ','ɢʙ'];
+        const i = Math.floor(Math.log(bytes) / Math.log(1e3));
+        return '{bold}' + bytes / Math.pow(1e3, i) + '{/}' + sizes[i];
+    }
 
     const log = (obj) => {
-        wpStatus.setContent(conStr(obj));
+        wpStatus.setContent(obj);
     };
 
     return ({ state, stats, options}) => {
@@ -39,42 +45,27 @@ module.exports = function webpackBox(screen, reload) {
             const { errors, warnings, assets, entrypoints, chunks, modules, version, time, hash } = stats.toJson();
 
             const timestamp = `{#FC0-fg}⚡️{/#FA0-fg}{bold}${time}{/bold}ms`;
+            const files = assets
+                .map(({name, size}) => {
+                    return `{#0AF-fg}${name}{/} ${formatBytes(size)}\n`
+                })
+                .join``;
 
-            // log({
-            //     hash,
-            //     time,
-            //     stats: stats.toJson(),
-            // });
+            const warnStr = warnings.join``;
+            const errorStr = errors.join``;
 
+            log([
+                `${timestamp}\n`,
+                `${files}`,
+                `{#0AF-fg}hash{/} {bold}${hash}{/}`,
+                `{#0AF-fg}modules{/} {bold}${modules.length}{/}`,
+                `{#0AF-fg}version{/} {bold}${version}{/}`,
+                `\n${errorStr}`,
+            ].join`\n`);
 
-
-            log({
-                hash,
-                time: timestamp,
-                version,
-                modules: modules.length,
-                entrypoints,
-                chunks,
-                assets,
-            });
-            // wpStatus.setContent(errors[0])
-
-
-            // let displayStats = (!options.quiet && options.stats !== false);
-            // if(displayStats &&
-                // !(stats.hasErrors() || stats.hasWarnings()) &&
-                // options.noInfo)
-                // displayStats = false;
-            // if(displayStats) {
-                // options.log(stats.toString(options.stats));
-                // wpStatus.setContent(stats.toString(options.stats));
-                // screen.render();
-            // }
-            if(!options.noInfo && !options.quiet) {
-                wpStatus.style.border.fg = '#06A';
-                screen.render();
-                reload();
-            }
+            wpStatus.style.border.fg = '#06A';
+            screen.render();
+            reload();
         } else {
             wpStatus.style.border.fg = '#FA0';
             screen.render();

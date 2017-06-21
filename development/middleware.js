@@ -62,7 +62,7 @@ module.exports = function(app, wss, server) {
         content: require('./ascii-logo')(),
         parent: screen,
         tags: true,
-        style: { bold: true },
+        // style: { bold: true },
     });
 
     screen.render();

@@ -4,7 +4,7 @@ module.exports = () => {
 ┴ ┴└─┘┴  ┴ ┴┴┘└┘┴`;
     const rainbow = ['red', '#FA0', 'yellow', '#0F0', '#00F', '#518'];
 
-    return monochrome
+    return '{bold}' + monochrome
         .split`\n`
         .map(line => {
             return line
@@ -12,8 +12,8 @@ module.exports = () => {
                 .map((d, i) => {
                     return `{${rainbow[i]}-fg}${d}`
                 })
-                .join`` + '{/}';
+                .join``;
         })
-        .join`\n` + ' (~˘▾˘)~';
+        .join`\n` + '{/} (~˘▾˘)~';
 };
 

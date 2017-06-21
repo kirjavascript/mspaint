@@ -27,6 +27,7 @@ export default class Selection extends Component {
         if (node) {
 
         }
+        console.log('asdasd');
     };
 
     render({fragment: { key, target, element }}) {
