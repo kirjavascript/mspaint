@@ -3,6 +3,7 @@
   "scripts": {
     "test": "node shared/crush.test",
     "start": "node development/daemon",
+    "reload": "node development/daemon --reload",
     "build": "git pull origin master && yarn && webpack -p",
     "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json",
     "format-styles": "stylefmt -r \"web/modules/css/**/*\" -c .stylelintrc",
