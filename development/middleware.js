@@ -1,23 +1,21 @@
-let webpack = require('webpack');
-let webpackConfig = require('../webpack.config.js')({dev:true});
-let { Screen, Box, BigText, FileManager, Text, Button } = require('blessed');
-let webpackBox = require('./webpack-box');
-let consoleBox = require('./console-box');
+const webpack = require('webpack');
+const webpackConfig = require('../webpack.config.js')({dev:true});
 
-// restart button VDOM, room
-// broadcast noreload signal on node restart
-// DEFAULT_SCROLL_OPTIONS
-// patch console.log to a window
+const { Screen, Box, BigText, FileManager, Text, Button, Listbar } = require('blessed');
+const webpackBox = require('./webpack-box');
+const consoleBox = require('./console-box');
+
+// inject console earlier
 
 module.exports = function(app, wss, server) {
 
     webpackConfig.output.path = '/';
 
-    let compiler = webpack(webpackConfig);
+    const compiler = webpack(webpackConfig);
 
     // create screen
 
-    let screen = Screen({
+    const screen = Screen({
         fastCSR: true,
         dockBorders: true,
     });
@@ -43,14 +41,50 @@ module.exports = function(app, wss, server) {
         .watch('web/templates/**/*', {ignored: /[\/\\]\./})
         .on('change', reload);
 
-    // load middleware
+    // load webpack middleware
 
     app.use(require('webpack-dev-middleware')(compiler, {
         stats: {colors: true},
         reporter: webpackBox(screen, reload),
     }));
 
-    // title //
+    // draw UI
+    consoleBox(screen);
+
+    new Listbar({
+        parent: screen,
+        right: 0,
+        top: 0,
+        height: 3,
+        mouse: true,
+        shrink: true,
+        tags: true,
+        commands: {
+            console: {
+                keys: '1',
+                callback() {
+                    console.log('asdasda');
+                },
+            },
+            webpack: {
+                keys: '2',
+                callback() {
+                    console.log('2');
+                },
+            },
+            quit: {
+                keys: 'q',
+            },
+        },
+        style: {
+            border: {
+                fg: '#06A',
+            },
+            scrollbar: {
+                bg: '#0AF',
+            },
+        },
+    });
 
     const title = new Text({
         left: 0,
@@ -60,8 +94,6 @@ module.exports = function(app, wss, server) {
         parent: screen,
         tags: true,
     });
-
-    consoleBox(screen);
 
     screen.render();
 

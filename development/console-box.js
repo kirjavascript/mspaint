@@ -1,15 +1,15 @@
-let { Screen, Box, BigText, FileManager, Text, Button } = require('blessed');
+const { Screen, Box, BigText, FileManager, Text, Button } = require('blessed');
 
-let conStr = require('./constr');
+const conStr = require('./constr');
 
 module.exports = function (screen) {
 
-    let container = new Box({
+    const container = new Box({
         parent: screen,
         left: 0,
         bottom: 0,
         height: '50%',
-        label: 'Console',
+        label: 'console',
         scrollable: true,
         alwaysScroll: true,
         mouse: true,
@@ -21,7 +21,7 @@ module.exports = function (screen) {
         },
         style: {
             border: {
-                fg: 'white',
+                fg: '#06A',
             },
             scrollbar: {
                 bg: '#0AF',
@@ -29,13 +29,26 @@ module.exports = function (screen) {
         },
     });
 
-    console.log = (obj) => {
-        let str = conStr(obj)
+    const format = (obj) => {
+        const str = conStr(obj)
             .replace(/(\[(.*?)\])/g, (a, b) => {
                 return `{bold}{#0AF-fg}${a}{/}`;
             });
+        return str;
+    };
 
-        container.setContent(str);
+    console.log = (obj) => {
+        container.setContent(format(obj));
+        screen.render();
+    };
+
+    console.append = (obj) => {
+        container.setContent(container.content + format(obj));
+        screen.render();
+    };
+
+    console.prepend = (obj) => {
+        container.setContent(format(obj) + container.content);
         screen.render();
     };
 
