@@ -51,7 +51,4 @@ module.exports = function (screen) {
         container.setContent(format(obj) + container.content);
         screen.render();
     };
-
-    console.log(screen);
-
 }

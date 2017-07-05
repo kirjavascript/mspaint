@@ -51,41 +51,6 @@ module.exports = function(app, wss, server) {
     // draw UI
     consoleBox(screen);
 
-    new Listbar({
-        parent: screen,
-        right: 0,
-        top: 0,
-        height: 3,
-        mouse: true,
-        shrink: true,
-        tags: true,
-        commands: {
-            console: {
-                keys: '1',
-                callback() {
-                    console.log('asdasda');
-                },
-            },
-            webpack: {
-                keys: '2',
-                callback() {
-                    console.log('2');
-                },
-            },
-            quit: {
-                keys: 'q',
-            },
-        },
-        style: {
-            border: {
-                fg: '#06A',
-            },
-            scrollbar: {
-                bg: '#0AF',
-            },
-        },
-    });
-
     const title = new Text({
         left: 0,
         top: 0,
