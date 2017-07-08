@@ -11,7 +11,7 @@
 
     require('#css/root.scss');
     require('#js/socket');
-    require('#workspace/index');
+    require('#workspace/');
     require('#ui/index');
     require('#js/browser');
 

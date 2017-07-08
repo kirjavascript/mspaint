@@ -14,12 +14,28 @@
     }
 
     .item {
-        padding: 2px 5px;
+        padding: 1px 5px;
+        margin: 1px 0;
         flex-shrink: 0;
 
         &:hover {
-            background-color: $blue;
-            color: white;
+            border-top: 1px solid white;
+            border-left: 1px solid white;
+            border-bottom: 1px solid $darkgrey;
+            border-right: 1px solid $darkgrey;
+            padding: 0 4px;
+        }
+
+        &.selected {
+            border-top: 1px solid $darkgrey;
+            border-left: 1px solid $darkgrey;
+            border-bottom: 1px solid white;
+            border-right: 1px solid white;
+            padding: 0 4px;
+            span {
+                display: block;
+                margin: 1px -1px -1px 1px;
+            }
         }
     }
 }

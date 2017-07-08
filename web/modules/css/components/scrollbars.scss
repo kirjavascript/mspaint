@@ -89,17 +89,7 @@
     // shading
     .bar,
     .arrowBlock {
-        background-color: $grey;
-        border-top: 1px solid $grey;
-        border-left: 1px solid $grey;
-        border-right: 1px solid black;
-        border-bottom: 1px solid black;
-        @include innerBorder {
-            border-top: 1px solid white;
-            border-left: 1px solid white;
-            border-right: 1px solid $darkgrey;
-            border-bottom: 1px solid $darkgrey;
-        }
+        @extend .windowShading;
     }
 }
 

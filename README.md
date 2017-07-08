@@ -115,6 +115,8 @@ https://github.com/1j01/jspaint/blob/gh-pages/src/image-manipulation.js
 add routes for badges to show active users
 https://github.com/github/markup/issues/224
 node shrinkray for compression
+cmd.exe chat - mouse is colournames
+view bitmap - do fullscreen
 
 increase array limit from 255-65535 (write helper)
 

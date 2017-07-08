@@ -99,6 +99,20 @@ img {
     border-right: 1px solid whitesmoke;
 }
 
+.windowShading {
+    background-color: $grey;
+    border-top: 1px solid $grey;
+    border-left: 1px solid $grey;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    @include innerBorder {
+        border-top: 1px solid white;
+        border-left: 1px solid white;
+        border-right: 1px solid $darkgrey;
+        border-bottom: 1px solid $darkgrey;
+    }
+}
+
 .fuzzy {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4QQJFgQM7DXdIAAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAHUlEQVQI1wESAO3/ANPQyP/+////Af7////V0ckAg8QN0UJCbhUAAAAASUVORK5CYII=);
 }
