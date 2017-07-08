@@ -17,6 +17,7 @@
         padding: 1px 5px;
         margin: 1px 0;
         flex-shrink: 0;
+        overflow: visible;
 
         &:hover {
             border-top: 1px solid white;
@@ -35,6 +36,18 @@
             span {
                 display: block;
                 margin: 1px -1px -1px 1px;
+            }
+        }
+
+        .list {
+            @extend .windowShading;
+            position: absolute;
+            left: 0;
+            top: 0;
+            flex: unset;
+            > div:hover {
+                color: white;
+                background-color: $blue;
             }
         }
     }
