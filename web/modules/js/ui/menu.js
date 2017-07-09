@@ -34,6 +34,9 @@ let menuDefinition = [
                 },
             },
             {
+                hr: true,
+            },
+            {
                 name: 'Print',
                 action() {
                     alert('print');
@@ -43,91 +46,73 @@ let menuDefinition = [
     },
 ];
 
-import { h, render, Component } from 'preact';
 
-class Menu extends Component {
+const menuElement = d3.select('.menu');
+let selected = false;
 
-    state = {
-        selectedIndex: void 0,
-    };
+const itemSelect = menuElement
+    .selectAll('.item')
+    .data(menuDefinition);
 
-    openMenu = () => {
-        
-    };
+const itemEnter = itemSelect
+    .enter();
 
-    render() {
-        return <div>
-            {menuDefinition.map((data) => (
-                <List data={data} onClick/>
-                <div key={name}>
-                    <div class="item" onClick={this.openMenu}>
-                        <u>{name[0]}</u>{name.slice(1)}
-                    </div>
-                    <div class="list">
-                        {children.map(({name, action}) => (
-                            <div>
-                                {name}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            ))}
-        </div>;
+const rootItem = itemEnter
+    .append('div')
+    .on('click', function (d) {
+        selectItem(this, d);
+    })
+    .on('mouseenter', function(d) {
+        if (selected) {
+            selectItem(this, d);
+        }
+    })
+    .classed('item', true);
+
+// text
+rootItem
+    .append('span')
+    .html((d) => {
+        return `<u>${d.name[0]}</u>${d.name.slice(1)}`;
+    });
+
+// list
+const listSelect = rootItem
+    .append('div')
+    .each(function () {
+        const { top, left } = this.parentNode.getBoundingClientRect();
+
+        d3.select(this)
+            .style('top', top - 5 + 'px')
+            .style('left', left - 5 + 'px');
+    })
+    .classed('list', true);
+listSelect
+    .append('div')
+    .selectAll('.list-item')
+    .data((d) => d.children || [])
+    .enter()
+    .append('div')
+    .classed('list-item', true)
+    .classed('hr', (d) => d.hr)
+    .text((d) => d.name);
+
+const selectItem = (element, data) => {
+    rootItem.classed('selected', function() {
+        return element == this;
+    });
+    if (!selected) {
+        const body = d3.select('.window');
+        body.on('click', () => {
+            if (!element.contains(d3.event.target)) {
+                rootItem.classed('selected', false);
+                listSelect.style('display', 'none');
+                body.on('click', null);
+                selected = false;
+            }
+        });
+        selected = true;
     }
-}
-
-class List extends Component {
-    render() {
-
-    }
-}
-
-render(<Menu/>, null, d3.select('.menu').node());
-
-// let selected = false;
-// const menuElement = d3.select('.menu');
-
-// const itemSelect = menuElement
-//     .selectAll('.item')
-//     .data(menuDefinition);
-
-// const itemEnter = itemSelect
-//     .enter()
-//     .append('div')
-//     .on('click', function () {
-//         selectItem(this);
-//     })
-//     .on('mouseover', function() {
-//         if (selected) {
-//             selectItem(this);
-//         }
-//     })
-//     .classed('item', true);
-
-// const selectItem = (element) => {
-//     itemEnter.classed('selected', function() {
-//         return element == this;
-//     });
-//     const body = d3.select(document.body);
-//     body.on('click', () => {
-//         if (!element.contains(d3.event.target)) {
-//             d3.select(element).classed('selected', false);
-//             body.on('click', null);
-//             selected = false;
-//         }
-//     });
-//     selected = true;
-// };
-
-// itemEnter
-//     .append('span')
-//     .html((d) => {
-//         return `<u>${d.name[0]}</u>${d.name.slice(1)}`;
-//     });
-
-// const listEnter = itemEnter
-//     .selectAll('.listitem')
-//     .data((d) => {console.log(d.children);return d.children || [];})
-//     .enter()
-//     .append('div')
-//     .text((d) => d.name);
+    listSelect
+        .style('display', (d) => d != data ? 'none' : 'block');
+};

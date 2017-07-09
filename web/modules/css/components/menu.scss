@@ -17,7 +17,7 @@
         padding: 1px 5px;
         margin: 1px 0;
         flex-shrink: 0;
-        overflow: visible;
+        // position: relative;
 
         &:hover {
             border-top: 1px solid white;
@@ -39,17 +39,33 @@
             }
         }
 
-        .list {
+    }
+
+    .list {
+        position: absolute;
+        display: none;
+        z-index: 10;
+        top: 100%;
+        > div {
             @extend .windowShading;
-            position: absolute;
-            left: 0;
-            top: 0;
-            flex: unset;
-            > div:hover {
+            padding: 1px 0px;
+        }
+
+        .list-item {
+            padding: 3px 22px;
+            margin: 0;
+            &:hover {
                 color: white;
                 background-color: $blue;
             }
+            &.hr {
+                border-top: 1px solid $darkgrey;
+                border-bottom: 1px solid white;
+                padding: 0;
+                margin: 3px 0 4px 0;
+            }
         }
-    }
-}
 
+    }
+
+}
