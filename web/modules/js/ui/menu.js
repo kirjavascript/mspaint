@@ -39,7 +39,7 @@ let menuDefinition = [
             {
                 name: 'Print',
                 action() {
-                    alert('print');
+                    console.log('print');
                 },
             },
         ],
@@ -63,18 +63,14 @@ const rootItem = itemEnter
         selectItem(this, d);
     })
     .on('mouseenter', function(d) {
-        if (selected) {
-            selectItem(this, d);
-        }
+        selected && selectItem(this, d);
     })
     .classed('item', true);
 
 // text
 rootItem
     .append('span')
-    .html((d) => {
-        return `<u>${d.name[0]}</u>${d.name.slice(1)}`;
-    });
+    .html((d) => `<u>${d.name[0]}</u>${d.name.slice(1)}`);
 
 // list
 const listSelect = rootItem
@@ -95,24 +91,37 @@ listSelect
     .append('div')
     .classed('list-item', true)
     .classed('hr', (d) => d.hr)
+    .on('click', (d) => {
+        if (d.action) {
+            d3.event.stopPropagation();
+            closeList();
+            d.action();
+        }
+    })
     .text((d) => d.name);
 
+
+const body = d3.select('.window');
+
 const selectItem = (element, data) => {
-    rootItem.classed('selected', function() {
-        return element == this;
-    });
     if (!selected) {
-        const body = d3.select('.window');
         body.on('click', () => {
             if (!element.contains(d3.event.target)) {
-                rootItem.classed('selected', false);
-                listSelect.style('display', 'none');
-                body.on('click', null);
-                selected = false;
+                closeList();
             }
         });
         selected = true;
     }
+    rootItem.classed('selected', function() {
+        return element == this;
+    });
     listSelect
         .style('display', (d) => d != data ? 'none' : 'block');
+};
+
+const closeList = () => {
+    rootItem.classed('selected', false);
+    listSelect.style('display', 'none');
+    body.on('click', null);
+    selected = false;
 };
