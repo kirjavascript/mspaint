@@ -49,7 +49,25 @@ export const menuDefinition = [
                         title: 'About Paint',
                         width: 348,
                         height: 283,
+                        contentClass: 'about',
                         y: -100,
+                        onLoad: (content) => {
+                            content.append('img')
+                                .attr('src', '/logo.png');
+
+                            content.append('span')
+                                .classed('info', true)
+                                .html([
+                                    'Microsoft (R) Paint',
+                                    'Windows 98',
+                                    'Copyright (C) 1981-1998 Microsoft Corp.',
+                                    '\n',
+                                    'This product is licenced to:',
+                                    'everyone',
+                                    '\n',
+                                    '<hr/>',
+                                ].join`\n`);
+                        },
                     });
                 },
             },

@@ -6,7 +6,7 @@ const mainTitlebar = d3.select('.titlebar');
 
 // add cover
 
-export function dialog({title, width, height, x = 0, y = 0}) {
+export function dialog({title, width, height, x = 0, y = 0, onLoad, contentClass}) {
 
     mainTitlebar.classed('unfocused', true);
 
@@ -62,13 +62,7 @@ export function dialog({title, width, height, x = 0, y = 0}) {
                 .style('left', x + 'px');
         }));
 
-    body.append('div')
-        .html([
-            'Microsoft (R) Paint',
-            'Windows 98',
-            'Copyright (C) 1981-1998 Microsoft Corp.',
-            '<hr/>',
-            'This product is licenced to:',
-            'everyone',
-        ].join`<br/>`);
+    const content = body.append('div').classed(contentClass, true);
+
+    onLoad && onLoad(content);
 }
