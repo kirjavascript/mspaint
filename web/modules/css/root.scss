@@ -19,7 +19,8 @@ body {
 }
 
 img,
-canvas {
+canvas,
+.image{
     /* stylelint-disable declaration-block-no-duplicate-properties */
     image-rendering: -moz-crisp-edges;
     image-rendering: -o-crisp-edges;

@@ -1,9 +1,9 @@
 .dialog {
-    // left: 0px;
-    // top: 0px;
     z-index: 10;
     @extend .noselect;
     position: absolute;
+    font-size: 11px;
+
     .titlebar {
         padding-left: 2px;
     }
@@ -14,12 +14,47 @@
     }
 
     .close {
-        position: absolute;
+        @extend .image;
+        top: 0;
         right: 0;
-        width: 16px;
-        height: 14px;
-        background-color: $grey;
-        margin: 3px;
+        width: 14px;
+        height: 12px;
+        background-color: $greyer;
+        background-image: url(/x.png);
+        background-position: 3px 2px;
+        background-repeat: no-repeat;
+        margin: 4px 4px;
+
+        border-top: 1px solid white;
+        border-left: 1px solid white;
+        border-bottom: 1px solid black;
+        border-right: 1px solid black;
+
+        @include innerBorder {
+            border-top: 1px solid $grey;
+            border-left: 1px solid $grey;
+            border-bottom: 1px solid $darkgrey;
+            border-right: 1px solid $darkgrey;
+        }
+
+        position: absolute;
+
+        &:active {
+            background-position: 4px 3px;
+            border-bottom: 1px solid white;
+            border-right: 1px solid white;
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+
+            @include innerBorder {
+                border-bottom: 1px solid $grey;
+                border-right: 1px solid $grey;
+                border-top: 1px solid $darkgrey;
+                border-left: 1px solid $darkgrey;
+            }
+
+            position: absolute;
+        }
     }
 }
 

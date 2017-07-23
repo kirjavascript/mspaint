@@ -1,5 +1,6 @@
 import d3 from '#lib/d3';
 import { dragFilter } from '#workspace';
+import { ding } from '#ui/audio';
 
 const mainTitlebar = d3.select('.titlebar');
 
@@ -15,7 +16,8 @@ export function dialog({title, width, height, x = 0, y = 0}) {
     const overlay = d3
         .select(document.body)
         .append('div')
-        .classed('dialog-overlay', true);
+        .classed('dialog-overlay', true)
+        .on('click', ding);
 
     const element = d3
         .select(document.body)
@@ -43,7 +45,7 @@ export function dialog({title, width, height, x = 0, y = 0}) {
         mainTitlebar.classed('unfocused', false);
     };
 
-    const closeIcon = titlebar
+    const closeIcon = body
         .append('div')
         .classed('close', true)
         .on('click', close);
@@ -61,13 +63,12 @@ export function dialog({title, width, height, x = 0, y = 0}) {
         }));
 
     body.append('div')
-        .html('<hr/>');
-
+        .html([
+            'Microsoft (R) Paint',
+            'Windows 98',
+            'Copyright (C) 1981-1998 Microsoft Corp.',
+            '<hr/>',
+            'This product is licenced to:',
+            'everyone',
+        ].join`<br/>`);
 }
-
-dialog({
-    title: 'About Paint',
-    width: 348,
-    height: 283,
-    y: -100,
-});
