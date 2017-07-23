@@ -2,42 +2,48 @@ import d3 from '#lib/d3';
 
 // File Edit View Colors Help
 
-let menuDefinition = [
+const menuDefinition = [
     {
         name: 'File',
+        ulIndex: 0,
         children: [
             {
-                name: 'Save',
-                action() {
-                    alert('save');
-                },
+                name: 'New',
             },
             {
-                name: 'Print',
-                action() {
-                    alert('print');
-                },
+                name: 'Open',
             },
-        ],
-    },
-    {
-        name: 'Edit',
-        children: [],
-    },
-    {
-        name: 'Help',
-        children: [
             {
                 name: 'Save',
-                action() {
-                    alert('save');
-                },
+            },
+            {
+                name: 'Save As',
             },
             {
                 hr: true,
             },
             {
                 name: 'Print',
+            },
+        ],
+    },
+    {
+        name: 'Help',
+        ulIndex: 0,
+        children: [
+            {
+                name: 'Documentation',
+                ulIndex: 0,
+                action() {
+                    window.open('https://www.github.com/kirjavascript/mspaint');
+                },
+            },
+            {
+                hr: true,
+            },
+            {
+                name: 'About Paint',
+                ulIndex: 0,
                 action() {
                     console.log('print');
                 },
@@ -46,6 +52,36 @@ let menuDefinition = [
     },
 ];
 
+const body = d3.select('.window');
+
+const ulChar = (str, index) => {
+    return index === void 0 ? str : `${str.slice(0, index)}<u>${str[index]}</u>${str.slice(index+1)}`;
+};
+
+const selectItem = (element, data) => {
+    if (!selected) {
+        body.on('click', () => {
+            if (!element.contains(d3.event.target)) {
+                closeList();
+            }
+        });
+        selected = true;
+    }
+    rootItem.classed('selected', function() {
+        return element == this;
+    });
+    listSelect
+        .style('display', (d) => d != data ? 'none' : 'block');
+};
+
+const closeList = () => {
+    rootItem.classed('selected', false);
+    listSelect.style('display', 'none');
+    body.on('click', null);
+    selected = false;
+};
+
+// create menu
 
 const menuElement = d3.select('.menu');
 let selected = false;
@@ -70,7 +106,7 @@ const rootItem = itemEnter
 // text
 rootItem
     .append('span')
-    .html((d) => `<u>${d.name[0]}</u>${d.name.slice(1)}`);
+    .html(({name, ulIndex}) => ulChar(name, ulIndex));
 
 // list
 const listSelect = rootItem
@@ -98,30 +134,4 @@ listSelect
             d.action();
         }
     })
-    .text((d) => d.name);
-
-
-const body = d3.select('.window');
-
-const selectItem = (element, data) => {
-    if (!selected) {
-        body.on('click', () => {
-            if (!element.contains(d3.event.target)) {
-                closeList();
-            }
-        });
-        selected = true;
-    }
-    rootItem.classed('selected', function() {
-        return element == this;
-    });
-    listSelect
-        .style('display', (d) => d != data ? 'none' : 'block');
-};
-
-const closeList = () => {
-    rootItem.classed('selected', false);
-    listSelect.style('display', 'none');
-    body.on('click', null);
-    selected = false;
-};
+    .html(({name, ulIndex}) => name && ulChar(name, ulIndex));

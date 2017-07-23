@@ -48,12 +48,13 @@
         top: 100%;
         > div {
             @extend .windowShading;
-            padding: 1px 0px;
+            padding: 1px 0;
         }
 
         .list-item {
             padding: 3px 22px;
             margin: 0;
+
             &:hover {
                 color: white;
                 background-color: $blue;
