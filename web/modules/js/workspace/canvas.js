@@ -6,7 +6,7 @@ import { drawColor, setColor } from '#ui/palette';
 import { setScroll, scrollPos } from '#ui/scrollbars';
 import { drawTool } from '#ui/tools';
 import { ws, wsMessage } from '#js/socket';
-import { getMotion } from './index';
+import { getMotion, dragFilter } from './index';
 
 let {width, height} = CANVAS;
 let canvasWrap = d3.select('.canvasWrap');
@@ -45,13 +45,6 @@ function initCanvas(img) {
     setScroll();
 }
 
-function dragFilter() {
-    return (
-        d3.event.button == 0 ||
-        d3.event.button == 2 ||
-        d3.event.type == 'touchstart'
-    );
-}
 
 // drawing
 

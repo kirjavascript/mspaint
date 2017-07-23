@@ -24,6 +24,14 @@ wsMessage.on('message.workspace', ({message}) => {
 
 });
 
+export function dragFilter() {
+    return (
+        d3.event.button == 0 ||
+        d3.event.button == 2 ||
+        d3.event.type == 'touchstart'
+    );
+}
+
 export function getMotion() {
     let { x, y, dx, dy } = d3.event;
     let { zoom } = scrollPos;

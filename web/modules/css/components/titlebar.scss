@@ -15,5 +15,9 @@
         margin-top: 3px;
         white-space: nowrap;
     }
-}
 
+    &.unfocused {
+        background: linear-gradient(to right, $darkgrey 0%, $greyer 100%);
+    }
+
+}

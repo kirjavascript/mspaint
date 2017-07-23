@@ -3,7 +3,7 @@ import { menuDefinition } from './menu-definition';
 
 const body = d3.select('.window');
 
-const ulChar = (str, index) => {
+export const ulChar = (str, index) => {
     return index === void 0 ? str : `${str.slice(0, index)}<u>${str[index]}</u>${str.slice(index+1)}`;
 };
 

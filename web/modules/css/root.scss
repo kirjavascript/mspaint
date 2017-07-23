@@ -1,12 +1,6 @@
 @import './variables.scss';
 @import './mixins.scss';
-@import './components/titlebar.scss';
-@import './components/menu.scss';
-@import './components/toolbox.scss';
-@import './components/workspace.scss';
-@import './components/statusbar.scss';
-@import './components/scrollbars.scss';
-@import './components/palette.scss';
+@import './components/**/*';
 
 html {
     font-family: Tahoma, Geneva, sans-serif;
@@ -33,6 +27,13 @@ canvas {
     image-rendering: pixelated;
     -ms-interpolation-mode: nearest-neighbor;
     /* stylelint-enable */
+}
+
+hr {
+    border-bottom: 1px solid white;
+    border-top: 1px solid $darkgrey;
+    border-left: none;
+    border-right: none;
 }
 
 .noselect,

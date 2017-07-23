@@ -1,3 +1,5 @@
+import { dialog } from './dialog';
+
 // File Edit View Colors Help
 
 export const menuDefinition = [
@@ -43,7 +45,12 @@ export const menuDefinition = [
                 name: 'About Paint',
                 ulIndex: 0,
                 action() {
-                    console.log('print');
+                    dialog({
+                        title: 'About Paint',
+                        width: 348,
+                        height: 283,
+                        y: -100,
+                    });
                 },
             },
         ],

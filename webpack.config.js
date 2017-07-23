@@ -36,6 +36,7 @@ module.exports = (env={}, args={}) => {
                         { loader:'style-loader' },
                         { loader:'raw-loader' },
                         { loader:'sass-loader' },
+                        { loader:'import-glob-loader' },
                     ]
                 },
                 {
@@ -74,7 +75,7 @@ module.exports = (env={}, args={}) => {
                 '#shared': __dirname + '/shared',
                 'd3': __dirname + '/web/modules/lib/d3',
             }
-            
+
         },
         devtool: env.dev ? 'source-map' : false,
     };

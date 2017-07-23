@@ -1,0 +1,33 @@
+.dialog {
+    // left: 0px;
+    // top: 0px;
+    z-index: 10;
+    @extend .noselect;
+    position: absolute;
+    .titlebar {
+        padding-left: 2px;
+    }
+
+    > div {
+        @extend .windowShading;
+        padding: 2px;
+    }
+
+    .close {
+        position: absolute;
+        right: 0;
+        width: 16px;
+        height: 14px;
+        background-color: $grey;
+        margin: 3px;
+    }
+}
+
+.dialog-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 9;
+}
