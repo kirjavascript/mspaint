@@ -1,6 +1,7 @@
-let { getPNG } = require('./canvas');
-let { getVDOM } = require('../shared/workspace');
-let Canvas = require('canvas');
+const { freemem, totalmem } = require('os');
+const { getPNG } = require('./canvas');
+const { getVDOM } = require('../shared/workspace');
+const Canvas = require('canvas');
 
 function routes(app) {
 
@@ -29,7 +30,18 @@ function routes(app) {
             res.end(buf);
         });
     });
+
+    // system resources
+    app.get('/mem', (req, res) => {
+        const [free, total] = [freemem(), totalmem()];
+        const i = Math.floor(Math.log(freemem) / Math.log(1e3));
+        const physical = (0|(freemem / 1e3 ** i)) + ['B','KB','MB','GB'][i];
+        const resources = `${0|(freemem/totalmem)*100}%`;
+
+        res.json({
+            physical, resources,
+        });
+    });
 }
 
 module.exports = routes;
-

@@ -23,8 +23,12 @@ export function dialog({title, width, height, x = 0, y = 0, onLoad, contentClass
         .select(document.body)
         .append('div')
         .classed('dialog', true)
-        .style('top', y + 'px')
-        .style('left',  x + 'px');
+        .on('move', function () {
+            d3.select(this)
+                .style('top', y + 'px')
+                .style('left', x + 'px');
+        })
+        .dispatch('move');
 
     const body = element
         .append('div')
@@ -53,13 +57,11 @@ export function dialog({title, width, height, x = 0, y = 0, onLoad, contentClass
     titlebar.call(d3.drag()
         .filter(dragFilter)
         .container(element.node().parentNode)
-        .on('drag', function (){
+        .on('drag', () => {
             const { dx, dy } = d3.event;
             x += dx;
             y += dy;
-            element
-                .style('top', y + 'px')
-                .style('left', x + 'px');
+            element.dispatch('move');
         }));
 
     const content = body.append('div').classed(contentClass, true);

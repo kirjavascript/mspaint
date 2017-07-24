@@ -55,18 +55,26 @@ export const menuDefinition = [
                             content.append('img')
                                 .attr('src', '/logo.png');
 
-                            content.append('span')
-                                .classed('info', true)
-                                .html([
-                                    'Microsoft (R) Paint',
-                                    'Windows 98',
-                                    'Copyright (C) 1981-1998 Microsoft Corp.',
-                                    '\n',
-                                    'This product is licenced to:',
-                                    'everyone',
-                                    '\n',
-                                    '<hr/>',
-                                ].join`\n`);
+                            fetch('/mem')
+                                .then((res) => res.json())
+                                .then(({physical, resources}) => {
+
+                                    content.append('span')
+                                        .classed('info', true)
+                                        .html([
+                                            'Microsoft (R) Paint',
+                                            'Windows 98',
+                                            'Copyright (C) 1980-1998 Microsoft Corp.',
+                                            '\n',
+                                            'This product is licenced to:',
+                                            'everyone',
+                                            '\n',
+                                            '<hr/>',
+                                            `Physical memory available to Windows:    ${physical}`,
+                                            `<span class="right">${resources}</span>System resources: `,
+                                        ].join`\n`);
+                                });
+
                         },
                     });
                 },

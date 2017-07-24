@@ -67,10 +67,13 @@
         padding: 10px;
         .info {
             padding: 10px 8px 10px 36px;
-            line-height: 18px;
+            line-height: 15px;
             flex-grow: 1;
         }
-
+        .right {
+            top: 0;
+            float: right;
+        }
     }
 }
 

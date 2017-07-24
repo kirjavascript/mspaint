@@ -122,9 +122,7 @@ cmd.exe chat - mouse is colournames
 view bitmap - do fullscreen
 
 mouse wheel
-increase array limit from 255-65535 (write helper)
-
-update licence info (cc0?)
+ncrease array limit from 255-65535 (write helper)
 -->
 
 ## licence
