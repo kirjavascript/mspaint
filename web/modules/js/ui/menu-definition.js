@@ -65,13 +65,13 @@ export const menuDefinition = [
                                             .html([
                                                 'Microsoft (R) Paint',
                                                 'Windows 98',
-                                                'Copyright (C) 1980-1998 Microsoft Corp.',
+                                                'Copyright (C) 1981-1998 Microsoft Corp.',
                                                 '\n',
                                                 'This product is licenced to:',
                                                 'everyone',
                                                 '\n',
                                                 '<hr/>',
-                                                `Physical memory available to Windows:    ${physical}`,
+                                                `<span class="right">${physical}</span>Physical memory available to Windows:`,
                                                 `<span class="right">${resources}</span>System resources: `,
                                                 '\n\n',
                                             ].join`\n`)
