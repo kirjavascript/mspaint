@@ -10,8 +10,8 @@ export function dialog({title, width, height, x = 0, y = 0, onLoad, contentClass
 
     mainTitlebar.classed('unfocused', true);
 
-    x = Math.max(x + (window.innerWidth/2) - (width/2), 0);
-    y = Math.max(y + (window.innerHeight/2) - (height/2), 0);
+    x = Math.max(x + (window.innerWidth/2) - ((width)/2), 0);
+    y = Math.max(y + (window.innerHeight/2) - ((height)/2), 0);
 
     const overlay = d3
         .select(document.body)
@@ -66,5 +66,5 @@ export function dialog({title, width, height, x = 0, y = 0, onLoad, contentClass
 
     const content = body.append('div').classed(contentClass, true);
 
-    onLoad && onLoad(content);
+    onLoad && onLoad({ content, close });
 }

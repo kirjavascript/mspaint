@@ -36,7 +36,7 @@ function routes(app) {
         const [free, total] = [freemem(), totalmem()];
         const i = Math.floor(Math.log(freemem) / Math.log(1e3));
         const physical = (0|(freemem / 1e3 ** i)) + ['B','KB','MB','GB'][i];
-        const resources = `${0|(freemem/totalmem)*100}%`;
+        const resources = `${0|(freemem/totalmem)*100}% Free`;
 
         res.json({
             physical, resources,

@@ -5,7 +5,7 @@
     "declaration-no-important": true,
     "indentation": 4,
     "max-empty-lines": 2,
-    "max-nesting-depth": 3,
+    "max-nesting-depth": 4,
     "number-max-precision": 3,
     "number-no-trailing-zeros": true,
     "string-quotes": "single",

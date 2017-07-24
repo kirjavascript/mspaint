@@ -19,6 +19,7 @@
 
     .close {
         @extend .image;
+        @extend .buttonShading;
         top: 0;
         right: 0;
         width: 14px;
@@ -28,37 +29,6 @@
         background-position: 3px 2px;
         background-repeat: no-repeat;
         margin: 4px 4px;
-
-        border-top: 1px solid white;
-        border-left: 1px solid white;
-        border-bottom: 1px solid black;
-        border-right: 1px solid black;
-
-        @include innerBorder {
-            border-top: 1px solid $grey;
-            border-left: 1px solid $grey;
-            border-bottom: 1px solid $darkgrey;
-            border-right: 1px solid $darkgrey;
-        }
-
-        position: absolute;
-
-        &:active {
-            background-position: 4px 3px;
-            border-bottom: 1px solid white;
-            border-right: 1px solid white;
-            border-top: 1px solid black;
-            border-left: 1px solid black;
-
-            @include innerBorder {
-                border-bottom: 1px solid $grey;
-                border-right: 1px solid $grey;
-                border-top: 1px solid $darkgrey;
-                border-left: 1px solid $darkgrey;
-            }
-
-            position: absolute;
-        }
     }
 
     .about {
@@ -74,6 +44,45 @@
             top: 0;
             float: right;
         }
+        .button {
+            background-color: $grey;
+            float: right;
+            text-align: center;
+            outline: 1px solid black;
+            width: 88px;
+            padding: 2px 0;
+            &:active {
+                border: 1px solid $darkgrey;
+                @include innerBorder {
+                    border: none;
+                }
+            }
+            > div {
+                border: 1px dotted black;
+                position: absolute;
+                left: 2px;
+                bottom: 2px;
+                right: 2px;
+                top: 2px;
+
+                &.unfocused {
+                    display: none;
+                }
+            }
+
+            border-top: 1px solid white;
+            border-left: 1px solid white;
+            border-bottom: 1px solid black;
+            border-right: 1px solid black;
+
+            @include innerBorder {
+                border-top: 1px solid $grey;
+                border-left: 1px solid $grey;
+                border-bottom: 1px solid $darkgrey;
+                border-right: 1px solid $darkgrey;
+            }
+
+        }
     }
 }
 
@@ -84,4 +93,37 @@
     bottom: 0;
     top: 0;
     z-index: 9;
+}
+
+.buttonShading {
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+
+    @include innerBorder {
+        border-top: 1px solid $grey;
+        border-left: 1px solid $grey;
+        border-bottom: 1px solid $darkgrey;
+        border-right: 1px solid $darkgrey;
+    }
+
+    position: absolute;
+
+    &:active {
+        background-position: 4px 3px;
+        border-bottom: 1px solid white;
+        border-right: 1px solid white;
+        border-top: 1px solid black;
+        border-left: 1px solid black;
+
+        @include innerBorder {
+            border-bottom: 1px solid $grey;
+            border-right: 1px solid $grey;
+            border-top: 1px solid $darkgrey;
+            border-left: 1px solid $darkgrey;
+        }
+
+        position: absolute;
+    }
 }

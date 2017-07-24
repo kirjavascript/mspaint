@@ -45,40 +45,50 @@ export const menuDefinition = [
                 name: 'About Paint',
                 ulIndex: 0,
                 action() {
-                    dialog({
-                        title: 'About Paint',
-                        width: 348,
-                        height: 283,
-                        contentClass: 'about',
-                        y: -100,
-                        onLoad: (content) => {
-                            content.append('img')
-                                .attr('src', '/logo.png');
 
-                            fetch('/mem')
-                                .then((res) => res.json())
-                                .then(({physical, resources}) => {
+                    fetch('/mem')
+                        .then((res) => res.json())
+                        .then(({physical, resources}) => {
+
+                            dialog({
+                                title: 'About Paint',
+                                width: 370,
+                                height: 320,
+                                contentClass: 'about',
+                                y: -100,
+                                onLoad: ({ content, close }) => {
+                                    content.append('img')
+                                        .attr('src', '/logo.png');
 
                                     content.append('span')
-                                        .classed('info', true)
-                                        .html([
-                                            'Microsoft (R) Paint',
-                                            'Windows 98',
-                                            'Copyright (C) 1980-1998 Microsoft Corp.',
-                                            '\n',
-                                            'This product is licenced to:',
-                                            'everyone',
-                                            '\n',
-                                            '<hr/>',
-                                            `Physical memory available to Windows:    ${physical}`,
-                                            `<span class="right">${resources}</span>System resources: `,
-                                        ].join`\n`);
-                                });
+                                            .classed('info', true)
+                                            .html([
+                                                'Microsoft (R) Paint',
+                                                'Windows 98',
+                                                'Copyright (C) 1980-1998 Microsoft Corp.',
+                                                '\n',
+                                                'This product is licenced to:',
+                                                'everyone',
+                                                '\n',
+                                                '<hr/>',
+                                                `Physical memory available to Windows:    ${physical}`,
+                                                `<span class="right">${resources}</span>System resources: `,
+                                                '\n\n',
+                                            ].join`\n`)
+                                            .append('div')
+                                            .classed('button', true)
+                                            .on('click', close)
+                                            .text('Ok')
+                                            .append('div');
 
-                        },
-                    });
+                                },
+                            });
+
+                        });
                 },
             },
         ],
     },
 ];
+
+menuDefinition[1].children[2].action();
