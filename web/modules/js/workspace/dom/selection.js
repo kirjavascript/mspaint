@@ -25,7 +25,6 @@ export default class Selection extends Component {
 
     onResize = (node) => {
         if (node) {
-
         }
     };
 

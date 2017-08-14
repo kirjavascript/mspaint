@@ -1,6 +1,5 @@
+const util = require('util');
 const { Screen, Box, BigText, FileManager, Text, Button } = require('blessed');
-
-const conStr = require('./constr');
 
 module.exports = function (screen) {
 
@@ -30,7 +29,7 @@ module.exports = function (screen) {
     });
 
     const format = (obj) => {
-        const str = conStr(obj)
+        const str = util.inspect(obj, { depth: 1, colors: true })
             .replace(/(\[(.*?)\])/g, (a, b) => {
                 return `{bold}{#0AF-fg}${a}{/}`;
             });
