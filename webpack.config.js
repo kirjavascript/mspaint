@@ -15,6 +15,7 @@ module.exports = (env={}, args={}) => {
             loaders: [
                 {
                     test: /\.js$/,
+                    exclude: /node_modules/,
                     use: [
                         {
                             loader: 'babel-loader',
@@ -77,8 +78,14 @@ module.exports = (env={}, args={}) => {
             }
 
         },
-        devtool: env.dev ? 'source-map' : false,
     };
+
+    if (env.dev) {
+        config.devtool = 'source-map';
+    }
+    else {
+        config.plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
+    }
 
     return config;
 
