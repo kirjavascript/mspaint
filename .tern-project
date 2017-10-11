@@ -1,9 +1,12 @@
 {
+  "ecmaVersion": 7,
   "libs": [
-    "browser"
+    "browser",
+    "react"
   ],
   "plugins": {
     "node": {},
+    "jsx": {},
     "webpack": {
         "configPath": "./webpack.config.js"
     }
