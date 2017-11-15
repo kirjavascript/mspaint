@@ -9,6 +9,7 @@
     <img src="https://img.shields.io/david/kirjavascript/mspaint.svg">
     <img src="https://img.shields.io/badge/babel-stage--0-brightgreen.svg">
     <img src="https://img.shields.io/badge/version-win98-0000ff.svg">
+    <img src="https://img.shields.io/badge/codestyle-airbnb-663399.svg">
     <img src="https://img.shields.io/badge/tools-7/16-orange.svg">
     <img src="https://img.shields.io/badge/live-no-red.svg">
 </p>
