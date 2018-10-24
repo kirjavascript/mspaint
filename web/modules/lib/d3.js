@@ -1,6 +1,6 @@
 // d3-drag was forked to remove preventDefault()
 
-let d3 = {
+const d3 = {
     // ...require('d3-array'),
     // ...require('d3-axis'),
     // ...require('d3-brush'),
