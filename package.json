@@ -31,7 +31,7 @@
     "blessed": "^0.1.81",
     "chokidar": "^1.6.0",
     "css-loader": "^0.25.0",
-    "eslint": "^3.7.0",
+    "eslint": "^4.18.2",
     "eslint-loader": "^1.5.0",
     "eslint-plugin-react": "^6.3.0",
     "import-glob-loader": "^1.1.0",
